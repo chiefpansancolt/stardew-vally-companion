@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-// CHANGE_ME: Update with your app's title and description
 export const metadata: Metadata = {
-	title: "YOUR_APP_NAME",
-	description: "A progress tracker built with tracker-template",
+	title: "Stardew Valley Companion",
+	description:
+		"Track your Stardew Valley progress — bundles, friendships, fishing, cooking, crafting, and more.",
 };
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
 				<ThemeModeScript />
 			</head>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-gray-50 antialiased dark:bg-gray-900`}
+				className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-surface antialiased dark:bg-surface-dark`}
 			>
 				<UIProvider>
 					<PlaythroughProvider>

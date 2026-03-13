@@ -28,14 +28,14 @@ export default function PlaythroughCard({ playthrough }: PlaythroughCardProps) {
 
 	return (
 		<>
-			<Card className={`relative ${isActive ? "ring-2 ring-blue-500" : ""}`}>
+			<Card className={`relative ${isActive ? "ring-2 ring-primary" : ""}`}>
 				<div className="flex items-start justify-between gap-2">
 					<div className="min-w-0 flex-1">
 						<h3 className="truncate text-lg font-semibold text-gray-900 dark:text-white">
 							{playthrough.name}
 						</h3>
 						{isActive && (
-							<Badge color="blue" className="mt-1 w-fit">
+							<Badge color="accent" className="mt-1 w-fit">
 								Active
 							</Badge>
 						)}
@@ -73,7 +73,7 @@ export default function PlaythroughCard({ playthrough }: PlaythroughCardProps) {
 
 				{!isActive && (
 					<Button
-						color="blue"
+						color="accent"
 						size="sm"
 						className="mt-2 w-full"
 						onClick={() => setActivePlaythrough(playthrough.id)}

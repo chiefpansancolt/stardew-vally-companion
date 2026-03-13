@@ -53,7 +53,7 @@ export default function PlaythroughListPage() {
 						Manage your playthroughs and track your progress
 					</p>
 				</div>
-				<Button onClick={() => setIsCreateModalOpen(true)} color="blue">
+				<Button onClick={() => setIsCreateModalOpen(true)} color="accent">
 					<HiPlus className="mr-2 h-5 w-5" />
 					New Playthrough
 				</Button>
@@ -77,7 +77,7 @@ export default function PlaythroughListPage() {
 								onClick={() => setSortOption(opt)}
 								className={`rounded-lg px-3 py-1.5 text-sm transition-colors ${
 									sortOption === opt
-										? "bg-blue-600 text-white"
+										? "bg-accent text-white"
 										: "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
 								}`}
 							>
@@ -95,7 +95,7 @@ export default function PlaythroughListPage() {
 			{playthroughs.length > 0 && searchQuery && (
 				<p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
 					Showing{" "}
-					<Badge color="blue" className="inline-flex">
+					<Badge color="accent" className="inline-flex">
 						{filtered.length}
 					</Badge>{" "}
 					of {playthroughs.length} playthroughs
@@ -114,7 +114,7 @@ export default function PlaythroughListPage() {
 						<div className="flex justify-center">
 							<Button
 								onClick={() => setIsCreateModalOpen(true)}
-								color="blue"
+								color="accent"
 								size="lg"
 							>
 								<HiPlus className="mr-2 h-5 w-5" />

@@ -3,20 +3,7 @@
  *
  * The `data` field is intentionally typed as `Record<string, unknown>` so that
  * this template compiles without any game-specific knowledge. When implementing
- * your tracker, replace or extend this field with a typed interface:
- *
- * @example
- * // src/types/app/game.d.ts
- * export interface GameData {
- *   completedQuests: string[];
- *   unlockedItems: Record<string, boolean>;
- *   level: number;
- * }
- *
- * // Then update Playthrough:
- * export interface Playthrough extends PlaythroughBase {
- *   data: GameData;
- * }
+ * your tracker, replace or extend this field with a typed interface.
  */
 export interface Playthrough {
   id: string;

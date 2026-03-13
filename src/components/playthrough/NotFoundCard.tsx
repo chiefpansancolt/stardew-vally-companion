@@ -16,7 +16,7 @@ export default function NotFoundCard({
 			<Card className="max-w-md text-center">
 				<h2 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h2>
 				<p className="text-gray-600 dark:text-gray-400">{message}</p>
-				<Button as={Link} href="/" color="blue">
+				<Button as={Link} href="/" color="accent">
 					<HiHome className="mr-2 h-5 w-5" />
 					Go Home
 				</Button>

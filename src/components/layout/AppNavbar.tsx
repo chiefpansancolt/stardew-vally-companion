@@ -8,21 +8,27 @@ export function AppNavbar() {
 	const { sidebarOpen, toggleSidebar } = useUI();
 
 	return (
-		<Navbar fluid className="border-b border-gray-200 dark:border-gray-700">
+		<Navbar
+			fluid
+			className="border-b border-primary/30 bg-primary text-white dark:border-primary/50 dark:bg-primary/90"
+		>
 			<div className="flex items-center gap-3">
-				<Button onClick={toggleSidebar} size="sm" className="mr-4 md:hidden">
+				<Button
+					onClick={toggleSidebar}
+					size="sm"
+					className="mr-4 border-white/30 bg-white/15 text-white hover:bg-white/25 md:hidden"
+				>
 					{sidebarOpen ? <HiX className="size-6" /> : <HiMenu className="size-6" />}
 					<span className="sr-only">Toggle sidebar</span>
 				</Button>
 				<NavbarBrand>
-					{/* CHANGE_ME: Replace with your app logo and name */}
-					<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-						YOUR_APP_NAME
+					<span className="self-center text-xl font-semibold whitespace-nowrap text-white">
+						Stardew Valley Companion
 					</span>
 				</NavbarBrand>
 			</div>
 			<div className="flex md:order-2">
-				<DarkThemeToggle />
+				<DarkThemeToggle className="text-white hover:bg-white/15 focus:ring-white/30" />
 			</div>
 		</Navbar>
 	);

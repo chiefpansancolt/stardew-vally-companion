@@ -24,7 +24,6 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 		addPlaythrough({
 			name: name.trim(),
 			description: description.trim() || undefined,
-			data: {},
 		});
 
 		handleClose();

@@ -28,7 +28,8 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 	};
 
 	const addPlaythrough = (
-		playthrough: Omit<Playthrough, "id" | "createdAt" | "lastModified">
+		playthrough: Omit<Playthrough, "id" | "createdAt" | "lastModified" | "data"> &
+			Partial<Pick<Playthrough, "data">>
 	) => {
 		const now = new Date().toISOString();
 		const newPlaythrough: Playthrough = {
@@ -36,8 +37,6 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 			id: crypto.randomUUID(),
 			createdAt: now,
 			lastModified: now,
-			// CHANGE_ME: Add default game-specific data here
-			// e.g., data: { completedQuests: [], unlockedItems: {} }
 			data: playthrough.data ?? {},
 		};
 

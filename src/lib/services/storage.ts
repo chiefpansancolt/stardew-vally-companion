@@ -1,7 +1,6 @@
 import type { AppData, Playthrough } from "@/types/app";
 
-// CHANGE_ME: Rename this to match your app's slug (e.g., "my-game-tracker")
-const STORAGE_KEY = "tracker-template";
+const STORAGE_KEY = "stardew-valley-companion";
 
 const defaultData: AppData = {
   playthroughs: [],

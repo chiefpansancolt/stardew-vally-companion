@@ -147,8 +147,16 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
     },
   },
   sidebar: {
+    root: {
+      inner: "bg-secondary dark:bg-secondary"
+    },
     item: {
-      base: "cursor-pointer text-sm",
+      base: "cursor-pointer text-sm flex items-center justify-center rounded-lg p-2 text-base font-normal text-white hover:bg-primary/30 dark:text-white dark:hover:bg-primary/30",
+      active: "bg-primary/25 dark:bg-primary/35",
+      icon: {
+        base: "text-white/80 transition duration-75",
+        active: "text-white dark:text-white",
+      },
     },
   },
   tabs: {

@@ -5,10 +5,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #5a9367;
-  --color-secondary: #6daedc;
-  --color-accent: #8b572a;
-  --color-highlight: #f39c12;
+  --color-primary: #4A7C31;
+  --color-secondary: #2B3A67;
+  --color-accent: #C0864A;
+  --color-highlight: #D9C97C;
+  --color-surface: #F5F0E1;
+  --color-surface-dark: #1E2538;
 }
 
 .Toastify__toast {

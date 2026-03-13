@@ -15,7 +15,7 @@ export function AppSidebar() {
 
 	return (
 		<aside
-			className={`fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r border-gray-200 bg-white transition-transform duration-300 ease-in-out md:static md:top-0 md:h-auto md:translate-x-0 dark:border-gray-700 dark:bg-gray-800 ${
+			className={`fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r border-secondary/30 bg-secondary transition-transform duration-300 ease-in-out md:static md:top-0 md:h-auto md:translate-x-0 dark:border-secondary/40 dark:bg-secondary/90 ${
 				sidebarOpen ? "translate-x-0" : "-translate-x-full"
 			}`}
 		>
@@ -46,31 +46,7 @@ export function AppSidebar() {
 									Playthroughs
 								</SidebarItem>
 
-								{/* CHANGE_ME: Add game-specific sidebar items here */}
-								{/* Example:
-								{activePlaythrough && (
-									<>
-										<SidebarItem
-											as={Link}
-											href="/dashboard"
-											icon={HiChartPie}
-											active={pathname === "/dashboard"}
-											onClick={() => setSidebarOpen(false)}
-										>
-											Dashboard
-										</SidebarItem>
-										<SidebarItem
-											as={Link}
-											href="/tracking"
-											icon={HiClipboardList}
-											active={pathname === "/tracking"}
-											onClick={() => setSidebarOpen(false)}
-										>
-											Tracking
-										</SidebarItem>
-									</>
-								)}
-								*/}
+								{/* TODO: Add game-specific sidebar items here when game data is implemented */}
 
 								{/* Suppress unused variable warning during development */}
 								{activePlaythrough && null}
@@ -84,9 +60,9 @@ export function AppSidebar() {
 								<Link
 									href="/settings"
 									onClick={() => setSidebarOpen(false)}
-									className={`flex cursor-pointer items-center justify-center rounded-lg p-2 text-sm font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${pathname === "/settings" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
+									className={`flex cursor-pointer items-center justify-center rounded-lg p-2 text-sm font-normal text-white hover:bg-primary/30 dark:text-white dark:hover:bg-primary/30 ${pathname === "/settings" ? "bg-primary/25 dark:bg-primary/35" : ""}`}
 								>
-									<HiCog className="h-6 w-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+									<HiCog className="h-6 w-6 shrink-0 text-white/80 transition duration-75" />
 									<span className="flex-1 px-3 whitespace-nowrap">Settings</span>
 								</Link>
 							</li>

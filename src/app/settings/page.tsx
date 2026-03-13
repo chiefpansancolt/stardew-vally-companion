@@ -30,8 +30,7 @@ export default function Settings() {
 		const url = URL.createObjectURL(blob);
 		const link = document.createElement("a");
 		link.href = url;
-		// CHANGE_ME: Update the filename prefix to match your app name
-		link.download = `tracker-backup-${new Date().toISOString().split("T")[0]}.json`;
+		link.download = `stardew-companion-backup-${new Date().toISOString().split("T")[0]}.json`;
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -89,7 +88,7 @@ export default function Settings() {
 	};
 
 	return (
-		<section className="min-h-screen bg-gray-50 p-8 dark:bg-gray-900">
+		<section className="min-h-screen bg-surface p-8 dark:bg-surface-dark">
 			<div className="mx-auto">
 				<div className="mb-8">
 					<h1 className="text-4xl font-bold text-gray-900 dark:text-white">Settings</h1>
@@ -186,18 +185,18 @@ export default function Settings() {
 					</Card>
 
 					<Card>
-						{/* CHANGE_ME: Update the About section with your app's details */}
 						<h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
 							About
 						</h2>
 						<div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
 							<p>
 								<strong className="text-gray-900 dark:text-white">
-									YOUR_APP_NAME
+									Stardew Valley Companion
 								</strong>
 							</p>
 							<p>
-								A progress tracking tool for YOUR_GAME. All data is stored locally
+								A progress tracking tool for Stardew Valley. Track bundles,
+								friendships, fish, artifacts, and more. All data is stored locally
 								in your browser.
 							</p>
 						</div>
