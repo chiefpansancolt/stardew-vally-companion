@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button, DarkThemeToggle, Navbar, NavbarBrand } from "flowbite-react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useUI } from "@/lib/contexts/UIContext";
@@ -21,8 +22,18 @@ export function AppNavbar() {
 					{sidebarOpen ? <HiX className="size-6" /> : <HiMenu className="size-6" />}
 					<span className="sr-only">Toggle sidebar</span>
 				</Button>
-				<NavbarBrand>
-					<span className="self-center text-xl font-semibold whitespace-nowrap text-white">
+				<NavbarBrand className="flex items-center gap-2">
+					<Image
+						src="/gamerdex-icon.svg"
+						alt="GamerDex"
+						width={32}
+						height={32}
+						className="h-8 w-8 shrink-0"
+					/>
+					<span
+						className="self-center text-xl font-bold whitespace-nowrap text-white"
+						style={{ fontFamily: "var(--font-stardew-valley)" }}
+					>
 						Stardew Valley Companion
 					</span>
 				</NavbarBrand>
