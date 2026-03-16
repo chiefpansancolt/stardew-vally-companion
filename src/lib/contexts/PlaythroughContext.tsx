@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useRef, useState } from "r
 import type { AppData, Playthrough } from "@/types/app";
 import type { PlaythroughContextType } from "@/types/contexts";
 import { storageService } from "@/service/storage";
+import { DEFAULT_GAME_DATA } from "@/data/constants";
 
 const PlaythroughContext = createContext<PlaythroughContextType | undefined>(undefined);
 
@@ -37,7 +38,7 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 			id: crypto.randomUUID(),
 			createdAt: now,
 			lastModified: now,
-			data: playthrough.data ?? {},
+			data: playthrough.data ?? { ...DEFAULT_GAME_DATA },
 		};
 
 		setAppData((prev) => {
