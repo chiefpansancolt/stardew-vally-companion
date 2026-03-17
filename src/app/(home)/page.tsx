@@ -91,7 +91,7 @@ export default function Home() {
 								clipPath:
 									"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
 							}}
-							className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-primary to-secondary opacity-20 sm:left-[calc(50%-30rem)] sm:w-288.75"
+							className="from-primary to-secondary relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr opacity-20 sm:left-[calc(50%-30rem)] sm:w-288.75"
 						/>
 					</div>
 					<div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -131,7 +131,7 @@ export default function Home() {
 								clipPath:
 									"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
 							}}
-							className="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-primary to-secondary opacity-20 sm:left-[calc(50%+36rem)] sm:w-288.75"
+							className="from-primary to-secondary relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr opacity-20 sm:left-[calc(50%+36rem)] sm:w-288.75"
 						/>
 					</div>
 				</div>
@@ -140,7 +140,7 @@ export default function Home() {
 				<div className="mt-8 sm:mt-16" id="features">
 					<div className="mx-auto max-w-7xl px-6 lg:px-8">
 						<div className="mx-auto max-w-2xl sm:text-center">
-							<h2 className="text-base/7 font-semibold text-primary dark:text-primary/80">
+							<h2 className="text-primary dark:text-primary/80 text-base/7 font-semibold">
 								Everything you need
 							</h2>
 							<p className="mt-2 text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl dark:text-white">
@@ -153,7 +153,7 @@ export default function Home() {
 							{FEATURES.map(({ icon: Icon, title, description }) => (
 								<div key={title} className="relative pl-9">
 									<dt className="inline font-semibold text-gray-900 dark:text-white">
-										<Icon className="absolute top-1 left-1 size-5 text-primary dark:text-primary/80" />
+										<Icon className="text-primary dark:text-primary/80 absolute top-1 left-1 size-5" />
 										{title}
 									</dt>
 									<dd> {description}</dd>

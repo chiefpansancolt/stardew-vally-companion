@@ -51,7 +51,7 @@ export default function SaveFAB({ isDirty, onSave }: SaveFABProps) {
 		<button
 			onClick={handleSave}
 			disabled={isSaving}
-			className="fixed right-6 bottom-6 z-30 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-accent p-0 text-white shadow-lg transition-colors hover:bg-accent/80 focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 disabled:opacity-50"
+			className="bg-accent hover:bg-accent/80 focus:ring-accent/50 fixed right-6 bottom-6 z-30 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full p-0 text-white shadow-lg transition-colors focus:ring-2 focus:ring-offset-2 disabled:opacity-50"
 			aria-label="Save Progress"
 		>
 			{isSaving ? <Spinner size="md" color="white" /> : <FaRegSave className="h-6 w-6" />}

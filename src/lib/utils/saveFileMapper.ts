@@ -1,0 +1,218 @@
+import type { SaveData } from "stardew-valley-data";
+import type { GameData } from "@/types/app/game";
+import { DEFAULT_GAME_DATA } from "@/data/constants";
+
+/**
+ * Maps parsed SaveData from stardew-valley-data's parseSaveFile() into our GameData structure.
+ */
+export function mapSaveDataToGameData(save: SaveData): GameData {
+  return {
+    character: {
+      name: save.player.name,
+      farmName: save.player.farmName,
+      favoriteThing: save.player.favoriteThing,
+      gender: save.player.gender,
+      money: save.player.money,
+      totalMoneyEarned: save.player.totalMoneyEarned,
+      spouse: save.player.spouse ?? "",
+      houseUpgradeLevel: save.player.houseUpgradeLevel,
+      maxHealth: save.player.maxHealth,
+      maxEnergy: save.player.maxStamina,
+      luckLevel: save.player.luckLevel,
+      maxItems: save.player.maxItems,
+      gameVersion: save.player.gameVersion,
+      totalDaysPlayed: save.date.totalDaysPlayed,
+      millisecondsPlayed: 0,
+      farmType: save.farm.type,
+      currentDate: {
+        season: save.date.season as "spring" | "summer" | "fall" | "winter",
+        day: save.date.day,
+        year: save.date.year,
+      },
+    },
+
+    toolLevels: {
+      wateringCan: save.player.toolLevels.wateringCan,
+      pan: save.player.toolLevels.pan,
+      pickaxe: save.player.toolLevels.pickaxe,
+      axe: save.player.toolLevels.axe,
+      hoe: save.player.toolLevels.hoe,
+      trashCan: save.player.toolLevels.trashCan,
+    },
+
+    shipped: Object.fromEntries(
+      save.itemsShipped.map((item) => [
+        item.id,
+        { shipped: true, count: item.count },
+      ]),
+    ),
+
+    fishCaught: save.fishCaught.map((fish) => ({
+      id: fish.id,
+      timesCaught: fish.timesCaught,
+      largestSize: fish.largestSize,
+    })),
+
+    cookingRecipes: Object.fromEntries(
+      save.cookingRecipes.map((recipe) => [
+        recipe.name,
+        { learned: true, cooked: recipe.timesMade > 0 },
+      ]),
+    ),
+
+    craftingRecipes: Object.fromEntries(
+      save.craftingRecipes.map((recipe) => [
+        recipe.name,
+        { learned: true, crafted: recipe.timesMade > 0 },
+      ]),
+    ),
+
+    minerals: Object.fromEntries(
+      save.museum.mineralsFound.map((mineral) => [
+        mineral.id,
+        {
+          found: true,
+          donated: save.museum.donations.includes(mineral.id),
+        },
+      ]),
+    ),
+
+    artifacts: Object.fromEntries(
+      save.museum.artifactsFound.map((artifact) => [
+        artifact.id,
+        {
+          found: true,
+          donated: save.museum.donations.includes(artifact.id),
+        },
+      ]),
+    ),
+
+    villagers: Object.fromEntries(
+      save.friendships.map((f) => [
+        f.name,
+        {
+          hearts: f.hearts,
+          heartPoints: f.points,
+          eventsSeen: save.eventsSeen,
+          status: f.status,
+        },
+      ]),
+    ),
+
+    bundles: Object.fromEntries(
+      save.bundles.rooms.flatMap((room) =>
+        room.bundles.map((bundle) => [
+          bundle.id,
+          Object.fromEntries(
+            bundle.items.map((item, index) => [String(index), item.completed]),
+          ),
+        ]),
+      ),
+    ),
+
+    achievements: save.achievements.map(String),
+
+    stardrops: Object.fromEntries(
+      save.stardrops.map((s) => [s.id, s.collected]),
+    ),
+
+    goldenWalnuts: Object.fromEntries(
+      save.walnuts.collected.map((id) => [id, 1]),
+    ),
+
+    secretNotes: Object.fromEntries(
+      save.secretNotes.notesFound.map((id) => [String(id), true]),
+    ),
+
+    lostBooks: DEFAULT_GAME_DATA.lostBooks,
+
+    monsters: Object.fromEntries(
+      save.monstersKilled.map((m) => [m.name, m.count]),
+    ),
+
+    skills: {
+      farming: {
+        level: save.player.skills.farming.level,
+        xp: save.player.skills.farming.xp,
+      },
+      fishing: {
+        level: save.player.skills.fishing.level,
+        xp: save.player.skills.fishing.xp,
+      },
+      foraging: {
+        level: save.player.skills.foraging.level,
+        xp: save.player.skills.foraging.xp,
+      },
+      mining: {
+        level: save.player.skills.mining.level,
+        xp: save.player.skills.mining.xp,
+      },
+      combat: {
+        level: save.player.skills.combat.level,
+        xp: save.player.skills.combat.xp,
+      },
+    },
+
+    professions: save.professions.map((p) => String(p.id)),
+
+    mastery: {
+      masteryXp: save.player.mastery.xp,
+      unlocked: save.player.mastery.perks
+        .filter((p) => p.unlocked)
+        .map((p) => p.id),
+    },
+
+    books: save.booksRead,
+
+    specialItems: save.powers.specialItems
+      .filter((p) => p.acquired)
+      .map((p) => p.id),
+
+    questsCompleted: Object.fromEntries(
+      save.activeQuests.filter((q) => q.completed).map((q) => [q.id, true]),
+    ),
+
+    specialOrdersCompleted: Object.fromEntries([
+      ...save.specialOrders.completed.map((id) => [id, true] as const),
+      ...save.specialOrders.qiCompleted.map((id) => [id, true] as const),
+    ]),
+
+    animals: save.animals.map((a) => ({
+      name: a.name,
+      id: a.id,
+      type: a.type,
+      buildingType: a.buildingType,
+      buildingId: a.buildingId,
+      friendship: a.friendship,
+      happiness: a.happiness,
+      age: a.age,
+      hasAnimalCracker: a.hasAnimalCracker,
+    })),
+
+    pets: save.pet
+      ? [
+          {
+            name: save.pet.name,
+            type: save.pet.type,
+            breed: String(save.pet.breed),
+            friendship: save.pet.friendship,
+          },
+        ]
+      : [],
+
+    buildings: save.buildings.map((b) => ({
+      id: b.id,
+      type: b.type,
+      animalCount: b.animalCount,
+    })),
+
+    mineProgress: {
+      deepestMineLevel: save.mineProgress.deepestMineLevel,
+      deepestSkullCavernLevel: save.mineProgress.deepestSkullCavernLevel,
+      hasRustyKey: save.mineProgress.hasRustyKey,
+      hasSkullKey: save.mineProgress.hasSkullKey,
+    },
+
+    perfectionWaiverCount: save.perfection.waivers,
+  };
+}

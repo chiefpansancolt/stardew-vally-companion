@@ -1,8 +1,15 @@
 import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from "flowbite-react";
 import { useState } from "react";
+import { maps } from "stardew-valley-data";
 import { LuChevronsUpDown, LuPlus } from "react-icons/lu";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
+import { assetPath } from "@/lib/utils/assetPath";
 import { CreatePlaythroughModal } from "@/comps/modals/CreatePlaythroughModal";
+
+function getFarmIcon(farmType: number) {
+	const farmMap = maps().find(String(farmType));
+	return assetPath(farmMap?.icon ?? "");
+}
 
 export function PlaythroughSwitcher() {
 	const { playthroughs, activePlaythrough, setActivePlaythrough } = usePlaythrough();
@@ -21,11 +28,19 @@ export function PlaythroughSwitcher() {
 					renderTrigger={() => (
 						<button
 							type="button"
-							className="flex w-full cursor-pointer items-center gap-2 rounded-lg p-2 text-left hover:bg-primary/30 focus:ring-2 focus:ring-primary/30 focus:outline-none dark:hover:bg-primary/30 dark:focus:ring-primary/40"
+							className="hover:bg-primary/30 focus:ring-primary/30 dark:hover:bg-primary/30 dark:focus:ring-primary/40 flex w-full cursor-pointer items-center gap-2 rounded-lg p-2 text-left focus:ring-2 focus:outline-none"
 						>
-							<div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-								{activePlaythrough?.name?.[0]?.toUpperCase() ?? "?"}
-							</div>
+							{activePlaythrough ? (
+								<img
+									src={getFarmIcon(activePlaythrough.data.character.farmType)}
+									alt="Farm type"
+									className="h-8 w-auto shrink-0"
+								/>
+							) : (
+								<div className="bg-primary flex size-8 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white">
+									?
+								</div>
+							)}
 							<div className="min-w-0 flex-1">
 								<span className="truncate text-sm font-medium text-white">
 									{activePlaythrough?.name || "None Selected"}
@@ -45,9 +60,14 @@ export function PlaythroughSwitcher() {
 								onClick={() => handlePlaythroughSelect(playthrough.id)}
 							>
 								<div className="flex w-full items-center gap-2">
+									<img
+										src={getFarmIcon(playthrough.data.character.farmType)}
+										alt="Farm type"
+										className="h-5 w-auto shrink-0"
+									/>
 									<span className="truncate">{playthrough.name}</span>
 									{activePlaythrough?.id === playthrough.id && (
-										<span className="ml-auto text-xs font-medium text-primary dark:text-primary/80">
+										<span className="text-primary dark:text-primary/80 ml-auto text-xs font-medium">
 											Active
 										</span>
 									)}

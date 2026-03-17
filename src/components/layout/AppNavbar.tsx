@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Button, DarkThemeToggle, Navbar, NavbarBrand } from "flowbite-react";
+import Image from "next/image";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useUI } from "@/lib/contexts/UIContext";
 
@@ -11,7 +11,7 @@ export function AppNavbar() {
 	return (
 		<Navbar
 			fluid
-			className="border-b border-primary/30 bg-primary text-white dark:border-primary/50 dark:bg-primary/90"
+			className="border-primary/30 bg-primary dark:border-primary/50 dark:bg-primary/90 border-b text-white"
 		>
 			<div className="flex items-center gap-3">
 				<Button

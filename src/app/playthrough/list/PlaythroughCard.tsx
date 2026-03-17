@@ -28,7 +28,7 @@ export default function PlaythroughCard({ playthrough }: PlaythroughCardProps) {
 
 	return (
 		<>
-			<Card className={`relative ${isActive ? "ring-2 ring-primary" : ""}`}>
+			<Card className={`relative ${isActive ? "ring-primary ring-2" : ""}`}>
 				<div className="flex items-start justify-between gap-2">
 					<div className="min-w-0 flex-1">
 						<h3 className="truncate text-lg font-semibold text-gray-900 dark:text-white">

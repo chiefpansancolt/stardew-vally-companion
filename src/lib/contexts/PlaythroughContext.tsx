@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import type { AppData, Playthrough } from "@/types/app";
 import type { PlaythroughContextType } from "@/types/contexts";
 import { storageService } from "@/service/storage";
@@ -8,18 +8,24 @@ import { DEFAULT_GAME_DATA } from "@/data/constants";
 
 const PlaythroughContext = createContext<PlaythroughContextType | undefined>(undefined);
 
-export function PlaythroughProvider({ children }: { children: React.ReactNode }) {
-	const [appData, setAppData] = useState<AppData>(() => storageService.load());
-	const isLoadedRef = useRef(false);
+const EMPTY_APP_DATA: AppData = { playthroughs: [], activePlaythroughId: null };
 
-	// Auto-save to localStorage on every state change (skip initial mount)
+export function PlaythroughProvider({ children }: { children: React.ReactNode }) {
+	const [appData, setAppData] = useState<AppData>(EMPTY_APP_DATA);
+	const [isHydrated, setIsHydrated] = useState(false);
+
+	// Hydrate from localStorage after mount to avoid SSR mismatch
 	useEffect(() => {
-		if (isLoadedRef.current) {
+		setAppData(storageService.load());
+		setIsHydrated(true);
+	}, []);
+
+	// Auto-save to localStorage on every state change (skip until hydrated)
+	useEffect(() => {
+		if (isHydrated) {
 			storageService.save(appData);
-		} else {
-			isLoadedRef.current = true;
 		}
-	}, [appData]);
+	}, [appData, isHydrated]);
 
 	const activePlaythrough =
 		appData.playthroughs.find((p) => p.id === appData.activePlaythroughId) || null;

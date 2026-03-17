@@ -5,7 +5,10 @@ export interface PlaythroughContextType {
   activePlaythrough: Playthrough | null;
   setActivePlaythrough: (id: string | null) => void;
   addPlaythrough: (
-    playthrough: Omit<Playthrough, "id" | "createdAt" | "lastModified" | "data"> &
+    playthrough: Omit<
+      Playthrough,
+      "id" | "createdAt" | "lastModified" | "data"
+    > &
       Partial<Pick<Playthrough, "data">>,
   ) => void;
   updatePlaythrough: (id: string, updates: Partial<Playthrough>) => void;

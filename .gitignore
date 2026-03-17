@@ -40,3 +40,6 @@ next-env.d.ts
 
 # flowbite
 .flowbite-react/
+
+# game assets copied from stardew-valley-data package
+/public/images/

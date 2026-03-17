@@ -43,7 +43,7 @@ export default function RootLayout({
 				<ThemeModeScript />
 			</head>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${stardewValley.variable} min-h-screen bg-surface antialiased dark:bg-surface-dark`}
+				className={`${geistSans.variable} ${geistMono.variable} ${stardewValley.variable} bg-surface dark:bg-surface-dark min-h-screen antialiased`}
 			>
 				<UIProvider>
 					<PlaythroughProvider>

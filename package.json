@@ -21,7 +21,8 @@
         "start": "next start",
         "lint": "eslint .",
         "format": "prettier . --write",
-        "format:check": "prettier . --check"
+        "format:check": "prettier . --check",
+        "postinstall": "bash scripts/copy-game-assets.sh"
     },
     "dependencies": {
         "flowbite-react": "^0.12.17",

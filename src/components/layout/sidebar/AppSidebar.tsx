@@ -15,7 +15,7 @@ export function AppSidebar() {
 
 	return (
 		<aside
-			className={`fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r border-secondary/30 bg-secondary transition-transform duration-300 ease-in-out md:static md:top-0 md:h-auto md:translate-x-0 dark:border-secondary/40 dark:bg-secondary/90 ${
+			className={`border-secondary/30 bg-secondary dark:border-secondary/40 dark:bg-secondary/90 fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r transition-transform duration-300 ease-in-out md:static md:top-0 md:h-auto md:translate-x-0 ${
 				sidebarOpen ? "translate-x-0" : "-translate-x-full"
 			}`}
 		>
@@ -60,7 +60,7 @@ export function AppSidebar() {
 								<Link
 									href="/settings"
 									onClick={() => setSidebarOpen(false)}
-									className={`flex cursor-pointer items-center justify-center rounded-lg p-2 text-sm font-normal text-white hover:bg-primary/30 dark:text-white dark:hover:bg-primary/30 ${pathname === "/settings" ? "bg-primary/25 dark:bg-primary/35" : ""}`}
+									className={`hover:bg-primary/30 dark:hover:bg-primary/30 flex cursor-pointer items-center justify-center rounded-lg p-2 text-sm font-normal text-white dark:text-white ${pathname === "/settings" ? "bg-primary/25 dark:bg-primary/35" : ""}`}
 								>
 									<HiCog className="h-6 w-6 shrink-0 text-white/80 transition duration-75" />
 									<span className="flex-1 px-3 whitespace-nowrap">Settings</span>

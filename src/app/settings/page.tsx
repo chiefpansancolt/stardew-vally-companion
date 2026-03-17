@@ -88,7 +88,7 @@ export default function Settings() {
 	};
 
 	return (
-		<section className="min-h-screen bg-surface p-8 dark:bg-surface-dark">
+		<section className="bg-surface dark:bg-surface-dark min-h-screen p-8">
 			<div className="mx-auto">
 				<div className="mb-8">
 					<h1 className="text-4xl font-bold text-gray-900 dark:text-white">Settings</h1>
