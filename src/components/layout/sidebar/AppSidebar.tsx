@@ -3,7 +3,7 @@
 import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiCog, HiHome, HiViewGrid } from "react-icons/hi";
+import { HiCog, HiHome, HiUser, HiViewGrid } from "react-icons/hi";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
 import { PlaythroughSwitcher } from "./PlaythroughSwitcher";
@@ -46,10 +46,17 @@ export function AppSidebar() {
 									Playthroughs
 								</SidebarItem>
 
-								{/* TODO: Add game-specific sidebar items here when game data is implemented */}
-
-								{/* Suppress unused variable warning during development */}
-								{activePlaythrough && null}
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/character"
+										icon={HiUser}
+										active={pathname === "/character"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Character
+									</SidebarItem>
+								)}
 							</SidebarItemGroup>
 						</SidebarItems>
 					</div>

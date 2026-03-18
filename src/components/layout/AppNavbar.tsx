@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, DarkThemeToggle, Navbar, NavbarBrand } from "flowbite-react";
+import { Button, Navbar, NavbarBrand } from "flowbite-react";
 import Image from "next/image";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useUI } from "@/lib/contexts/UIContext";
@@ -38,9 +38,7 @@ export function AppNavbar() {
 					</span>
 				</NavbarBrand>
 			</div>
-			<div className="flex md:order-2">
-				<DarkThemeToggle className="text-white hover:bg-white/15 focus:ring-white/30" />
-			</div>
+			<div className="flex md:order-2" />
 		</Navbar>
 	);
 }
