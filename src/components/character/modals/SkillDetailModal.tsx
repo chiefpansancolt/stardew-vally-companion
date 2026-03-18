@@ -14,7 +14,7 @@ interface Props {
 }
 
 function getRecipeImage(name: string): string | null {
-	const r = crafting().find(name) ?? cooking().find(name);
+	const r = crafting().findByName(name) ?? cooking().findByName(name);
 	return r ? assetPath(r.image) : null;
 }
 

@@ -29,6 +29,7 @@ export interface ToolLevels {
   axe: number;
   hoe: number;
   trashCan: number;
+  fishingRod: number;
 }
 
 export interface ShippedItem {

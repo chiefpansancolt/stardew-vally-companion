@@ -5,7 +5,7 @@ import { useState } from "react";
 import { HiCheck, HiLockClosed } from "react-icons/hi";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
-import { SkillDetailModal } from "./SkillDetailModal";
+import { SkillDetailModal } from "./modals/SkillDetailModal";
 
 interface Props {
 	gameData: GameData;
