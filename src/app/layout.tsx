@@ -1,4 +1,3 @@
-import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
@@ -38,10 +37,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning className="h-full">
-			<head>
-				<ThemeModeScript />
-			</head>
+		<html lang="en" className="h-full">
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${stardewValley.variable} bg-surface dark:bg-surface-dark min-h-screen antialiased`}
 			>

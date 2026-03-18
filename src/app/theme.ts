@@ -133,6 +133,10 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
     inlineWrapper: "cursor-pointer",
   },
   modal: {
+    content: {
+      inner:
+        "bg-surface relative flex max-h-[90dvh] flex-col rounded-xl shadow",
+    },
     header: {
       close: {
         base: "cursor-pointer",
