@@ -22,7 +22,7 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       maxItems: save.player.maxItems,
       gameVersion: save.player.gameVersion,
       totalDaysPlayed: save.date.totalDaysPlayed,
-      millisecondsPlayed: save.stats.raw["millisecondsPlayed"] ?? 0,
+      millisecondsPlayed: save.player.millisecondsPlayed,
       farmType: save.farm.type,
       currentDate: {
         season: save.date.season as "spring" | "summer" | "fall" | "winter",
