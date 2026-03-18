@@ -52,11 +52,17 @@ export function FishingRodDetailModal({
 			<ModalHeader>
 				<div className="flex items-center gap-3">
 					{headerImg && (
-						<img src={headerImg} alt={currentLvl?.name} className="h-10 w-10 object-contain" />
+						<img
+							src={headerImg}
+							alt={currentLvl?.name}
+							className="h-10 w-10 object-contain"
+						/>
 					)}
 					<div>
 						<div className="text-lg font-extrabold">{rod.name}</div>
-						<div className="text-sm font-semibold text-gray-500">{currentLvl?.name}</div>
+						<div className="text-sm font-semibold text-gray-500">
+							{currentLvl?.name}
+						</div>
 					</div>
 				</div>
 			</ModalHeader>
@@ -87,7 +93,11 @@ export function FishingRodDetailModal({
 							>
 								<div className="shrink-0">
 									{imgSrc ? (
-										<img src={imgSrc} alt={lvl.name} className="h-14 w-14 object-contain" />
+										<img
+											src={imgSrc}
+											alt={lvl.name}
+											className="h-14 w-14 object-contain"
+										/>
 									) : (
 										<div className="h-14 w-14 rounded-lg bg-gray-100" />
 									)}
@@ -105,18 +115,22 @@ export function FishingRodDetailModal({
 											{lvl.name}
 										</span>
 										{isCurrentLevel && (
-											<span className="rounded-full bg-primary/20 px-2 py-0.5 text-[0.6rem] font-bold text-primary">
+											<span className="bg-primary/20 text-primary rounded-full px-2 py-0.5 text-[0.6rem] font-bold">
 												Current
 											</span>
 										)}
 										{!isCurrentLevel && isReached && (
-											<span className="rounded-full bg-primary/15 px-2 py-0.5 text-[0.6rem] font-bold text-primary">
+											<span className="bg-primary/15 text-primary rounded-full px-2 py-0.5 text-[0.6rem] font-bold">
 												Owned
 											</span>
 										)}
-										{!isReached && <HiLockClosed className="h-3.5 w-3.5 text-red-500" />}
+										{!isReached && (
+											<HiLockClosed className="h-3.5 w-3.5 text-red-500" />
+										)}
 									</div>
-									<p className="mb-1.5 text-xs text-gray-500">{lvl.description}</p>
+									<p className="mb-1.5 text-xs text-gray-500">
+										{lvl.description}
+									</p>
 									<div className="flex flex-wrap gap-2">
 										{lvl.bait && (
 											<span className="rounded bg-blue-50 px-1.5 py-0.5 text-[0.6rem] font-semibold text-blue-700">
@@ -125,7 +139,8 @@ export function FishingRodDetailModal({
 										)}
 										{lvl.tackleSlots > 0 && (
 											<span className="rounded bg-purple-50 px-1.5 py-0.5 text-[0.6rem] font-semibold text-purple-700">
-												{lvl.tackleSlots} Tackle Slot{lvl.tackleSlots > 1 ? "s" : ""}
+												{lvl.tackleSlots} Tackle Slot
+												{lvl.tackleSlots > 1 ? "s" : ""}
 											</span>
 										)}
 										{lvl.fishingLevelRequired !== null && (
@@ -147,14 +162,18 @@ export function FishingRodDetailModal({
 											{lvl.cost.toLocaleString()}g
 										</div>
 									) : (
-										<span className="text-[0.65rem] text-gray-600">{lvl.obtain}</span>
+										<span className="text-[0.65rem] text-gray-600">
+											{lvl.obtain}
+										</span>
 									)}
 								</div>
 							</div>
 						);
 					})}
 				</div>
-				<p className="mt-4 text-[0.7rem] text-gray-800">Purchased from Willy&apos;s Fish Shop.</p>
+				<p className="mt-4 text-[0.7rem] text-gray-800">
+					Purchased from Willy&apos;s Fish Shop.
+				</p>
 			</ModalBody>
 		</Modal>
 	);

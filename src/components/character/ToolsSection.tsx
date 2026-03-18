@@ -4,9 +4,9 @@ import { tools } from "stardew-valley-data";
 import { useState } from "react";
 import { type GameData, type ToolLevels } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
+import { BACKPACK_LEVELS, BackpackDetailModal } from "./modals/BackpackDetailModal";
+import { FishingRodDetailModal, ROD_DOT_HEX, type RodData } from "./modals/FishingRodDetailModal";
 import { ToolDetailModal, type ToolModalState } from "./modals/ToolDetailModal";
-import { FishingRodDetailModal, type RodData, ROD_DOT_HEX } from "./modals/FishingRodDetailModal";
-import { BackpackDetailModal, BACKPACK_LEVELS } from "./modals/BackpackDetailModal";
 
 interface Props {
 	gameData: GameData;
@@ -228,7 +228,9 @@ export function ToolsSection({ gameData }: Props) {
 							key={id}
 							toolId={id}
 							level={toolLevels[key]}
-							onClick={() => setModalState({ toolId: id, currentLevel: toolLevels[key] })}
+							onClick={() =>
+								setModalState({ toolId: id, currentLevel: toolLevels[key] })
+							}
 						/>
 					))}
 					<FishingRodCard

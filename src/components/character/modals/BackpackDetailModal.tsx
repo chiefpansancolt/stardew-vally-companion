@@ -118,7 +118,9 @@ export function BackpackDetailModal({
 
 								<div className="min-w-0 flex-1">
 									<div className="mb-1 flex items-center gap-2">
-										<span className="text-sm font-bold text-gray-800">{lvl.name}</span>
+										<span className="text-sm font-bold text-gray-800">
+											{lvl.name}
+										</span>
 										{isCurrentLevel && (
 											<span className="bg-primary/20 text-primary rounded-full px-2 py-0.5 text-[0.6rem] font-bold">
 												Current
@@ -129,7 +131,9 @@ export function BackpackDetailModal({
 												Upgraded
 											</span>
 										)}
-										{!isReached && <HiLockClosed className="h-3.5 w-3.5 text-red-500" />}
+										{!isReached && (
+											<HiLockClosed className="h-3.5 w-3.5 text-red-500" />
+										)}
 									</div>
 									<p className="mb-1 text-xs text-gray-500">{lvl.description}</p>
 									<span className="text-[0.65rem] font-semibold text-gray-600">
@@ -143,7 +147,9 @@ export function BackpackDetailModal({
 											{lvl.cost.toLocaleString()}g
 										</div>
 									) : (
-										<span className="text-[0.65rem] text-gray-800">Starter</span>
+										<span className="text-[0.65rem] text-gray-800">
+											Starter
+										</span>
 									)}
 								</div>
 							</div>

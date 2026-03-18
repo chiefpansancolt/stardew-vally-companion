@@ -38,7 +38,9 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       axe: save.player.toolLevels.axe,
       hoe: save.player.toolLevels.hoe,
       trashCan: save.player.toolLevels.trashCan,
-      fishingRod: (save.player.toolLevels as unknown as Record<string, number>).fishingRod ?? 0,
+      fishingRod:
+        (save.player.toolLevels as unknown as Record<string, number>)
+          .fishingRod ?? 0,
     },
 
     shipped: Object.fromEntries(
