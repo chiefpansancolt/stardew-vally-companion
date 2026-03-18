@@ -3,7 +3,7 @@
 import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiCog, HiHome, HiUser, HiViewGrid } from "react-icons/hi";
+import { HiCog, HiHome, HiUser, HiUserGroup, HiViewGrid } from "react-icons/hi";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
 import { PlaythroughSwitcher } from "./PlaythroughSwitcher";
@@ -55,6 +55,18 @@ export function AppSidebar() {
 										onClick={() => setSidebarOpen(false)}
 									>
 										Character
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/villagers"
+										icon={HiUserGroup}
+										active={pathname === "/villagers"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Villagers
 									</SidebarItem>
 								)}
 							</SidebarItemGroup>

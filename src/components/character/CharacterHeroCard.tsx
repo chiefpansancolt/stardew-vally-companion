@@ -5,6 +5,7 @@ import { maps } from "stardew-valley-data";
 import { useState } from "react";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
+import { StatTile } from "@/comps/ui/StatTile";
 
 interface Props {
 	gameData: GameData;
@@ -31,17 +32,6 @@ function formatTimePlayed(ms: number): string {
 	const minutes = totalMinutes % 60;
 	if (hours === 0) return `${minutes}m`;
 	return `${hours}h ${minutes}m`;
-}
-
-function StatTile({ label, value }: { label: string; value: string }) {
-	return (
-		<div className="bg-surface rounded-lg border border-[#d6d0bc] px-3 py-2">
-			<div className="text-[0.675rem] font-semibold tracking-wide text-gray-500 uppercase">
-				{label}
-			</div>
-			<div className="mt-0.5 text-[0.9375rem] font-bold text-gray-800">{value}</div>
-		</div>
-	);
 }
 
 export function CharacterHeroCard({ gameData }: Props) {

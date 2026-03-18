@@ -166,7 +166,7 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
   tabs: {
     tablist: {
       tabitem: {
-        base: "cursor-pointer",
+        base: "flex cursor-pointer items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
       },
     },
   },

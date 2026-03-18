@@ -11,8 +11,8 @@ import {
 	Textarea,
 	TextInput,
 } from "flowbite-react";
-import { useState } from "react";
 import { parseSaveFile, type SaveData } from "stardew-valley-data";
+import { useState } from "react";
 import { HiInformationCircle } from "react-icons/hi";
 import type { EditPlaythroughModalProps } from "@/types/components";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
@@ -150,7 +150,9 @@ export function EditPlaythroughModal({
 							<Alert color="success" className="mb-3">
 								Ready to save —{" "}
 								<span className="font-semibold">{parsedData.player.name}</span> from{" "}
-								<span className="font-semibold">{parsedData.player.farmName} Farm</span>
+								<span className="font-semibold">
+									{parsedData.player.farmName} Farm
+								</span>
 							</Alert>
 						)}
 
