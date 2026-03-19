@@ -2,7 +2,7 @@
 
 import { Card } from "flowbite-react";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
-import { CollectionsOverview } from "@/comps/collections/CollectionsOverview";
+import { CollectionsOverview } from "@/comps/collections/overview/CollectionsOverview";
 
 export default function CollectionsPage() {
 	const { activePlaythrough } = usePlaythrough();

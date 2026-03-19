@@ -9,6 +9,7 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaEgg } from "react-icons/fa";
 import {
 	HiCog,
 	HiCollection,
@@ -98,6 +99,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Overview
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/animal-products"
+											icon={FaEgg}
+											active={pathname === "/collections/animal-products"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Animal Products
 										</SidebarItem>
 									</SidebarCollapse>
 								)}
