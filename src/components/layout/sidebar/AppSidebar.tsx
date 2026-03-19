@@ -1,9 +1,15 @@
 "use client";
 
-import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems } from "flowbite-react";
+import {
+	Sidebar,
+	SidebarCollapse,
+	SidebarItem,
+	SidebarItemGroup,
+	SidebarItems,
+} from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiCog, HiHome, HiUser, HiUserGroup, HiViewGrid } from "react-icons/hi";
+import { HiCog, HiCollection, HiHome, HiTable, HiUser, HiUserGroup, HiViewGrid } from "react-icons/hi";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
 import { PlaythroughSwitcher } from "./PlaythroughSwitcher";
@@ -68,6 +74,24 @@ export function AppSidebar() {
 									>
 										Villagers
 									</SidebarItem>
+								)}
+
+								{activePlaythrough && (
+									<SidebarCollapse
+										icon={HiCollection}
+										label="Collections"
+										open={pathname.startsWith("/collections")}
+									>
+										<SidebarItem
+											as={Link}
+											href="/collections"
+											icon={HiTable}
+											active={pathname === "/collections"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Overview
+										</SidebarItem>
+									</SidebarCollapse>
 								)}
 							</SidebarItemGroup>
 						</SidebarItems>

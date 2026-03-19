@@ -158,9 +158,31 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
       base: "hover:bg-primary/30 dark:hover:bg-primary/30 flex cursor-pointer items-center justify-center rounded-lg p-2 text-base text-sm font-normal text-white dark:text-white",
       active: "bg-primary/25 dark:bg-primary/35",
       icon: {
-        base: "text-white/80 transition duration-75",
+        base: "text-white transition duration-75 group-hover:text-white",
         active: "text-white dark:text-white",
       },
+    },
+    collapse: {
+      button:
+        "hover:bg-primary/30 dark:hover:bg-primary/30 group flex w-full cursor-pointer items-center rounded-lg p-2 text-sm font-normal text-white transition duration-75 dark:text-white",
+      icon: {
+        base: "text-white transition duration-75 group-hover:text-white",
+        open: {
+          off: "",
+          on: "text-white",
+        },
+      },
+      label: {
+        base: "ml-3 flex-1 whitespace-nowrap text-left",
+        icon: {
+          base: "h-6 w-6 transition delay-0",
+          open: {
+            on: "rotate-180",
+            off: "",
+          },
+        },
+      },
+      list: "space-y-1 py-1",
     },
   },
   tabs: {
