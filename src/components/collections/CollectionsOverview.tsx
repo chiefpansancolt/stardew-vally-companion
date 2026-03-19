@@ -25,9 +25,7 @@ function ItemTile({ item, complete }: { item: CollectionItem; complete: boolean 
 	return (
 		<div
 			className={`relative flex flex-col items-center gap-1 rounded-md border p-1.5 transition-all ${
-				complete
-					? "border-green-500/40 bg-green-900/20"
-					: "border-white/10 bg-white/5"
+				complete ? "border-green-500/40 bg-green-900/20" : "border-white/10 bg-white/5"
 			}`}
 		>
 			<div className="relative">
@@ -43,7 +41,7 @@ function ItemTile({ item, complete }: { item: CollectionItem; complete: boolean 
 				)}
 			</div>
 			<span
-				className={`w-full text-center text-[0.55rem] font-semibold leading-tight ${
+				className={`w-full text-center text-[0.55rem] leading-tight font-semibold ${
 					complete ? "text-green-300" : "text-white/50"
 				}`}
 				style={{ wordBreak: "break-word" }}
@@ -66,7 +64,7 @@ function CategorySection({ title, items, isComplete }: CategorySectionProps) {
 
 	return (
 		<div
-			className="rounded-xl border border-secondary/60 p-5"
+			className="border-secondary/60 rounded-xl border p-5"
 			style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
 		>
 			<div className="mb-4 flex items-center justify-between">
@@ -104,14 +102,12 @@ export function CollectionsOverview({ gameData }: Props) {
 	const cookingItems = c.cooking().get();
 	const craftingItems = c.crafting().get();
 
-	const isShippedComplete = (item: CollectionItem) =>
-		gameData.shipped[item.id]?.shipped === true;
+	const isShippedComplete = (item: CollectionItem) => gameData.shipped[item.id]?.shipped === true;
 	const isFishComplete = (item: CollectionItem) =>
 		gameData.fishCaught.some((f) => f.id === item.id);
 	const isArtifactComplete = (item: CollectionItem) =>
 		gameData.artifacts[item.id]?.found === true;
-	const isMineralComplete = (item: CollectionItem) =>
-		gameData.minerals[item.id]?.found === true;
+	const isMineralComplete = (item: CollectionItem) => gameData.minerals[item.id]?.found === true;
 	const isCookingComplete = (item: CollectionItem) =>
 		gameData.cookingRecipes[item.name]?.cooked === true;
 	const isCraftingComplete = (item: CollectionItem) =>
@@ -168,7 +164,11 @@ export function CollectionsOverview({ gameData }: Props) {
 			</div>
 
 			{/* Per-category grids */}
-			<CategorySection title="Items Shipped" items={shippedItems} isComplete={isShippedComplete} />
+			<CategorySection
+				title="Items Shipped"
+				items={shippedItems}
+				isComplete={isShippedComplete}
+			/>
 			<CategorySection title="Fish Caught" items={fishItems} isComplete={isFishComplete} />
 			<CategorySection
 				title="Artifacts Found"

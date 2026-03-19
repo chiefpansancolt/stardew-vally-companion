@@ -9,7 +9,15 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiCog, HiCollection, HiHome, HiTable, HiUser, HiUserGroup, HiViewGrid } from "react-icons/hi";
+import {
+	HiCog,
+	HiCollection,
+	HiHome,
+	HiTable,
+	HiUser,
+	HiUserGroup,
+	HiViewGrid,
+} from "react-icons/hi";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
 import { PlaythroughSwitcher } from "./PlaythroughSwitcher";

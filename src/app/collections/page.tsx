@@ -31,7 +31,8 @@ export default function CollectionsPage() {
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Collections</h1>
 				<p className="mt-1 text-gray-600">
-					Track your shipped items, fish, artifacts, minerals, cooking, and crafting progress
+					Track your shipped items, fish, artifacts, minerals, cooking, and crafting
+					progress
 				</p>
 			</div>
 

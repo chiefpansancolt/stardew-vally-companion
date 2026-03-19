@@ -173,7 +173,7 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
         },
       },
       label: {
-        base: "ml-3 flex-1 whitespace-nowrap text-left",
+        base: "ml-3 flex-1 text-left whitespace-nowrap",
         icon: {
           base: "h-6 w-6 transition delay-0",
           open: {
