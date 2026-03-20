@@ -9,6 +9,7 @@ import { SkillDetailModal } from "./modals/SkillDetailModal";
 
 interface Props {
 	gameData: GameData;
+	onToggleProfession?: (profId: string) => void;
 }
 
 function computeXpBarPercent(skill: Skill, currentXp: number, currentLevel: number): number {
@@ -123,7 +124,7 @@ function SkillCard({ skillData, progress, professionIds, onClick }: SkillCardPro
 	);
 }
 
-export function SkillsSection({ gameData }: Props) {
+export function SkillsSection({ gameData, onToggleProfession }: Props) {
 	const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 	const allSkills = skills().get();
 	const totalLevels = allSkills.reduce((sum, s) => sum + (gameData.skills[s.id]?.level ?? 0), 0);
@@ -170,6 +171,7 @@ export function SkillsSection({ gameData }: Props) {
 					chosenProfessionIds={gameData.professions}
 					isOpen={true}
 					onClose={() => setSelectedSkill(null)}
+					onToggleProfession={onToggleProfession}
 				/>
 			)}
 		</>

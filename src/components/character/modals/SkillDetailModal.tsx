@@ -11,6 +11,7 @@ interface Props {
 	chosenProfessionIds: string[];
 	isOpen: boolean;
 	onClose: () => void;
+	onToggleProfession?: (profId: string) => void;
 }
 
 function getRecipeImage(name: string): string | null {
@@ -41,22 +42,25 @@ function ProfOption({
 	skillName,
 	chosen,
 	dimmed,
+	onToggle,
 }: {
 	profId: string;
 	skillName: string;
 	chosen: boolean;
 	dimmed: boolean;
+	onToggle?: (profId: string) => void;
 }) {
 	const prof = professions().find(profId);
 	if (!prof) return null;
 	return (
 		<div
-			className={`flex flex-1 flex-col gap-1 p-2 ${chosen ? "bg-primary/5 dark:bg-primary/10" : ""} ${dimmed ? "opacity-40" : ""}`}
+			className={`flex flex-1 flex-col gap-1 p-2 transition-colors ${chosen ? "bg-primary/5 dark:bg-primary/10" : ""} ${dimmed ? "opacity-40" : ""} ${onToggle ? "cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20" : ""}`}
+			onClick={() => onToggle?.(profId)}
 		>
 			<div className="flex items-center gap-1.5">
 				<div className="text-[0.6875rem] font-bold text-gray-800 dark:text-gray-200">
 					{prof.name}
-					{chosen && <HiCheck className="ml-1 inline h-3 w-3" />}
+					{chosen && <HiCheck className="ml-1 inline h-3 w-3 text-primary" />}
 				</div>
 			</div>
 			<div className="text-[0.6rem] leading-snug text-gray-500 dark:text-gray-400">
@@ -71,9 +75,10 @@ interface LevelBlockProps {
 	levelNum: number;
 	reached: boolean;
 	chosenProfessionIds: string[];
+	onToggleProfession?: (profId: string) => void;
 }
 
-function LevelBlock({ skill, levelNum, reached, chosenProfessionIds }: LevelBlockProps) {
+function LevelBlock({ skill, levelNum, reached, chosenProfessionIds, onToggleProfession }: LevelBlockProps) {
 	const levelData = skill.levels[levelNum - 1];
 	const allProfs = professions()
 		.bySkill(skill.name as "Farming" | "Mining" | "Foraging" | "Fishing" | "Combat")
@@ -97,6 +102,7 @@ function LevelBlock({ skill, levelNum, reached, chosenProfessionIds }: LevelBloc
 							skillName={skill.name}
 							chosen={chosenProfessionIds.includes(p.id)}
 							dimmed={false}
+							onToggle={onToggleProfession}
 						/>
 					))}
 				</div>
@@ -136,6 +142,7 @@ function LevelBlock({ skill, levelNum, reached, chosenProfessionIds }: LevelBloc
 										skillName={skill.name}
 										chosen={chosenProfessionIds.includes(p.id)}
 										dimmed={!reached}
+										onToggle={onToggleProfession}
 									/>
 								))}
 							</div>
@@ -180,6 +187,7 @@ export function SkillDetailModal({
 	chosenProfessionIds,
 	isOpen,
 	onClose,
+	onToggleProfession,
 }: Props) {
 	const row1 = [1, 2, 3, 4, 5];
 	const row2 = [6, 7, 8, 9, 10];
@@ -217,6 +225,7 @@ export function SkillDetailModal({
 								levelNum={lvl}
 								reached={currentLevel >= lvl}
 								chosenProfessionIds={chosenProfessionIds}
+								onToggleProfession={onToggleProfession}
 							/>
 						))}
 					</div>
@@ -235,6 +244,7 @@ export function SkillDetailModal({
 								levelNum={lvl}
 								reached={currentLevel >= lvl}
 								chosenProfessionIds={chosenProfessionIds}
+								onToggleProfession={onToggleProfession}
 							/>
 						))}
 					</div>

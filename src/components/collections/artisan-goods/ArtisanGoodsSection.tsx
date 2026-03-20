@@ -9,6 +9,7 @@ import {
 } from "stardew-valley-data";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
 import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
+import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 import { useState } from "react";
@@ -16,6 +17,7 @@ import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { PriceFormulaModal } from "./modals/PriceFormulaModal";
+import { getActiveProfessionBonuses, applyBestProfessionBonus, type BonusResult } from "@/lib/utils/professionPrices";
 
 interface Props {
 	gameData: GameData;
@@ -72,10 +74,11 @@ interface GoodCardProps {
 	good: ArtisanGood;
 	shipped: boolean;
 	shippable: boolean;
+	professionBonus?: BonusResult | null;
 	onCalculate: () => void;
 }
 
-function ArtisanGoodCard({ good, shipped, shippable, onCalculate }: GoodCardProps) {
+function ArtisanGoodCard({ good, shipped, shippable, professionBonus = null, onCalculate }: GoodCardProps) {
 	return (
 		<div
 			className={`flex flex-col gap-3 rounded-xl border p-3 transition-all ${
@@ -141,7 +144,7 @@ function ArtisanGoodCard({ good, shipped, shippable, onCalculate }: GoodCardProp
 
 			{/* Price display */}
 			{good.sellPrice !== null ? (
-				<PriceGrid price={good.sellPrice} maxQuality={good.maxQuality} shipped={shippable && shipped} />
+				<PriceGrid price={good.sellPrice} maxQuality={good.maxQuality} shipped={shippable && shipped} professionBonus={professionBonus} />
 			) : (
 				<div className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
 					<span className="text-[0.7rem] text-white/70 italic">
@@ -202,6 +205,10 @@ export function ArtisanGoodsSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");
 	const [filter, setFilter] = useState<ShippedFilter>("all");
 	const [modalGood, setModalGood] = useState<ArtisanGood | null>(null);
+	const [showProfessionPrices, setShowProfessionPrices] = useState(false);
+
+	const activeProfessionBonuses = getActiveProfessionBonuses(gameData);
+	const hasProfessions = activeProfessionBonuses.has("artisan") || activeProfessionBonuses.has("tapper");
 
 	const allGoods = artisanGoods().get();
 	const shippableGoods = allGoods.filter((g) => shippableIds.has(g.id));
@@ -257,6 +264,12 @@ export function ArtisanGoodsSection({ gameData }: Props) {
 							))}
 						</FilterGroup>
 					</FilterPopover>
+					{hasProfessions && (
+						<ProfessionsButton
+							active={showProfessionPrices}
+							onClick={() => setShowProfessionPrices(!showProfessionPrices)}
+						/>
+					)}
 				</div>
 
 				{/* Grid */}
@@ -272,6 +285,7 @@ export function ArtisanGoodsSection({ gameData }: Props) {
 								good={good}
 								shipped={gameData.shipped[good.id]?.shipped === true}
 								shippable={shippableIds.has(good.id)}
+								professionBonus={showProfessionPrices && good.sellPrice !== null ? applyBestProfessionBonus(good.sellPrice, good.profession, activeProfessionBonuses) : null}
 								onCalculate={() => setModalGood(good)}
 							/>
 						))}
@@ -284,6 +298,7 @@ export function ArtisanGoodsSection({ gameData }: Props) {
 					key={modalGood?.id}
 					good={modalGood}
 					onClose={() => setModalGood(null)}
+					activeProfessionBonuses={showProfessionPrices ? activeProfessionBonuses : null}
 				/>
 			)}
 		</>

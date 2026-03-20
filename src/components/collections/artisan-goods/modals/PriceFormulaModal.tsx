@@ -9,14 +9,16 @@ import {
 	crops,
 	fish,
 	forageables,
-	QualityCalculator,
 	trees,
 } from "stardew-valley-data";
+import type { ProfessionBonus } from "stardew-valley-data";
 import { useState } from "react";
 import { HiArrowRight } from "react-icons/hi";
 import { assetPath } from "@/lib/utils/assetPath";
+import { applyBestProfessionBonus, getStackedBonuses, type BonusResult } from "@/lib/utils/professionPrices";
+import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 
-const calc = new QualityCalculator();
 const artisanCalc = artisanCalculator();
 
 const ARTISAN_USE_KEY: Record<string, keyof ArtisanUses> = {
@@ -165,9 +167,10 @@ function calculateResult(good: ArtisanGood, opt: IngredientOption): ArtisanResul
 interface Props {
 	good: ArtisanGood | null;
 	onClose: () => void;
+	activeProfessionBonuses?: Set<ProfessionBonus> | null;
 }
 
-export function PriceFormulaModal({ good, onClose }: Props) {
+export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = null }: Props) {
 	const [query, setQuery] = useState("");
 	const [selected, setSelected] = useState<IngredientOption | null>(null);
 
@@ -181,14 +184,16 @@ export function PriceFormulaModal({ good, onClose }: Props) {
 	const calculatedEnergy = result?.energy ?? null;
 	const calculatedHealth = result?.health ?? null;
 
-	const qualityPrices =
-		calculatedPrice !== null && good?.maxQuality === "iridium"
-			? calc.sellPrices(calculatedPrice)
-			: null;
-
-	const qualityEnergyHealth =
-		calculatedEnergy !== null && calculatedHealth !== null && good?.maxQuality === "iridium"
-			? calc.energyHealth(calculatedEnergy, calculatedHealth)
+// Items with stacking professions (e.g. Smoked Fish: Fisher/Angler + Artisan)
+	const hasStackingProfessions =
+		!!good && good.profession.length > 1 && good.profession.includes("artisan");
+	const professionBonuses: BonusResult[] =
+		hasStackingProfessions && calculatedPrice !== null && activeProfessionBonuses && good
+			? getStackedBonuses(calculatedPrice, good.profession, activeProfessionBonuses)
+			: [];
+	const professionBonus: BonusResult | null =
+		!hasStackingProfessions && calculatedPrice !== null && activeProfessionBonuses && good
+			? applyBestProfessionBonus(calculatedPrice, good.profession, activeProfessionBonuses)
 			: null;
 
 	return (
@@ -287,145 +292,25 @@ export function PriceFormulaModal({ good, onClose }: Props) {
 								</div>
 
 								{/* Sell price */}
-								{qualityPrices ? (
-									<div className="grid grid-cols-4 overflow-hidden rounded-lg border border-white/10">
-										<div className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-2 py-2">
-											<span className="text-[0.6rem] font-semibold tracking-wide text-white uppercase">
-												Basic
-											</span>
-											<span className="text-sm font-bold text-white/80">
-												{calculatedPrice}g
-											</span>
-										</div>
-										{qualityPrices.map(({ quality, icon, value }) => (
-											<div
-												key={quality}
-												className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-2 py-2 last:border-r-0"
-											>
-												<img
-													src={assetPath(icon)}
-													alt={quality}
-													className="h-3.5 w-3.5 object-contain"
-												/>
-												<span className="text-sm font-bold text-white/80">
-													{value}g
-												</span>
-											</div>
-										))}
-									</div>
-								) : (
-									<p className="text-accent text-2xl font-bold">
-										{calculatedPrice}g
-									</p>
-								)}
+								<PriceGrid
+									price={calculatedPrice}
+									maxQuality={good.maxQuality}
+									variant="modal"
+									professionBonus={professionBonus}
+									professionBonuses={professionBonuses.length > 0 ? professionBonuses : undefined}
+								/>
 
 								{/* Energy / Health */}
 								{calculatedEnergy !== null &&
 									calculatedHealth !== null &&
 									(calculatedEnergy > 0 || calculatedHealth > 0) && (
 										<div className="mt-2">
-											{qualityEnergyHealth ? (
-												<div className="grid grid-cols-4 overflow-hidden rounded-lg border border-white/10">
-													<div className="flex flex-col items-center gap-1 border-r border-white/10 bg-white/5 px-1 py-1.5">
-														<span className="text-[0.6rem] font-semibold tracking-wide text-white uppercase">
-															Basic
-														</span>
-														<div className="flex items-center gap-1.5">
-															<span className="inline-flex items-center gap-0.5">
-																<img
-																	src={assetPath(
-																		"images/misc/Energy.png"
-																	)}
-																	alt="Energy"
-																	className="h-3.5 w-3.5 object-contain"
-																/>
-																<span className="text-[0.65rem] font-bold text-yellow-300">
-																	+{calculatedEnergy}
-																</span>
-															</span>
-															<span className="inline-flex items-center gap-0.5">
-																<img
-																	src={assetPath(
-																		"images/misc/Health.png"
-																	)}
-																	alt="Health"
-																	className="h-3.5 w-3.5 object-contain"
-																/>
-																<span className="text-[0.65rem] font-bold text-red-400">
-																	+{calculatedHealth}
-																</span>
-															</span>
-														</div>
-													</div>
-													{qualityEnergyHealth.map(
-														({ quality, icon, energy, health }) => (
-															<div
-																key={quality}
-																className="flex flex-col items-center gap-1 border-r border-white/10 bg-white/5 px-1 py-1.5 last:border-r-0"
-															>
-																<img
-																	src={assetPath(icon)}
-																	alt={quality}
-																	className="h-3.5 w-3.5 object-contain"
-																/>
-																<div className="flex items-center gap-1.5">
-																	<span className="inline-flex items-center gap-0.5">
-																		<img
-																			src={assetPath(
-																				"images/misc/Energy.png"
-																			)}
-																			alt="Energy"
-																			className="h-3.5 w-3.5 object-contain"
-																		/>
-																		<span className="text-[0.65rem] font-bold text-yellow-300">
-																			+{energy}
-																		</span>
-																	</span>
-																	<span className="inline-flex items-center gap-0.5">
-																		<img
-																			src={assetPath(
-																				"images/misc/Health.png"
-																			)}
-																			alt="Health"
-																			className="h-3.5 w-3.5 object-contain"
-																		/>
-																		<span className="text-[0.65rem] font-bold text-red-400">
-																			+{health}
-																		</span>
-																	</span>
-																</div>
-															</div>
-														)
-													)}
-												</div>
-											) : (
-												<div className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
-													<span className="inline-flex items-center gap-1.5">
-														<img
-															src={assetPath(
-																"images/misc/Energy.png"
-															)}
-															alt="Energy"
-															className="h-4 w-4 object-contain"
-														/>
-														<span className="text-xs font-semibold text-yellow-300">
-															+{calculatedEnergy}
-														</span>
-													</span>
-													<span className="inline-flex items-center gap-1.5">
-														<img
-															src={assetPath(
-																"images/misc/Health.png"
-															)}
-															alt="Health"
-															className="h-4 w-4 object-contain"
-														/>
-														<span className="text-xs font-semibold text-red-400">
-															+{calculatedHealth}
-														</span>
-													</span>
-												</div>
-											)}
+											<EnergyHealthGrid
+												energy={calculatedEnergy}
+												health={calculatedHealth}
+												maxQuality={good.maxQuality}
+												variant="modal"
+											/>
 										</div>
 									)}
 							</div>

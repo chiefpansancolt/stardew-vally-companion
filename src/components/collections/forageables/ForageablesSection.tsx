@@ -14,9 +14,11 @@ import { PriceGrid } from "@/comps/ui/PriceGrid";
 import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
+import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
 import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
+import { getActiveProfessionBonuses, getActiveKnowledgeBonuses, applyBestForageableBonus, applyBestProfessionBonus, type BonusResult } from "@/lib/utils/professionPrices";
 import { assetPath } from "@/lib/utils/assetPath";
 
 interface Props {
@@ -62,11 +64,13 @@ function ForageableCard({
 	shippable,
 	shipped,
 	shippedCount,
+	professionBonus = null,
 }: {
 	item: Forageable;
 	shippable: boolean;
 	shipped: boolean;
 	shippedCount: number;
+	professionBonus?: BonusResult | null;
 }) {
 	const hasEnergy =
 		item.energyHealth &&
@@ -105,7 +109,7 @@ function ForageableCard({
 			</div>
 
 			{/* Price quality grid */}
-			<PriceGrid price={item.sellPrice} maxQuality="iridium" shipped={shipped} />
+			<PriceGrid price={item.sellPrice} maxQuality="iridium" shipped={shipped} professionBonus={professionBonus} />
 
 			{/* Energy/Health */}
 			{hasEnergy && (
@@ -126,10 +130,12 @@ function FruitTreeProduceCard({
 	tree,
 	shipped,
 	shippedCount,
+	professionBonus = null,
 }: {
 	tree: FruitTree;
 	shipped: boolean;
 	shippedCount: number;
+	professionBonus?: BonusResult | null;
 }) {
 	const p = tree.produce;
 	const hasEnergy = p.energyHealth && (p.energyHealth.energy ?? 0) > 0;
@@ -161,7 +167,7 @@ function FruitTreeProduceCard({
 			</div>
 
 			{/* Price quality grid */}
-			<PriceGrid price={p.sellPrice} maxQuality="iridium" shipped={shipped} />
+			<PriceGrid price={p.sellPrice} maxQuality="iridium" shipped={shipped} professionBonus={professionBonus} />
 
 			{/* Energy/Health */}
 			{hasEnergy && (
@@ -178,10 +184,12 @@ function WildTreeTapperCard({
 	tree,
 	shipped,
 	shippedCount,
+	professionBonus = null,
 }: {
 	tree: WildTree;
 	shipped: boolean;
 	shippedCount: number;
+	professionBonus?: BonusResult | null;
 }) {
 	const t = tree.tapper!;
 	const hasEnergy = t.energyHealth && (t.energyHealth.energy ?? 0) > 0;
@@ -210,7 +218,7 @@ function WildTreeTapperCard({
 			</div>
 
 			{/* Single price row (tappers have no quality tiers) */}
-			<PriceGrid price={t.sellPrice} maxQuality="basic" shipped={shipped} />
+			<PriceGrid price={t.sellPrice} maxQuality="basic" shipped={shipped} professionBonus={professionBonus} />
 
 		{/* Single E/H row */}
 		{hasEnergy && <EnergyHealthGrid energy={t.energyHealth!.energy ?? 0} health={t.energyHealth!.health ?? 0} maxQuality="basic" />}
@@ -238,6 +246,11 @@ export function ForageablesSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");
 	const [seasonFilter, setSeasonFilter] = useState<SeasonFilter>("all");
 	const [shippedFilter, setShippedFilter] = useState<ShippedFilter>("all");
+	const [showProfessionPrices, setShowProfessionPrices] = useState(false);
+
+	const activeProfessionBonuses = getActiveProfessionBonuses(gameData);
+	const activeKnowledgeBonuses = getActiveKnowledgeBonuses(gameData);
+	const hasBonuses = activeProfessionBonuses.has("tiller") || activeProfessionBonuses.has("tapper") || activeKnowledgeBonuses.size > 0;
 
 	const allForageables = forageables().sortByName().get();
 	const allTrees = trees().get();
@@ -333,6 +346,12 @@ export function ForageablesSection({ gameData }: Props) {
 						))}
 					</FilterGroup>
 				</FilterPopover>
+				{hasBonuses && (
+					<ProfessionsButton
+						active={showProfessionPrices}
+						onClick={() => setShowProfessionPrices(!showProfessionPrices)}
+					/>
+				)}
 			</div>
 
 			{/* Card grid */}
@@ -347,6 +366,7 @@ export function ForageablesSection({ gameData }: Props) {
 							shippable={isShippable}
 							shipped={isShipped}
 							shippedCount={count}
+							professionBonus={showProfessionPrices ? applyBestForageableBonus(f.sellPrice, f.profession, f.knowledge, activeProfessionBonuses, activeKnowledgeBonuses) : null}
 						/>
 					);
 				})}
@@ -360,6 +380,7 @@ export function ForageablesSection({ gameData }: Props) {
 								tree={t}
 								shipped={isShipped}
 								shippedCount={count}
+								professionBonus={showProfessionPrices ? applyBestProfessionBonus(t.produce.sellPrice, t.produce.profession, activeProfessionBonuses) : null}
 							/>
 						);
 					}
@@ -372,6 +393,7 @@ export function ForageablesSection({ gameData }: Props) {
 							tree={t}
 							shipped={isShipped}
 							shippedCount={count}
+							professionBonus={showProfessionPrices ? applyBestProfessionBonus(t.tapper.sellPrice, t.tapper.profession, activeProfessionBonuses) : null}
 						/>
 					);
 				})}

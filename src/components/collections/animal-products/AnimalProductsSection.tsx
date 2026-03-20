@@ -1,12 +1,14 @@
 "use client";
 
-import { animals, isFarmAnimal } from "stardew-valley-data";
+import { animals, isFarmAnimal, type AnimalProduce } from "stardew-valley-data";
 import { useState } from "react";
 import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
+import { getActiveProfessionBonuses, applyBestProfessionBonus, type BonusResult } from "@/lib/utils/professionPrices";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 
 interface Props {
@@ -14,7 +16,7 @@ interface Props {
 }
 
 interface ProduceEntry {
-	produce: { id: string; name: string; sellPrice: number; image: string };
+	produce: AnimalProduce;
 	animalName: string;
 	building: string;
 	isDeluxe: boolean;
@@ -31,9 +33,10 @@ const FILTERS: { id: ShippedFilter; label: string }[] = [
 interface ProduceCardProps {
 	entry: ProduceEntry;
 	shipped: boolean;
+	professionBonus?: BonusResult | null;
 }
 
-function ProduceCard({ entry, shipped }: ProduceCardProps) {
+function ProduceCard({ entry, shipped, professionBonus = null }: ProduceCardProps) {
 	const { produce, animalName, building, isDeluxe } = entry;
 
 	return (
@@ -72,7 +75,7 @@ function ProduceCard({ entry, shipped }: ProduceCardProps) {
 			</div>
 
 			{/* Sell price table */}
-			<PriceGrid price={produce.sellPrice} maxQuality="iridium" shipped={shipped} />
+			<PriceGrid price={produce.sellPrice} maxQuality="iridium" shipped={shipped} professionBonus={professionBonus} />
 		</div>
 	);
 }
@@ -80,6 +83,10 @@ function ProduceCard({ entry, shipped }: ProduceCardProps) {
 export function AnimalProductsSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");
 	const [filter, setFilter] = useState<ShippedFilter>("all");
+	const [showProfessionPrices, setShowProfessionPrices] = useState(false);
+
+	const activeProfessionBonuses = getActiveProfessionBonuses(gameData);
+	const hasProfessions = activeProfessionBonuses.has("rancher");
 
 	const allAnimals = animals().farmAnimals().get().filter(isFarmAnimal);
 
@@ -143,6 +150,12 @@ export function AnimalProductsSection({ gameData }: Props) {
 						))}
 					</FilterGroup>
 				</FilterPopover>
+				{hasProfessions && (
+					<ProfessionsButton
+						active={showProfessionPrices}
+						onClick={() => setShowProfessionPrices(!showProfessionPrices)}
+					/>
+				)}
 			</div>
 
 			{/* Grid */}
@@ -157,6 +170,7 @@ export function AnimalProductsSection({ gameData }: Props) {
 							key={`${entry.animalName}-${entry.produce.id}-${entry.isDeluxe}`}
 							entry={entry}
 							shipped={gameData.shipped[entry.produce.id]?.shipped === true}
+							professionBonus={showProfessionPrices ? applyBestProfessionBonus(entry.produce.sellPrice, entry.produce.profession, activeProfessionBonuses) : null}
 						/>
 					))}
 				</div>

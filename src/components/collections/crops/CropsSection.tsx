@@ -1,6 +1,7 @@
 "use client";
 
 import { type Crop, crops, type Season } from "stardew-valley-data";
+import { getActiveProfessionBonuses, applyBestProfessionBonus, type BonusResult } from "@/lib/utils/professionPrices";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
 import { SeedRow } from "@/comps/ui/SeedRow";
 import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
@@ -10,6 +11,7 @@ import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
+import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
 import { CropDetailModal } from "./modals/CropDetailModal";
 
@@ -33,10 +35,11 @@ interface CropCardProps {
 	crop: Crop;
 	shipped: boolean;
 	shippedCount: number;
+	professionBonus?: BonusResult | null;
 	onClick: () => void;
 }
 
-function CropCard({ crop, shipped, shippedCount, onClick }: CropCardProps) {
+function CropCard({ crop, shipped, shippedCount, professionBonus = null, onClick }: CropCardProps) {
 	const hasEnergy =
 		crop.energyHealth &&
 		!crop.energyHealth.poison &&
@@ -137,7 +140,7 @@ function CropCard({ crop, shipped, shippedCount, onClick }: CropCardProps) {
 			</div>
 
 			{/* Price */}
-			<PriceGrid price={crop.cropSellPrice} maxQuality={crop.maxQuality} shipped={shipped} />
+			<PriceGrid price={crop.cropSellPrice} maxQuality={crop.maxQuality} shipped={shipped} professionBonus={professionBonus} />
 
 			{/* Energy/Health */}
 		{hasEnergy && (
@@ -159,6 +162,10 @@ export function CropsSection({ gameData }: Props) {
 	const [trellisFilter, setTrellisFilter] = useState<TraitFilter>("all");
 	const [giantFilter, setGiantFilter] = useState<TraitFilter>("all");
 	const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
+	const [showProfessionPrices, setShowProfessionPrices] = useState(false);
+
+	const activeProfessionBonuses = getActiveProfessionBonuses(gameData);
+	const hasProfessions = activeProfessionBonuses.has("tiller");
 
 	const allCrops = crops().get();
 	const shippedCount = allCrops.filter(
@@ -251,6 +258,12 @@ export function CropsSection({ gameData }: Props) {
 							))}
 						</FilterGroup>
 					</FilterPopover>
+				{hasProfessions && (
+					<ProfessionsButton
+						active={showProfessionPrices}
+						onClick={() => setShowProfessionPrices(!showProfessionPrices)}
+					/>
+				)}
 			</div>
 
 			{/* Grid */}
@@ -266,6 +279,7 @@ export function CropsSection({ gameData }: Props) {
 								crop={crop}
 								shipped={gameData.shipped[crop.id]?.shipped === true}
 								shippedCount={gameData.shipped[crop.id]?.count ?? 0}
+								professionBonus={showProfessionPrices ? applyBestProfessionBonus(crop.cropSellPrice, crop.profession, activeProfessionBonuses) : null}
 								onClick={() => setSelectedCrop(crop)}
 							/>
 						))}
