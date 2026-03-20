@@ -1,18 +1,19 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { type Crop, QualityCalculator } from "stardew-valley-data";
+import { type Crop } from "stardew-valley-data";
 import { HiCheck } from "react-icons/hi";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
+import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { SeedRow } from "@/comps/ui/SeedRow";
+import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 
 interface Props {
 	crop: Crop | null;
 	gameData: GameData;
 	onClose: () => void;
 }
-
-const calc = new QualityCalculator();
 
 const ARTISAN_USE_META: Record<string, { name: string; image: string }> = {
 	honey: { name: "Honey", image: "images/artisan-goods/Honey.png" },
@@ -75,37 +76,12 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 			<ModalBody>
 				<div className="flex flex-col gap-4">
 					{/* Seed row */}
-					<div
-						className="flex items-center justify-between rounded-xl p-3"
-						style={NAVY_TILE}
-					>
-						<div className="flex items-center gap-2">
-							{crop.seedImage && (
-								<img
-									src={assetPath(crop.seedImage)}
-									alt={crop.seedName}
-									className="h-6 w-6 object-contain"
-								/>
-							)}
-							<span className="text-sm font-semibold text-white/85">
-								{crop.seedName}
-							</span>
-						</div>
-						{crop.seedBuyPrices.length > 0 && (
-							<div className="flex gap-4">
-								{crop.seedBuyPrices.map((bp) => (
-									<div key={bp.place} className="flex flex-col items-end">
-										<span className="text-[0.55rem] font-semibold tracking-wide text-white/80 uppercase">
-											{bp.place}
-										</span>
-										<span className="text-sm font-bold text-accent">
-											{bp.price}g
-										</span>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
+					<SeedRow
+						image={crop.seedImage}
+						name={crop.seedName}
+						prices={crop.seedBuyPrices}
+						variant="modal"
+					/>
 
 					{/* Info chips */}
 					<div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -134,59 +110,12 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 					</div>
 
 					{/* Sell price */}
-					{crop.maxQuality === "iridium" ? (
-						<div>
-							<div className="mb-2 text-sm font-bold text-gray-900">
-								Sell Price
-							</div>
-							<div className="grid grid-cols-4 overflow-hidden rounded-xl border border-white/10">
-								<div
-									className="flex flex-col items-center gap-0.5 border-r border-white/10 px-1 py-2"
-									style={NAVY_TILE}
-								>
-									<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-										Basic
-									</span>
-									<span className="text-xs font-bold text-white/85">
-										{crop.cropSellPrice}g
-									</span>
-								</div>
-								{calc.sellPrices(crop.cropSellPrice).map(({ quality, icon, value }) => (
-									<div
-										key={quality}
-										className="flex flex-col items-center gap-0.5 border-r border-white/10 px-1 py-2 last:border-r-0"
-										style={NAVY_TILE}
-									>
-										<img
-											src={assetPath(icon)}
-											alt={quality}
-											className="h-3.5 w-3.5 object-contain"
-										/>
-										<span className="text-xs font-bold text-white/85">
-											{value}g
-										</span>
-									</div>
-								))}
-							</div>
+					<div>
+						<div className="mb-2 text-sm font-bold text-gray-900">
+							Sell Price
 						</div>
-					) : (
-						<div>
-							<div className="mb-2 text-sm font-bold text-gray-900">
-								Sell Price
-							</div>
-							<div
-								className="flex items-center justify-between rounded-xl px-3 py-2"
-								style={NAVY_TILE}
-							>
-								<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-									Price
-								</span>
-								<span className="text-sm font-bold text-white/85">
-									{crop.cropSellPrice}g
-								</span>
-							</div>
-						</div>
-					)}
+						<PriceGrid price={crop.cropSellPrice} maxQuality={crop.maxQuality} variant="modal" />
+					</div>
 
 					{/* Energy & Health */}
 					{hasEnergy && (
@@ -194,63 +123,12 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 							<div className="mb-2 text-sm font-bold text-gray-900">
 								Energy &amp; Health
 							</div>
-							{crop.maxQuality === "iridium" ? (
-								<div className="grid grid-cols-4 overflow-hidden rounded-xl border border-white/10">
-									<div
-										className="flex flex-col items-center gap-1.5 border-r border-white/10 px-2 py-2.5"
-										style={NAVY_TILE}
-									>
-										<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-											Basic
-										</span>
-										<div className="flex gap-1.5">
-											<span className="inline-flex items-center gap-1">
-												<img src={assetPath("images/misc/Energy.png")} alt="Energy" className="h-4 w-4 object-contain" />
-												<span className="text-xs font-bold text-yellow-300">+{crop.energyHealth!.energy}</span>
-											</span>
-											<span className="inline-flex items-center gap-1">
-												<img src={assetPath("images/misc/Health.png")} alt="Health" className="h-4 w-4 object-contain" />
-												<span className="text-xs font-bold text-red-400">+{crop.energyHealth!.health}</span>
-											</span>
-										</div>
-									</div>
-									{calc
-										.energyHealth(crop.energyHealth!.energy ?? 0, crop.energyHealth!.health ?? 0)
-										.map(({ quality, icon, energy, health }) => (
-											<div
-												key={quality}
-												className="flex flex-col items-center gap-1.5 border-r border-white/10 px-2 py-2.5 last:border-r-0"
-												style={NAVY_TILE}
-											>
-												<img src={assetPath(icon)} alt={quality} className="h-4 w-4 object-contain" />
-												<div className="flex gap-1.5">
-													<span className="inline-flex items-center gap-1">
-														<img src={assetPath("images/misc/Energy.png")} alt="Energy" className="h-4 w-4 object-contain" />
-														<span className="text-xs font-bold text-yellow-300">+{energy}</span>
-													</span>
-													<span className="inline-flex items-center gap-1">
-														<img src={assetPath("images/misc/Health.png")} alt="Health" className="h-4 w-4 object-contain" />
-														<span className="text-xs font-bold text-red-400">+{health}</span>
-													</span>
-												</div>
-											</div>
-										))}
-								</div>
-							) : (
-								<div
-									className="flex items-center gap-4 rounded-xl px-3 py-2"
-									style={NAVY_TILE}
-								>
-									<span className="inline-flex items-center gap-1.5">
-										<img src={assetPath("images/misc/Energy.png")} alt="Energy" className="h-4 w-4 object-contain" />
-										<span className="text-sm font-bold text-yellow-300">+{crop.energyHealth!.energy}</span>
-									</span>
-									<span className="inline-flex items-center gap-1.5">
-										<img src={assetPath("images/misc/Health.png")} alt="Health" className="h-4 w-4 object-contain" />
-										<span className="text-sm font-bold text-red-400">+{crop.energyHealth!.health}</span>
-									</span>
-								</div>
-							)}
+							<EnergyHealthGrid
+								energy={crop.energyHealth!.energy ?? 0}
+								health={crop.energyHealth!.health ?? 0}
+								maxQuality={crop.maxQuality}
+								variant="modal"
+							/>
 						</div>
 					)}
 

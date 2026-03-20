@@ -1,10 +1,13 @@
 "use client";
 
-import { animals, isFarmAnimal, QualityCalculator } from "stardew-valley-data";
+import { animals, isFarmAnimal } from "stardew-valley-data";
 import { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
+import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { SearchField } from "@/comps/ui/SearchField";
+import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 
 interface Props {
 	gameData: GameData;
@@ -25,8 +28,6 @@ const FILTERS: { id: ShippedFilter; label: string }[] = [
 	{ id: "not-shipped", label: "Not Shipped" },
 ];
 
-const calc = new QualityCalculator();
-
 interface ProduceCardProps {
 	entry: ProduceEntry;
 	shipped: boolean;
@@ -34,7 +35,6 @@ interface ProduceCardProps {
 
 function ProduceCard({ entry, shipped }: ProduceCardProps) {
 	const { produce, animalName, building, isDeluxe } = entry;
-	const qualityPrices = calc.sellPrices(produce.sellPrice);
 
 	return (
 		<div
@@ -82,35 +82,7 @@ function ProduceCard({ entry, shipped }: ProduceCardProps) {
 			</div>
 
 			{/* Sell price table */}
-			<div className="grid grid-cols-4 overflow-hidden rounded-lg border border-white/10">
-				<div className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-1 py-1.5">
-					<span className="text-[0.6rem] font-semibold tracking-wide text-white/40 uppercase">
-						Basic
-					</span>
-					<span
-						className={`text-xs font-bold ${shipped ? "text-green-300" : "text-white/80"}`}
-					>
-						{produce.sellPrice}g
-					</span>
-				</div>
-				{qualityPrices.map(({ quality, icon, value }) => (
-					<div
-						key={quality}
-						className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-1 py-1.5 last:border-r-0"
-					>
-						<img
-							src={assetPath(icon)}
-							alt={quality}
-							className="h-3.5 w-3.5 object-contain"
-						/>
-						<span
-							className={`text-xs font-bold ${shipped ? "text-green-300" : "text-white/80"}`}
-						>
-							{value}g
-						</span>
-					</div>
-				))}
-			</div>
+			<PriceGrid price={produce.sellPrice} maxQuality="iridium" shipped={shipped} />
 		</div>
 	);
 }
@@ -171,35 +143,16 @@ export function AnimalProductsSection({ gameData }: Props) {
 
 			{/* Controls */}
 			<div className="mb-4 flex flex-wrap items-center gap-3">
-				<input
-					type="text"
-					placeholder="Search produce or animal…"
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-					className="flex-1 rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
-				/>
-				<fieldset>
-					<div className="flex flex-wrap gap-2">
+				<SearchField value={search} onChange={setSearch} placeholder="Search produce or animal…" />
+				<FilterPopover activeCount={filter !== "all" ? 1 : 0}>
+					<FilterGroup label="Shipped Status">
 						{FILTERS.map(({ id, label }) => (
-							<label
-								key={id}
-								className="group has-checked:border-accent has-checked:bg-accent relative flex cursor-pointer items-center justify-center rounded-md border border-slate-500 bg-slate-700/60 px-3 py-1.5 transition-all"
-							>
-								<input
-									type="radio"
-									name="animal-products-filter"
-									value={id}
-									checked={filter === id}
-									onChange={() => setFilter(id)}
-									className="absolute inset-0 cursor-pointer appearance-none focus:outline-none"
-								/>
-								<span className="text-[0.75rem] font-semibold text-slate-300 uppercase group-has-checked:text-white">
-									{label}
-								</span>
-							</label>
+							<FilterRadio key={id} name="animal-products-filter" value={id} checked={filter === id} onChange={() => setFilter(id)}>
+								{label}
+							</FilterRadio>
 						))}
-					</div>
-				</fieldset>
+					</FilterGroup>
+				</FilterPopover>
 			</div>
 
 			{/* Grid */}

@@ -5,9 +5,12 @@ import {
 	type ArtisanGood,
 	artisanGoods,
 	collections,
-	QualityCalculator,
 	search,
 } from "stardew-valley-data";
+import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
+import { SearchField } from "@/comps/ui/SearchField";
+import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 import { useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import { type GameData } from "@/types/app/game";
@@ -27,7 +30,6 @@ const FILTERS: { id: ShippedFilter; label: string }[] = [
 	{ id: "not-applicable", label: "Other" },
 ];
 
-const calc = new QualityCalculator();
 const shippableIds = new Set(
 	collections()
 		.itemsShipped()
@@ -150,47 +152,8 @@ function ArtisanGoodCard({ good, shipped, shippable, onCalculate }: GoodCardProp
 			</div>
 
 			{/* Price display */}
-			{good.sellPrice !== null && good.maxQuality === "iridium" ? (
-				<div className="grid grid-cols-4 overflow-hidden rounded-lg border border-white/10">
-					<div className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-1 py-1.5">
-						<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-							Basic
-						</span>
-						<span
-							className={`text-xs font-bold ${shippable && shipped ? "text-green-300" : "text-white/80"}`}
-						>
-							{good.sellPrice}g
-						</span>
-					</div>
-					{calc.sellPrices(good.sellPrice).map(({ quality, icon, value }) => (
-						<div
-							key={quality}
-							className="flex flex-col items-center gap-0.5 border-r border-white/10 bg-white/5 px-1 py-1.5 last:border-r-0"
-						>
-							<img
-								src={assetPath(icon)}
-								alt={quality}
-								className="h-3.5 w-3.5 object-contain"
-							/>
-							<span
-								className={`text-xs font-bold ${shippable && shipped ? "text-green-300" : "text-white/80"}`}
-							>
-								{value}g
-							</span>
-						</div>
-					))}
-				</div>
-			) : good.sellPrice !== null ? (
-				<div className="flex items-center justify-between overflow-hidden rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
-					<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-						Price
-					</span>
-					<span
-						className={`text-xs font-bold ${shippable && shipped ? "text-green-300" : "text-white/80"}`}
-					>
-						{good.sellPrice}g
-					</span>
-				</div>
+			{good.sellPrice !== null ? (
+				<PriceGrid price={good.sellPrice} maxQuality={good.maxQuality} shipped={shippable && shipped} />
 			) : (
 				<div className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
 					<span className="text-[0.7rem] text-white/70 italic">
@@ -203,111 +166,14 @@ function ArtisanGoodCard({ good, shipped, shippable, onCalculate }: GoodCardProp
 			)}
 
 			{/* Health / Energy / Poison */}
-			{good.energyHealth &&
-				(good.energyHealth.poison ? (
-					<div className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
-						<img
-							src={assetPath("images/misc/Poison.png")}
-							alt="Poison"
-							className="h-4 w-4 object-contain"
-						/>
-						<span className="text-xs font-semibold text-red-400">Poison</span>
-					</div>
-				) : good.maxQuality === "iridium" ? (
-					<div className="grid grid-cols-4 overflow-hidden rounded-lg border border-white/10">
-						{/* Base column */}
-						<div className="flex flex-col items-center gap-1 border-r border-white/10 bg-white/5 px-1 py-1.5">
-							<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
-								Basic
-							</span>
-							<div className="flex items-center gap-1.5">
-								<span className="inline-flex items-center gap-0.5">
-									<img
-										src={assetPath("images/misc/Energy.png")}
-										alt="Energy"
-										className="h-3.5 w-3.5 object-contain"
-									/>
-									<span className="text-[0.65rem] font-bold text-yellow-300">
-										+{good.energyHealth.energy}
-									</span>
-								</span>
-								<span className="inline-flex items-center gap-0.5">
-									<img
-										src={assetPath("images/misc/Health.png")}
-										alt="Health"
-										className="h-3.5 w-3.5 object-contain"
-									/>
-									<span className="text-[0.65rem] font-bold text-red-400">
-										+{good.energyHealth.health}
-									</span>
-								</span>
-							</div>
-						</div>
-						{/* Silver / Gold / Iridium columns */}
-						{calc
-							.energyHealth(
-								good.energyHealth.energy ?? 0,
-								good.energyHealth.health ?? 0
-							)
-							.map(({ quality, icon, energy, health }) => (
-								<div
-									key={quality}
-									className="flex flex-col items-center gap-1 border-r border-white/10 bg-white/5 px-1 py-1.5 last:border-r-0"
-								>
-									<img
-										src={assetPath(icon)}
-										alt={quality}
-										className="h-3.5 w-3.5 object-contain"
-									/>
-									<div className="flex items-center gap-1.5">
-										<span className="inline-flex items-center gap-0.5">
-											<img
-												src={assetPath("images/misc/Energy.png")}
-												alt="Energy"
-												className="h-3.5 w-3.5 object-contain"
-											/>
-											<span className="text-[0.65rem] font-bold text-yellow-300">
-												+{energy}
-											</span>
-										</span>
-										<span className="inline-flex items-center gap-0.5">
-											<img
-												src={assetPath("images/misc/Health.png")}
-												alt="Health"
-												className="h-3.5 w-3.5 object-contain"
-											/>
-											<span className="text-[0.65rem] font-bold text-red-400">
-												+{health}
-											</span>
-										</span>
-									</div>
-								</div>
-							))}
-					</div>
-				) : (
-					<div className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5">
-						<span className="inline-flex items-center gap-1.5">
-							<img
-								src={assetPath("images/misc/Energy.png")}
-								alt="Energy"
-								className="h-4 w-4 object-contain"
-							/>
-							<span className="text-xs font-semibold text-yellow-300">
-								+{good.energyHealth.energy}
-							</span>
-						</span>
-						<span className="inline-flex items-center gap-1.5">
-							<img
-								src={assetPath("images/misc/Health.png")}
-								alt="Health"
-								className="h-4 w-4 object-contain"
-							/>
-							<span className="text-xs font-semibold text-red-400">
-								+{good.energyHealth.health}
-							</span>
-						</span>
-					</div>
-				))}
+			{good.energyHealth && (
+				<EnergyHealthGrid
+					energy={good.energyHealth.energy ?? 0}
+					health={good.energyHealth.health ?? 0}
+					maxQuality={good.maxQuality}
+					poison={good.energyHealth.poison ?? false}
+				/>
+			)}
 
 			{/* Buffs */}
 			{good.buffs && good.buffs.length > 0 && (
@@ -393,35 +259,16 @@ export function ArtisanGoodsSection({ gameData }: Props) {
 
 				{/* Controls */}
 				<div className="mb-4 flex flex-wrap items-center gap-3">
-					<input
-						type="text"
-						placeholder="Search by name, equipment, or ingredient…"
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-						className="flex-1 rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none"
-					/>
-					<fieldset>
-						<div className="flex flex-wrap gap-2">
+					<SearchField value={search} onChange={setSearch} placeholder="Search by name, equipment, or ingredient…" />
+					<FilterPopover activeCount={filter !== "all" ? 1 : 0}>
+						<FilterGroup label="Shipped Status">
 							{FILTERS.map(({ id, label }) => (
-								<label
-									key={id}
-									className="group has-checked:border-accent has-checked:bg-accent relative flex cursor-pointer items-center justify-center rounded-md border border-slate-500 bg-slate-700/60 px-3 py-1.5 transition-all"
-								>
-									<input
-										type="radio"
-										name="artisan-goods-filter"
-										value={id}
-										checked={filter === id}
-										onChange={() => setFilter(id)}
-										className="absolute inset-0 cursor-pointer appearance-none focus:outline-none"
-									/>
-									<span className="text-[0.75rem] font-semibold text-slate-300 uppercase group-has-checked:text-white">
-										{label}
-									</span>
-								</label>
+								<FilterRadio key={id} name="artisan-goods-filter" value={id} checked={filter === id} onChange={() => setFilter(id)}>
+									{label}
+								</FilterRadio>
 							))}
-						</div>
-					</fieldset>
+						</FilterGroup>
+					</FilterPopover>
 				</div>
 
 				{/* Grid */}
