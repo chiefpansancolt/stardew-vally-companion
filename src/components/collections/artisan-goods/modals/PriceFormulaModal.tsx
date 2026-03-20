@@ -216,7 +216,7 @@ export function PriceFormulaModal({ good, onClose }: Props) {
 					<div className="flex flex-col gap-4">
 						{/* Search */}
 						<input
-							type="text"
+							type="search"
 							placeholder={`Search ${good.ingredients[0]?.name ?? "ingredient"}…`}
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}

@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg } from "react-icons/fa";
+import { FaSeedling } from "react-icons/fa";
 import {
 	HiCog,
 	HiCollection,
@@ -117,6 +118,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Artisan Goods
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/crops"
+											icon={FaSeedling}
+											active={pathname === "/collections/crops"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Crops
 										</SidebarItem>
 									</SidebarCollapse>
 								)}
