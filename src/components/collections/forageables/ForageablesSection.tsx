@@ -15,7 +15,7 @@ import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 import { SearchField } from "@/comps/ui/SearchField";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 
@@ -93,18 +93,8 @@ function ForageableCard({
 				</div>
 				{shippable && (
 					<div className="flex shrink-0 flex-col items-end gap-1">
-						{shipped ? (
-							<>
-								<span className="inline-flex items-center gap-1 rounded-full bg-green-900 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-									<HiCheck className="h-3 w-3" /> Shipped
-								</span>
-								<span className="text-[0.6rem] text-white/60">×{shippedCount} shipped</span>
-							</>
-						) : (
-							<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/70">
-								Not Shipped
-							</span>
-						)}
+						<ShippedBadge shippable={shippable} shipped={shipped} />
+						{shipped && <span className="text-[0.6rem] text-white/60">×{shippedCount} shipped</span>}
 					</div>
 				)}
 			</div>
@@ -165,18 +155,8 @@ function FruitTreeProduceCard({
 					</div>
 				</div>
 				<div className="flex shrink-0 flex-col items-end gap-1">
-					{shipped ? (
-						<>
-							<span className="inline-flex items-center gap-1 rounded-full bg-green-900 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-								<HiCheck className="h-3 w-3" /> Shipped
-							</span>
-							<span className="text-[0.6rem] text-white/60">×{shippedCount}</span>
-						</>
-					) : (
-						<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/70">
-							Not Shipped
-						</span>
-					)}
+					<ShippedBadge shippable={true} shipped={shipped} />
+					{shipped && <span className="text-[0.6rem] text-white/60">×{shippedCount}</span>}
 				</div>
 			</div>
 
@@ -224,18 +204,8 @@ function WildTreeTapperCard({
 					<div className="mt-1 text-[0.65rem] text-white/60">{tree.name} tapper</div>
 				</div>
 				<div className="flex shrink-0 flex-col items-end gap-1">
-					{shipped ? (
-						<>
-							<span className="inline-flex items-center gap-1 rounded-full bg-green-900 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-								<HiCheck className="h-3 w-3" /> Shipped
-							</span>
-							<span className="text-[0.6rem] text-white/60">×{shippedCount}</span>
-						</>
-					) : (
-						<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/70">
-							Not Shipped
-						</span>
-					)}
+					<ShippedBadge shippable={true} shipped={shipped} />
+					{shipped && <span className="text-[0.6rem] text-white/60">×{shippedCount}</span>}
 				</div>
 			</div>
 

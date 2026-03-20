@@ -5,7 +5,7 @@ import { PriceGrid } from "@/comps/ui/PriceGrid";
 import { SeedRow } from "@/comps/ui/SeedRow";
 import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 import { useState } from "react";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
@@ -85,15 +85,7 @@ function CropCard({ crop, shipped, shippedCount, onClick }: CropCardProps) {
 				</div>
 				{/* Badge area */}
 				<div className="flex shrink-0 flex-col items-end gap-1">
-					{shipped ? (
-						<span className="inline-flex items-center gap-1 rounded-full bg-green-800 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-							<HiCheck className="h-3 w-3" /> Shipped
-						</span>
-					) : (
-						<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/80">
-							Not Shipped
-						</span>
-					)}
+					<ShippedBadge shippable={true} shipped={shipped} />
 					{shipped && shippedCount > 0 && (
 						<span className="text-[0.6rem] text-white/80">×{shippedCount} shipped</span>
 					)}

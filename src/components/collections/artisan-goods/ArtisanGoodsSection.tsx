@@ -12,7 +12,7 @@ import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
 import { SearchField } from "@/comps/ui/SearchField";
 import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 import { useState } from "react";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { PriceFormulaModal } from "./modals/PriceFormulaModal";
@@ -136,19 +136,7 @@ function ArtisanGoodCard({ good, shipped, shippable, onCalculate }: GoodCardProp
 						</div>
 					)}
 				</div>
-				{shippable && (
-					<div className="shrink-0">
-						{shipped ? (
-							<span className="inline-flex items-center gap-1 rounded-full bg-green-800 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-								<HiCheck className="h-3 w-3" /> Shipped
-							</span>
-						) : (
-							<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/40">
-								Not Shipped
-							</span>
-						)}
-					</div>
-				)}
+				<ShippedBadge shippable={shippable} shipped={shipped} />
 			</div>
 
 			{/* Price display */}

@@ -2,7 +2,7 @@
 
 import { animals, isFarmAnimal } from "stardew-valley-data";
 import { useState } from "react";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
@@ -68,17 +68,7 @@ function ProduceCard({ entry, shipped }: ProduceCardProps) {
 						{animalName} · {building}
 					</div>
 				</div>
-				<div className="shrink-0">
-					{shipped ? (
-						<span className="inline-flex items-center gap-1 rounded-full bg-green-800 px-2 py-0.5 text-[0.65rem] font-bold text-green-300">
-							<HiCheck className="h-3 w-3" /> Shipped
-						</span>
-					) : (
-						<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem] font-bold text-white/40">
-							Not Shipped
-						</span>
-					)}
-				</div>
+				<ShippedBadge shippable={true} shipped={shipped} />
 			</div>
 
 			{/* Sell price table */}

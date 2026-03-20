@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { search, type FruitTree, type WildTree, type Tree } from "stardew-valley-data";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
 import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SeedRow } from "@/comps/ui/SeedRow";
@@ -115,15 +115,7 @@ function FruitTreeModal({
 					<div>
 						<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 							Produce
-							{shipped ? (
-								<span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
-									<HiCheck className="h-3 w-3" /> Shipped ×{shippedCount}
-								</span>
-							) : (
-								<span className="rounded-full bg-gray-100 px-2 py-0.5 text-[0.65rem] font-bold text-gray-500">
-									Not Shipped
-								</span>
-							)}
+							<ShippedBadge shippable={true} shipped={shipped} count={shippedCount} />
 						</div>
 
 						{/* Produce name row */}
@@ -243,17 +235,7 @@ function WildTreeModal({
 						<div>
 							<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 								Tapper Produce
-								{isShippable && (
-									shipped ? (
-										<span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
-											<HiCheck className="h-3 w-3" /> Shipped ×{shippedCount}
-										</span>
-									) : (
-										<span className="rounded-full bg-gray-100 px-2 py-0.5 text-[0.65rem] font-bold text-gray-500">
-											Not Shipped
-										</span>
-									)
-								)}
+								<ShippedBadge shippable={isShippable} shipped={shipped} count={shippedCount} />
 							</div>
 
 							{/* Tapper name row */}

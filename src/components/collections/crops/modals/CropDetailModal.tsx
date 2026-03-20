@@ -2,7 +2,7 @@
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { type Crop } from "stardew-valley-data";
-import { HiCheck } from "react-icons/hi";
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { PriceGrid } from "@/comps/ui/PriceGrid";
@@ -66,11 +66,7 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						<div className="text-lg font-extrabold">{crop.name}</div>
 						<div className="text-sm text-gray-500">{seasonLabel}</div>
 					</div>
-					{shipped && (
-						<span className="ml-2 inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
-							<HiCheck className="h-3 w-3" /> Shipped
-						</span>
-					)}
+					<ShippedBadge shippable={true} shipped={shipped} />
 				</div>
 			</ModalHeader>
 			<ModalBody>
