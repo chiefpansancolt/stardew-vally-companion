@@ -9,7 +9,7 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaCheese, FaEgg } from "react-icons/fa";
+import { FaCheese, FaEgg, FaFish } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { GiMushroom } from "react-icons/gi";
 import {
@@ -128,6 +128,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Crops
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/fish"
+											icon={FaFish}
+											active={pathname === "/collections/fish"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Fish
 										</SidebarItem>
 										<SidebarItem
 											as={Link}

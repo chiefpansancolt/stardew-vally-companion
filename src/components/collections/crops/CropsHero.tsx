@@ -54,18 +54,11 @@ export function CropsHero({ gameData }: Props) {
 			>
 				<StatTile label="Total Crops" value={total} />
 				<StatTile label="Regrowing" value={regrowing} />
-				<StatTile label="Shipped" value={`${shippedCount} / ${total}`} colored />
-				<StatTile label="Shipped 15+" value={`${shipped15} / ${total}`} colored />
-				<StatTile label="Shipped 300+" value={`${shipped300} / ${total}`} colored />
+				<StatTile label="Shipped" value={shippedCount} valueColor="text-green-600" suffix={`/ ${total}`}/>
+				<StatTile label="Shipped 15+" value={shipped15} valueColor="text-green-600" suffix={`/ ${total}`} />
+				<StatTile label="Shipped 300+" value={shipped300} valueColor="text-green-600" suffix={`/ ${total}`} />
 				{seasonCounts.map((s) => (
-					<div key={s.key} className="bg-surface rounded-lg border border-[#d6d0bc] px-3 py-2">
-						<div className="text-[0.675rem] font-semibold tracking-wide text-gray-500 uppercase">
-							{s.label}
-						</div>
-						<div className={`mt-0.5 text-[0.9375rem] font-bold ${s.color}`}>
-							{s.count}
-						</div>
-					</div>
+					<StatTile key={s.key} label={s.label} value={s.count} valueColor={s.color} />
 				))}
 			</div>
 		</div>

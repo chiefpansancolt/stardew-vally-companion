@@ -64,18 +64,12 @@ export function ForageablesHero({ gameData }: Props) {
 				<StatTile label="Wild Trees" value={wildTrees.length} />
 				<StatTile
 					label="Shipped"
-					value={`${shippedCount} / ${shippableUniqueIds.length}`}
-					colored
+					value={shippedCount}
+					valueColor="text-green-600"
+					suffix={`/ ${shippableUniqueIds.length}`}
 				/>
 				{seasonCounts.map((s) => (
-					<div key={s.key} className="bg-surface rounded-lg border border-[#d6d0bc] px-3 py-2">
-						<div className="text-[0.675rem] font-semibold tracking-wide text-gray-500 uppercase">
-							{s.label}
-						</div>
-						<div className={`mt-0.5 text-[0.9375rem] font-bold ${s.color}`}>
-							{s.count}
-						</div>
-					</div>
+					<StatTile key={s.key} label={s.label} value={s.count} valueColor={s.color} />
 				))}
 			</div>
 		</div>

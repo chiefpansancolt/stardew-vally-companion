@@ -13,6 +13,8 @@ interface Props {
 
 const calc = new QualityCalculator();
 
+const fmt = (n: number) => n.toLocaleString();
+
 const NAVY_TILE_STYLE = {
 	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
 	border: "1px solid rgba(43,58,103,0.6)",
@@ -45,7 +47,7 @@ function IridiumRow({
 					<span className="text-[0.55rem] font-semibold tracking-wide text-white uppercase">
 						Basic
 					</span>
-					<span className={`text-xs font-bold ${valueColor}`}>{price}g</span>
+					<span className={`text-xs font-bold ${valueColor}`}>{fmt(price)}g</span>
 				</div>
 				{tiers.map(({ quality, icon, value }) => (
 					<div
@@ -54,7 +56,7 @@ function IridiumRow({
 						style={isModal ? NAVY_TILE_STYLE : undefined}
 					>
 						<img src={assetPath(icon)} alt={quality} className="h-3.5 w-3.5 object-contain" />
-						<span className={`text-xs font-bold ${valueColor}`}>{value}g</span>
+						<span className={`text-xs font-bold ${valueColor}`}>{fmt(value)}g</span>
 					</div>
 				))}
 			</div>
@@ -101,7 +103,7 @@ export function PriceGrid({
 					<span className="text-[0.55rem] font-semibold tracking-wide text-white uppercase">
 						Basic
 					</span>
-					<span className={`text-xs font-bold ${valueColor}`}>{price}g</span>
+					<span className={`text-xs font-bold ${valueColor}`}>{fmt(price)}g</span>
 				</div>
 				{tiers.map(({ quality, icon, value }) => (
 					<div
@@ -110,7 +112,7 @@ export function PriceGrid({
 						style={isModal ? NAVY_TILE_STYLE : undefined}
 					>
 						<img src={assetPath(icon)} alt={quality} className="h-3.5 w-3.5 object-contain" />
-						<span className={`text-xs font-bold ${valueColor}`}>{value}g</span>
+						<span className={`text-xs font-bold ${valueColor}`}>{fmt(value)}g</span>
 					</div>
 				))}
 			</div>
@@ -129,7 +131,7 @@ export function PriceGrid({
 					<span className={labelCls}>Base</span>
 					<div className={rowCls} style={isModal ? NAVY_TILE_STYLE : undefined}>
 						<span className={priceLabelCls}>Price</span>
-						<span className={`${priceValCls} ${valueColor}`}>{price}g</span>
+						<span className={`${priceValCls} ${valueColor}`}>{fmt(price)}g</span>
 					</div>
 				</div>
 				{professionBonuses.map((b) => (
@@ -137,7 +139,7 @@ export function PriceGrid({
 						<span className={labelCls}>{b.label}</span>
 						<div className={rowCls} style={isModal ? NAVY_TILE_STYLE : undefined}>
 							<span className={priceLabelCls}>Price</span>
-							<span className={`${priceValCls} ${bonusColor}`}>{b.price}g</span>
+							<span className={`${priceValCls} ${bonusColor}`}>{fmt(b.price)}g</span>
 						</div>
 					</div>
 				))}
@@ -161,7 +163,7 @@ export function PriceGrid({
 							Price
 						</span>
 						<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${valueColor}`}>
-							{price}g
+							{fmt(price)}g
 						</span>
 					</div>
 				</div>
@@ -177,7 +179,7 @@ export function PriceGrid({
 							Price
 						</span>
 						<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${bonusColor}`}>
-							{professionBonus.price}g
+							{fmt(professionBonus.price)}g
 						</span>
 					</div>
 				</div>
@@ -193,7 +195,7 @@ export function PriceGrid({
 			<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 				Price
 			</span>
-			<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${valueColor}`}>{price}g</span>
+			<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${valueColor}`}>{fmt(price)}g</span>
 		</div>
 	);
 }
