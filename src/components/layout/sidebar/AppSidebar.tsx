@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
+import { GiMushroom } from "react-icons/gi";
 import {
 	HiCog,
 	HiCollection,
@@ -127,6 +128,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Crops
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/forageables"
+											icon={GiMushroom}
+											active={pathname === "/collections/forageables"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Forageables
 										</SidebarItem>
 									</SidebarCollapse>
 								)}
