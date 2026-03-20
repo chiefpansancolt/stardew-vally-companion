@@ -1,6 +1,7 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
+import { SearchField } from "@/comps/ui/SearchField";
 import {
 	artisanCalculator,
 	type ArtisanGood,
@@ -215,12 +216,11 @@ export function PriceFormulaModal({ good, onClose }: Props) {
 				{good && (
 					<div className="flex flex-col gap-4">
 						{/* Search */}
-						<input
-							type="search"
-							placeholder={`Search ${good.ingredients[0]?.name ?? "ingredient"}…`}
+						<SearchField
 							value={query}
-							onChange={(e) => setQuery(e.target.value)}
-							className="focus:border-primary w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none"
+							onChange={setQuery}
+							placeholder={`Search ${good.ingredients[0]?.name ?? "ingredient"}…`}
+							variant="light"
 						/>
 
 						{/* Ingredient grid */}

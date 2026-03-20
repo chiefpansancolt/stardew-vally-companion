@@ -7,30 +7,32 @@ import { type GameData } from "@/types/app/game";
 import { assetPath } from "@/lib/utils/assetPath";
 import { effectiveMaxHearts } from "@/lib/utils/villagerHearts";
 import { VillagerDetailModal } from "./modals/VillagerDetailModal";
+import { SearchField } from "@/comps/ui/SearchField";
+import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
 
 interface HeartEvent {
 	id: number | number[] | null;
 }
 
-type Filter = "all" | "marriageable" | "spring" | "summer" | "fall" | "winter";
+type SeasonFilter = "all" | "spring" | "summer" | "fall" | "winter";
+type TypeFilter = "all" | "marriageable" | "non-marriageable";
 
-const FILTERS: { id: Filter; label: string }[] = [
+const SEASON_FILTERS: { id: SeasonFilter; label: string }[] = [
 	{ id: "all", label: "All" },
-	{ id: "marriageable", label: "Marriage Candidates" },
 	{ id: "spring", label: "Spring" },
 	{ id: "summer", label: "Summer" },
 	{ id: "fall", label: "Fall" },
 	{ id: "winter", label: "Winter" },
 ];
 
+const TYPE_FILTERS: { id: TypeFilter; label: string }[] = [
+	{ id: "all", label: "All" },
+	{ id: "marriageable", label: "Marriageable" },
+	{ id: "non-marriageable", label: "Non-Marriageable" },
+];
+
 interface Props {
 	gameData: GameData;
-}
-
-function filterVillagers(all: Villager[], filter: Filter): Villager[] {
-	if (filter === "all") return all;
-	if (filter === "marriageable") return all.filter((v) => v.marriageable);
-	return all.filter((v) => v.birthday.season === filter);
 }
 
 interface VillagerCardProps {
@@ -181,11 +183,20 @@ function VillagerCard({ villager, gameData, onClick }: VillagerCardProps) {
 }
 
 export function VillagersSection({ gameData }: Props) {
-	const [filter, setFilter] = useState<Filter>("all");
+	const [seasonFilter, setSeasonFilter] = useState<SeasonFilter>("all");
+	const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
+	const [search, setSearch] = useState("");
 	const [selected, setSelected] = useState<Villager | null>(null);
 
 	const allVillagers = villagers().sortByName().get();
-	const displayed = filterVillagers(allVillagers, filter);
+	const q = search.toLowerCase().trim();
+	const displayed = allVillagers.filter((v) => {
+		if (q && !v.name.toLowerCase().includes(q)) return false;
+		if (seasonFilter !== "all" && v.birthday.season !== seasonFilter) return false;
+		if (typeFilter === "marriageable" && !v.marriageable) return false;
+		if (typeFilter === "non-marriageable" && v.marriageable) return false;
+		return true;
+	});
 
 	const maxHeartsCount = allVillagers.filter((v) => {
 		const p = gameData.villagers[v.name];
@@ -210,29 +221,26 @@ export function VillagersSection({ gameData }: Props) {
 					</span>
 				</div>
 
-				{/* Filter — radio button fieldset */}
-				<fieldset className="mb-4">
-					<div className="flex flex-wrap gap-2">
-						{FILTERS.map(({ id, label }) => (
-							<label
-								key={id}
-								className="group has-checked:border-accent has-checked:bg-accent relative flex cursor-pointer items-center justify-center rounded-md border border-slate-500 bg-slate-700/60 px-3 py-1.5 transition-all"
-							>
-								<input
-									type="radio"
-									name="villager-filter"
-									value={id}
-									checked={filter === id}
-									onChange={() => setFilter(id)}
-									className="absolute inset-0 cursor-pointer appearance-none focus:outline-none"
-								/>
-								<span className="text-[0.75rem] font-semibold text-slate-300 uppercase group-has-checked:text-white">
+				{/* Controls */}
+				<div className="mb-4 flex flex-wrap items-center gap-3">
+					<SearchField value={search} onChange={setSearch} placeholder="Search villagers…" />
+					<FilterPopover activeCount={[seasonFilter !== "all", typeFilter !== "all"].filter(Boolean).length}>
+						<FilterGroup label="Birthday Season">
+							{SEASON_FILTERS.map(({ id, label }) => (
+								<FilterRadio key={id} name="villager-season" value={id} checked={seasonFilter === id} onChange={() => setSeasonFilter(id)}>
 									{label}
-								</span>
-							</label>
-						))}
-					</div>
-				</fieldset>
+								</FilterRadio>
+							))}
+						</FilterGroup>
+						<FilterGroup label="Marriage Candidates" className="mt-4">
+							{TYPE_FILTERS.map(({ id, label }) => (
+								<FilterRadio key={id} name="villager-type" value={id} checked={typeFilter === id} onChange={() => setTypeFilter(id)}>
+									{label}
+								</FilterRadio>
+							))}
+						</FilterGroup>
+					</FilterPopover>
+				</div>
 
 				{/* Grid */}
 				<div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
