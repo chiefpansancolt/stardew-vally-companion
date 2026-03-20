@@ -4,6 +4,9 @@ import type { CustomFlowbiteTheme } from "flowbite-react/types";
 export const customTheme: CustomFlowbiteTheme = createTheme({
   button: {
     base: "cursor-pointer",
+    size: {
+      xxs: "h-6 px-2 text-xs",
+    },
     color: {
       primary:
         "bg-primary hover:bg-primary/80 focus:ring-primary/50 dark:bg-primary dark:hover:bg-primary/80 dark:focus:ring-primary/30 text-white",
