@@ -9,7 +9,7 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaCheese, FaEgg, FaFish } from "react-icons/fa";
+import { FaCheese, FaEgg, FaFish, FaGem } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { GiMushroom } from "react-icons/gi";
 import { RiTreasureMapLine } from "react-icons/ri";
@@ -156,6 +156,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Forageables
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/minerals"
+											icon={FaGem}
+											active={pathname === "/collections/minerals"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Minerals
 										</SidebarItem>
 									</SidebarCollapse>
 								)}
