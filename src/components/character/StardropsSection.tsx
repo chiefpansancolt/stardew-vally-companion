@@ -2,12 +2,8 @@
 
 import { starDrops } from "stardew-valley-data";
 import { HiCheck, HiLockClosed } from "react-icons/hi";
-import { type GameData } from "@/types/app/game";
+import { type CharacterProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-
-interface Props {
-	gameData: GameData;
-}
 
 export function StardropsSection({ gameData }: Props) {
 	const allDrops = starDrops().get();

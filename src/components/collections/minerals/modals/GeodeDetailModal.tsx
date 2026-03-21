@@ -1,20 +1,11 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { minerals, type GeodeContainer, type GeodeContent, type MineralItem } from "stardew-valley-data";
+import { type GeodeContent, type MineralItem, minerals } from "stardew-valley-data";
+import { GeodeDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
-
-const NAVY_TILE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
-
-interface Props {
-	geode: GeodeContainer | null;
-	fallbackContents: MineralItem[] | null;
-	onClose: () => void;
-}
+import { NAVY_TILE } from "@/data/constants/styles";
+import { PriceGrid } from "@/comps/ui/price-grid";
 
 export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 	if (!geode) return null;
@@ -42,7 +33,7 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 				<div className="flex flex-col gap-5">
 					<div>
 						<div className="mb-1.5 text-sm font-bold text-gray-900">Description</div>
-						<p className="text-sm italic leading-relaxed text-gray-500">
+						<p className="text-sm leading-relaxed text-gray-500 italic">
 							{geode.description}
 						</p>
 					</div>
@@ -52,7 +43,6 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 						<PriceGrid price={geode.sellPrice} maxQuality="normal" variant="modal" />
 					</div>
 
-					{/* Structured GeodeContent list (preferred) */}
 					{geodeContents && geodeContents.length > 0 && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">
@@ -73,7 +63,9 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 													className="h-8 w-8 shrink-0 object-contain"
 												/>
 											)}
-											<span className="text-sm font-medium text-white/80">{item.name}</span>
+											<span className="text-sm font-medium text-white/80">
+												{item.name}
+											</span>
 										</div>
 										<div className="flex items-center gap-2">
 											{item.quantity && (
@@ -82,7 +74,7 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 												</span>
 											)}
 											{item.chance && (
-												<span className="text-xs font-semibold text-accent">
+												<span className="text-accent text-xs font-semibold">
 													{item.chance}
 												</span>
 											)}
@@ -93,7 +85,6 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 						</div>
 					)}
 
-					{/* Fallback MineralItem grid when geode.contents is absent */}
 					{!geodeContents && mineralFallback.length > 0 && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">
@@ -101,7 +92,9 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 							</div>
 							<div
 								className="grid gap-2"
-								style={{ gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))" }}
+								style={{
+									gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
+								}}
 							>
 								{mineralFallback.map((mineral) => (
 									<div
@@ -114,7 +107,7 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 											alt={mineral.name}
 											className="h-10 w-10 object-contain"
 										/>
-										<span className="text-[0.6rem] font-semibold leading-tight text-white/75">
+										<span className="text-[0.6rem] leading-tight font-semibold text-white/75">
 											{mineral.name}
 										</span>
 									</div>
@@ -133,7 +126,9 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 										className="flex items-center gap-3 rounded-xl px-4 py-2.5"
 										style={NAVY_TILE}
 									>
-										<span className="text-sm font-medium text-white/80">{loc}</span>
+										<span className="text-sm font-medium text-white/80">
+											{loc}
+										</span>
 									</div>
 								))}
 							</div>

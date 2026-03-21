@@ -1,84 +1,15 @@
 "use client";
 
-import { animals, isFarmAnimal, type AnimalProduce } from "stardew-valley-data";
+import { animals, isFarmAnimal } from "stardew-valley-data";
 import { useState } from "react";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
-import { type GameData } from "@/types/app/game";
-import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { type ProduceEntry, CollectionProps as Props, type ShippedFilter } from "@/types";
+import { applyBestProfessionBonus, getActiveProfessionBonuses } from "@/lib/utils/professionPrices";
+import { SHIPPED_FILTERS } from "@/data/constants/filters";
+import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
+import { NavySection } from "@/comps/ui/NavySection";
 import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
-import { getActiveProfessionBonuses, applyBestProfessionBonus, type BonusResult } from "@/lib/utils/professionPrices";
-import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/FilterPopover";
-
-interface Props {
-	gameData: GameData;
-}
-
-interface ProduceEntry {
-	produce: AnimalProduce;
-	animalName: string;
-	building: string;
-	isDeluxe: boolean;
-}
-
-type ShippedFilter = "all" | "shipped" | "not-shipped";
-
-const FILTERS: { id: ShippedFilter; label: string }[] = [
-	{ id: "all", label: "All" },
-	{ id: "shipped", label: "Shipped" },
-	{ id: "not-shipped", label: "Not Shipped" },
-];
-
-interface ProduceCardProps {
-	entry: ProduceEntry;
-	shipped: boolean;
-	professionBonus?: BonusResult | null;
-}
-
-function ProduceCard({ entry, shipped, professionBonus = null }: ProduceCardProps) {
-	const { produce, animalName, building, isDeluxe } = entry;
-
-	return (
-		<div
-			className={`flex flex-col gap-3 rounded-xl border p-3 transition-all ${
-				shipped ? "border-green-500/40 bg-green-900/20" : "border-white/10 bg-white/5"
-			}`}
-		>
-			{/* Top row: image + name + badge */}
-			<div className="flex items-start gap-3">
-				<img
-					src={assetPath(produce.image)}
-					alt={produce.name}
-					className="h-12 w-12 shrink-0 rounded-lg object-contain"
-				/>
-				<div className="min-w-0 flex-1">
-					<div className="flex flex-wrap items-center gap-1.5">
-						<span
-							className={`text-sm leading-tight font-bold ${
-								shipped ? "text-green-300" : "text-white"
-							}`}
-						>
-							{produce.name}
-						</span>
-						{isDeluxe && (
-							<span className="bg-accent/20 text-accent rounded-full px-1.5 py-0.5 text-[0.6rem] font-bold uppercase">
-								Deluxe
-							</span>
-						)}
-					</div>
-					<div className="mt-0.5 text-[0.7rem] text-white/50">
-						{animalName} · {building}
-					</div>
-				</div>
-				<ShippedBadge shippable={true} shipped={shipped} />
-			</div>
-
-			{/* Sell price table */}
-			<PriceGrid price={produce.sellPrice} maxQuality="iridium" shipped={shipped} professionBonus={professionBonus} />
-		</div>
-	);
-}
+import { ProduceCard } from "./cards";
 
 export function AnimalProductsSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");
@@ -124,27 +55,26 @@ export function AnimalProductsSection({ gameData }: Props) {
 		});
 
 	return (
-		<div
-			className="border-secondary/60 rounded-xl border p-5"
-			style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
+		<NavySection
+			title="Animal Products"
+			badge={`${shippedCount} / ${allEntries.length} shipped`}
 		>
-			{/* Header */}
-			<div className="mb-4 flex items-center justify-between">
-				<h3 className="text-[0.8125rem] font-bold tracking-wide text-white uppercase">
-					Animal Products
-				</h3>
-				<span className="bg-highlight/20 text-highlight rounded-full px-3 py-0.5 text-[0.7rem] font-semibold">
-					{shippedCount} / {allEntries.length} shipped
-				</span>
-			</div>
-
-			{/* Controls */}
 			<div className="mb-4 flex flex-wrap items-center gap-3">
-				<SearchField value={search} onChange={setSearch} placeholder="Search produce or animal…" />
+				<SearchField
+					value={search}
+					onChange={setSearch}
+					placeholder="Search produce or animal…"
+				/>
 				<FilterPopover activeCount={filter !== "all" ? 1 : 0}>
 					<FilterGroup label="Shipped Status">
-						{FILTERS.map(({ id, label }) => (
-							<FilterRadio key={id} name="animal-products-filter" value={id} checked={filter === id} onChange={() => setFilter(id)}>
+						{SHIPPED_FILTERS.map(({ id, label }) => (
+							<FilterRadio
+								key={id}
+								name="animal-products-filter"
+								value={id}
+								checked={filter === id}
+								onChange={() => setFilter(id)}
+							>
 								{label}
 							</FilterRadio>
 						))}
@@ -158,7 +88,6 @@ export function AnimalProductsSection({ gameData }: Props) {
 				)}
 			</div>
 
-			{/* Grid */}
 			{filtered.length === 0 ? (
 				<p className="py-8 text-center text-sm text-white/40">
 					No produce items match your search.
@@ -170,11 +99,19 @@ export function AnimalProductsSection({ gameData }: Props) {
 							key={`${entry.animalName}-${entry.produce.id}-${entry.isDeluxe}`}
 							entry={entry}
 							shipped={gameData.shipped[entry.produce.id]?.shipped === true}
-							professionBonus={showProfessionPrices ? applyBestProfessionBonus(entry.produce.sellPrice, entry.produce.profession, activeProfessionBonuses) : null}
+							professionBonus={
+								showProfessionPrices
+									? applyBestProfessionBonus(
+											entry.produce.sellPrice,
+											entry.produce.profession,
+											activeProfessionBonuses
+										)
+									: null
+							}
 						/>
 					))}
 				</div>
 			)}
-		</div>
+		</NavySection>
 	);
 }

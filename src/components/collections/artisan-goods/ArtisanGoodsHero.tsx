@@ -2,12 +2,8 @@
 
 import { artisanGoods, collections } from "stardew-valley-data";
 import { FaCheese } from "react-icons/fa";
-import { type GameData } from "@/types/app/game";
+import { CollectionProps as Props } from "@/types";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
 
 export function ArtisanGoodsHero({ gameData }: Props) {
 	const allGoods = artisanGoods().get();

@@ -1,15 +1,9 @@
 import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from "flowbite-react";
-import { maps } from "stardew-valley-data";
 import { useState } from "react";
 import { LuChevronsUpDown, LuPlus } from "react-icons/lu";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
-import { assetPath } from "@/lib/utils/assetPath";
+import { getFarmIcon } from "@/lib/utils/farmIcon";
 import { CreatePlaythroughModal } from "@/comps/modals/CreatePlaythroughModal";
-
-function getFarmIcon(farmType: number) {
-	const farmMap = maps().find(String(farmType));
-	return assetPath(farmMap?.icon ?? "");
-}
 
 export function PlaythroughSwitcher() {
 	const { playthroughs, activePlaythrough, setActivePlaythrough } = usePlaythrough();

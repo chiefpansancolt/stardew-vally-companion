@@ -1,30 +1,14 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { type Fish, type ProfessionBonus } from "stardew-valley-data";
+import { FishDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
-import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
-import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 import { applyBestProfessionBonus } from "@/lib/utils/professionPrices";
-
-const NAVY_TILE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
-
-const WEATHER_LABELS: Record<string, string> = {
-	sunny: "Sunny",
-	rainy: "Rainy",
-	both: "Any",
-};
-
-interface Props {
-	fish: Fish | null;
-	caught: boolean;
-	onClose: () => void;
-	activeProfessionBonuses?: Set<ProfessionBonus> | null;
-}
+import { WEATHER_LABELS } from "@/data/constants/filters";
+import { NAVY_TILE } from "@/data/constants/styles";
+import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
+import { PriceGrid } from "@/comps/ui/price-grid";
+import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 
 export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses = null }: Props) {
 	if (!fish) return null;
@@ -97,9 +81,11 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 			</ModalHeader>
 			<ModalBody>
 				<div className="flex flex-col gap-4">
-					{/* Info chips */}
 					<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-						<div className="flex flex-col items-center rounded-xl px-3 py-2.5" style={NAVY_TILE}>
+						<div
+							className="flex flex-col items-center rounded-xl px-3 py-2.5"
+							style={NAVY_TILE}
+						>
 							<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 								Seasons
 							</span>
@@ -112,7 +98,10 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 							</div>
 						</div>
 						{fish.location && (
-							<div className="flex flex-col items-center rounded-xl px-3 py-2.5" style={NAVY_TILE}>
+							<div
+								className="flex flex-col items-center rounded-xl px-3 py-2.5"
+								style={NAVY_TILE}
+							>
 								<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 									Location
 								</span>
@@ -122,7 +111,10 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 							</div>
 						)}
 						{isRod && fish.weather && (
-							<div className="flex flex-col items-center rounded-xl px-3 py-2.5" style={NAVY_TILE}>
+							<div
+								className="flex flex-col items-center rounded-xl px-3 py-2.5"
+								style={NAVY_TILE}
+							>
 								<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 									Weather
 								</span>
@@ -132,19 +124,29 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 							</div>
 						)}
 						{isRod && fish.time && (
-							<div className="flex flex-col items-center rounded-xl px-3 py-2.5" style={NAVY_TILE}>
+							<div
+								className="flex flex-col items-center rounded-xl px-3 py-2.5"
+								style={NAVY_TILE}
+							>
 								<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 									Time
 								</span>
-								<span className="mt-0.5 text-sm font-bold text-white/85">{fish.time}</span>
+								<span className="mt-0.5 text-sm font-bold text-white/85">
+									{fish.time}
+								</span>
 							</div>
 						)}
 					</div>
 
-					{/* Difficulty bar (rod only) */}
 					{isRod && fish.difficulty != null && (
-						<div className="flex items-center gap-3 rounded-xl px-4 py-3" style={NAVY_TILE}>
-							<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase" style={{ width: 60, flexShrink: 0 }}>
+						<div
+							className="flex items-center gap-3 rounded-xl px-4 py-3"
+							style={NAVY_TILE}
+						>
+							<span
+								className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase"
+								style={{ width: 60, flexShrink: 0 }}
+							>
 								Difficulty
 							</span>
 							<div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
@@ -156,13 +158,15 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 									}}
 								/>
 							</div>
-							<span className={`text-sm font-bold ${difficultyColor}`} style={{ width: 28, textAlign: "right", flexShrink: 0 }}>
+							<span
+								className={`text-sm font-bold ${difficultyColor}`}
+								style={{ width: 28, textAlign: "right", flexShrink: 0 }}
+							>
 								{fish.difficulty}
 							</span>
 						</div>
 					)}
 
-					{/* Sell price */}
 					<div>
 						<div className="mb-2 text-sm font-bold text-gray-900">Sell Price</div>
 						<PriceGrid
@@ -173,10 +177,11 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 						/>
 					</div>
 
-					{/* Energy & Health */}
 					{hasEnergy && (
 						<div>
-							<div className="mb-2 text-sm font-bold text-gray-900">Energy &amp; Health</div>
+							<div className="mb-2 text-sm font-bold text-gray-900">
+								Energy &amp; Health
+							</div>
 							<EnergyHealthGrid
 								energy={fish.energyHealth!.energy ?? 0}
 								health={fish.energyHealth!.health ?? 0}
@@ -186,7 +191,6 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 						</div>
 					)}
 
-					{/* Properties */}
 					{(fish.roe !== null || fish.canSmoke) && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">Properties</div>
@@ -215,7 +219,6 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 						</div>
 					)}
 
-					{/* Fish Pond */}
 					{fish.fishPond && fish.fishPond.produce.length > 0 && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">Fish Pond</div>
@@ -226,7 +229,9 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 										className="flex items-center justify-between rounded-xl px-3 py-2"
 										style={NAVY_TILE}
 									>
-										<span className="text-sm font-semibold text-white/85">{p.product}</span>
+										<span className="text-sm font-semibold text-white/85">
+											{p.product}
+										</span>
 										<span className="text-[0.65rem] text-white/80">
 											{p.minPopulation === 0
 												? "Any population"

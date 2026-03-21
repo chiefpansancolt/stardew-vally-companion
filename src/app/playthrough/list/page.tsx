@@ -3,11 +3,10 @@
 import { Badge, Button, Card, TextInput } from "flowbite-react";
 import { useMemo, useState } from "react";
 import { HiPlus, HiSearch } from "react-icons/hi";
+import type { SortOption } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CreatePlaythroughModal } from "@/comps/modals/CreatePlaythroughModal";
 import PlaythroughCard from "./PlaythroughCard";
-
-type SortOption = "lastModified" | "name" | "createdAt";
 
 export default function PlaythroughListPage() {
 	const { playthroughs } = usePlaythrough();

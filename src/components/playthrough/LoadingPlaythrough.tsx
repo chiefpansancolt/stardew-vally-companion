@@ -1,8 +1,5 @@
 import { Spinner } from "flowbite-react";
-
-interface LoadingPlaythroughProps {
-	message?: string;
-}
+import type { LoadingPlaythroughProps } from "@/types";
 
 export default function LoadingPlaythrough({ message = "Loading..." }: LoadingPlaythroughProps) {
 	return (

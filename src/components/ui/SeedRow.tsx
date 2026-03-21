@@ -1,23 +1,6 @@
+import { SeedRowProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-
-interface BuyPrice {
-	place: string;
-	price: number;
-}
-
-interface Props {
-	image?: string | null;
-	name: string;
-	prices?: BuyPrice[];
-	variant?: "card" | "modal";
-	/** Shown on the right when prices array is empty, e.g. "No shop" */
-	emptyLabel?: string;
-}
-
-const NAVY_TILE_STYLE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
+import { NAVY_TILE as NAVY_TILE_STYLE } from "@/data/constants/styles";
 
 export function SeedRow({ image, name, prices, variant = "card", emptyLabel }: Props) {
 	const isModal = variant === "modal";
@@ -44,9 +27,7 @@ export function SeedRow({ image, name, prices, variant = "card", emptyLabel }: P
 				)}
 				<span
 					className={
-						isModal
-							? "text-sm font-semibold text-white/85"
-							: "text-xs text-white"
+						isModal ? "text-sm font-semibold text-white/85" : "text-xs text-white"
 					}
 				>
 					{name}
@@ -65,7 +46,7 @@ export function SeedRow({ image, name, prices, variant = "card", emptyLabel }: P
 								{bp.place}
 							</span>
 							<span
-								className={`font-bold text-accent ${isModal ? "text-sm" : "text-[0.7rem]"}`}
+								className={`text-accent font-bold ${isModal ? "text-sm" : "text-[0.7rem]"}`}
 							>
 								{bp.price.toLocaleString()}g
 							</span>

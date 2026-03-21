@@ -1,35 +1,14 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader, TabItem, Tabs } from "flowbite-react";
-import { universalGifts, type Villager } from "stardew-valley-data";
+import { universalGifts } from "stardew-valley-data";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { HiCheck, HiLockClosed } from "react-icons/hi";
-import { type VillagerProgress } from "@/types/app/game";
+import type { HeartEvent, VillagerDetailModalProps as Props } from "@/types";
+import { isSeen } from "@/lib/pages/villagers";
 import { assetPath } from "@/lib/utils/assetPath";
+import { capitalize } from "@/lib/utils/formatting";
 import { effectiveMaxHearts } from "@/lib/utils/villagerHearts";
-
-interface HeartEvent {
-	heart: number;
-	id: number | number[] | null;
-	description: string;
-	details: string;
-}
-
-interface Props {
-	villager: Villager;
-	progress: VillagerProgress | undefined;
-	spouse: string;
-	onClose: () => void;
-}
-
-function isSeen(event: HeartEvent, eventsSeen: string[], hearts: number): boolean {
-	if (event.id === null) return hearts >= event.heart;
-	return [event.id].flat().some((id) => eventsSeen.includes(String(id)));
-}
-
-function capitalize(s: string) {
-	return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 export function VillagerDetailModal({ villager, progress, spouse, onClose }: Props) {
 	const universal = universalGifts();
@@ -86,7 +65,6 @@ export function VillagerDetailModal({ villager, progress, spouse, onClose }: Pro
 
 			<ModalBody>
 				<div className="flex gap-5">
-					{/* ── Left column ── */}
 					<div className="flex w-56 shrink-0 flex-col gap-4">
 						<img
 							src={portraitSrc}
@@ -120,7 +98,6 @@ export function VillagerDetailModal({ villager, progress, spouse, onClose }: Pro
 								</div>
 							</div>
 
-							{/* Heart meter */}
 							<div>
 								<div className="mb-1 text-sm font-bold text-gray-800">
 									{hearts} / {maxHearts} hearts
@@ -173,7 +150,6 @@ export function VillagerDetailModal({ villager, progress, spouse, onClose }: Pro
 						</p>
 					</div>
 
-					{/* ── Right column ── */}
 					<div className="min-w-0 flex-1">
 						<Tabs variant="underline">
 							<TabItem title={eventsTabTitle}>

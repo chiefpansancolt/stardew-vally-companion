@@ -3,23 +3,9 @@
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { minerals, tools, type UpgradeLevel } from "stardew-valley-data";
 import { HiLockClosed } from "react-icons/hi";
+import type { ToolModalState } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-
-export interface ToolModalState {
-	toolId: string;
-	currentLevel: number;
-}
-
-const LEVEL_NAMES = ["Basic", "Copper", "Steel", "Gold", "Iridium"];
-const PAN_LEVEL_OFFSET = 1;
-
-const LEVEL_CARD_HEX: Record<string, { border: string; bg: string; text: string }> = {
-	Basic: { border: "rgba(0,0,0,0.1)", bg: "rgba(0,0,0,0.03)", text: "#6b7280" },
-	Copper: { border: "rgba(234,88,12,0.3)", bg: "rgba(234,88,12,0.06)", text: "#c2410c" },
-	Steel: { border: "rgba(59,130,246,0.3)", bg: "rgba(59,130,246,0.06)", text: "#1d4ed8" },
-	Gold: { border: "rgba(161,116,0,0.3)", bg: "rgba(161,116,0,0.06)", text: "#92660a" },
-	Iridium: { border: "rgba(126,34,206,0.3)", bg: "rgba(126,34,206,0.06)", text: "#7e22ce" },
-};
+import { LEVEL_META, LEVEL_NAMES, PAN_LEVEL_OFFSET } from "@/data/constants/tools";
 
 export function ToolDetailModal({
 	state,
@@ -55,7 +41,7 @@ export function ToolDetailModal({
 						<div className="text-lg font-extrabold">{tool.name}</div>
 						<div
 							className="text-sm font-semibold"
-							style={{ color: LEVEL_CARD_HEX[currentLevelName]?.text ?? "inherit" }}
+							style={{ color: LEVEL_META[currentLevelName]?.card.text ?? "inherit" }}
 						>
 							{currentLevelName}
 						</div>
@@ -70,7 +56,7 @@ export function ToolDetailModal({
 						const levelName = dotNames[i] ?? "";
 						const isCurrentLevel = i === levelIndex;
 						const isReached = i <= levelIndex;
-						const colors = LEVEL_CARD_HEX[levelName];
+						const colors = LEVEL_META[levelName]?.card;
 						const imgSrc = lvl.image ? assetPath(lvl.image) : null;
 						const materialData = lvl.materialName
 							? minerals().findByName(lvl.materialName)

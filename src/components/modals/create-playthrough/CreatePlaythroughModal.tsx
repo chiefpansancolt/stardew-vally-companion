@@ -3,14 +3,19 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from "flowbite-react";
 import type { SaveData } from "stardew-valley-data";
 import { useMemo, useState } from "react";
-import type { GameData } from "@/types/app/game";
-import type { CreatePlaythroughModalProps } from "@/types/components";
+import type {
+	BundleConfig,
+	CharacterFormData,
+	CreatePlaythroughModalProps,
+	GameData,
+	WizardPath,
+} from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { mapSaveDataToGameData } from "@/lib/utils/saveFileMapper";
 import { DEFAULT_GAME_DATA } from "@/data/constants";
-import { type BundleConfig, BundleSelectionStep } from "./BundleSelectionStep";
-import { type CharacterFormData, CharacterInfoStep } from "./CharacterInfoStep";
-import { ChoosePathStep, type WizardPath } from "./ChoosePathStep";
+import { BundleSelectionStep } from "./BundleSelectionStep";
+import { CharacterInfoStep } from "./CharacterInfoStep";
+import { ChoosePathStep } from "./ChoosePathStep";
 import { ReviewStep } from "./ReviewStep";
 import { StepIndicator } from "./StepIndicator";
 import { UploadSaveStep } from "./UploadSaveStep";

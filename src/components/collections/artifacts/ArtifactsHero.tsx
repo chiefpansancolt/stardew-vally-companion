@@ -2,23 +2,17 @@
 
 import { artifacts } from "stardew-valley-data";
 import { RiTreasureMapLine } from "react-icons/ri";
-import { type GameData } from "@/types/app/game";
+import { CollectionProps as Props } from "@/types";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
 
 const allArtifacts = artifacts().get();
 const total = allArtifacts.length;
 const withRewardsCount = allArtifacts.filter((a) => a.donationNotes !== null).length;
 
 export function ArtifactsHero({ gameData }: Props) {
-	const foundCount = allArtifacts.filter(
-		(a) => gameData.artifacts[a.id]?.found === true,
-	).length;
+	const foundCount = allArtifacts.filter((a) => gameData.artifacts[a.id]?.found === true).length;
 	const donatedCount = allArtifacts.filter(
-		(a) => gameData.artifacts[a.id]?.donated === true,
+		(a) => gameData.artifacts[a.id]?.donated === true
 	).length;
 
 	return (

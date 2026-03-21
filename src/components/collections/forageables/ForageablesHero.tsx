@@ -1,20 +1,10 @@
 "use client";
 
-import { forageables, trees, collections } from "stardew-valley-data";
+import { collections, forageables, trees } from "stardew-valley-data";
 import { GiMushroom } from "react-icons/gi";
-import { type GameData } from "@/types/app/game";
+import { CollectionProps as Props } from "@/types";
+import { SEASONS } from "@/data/constants/seasons";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
-
-const SEASONS = [
-	{ key: "spring" as const, label: "Spring", color: "text-green-600" },
-	{ key: "summer" as const, label: "Summer", color: "text-yellow-600" },
-	{ key: "fall" as const, label: "Fall", color: "text-orange-600" },
-	{ key: "winter" as const, label: "Winter", color: "text-blue-500" },
-];
 
 export function ForageablesHero({ gameData }: Props) {
 	const allForageables = forageables().get();
@@ -22,12 +12,19 @@ export function ForageablesHero({ gameData }: Props) {
 	const fruitTrees = trees().fruitTrees().get();
 	const wildTrees = trees().wildTrees().get();
 
-	const shippableIds = new Set(collections().itemsShipped().get().map((i) => i.id));
+	const shippableIds = new Set(
+		collections()
+			.itemsShipped()
+			.get()
+			.map((i) => i.id)
+	);
 
-	const seasonCounts = SEASONS.map((s) => ({
-		...s,
-		count: allForageables.filter((f) => f.seasons.includes(s.key)).length,
-	}));
+	const seasonCounts = Object.values(SEASONS)
+		.filter((s) => s.id !== "ginger island")
+		.map((s) => ({
+			...s,
+			count: allForageables.filter((f) => f.seasons.includes(s.id)).length,
+		}));
 
 	const forageableIdSet = new Set(allForageables.map((f) => f.id));
 	const treeProduceIds = allTrees
@@ -37,8 +34,9 @@ export function ForageablesHero({ gameData }: Props) {
 	const allUniqueIds = [...allForageables.map((f) => f.id), ...treeProduceIds];
 
 	const shippableUniqueIds = allUniqueIds.filter((id) => shippableIds.has(id));
-	const shippedCount = shippableUniqueIds.filter((id) => gameData.shipped[id]?.shipped === true).length;
-
+	const shippedCount = shippableUniqueIds.filter(
+		(id) => gameData.shipped[id]?.shipped === true
+	).length;
 
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
@@ -69,7 +67,7 @@ export function ForageablesHero({ gameData }: Props) {
 					suffix={`/ ${shippableUniqueIds.length}`}
 				/>
 				{seasonCounts.map((s) => (
-					<StatTile key={s.key} label={s.label} value={s.count} valueColor={s.color} />
+					<StatTile key={s.id} label={s.label} value={s.count} valueColor={s.heroColor} />
 				))}
 			</div>
 		</div>

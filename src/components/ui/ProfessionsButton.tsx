@@ -1,7 +1,4 @@
-interface Props {
-	active: boolean;
-	onClick: () => void;
-}
+import { ProfessionsButtonProps as Props } from "@/types";
 
 export function ProfessionsButton({ active, onClick }: Props) {
 	return (

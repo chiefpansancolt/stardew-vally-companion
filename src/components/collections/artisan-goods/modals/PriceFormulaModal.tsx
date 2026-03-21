@@ -1,174 +1,19 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { SearchField } from "@/comps/ui/SearchField";
-import {
-	artisanCalculator,
-	type ArtisanGood,
-	type ArtisanUses,
-	crops,
-	fish,
-	forageables,
-	trees,
-} from "stardew-valley-data";
-import type { ProfessionBonus } from "stardew-valley-data";
 import { useState } from "react";
 import { HiArrowRight } from "react-icons/hi";
+import type { IngredientOption, PriceFormulaModalProps as Props } from "@/types";
+import { calculateResult, getIngredientOptions } from "@/lib/pages/artisan-goods";
 import { assetPath } from "@/lib/utils/assetPath";
-import { applyBestProfessionBonus, getStackedBonuses, type BonusResult } from "@/lib/utils/professionPrices";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
-import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
-
-const artisanCalc = artisanCalculator();
-
-const ARTISAN_USE_KEY: Record<string, keyof ArtisanUses> = {
-	Honey: "honey",
-	Wine: "wine",
-	Juice: "juice",
-	Jelly: "jelly",
-	Pickles: "pickles",
-	"Dried Fruit": "driedFruit",
-	"Dried Mushrooms": "driedMushrooms",
-};
-
-type ArtisanCalcMethod = keyof typeof artisanCalc;
-
-const ARTISAN_CALC_METHOD: Record<string, ArtisanCalcMethod> = {
-	Honey: "honey",
-	Wine: "wine",
-	Juice: "juice",
-	Jelly: "jelly",
-	Pickles: "pickles",
-	"Dried Fruit": "driedFruit",
-	"Dried Mushrooms": "driedMushrooms",
-	"Smoked Fish": "smokedFish",
-	"Aged Roe": "agedRoe",
-};
-
-const FRUIT_TREE_KEYS = new Set(["wine", "jelly", "driedFruit"]);
-
-interface IngredientOption {
-	name: string;
-	basePrice: number;
-	image: string;
-	energy?: number;
-	health?: number;
-	sublabel?: string;
-}
-
-interface ArtisanResult {
-	sellPrice: number;
-	energy?: number;
-	health?: number;
-}
-
-function getIngredientOptions(good: ArtisanGood): IngredientOption[] {
-	if (good.name === "Smoked Fish") {
-		return fish()
-			.get()
-			.map((f) => ({
-				name: f.name,
-				basePrice: f.sellPrice,
-				image: f.image,
-				energy: f.energyHealth?.energy,
-				health: f.energyHealth?.health,
-			}))
-			.sort((a, b) => a.name.localeCompare(b.name));
-	}
-
-	if (good.name === "Aged Roe") {
-		return fish()
-			.byRoe("roe")
-			.get()
-			.map((f) => {
-				const roePrice = artisanCalc.roe(f.sellPrice).sellPrice;
-				return {
-					name: f.name,
-					basePrice: f.sellPrice,
-					image: f.image,
-					sublabel: `Roe: ${roePrice}g`,
-				};
-			})
-			.sort((a, b) => a.name.localeCompare(b.name));
-	}
-
-	const useKey = ARTISAN_USE_KEY[good.name];
-	if (!useKey) return [];
-
-	const results: IngredientOption[] = [
-		...crops()
-			.byArtisanUse(useKey)
-			.get()
-			.map((c) => ({
-				name: c.name,
-				basePrice: c.cropSellPrice,
-				image: c.image,
-				energy: c.energyHealth?.energy,
-				health: c.energyHealth?.health,
-			})),
-		...forageables()
-			.byArtisanUse(useKey)
-			.get()
-			.map((f) => ({
-				name: f.name,
-				basePrice: f.sellPrice,
-				image: f.image,
-				energy: f.energyHealth?.energy,
-				health: f.energyHealth?.health,
-			})),
-	];
-
-	if (FRUIT_TREE_KEYS.has(useKey)) {
-		results.push(
-			...trees()
-				.fruitTrees()
-				.byArtisanUse(useKey)
-				.get()
-				.filter(
-					(t): t is Extract<typeof t, { type: "fruit-tree" }> => t.type === "fruit-tree"
-				)
-				.map((t) => ({
-					name: t.produce.name,
-					basePrice: t.produce.sellPrice,
-					image: t.produce.image,
-					energy: t.produce.energyHealth?.energy,
-					health: t.produce.energyHealth?.health,
-				}))
-		);
-	}
-
-	const seen = new Set<string>();
-	const deduped = results.filter((r) => {
-		if (seen.has(r.name)) return false;
-		seen.add(r.name);
-		return true;
-	});
-
-	return deduped.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-function calculateResult(good: ArtisanGood, opt: IngredientOption): ArtisanResult | null {
-	const method = ARTISAN_CALC_METHOD[good.name];
-	if (!method) return null;
-
-	const fn = artisanCalc[method] as unknown;
-
-	if (good.name === "Honey" || good.name === "Aged Roe") {
-		return (fn as (price: number) => ArtisanResult)(opt.basePrice);
-	}
-
-	return (fn as (price: number, energy: number, health: number) => ArtisanResult)(
-		opt.basePrice,
-		opt.energy ?? 0,
-		opt.health ?? 0
-	);
-}
-
-interface Props {
-	good: ArtisanGood | null;
-	onClose: () => void;
-	activeProfessionBonuses?: Set<ProfessionBonus> | null;
-}
+import {
+	applyBestProfessionBonus,
+	type BonusResult,
+	getStackedBonuses,
+} from "@/lib/utils/professionPrices";
+import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
+import { PriceGrid } from "@/comps/ui/price-grid";
+import { SearchField } from "@/comps/ui/SearchField";
 
 export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = null }: Props) {
 	const [query, setQuery] = useState("");
@@ -219,7 +64,6 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 			<ModalBody>
 				{good && (
 					<div className="flex flex-col gap-4">
-						{/* Search */}
 						<SearchField
 							value={query}
 							onChange={setQuery}
@@ -227,7 +71,6 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 							variant="light"
 						/>
 
-						{/* Ingredient grid */}
 						{filtered.length === 0 ? (
 							<p className="py-6 text-center text-sm text-white/40">
 								No items match your search.
@@ -267,7 +110,6 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 							</div>
 						)}
 
-						{/* Result */}
 						{calculatedPrice !== null && selected && (
 							<div
 								className="border-secondary/60 rounded-xl border p-4"
@@ -290,16 +132,16 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 									</p>
 								</div>
 
-								{/* Sell price */}
 								<PriceGrid
 									price={calculatedPrice}
 									maxQuality={good.maxQuality}
 									variant="modal"
 									professionBonus={professionBonus}
-									professionBonuses={professionBonuses.length > 0 ? professionBonuses : undefined}
+									professionBonuses={
+										professionBonuses.length > 0 ? professionBonuses : undefined
+									}
 								/>
 
-								{/* Energy / Health */}
 								{calculatedEnergy !== null &&
 									calculatedHealth !== null &&
 									(calculatedEnergy > 0 || calculatedHealth > 0) && (

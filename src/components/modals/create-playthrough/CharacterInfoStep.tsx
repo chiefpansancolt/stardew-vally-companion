@@ -1,26 +1,6 @@
 import { Label, Select, TextInput } from "flowbite-react";
-
-const FARM_TYPES = [
-	{ value: 0, label: "Standard" },
-	{ value: 1, label: "Riverland" },
-	{ value: 2, label: "Forest" },
-	{ value: 3, label: "Hill-top" },
-	{ value: 4, label: "Wilderness" },
-	{ value: 5, label: "Four Corners" },
-	{ value: 6, label: "Beach" },
-	{ value: 7, label: "Meadowlands" },
-];
-
-export interface CharacterFormData {
-	playthroughName: string;
-	farmName: string;
-	farmType: number;
-}
-
-interface CharacterInfoStepProps {
-	formData: CharacterFormData;
-	onChange: (data: CharacterFormData) => void;
-}
+import type { CharacterInfoStepProps } from "@/types";
+import { FARM_TYPES } from "@/data/constants/farms";
 
 export function CharacterInfoStep({ formData, onChange }: CharacterInfoStepProps) {
 	return (

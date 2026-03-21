@@ -2,16 +2,9 @@
 
 import { Alert, FileInput, Label, Spinner, Textarea } from "flowbite-react";
 import { parseSaveFile } from "stardew-valley-data";
-import type { SaveData } from "stardew-valley-data";
 import { useState } from "react";
 import { HiInformationCircle } from "react-icons/hi";
-
-interface UploadSaveStepProps {
-	description: string;
-	onDescriptionChange: (value: string) => void;
-	onParsed: (data: SaveData) => void;
-	parsedData: SaveData | null;
-}
+import type { UploadSaveStepProps } from "@/types";
 
 export function UploadSaveStep({
 	description,

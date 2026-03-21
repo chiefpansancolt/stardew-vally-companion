@@ -1,5 +1,5 @@
 import type { SaveData } from "stardew-valley-data";
-import type { GameData } from "@/types/app/game";
+import type { GameData } from "@/types";
 import { DEFAULT_GAME_DATA } from "@/data/constants";
 
 /**

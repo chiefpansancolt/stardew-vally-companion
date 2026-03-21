@@ -1,9 +1,5 @@
 import { HiCheck } from "react-icons/hi";
-
-interface StepIndicatorProps {
-	steps: string[];
-	currentStep: number;
-}
+import type { StepIndicatorProps } from "@/types";
 
 export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
 	return (

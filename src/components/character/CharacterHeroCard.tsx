@@ -3,36 +3,12 @@
 import { Modal, ModalBody } from "flowbite-react";
 import { maps } from "stardew-valley-data";
 import { useState } from "react";
-import { type GameData } from "@/types/app/game";
+import { HiHome } from "react-icons/hi";
+import { type CharacterProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
+import { formatTimePlayed } from "@/lib/utils/formatting";
+import { SEASONS } from "@/data/constants/seasons";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
-
-const SEASON_LABELS: Record<string, string> = {
-	spring: "Spring",
-	summer: "Summer",
-	fall: "Fall",
-	winter: "Winter",
-};
-
-const SEASON_ICONS: Record<string, string> = {
-	spring: "🌸",
-	summer: "☀️",
-	fall: "🍂",
-	winter: "❄️",
-};
-
-function formatTimePlayed(ms: number): string {
-	if (!ms) return "—";
-	const totalMinutes = Math.floor(ms / 60_000);
-	const hours = Math.floor(totalMinutes / 60);
-	const minutes = totalMinutes % 60;
-	if (hours === 0) return `${minutes}m`;
-	return `${hours}h ${minutes}m`;
-}
 
 export function CharacterHeroCard({ gameData }: Props) {
 	const [mapOpen, setMapOpen] = useState(false);
@@ -41,14 +17,13 @@ export function CharacterHeroCard({ gameData }: Props) {
 	const farmIcon = mapData ? assetPath(mapData.icon) : null;
 	const farmImage = mapData ? assetPath(mapData.image) : null;
 	const { season, day, year } = character.currentDate;
-	const seasonIcon = SEASON_ICONS[season] ?? "";
-	const seasonLabel = SEASON_LABELS[season] ?? season;
+	const seasonMeta = SEASONS[season];
+	const seasonLabel = seasonMeta?.label ?? season;
 
 	return (
 		<>
 			<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
 				<div className="flex flex-wrap gap-5">
-					{/* Farm Icon — click to preview map */}
 					<div className="shrink-0">
 						{farmIcon ? (
 							<button
@@ -68,13 +43,12 @@ export function CharacterHeroCard({ gameData }: Props) {
 								</div>
 							</button>
 						) : (
-							<div className="bg-primary flex h-20 w-20 items-center justify-center rounded-xl border-2 border-[#c5b898] text-3xl">
-								🌿
+							<div className="bg-primary flex h-20 w-20 items-center justify-center rounded-xl border-2 border-[#c5b898]">
+								<HiHome className="h-8 w-8 text-white" />
 							</div>
 						)}
 					</div>
 
-					{/* Name + Farm + Date */}
 					<div className="min-w-40 flex-1">
 						<div className="text-[1.75rem] leading-none font-extrabold text-gray-900">
 							{character.name || "Unknown Farmer"}
@@ -86,11 +60,17 @@ export function CharacterHeroCard({ gameData }: Props) {
 							className="mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.8125rem] font-semibold"
 							style={{ background: "#d9c97c", color: "#6b4c1a" }}
 						>
-							{seasonIcon} {seasonLabel} {day}, Year {year}
+							{seasonMeta && (
+								<img
+									src={assetPath(seasonMeta.image)}
+									alt={seasonLabel}
+									className="inline h-4 w-4"
+								/>
+							)}{" "}
+							{seasonLabel} {day}, Year {year}
 						</div>
 					</div>
 
-					{/* Stat tiles */}
 					<div className="grid min-w-65 flex-2 grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
 						<StatTile label="Gender" value={character.gender || "—"} />
 						<StatTile label="Favorite Thing" value={character.favoriteThing || "—"} />
@@ -117,7 +97,6 @@ export function CharacterHeroCard({ gameData }: Props) {
 				</div>
 			</div>
 
-			{/* Farm map preview modal */}
 			{farmImage && (
 				<Modal show={mapOpen} onClose={() => setMapOpen(false)} dismissible size="4xl">
 					<ModalBody className="p-2">

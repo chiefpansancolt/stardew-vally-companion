@@ -3,16 +3,8 @@
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { cooking, crafting, professions, type Skill } from "stardew-valley-data";
 import { HiCheck } from "react-icons/hi";
+import { type LevelBlockProps, type SkillDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-
-interface Props {
-	skill: Skill;
-	currentLevel: number;
-	chosenProfessionIds: string[];
-	isOpen: boolean;
-	onClose: () => void;
-	onToggleProfession?: (profId: string) => void;
-}
 
 function getRecipeImage(name: string): string | null {
 	const r = crafting().findByName(name) ?? cooking().findByName(name);
@@ -39,13 +31,11 @@ function RecipeItem({ name, reached }: { name: string; reached: boolean }) {
 
 function ProfOption({
 	profId,
-	skillName,
 	chosen,
 	dimmed,
 	onToggle,
 }: {
 	profId: string;
-	skillName: string;
 	chosen: boolean;
 	dimmed: boolean;
 	onToggle?: (profId: string) => void;
@@ -54,13 +44,13 @@ function ProfOption({
 	if (!prof) return null;
 	return (
 		<div
-			className={`flex flex-1 flex-col gap-1 p-2 transition-colors ${chosen ? "bg-primary/5 dark:bg-primary/10" : ""} ${dimmed ? "opacity-40" : ""} ${onToggle ? "cursor-pointer hover:bg-primary/10 dark:hover:bg-primary/20" : ""}`}
+			className={`flex flex-1 flex-col gap-1 p-2 transition-colors ${chosen ? "bg-primary/5 dark:bg-primary/10" : ""} ${dimmed ? "opacity-40" : ""} ${onToggle ? "hover:bg-primary/10 dark:hover:bg-primary/20 cursor-pointer" : ""}`}
 			onClick={() => onToggle?.(profId)}
 		>
 			<div className="flex items-center gap-1.5">
 				<div className="text-[0.6875rem] font-bold text-gray-800 dark:text-gray-200">
 					{prof.name}
-					{chosen && <HiCheck className="ml-1 inline h-3 w-3 text-primary" />}
+					{chosen && <HiCheck className="text-primary ml-1 inline h-3 w-3" />}
 				</div>
 			</div>
 			<div className="text-[0.6rem] leading-snug text-gray-500 dark:text-gray-400">
@@ -70,15 +60,13 @@ function ProfOption({
 	);
 }
 
-interface LevelBlockProps {
-	skill: Skill;
-	levelNum: number;
-	reached: boolean;
-	chosenProfessionIds: string[];
-	onToggleProfession?: (profId: string) => void;
-}
-
-function LevelBlock({ skill, levelNum, reached, chosenProfessionIds, onToggleProfession }: LevelBlockProps) {
+function LevelBlock({
+	skill,
+	levelNum,
+	reached,
+	chosenProfessionIds,
+	onToggleProfession,
+}: LevelBlockProps) {
 	const levelData = skill.levels[levelNum - 1];
 	const allProfs = professions()
 		.bySkill(skill.name as "Farming" | "Mining" | "Foraging" | "Fishing" | "Combat")
@@ -99,7 +87,6 @@ function LevelBlock({ skill, levelNum, reached, chosenProfessionIds, onTogglePro
 						<ProfOption
 							key={p.id}
 							profId={p.id}
-							skillName={skill.name}
 							chosen={chosenProfessionIds.includes(p.id)}
 							dimmed={false}
 							onToggle={onToggleProfession}
@@ -139,7 +126,6 @@ function LevelBlock({ skill, levelNum, reached, chosenProfessionIds, onTogglePro
 									<ProfOption
 										key={p.id}
 										profId={p.id}
-										skillName={skill.name}
 										chosen={chosenProfessionIds.includes(p.id)}
 										dimmed={!reached}
 										onToggle={onToggleProfession}
@@ -212,7 +198,6 @@ export function SkillDetailModal({
 			<ModalBody>
 				<p className="mb-5 text-sm text-gray-600 dark:text-gray-400">{skill.description}</p>
 
-				{/* Levels 1–5 */}
 				<div className="mb-1 text-[0.7rem] font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
 					Levels 1 – 5
 				</div>
@@ -231,7 +216,6 @@ export function SkillDetailModal({
 					</div>
 				</div>
 
-				{/* Levels 6–10 */}
 				<div className="mb-1 text-[0.7rem] font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
 					Levels 6 – 10
 				</div>

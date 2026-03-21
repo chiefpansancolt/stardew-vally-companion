@@ -1,4 +1,4 @@
-import type { GameData } from "@/types/app/game";
+import type { GameData } from "@/types";
 
 export const DEFAULT_GAME_DATA: GameData = {
   character: {

@@ -1,0 +1,55 @@
+import type { Season } from "stardew-valley-data";
+import type { SeasonMeta } from "@/types";
+
+export const SEASONS: Record<Season, SeasonMeta> = {
+  spring: {
+    id: "spring",
+    label: "Spring",
+    abbr: "Sp",
+    image: "images/misc/Spring.png",
+    badgeColor: "bg-green-700",
+    textColor: "text-green-400",
+    heroColor: "text-green-600",
+    dotColor: "#4ade80",
+  },
+  summer: {
+    id: "summer",
+    label: "Summer",
+    abbr: "Su",
+    image: "images/misc/Summer.png",
+    badgeColor: "bg-yellow-600",
+    textColor: "text-yellow-400",
+    heroColor: "text-yellow-600",
+    dotColor: "#fb923c",
+  },
+  fall: {
+    id: "fall",
+    label: "Fall",
+    abbr: "Fa",
+    image: "images/misc/Fall.png",
+    badgeColor: "bg-orange-700",
+    textColor: "text-orange-400",
+    heroColor: "text-orange-600",
+    dotColor: "#f59e0b",
+  },
+  winter: {
+    id: "winter",
+    label: "Winter",
+    abbr: "Wi",
+    image: "images/misc/Winter.png",
+    badgeColor: "bg-blue-500",
+    textColor: "text-blue-400",
+    heroColor: "text-blue-500",
+    dotColor: "#93c5fd",
+  },
+  "ginger island": {
+    id: "ginger island",
+    label: "Ginger Island",
+    abbr: "GI",
+    image: "images/misc/Spring.png",
+    badgeColor: "bg-teal-600",
+    textColor: "text-teal-400",
+    heroColor: "text-teal-600",
+    dotColor: "#2dd4bf",
+  },
+};

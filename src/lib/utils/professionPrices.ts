@@ -1,55 +1,57 @@
 import {
-	professions,
-	professionCalculator,
-	knowledgeCalculator,
-	type ProfessionBonus,
-	type KnowledgeBonus,
+  type KnowledgeBonus,
+  knowledgeCalculator,
+  type ProfessionBonus,
+  professionCalculator,
+  professions,
 } from "stardew-valley-data";
-import type { GameData } from "@/types/app/game";
+import type { GameData } from "@/types";
 
 const VALID_BONUSES = new Set<string>([
-	"artisan",
-	"rancher",
-	"tiller",
-	"blacksmith",
-	"gemologist",
-	"tapper",
-	"fisher",
-	"angler",
+  "artisan",
+  "rancher",
+  "tiller",
+  "blacksmith",
+  "gemologist",
+  "tapper",
+  "fisher",
+  "angler",
 ]);
 
 const PROFESSION_LABELS: Record<string, string> = {
-	artisan: "Artisan",
-	rancher: "Rancher",
-	tiller: "Tiller",
-	blacksmith: "Blacksmith",
-	gemologist: "Gemologist",
-	tapper: "Tapper",
-	fisher: "Fisher",
-	angler: "Angler",
+  artisan: "Artisan",
+  rancher: "Rancher",
+  tiller: "Tiller",
+  blacksmith: "Blacksmith",
+  gemologist: "Gemologist",
+  tapper: "Tapper",
+  fisher: "Fisher",
+  angler: "Angler",
 };
 
 const KNOWLEDGE_LABELS: Record<string, string> = {
-	"bears-knowledge": "Bear's Knowledge",
-	"spring-onion-mastery": "Spring Onion Mastery",
+  "bears-knowledge": "Bear's Knowledge",
+  "spring-onion-mastery": "Spring Onion Mastery",
 };
 
 export interface BonusResult {
-	price: number;
-	label: string;
+  price: number;
+  label: string;
 }
 
 /** Resolves numeric profession IDs in GameData to a Set of active ProfessionBonus names. */
-export function getActiveProfessionBonuses(gameData: GameData): Set<ProfessionBonus> {
-	const playerIds = new Set(gameData.professions);
-	const bonuses = new Set<ProfessionBonus>();
-	for (const prof of professions().get()) {
-		if (playerIds.has(prof.id)) {
-			const key = prof.name.toLowerCase();
-			if (VALID_BONUSES.has(key)) bonuses.add(key as ProfessionBonus);
-		}
-	}
-	return bonuses;
+export function getActiveProfessionBonuses(
+  gameData: GameData,
+): Set<ProfessionBonus> {
+  const playerIds = new Set(gameData.professions);
+  const bonuses = new Set<ProfessionBonus>();
+  for (const prof of professions().get()) {
+    if (playerIds.has(prof.id)) {
+      const key = prof.name.toLowerCase();
+      if (VALID_BONUSES.has(key)) bonuses.add(key as ProfessionBonus);
+    }
+  }
+  return bonuses;
 }
 
 /**
@@ -58,22 +60,26 @@ export function getActiveProfessionBonuses(gameData: GameData): Set<ProfessionBo
  * and active (they are mutually exclusive in-game and angler gives a higher bonus).
  */
 export function applyBestProfessionBonus(
-	price: number,
-	itemProfessions: ProfessionBonus[],
-	activeBonuses: Set<ProfessionBonus>
+  price: number,
+  itemProfessions: ProfessionBonus[],
+  activeBonuses: Set<ProfessionBonus>,
 ): BonusResult | null {
-	const calc = professionCalculator();
-	let best: BonusResult | null = null;
-	for (const bonus of itemProfessions) {
-		if (!activeBonuses.has(bonus)) continue;
-		if (bonus === "fisher" && itemProfessions.includes("angler") && activeBonuses.has("angler"))
-			continue;
-		const adjusted = (calc[bonus] as (p: number) => number)(price);
-		if (best === null || adjusted > best.price) {
-			best = { price: adjusted, label: PROFESSION_LABELS[bonus] ?? bonus };
-		}
-	}
-	return best;
+  const calc = professionCalculator();
+  let best: BonusResult | null = null;
+  for (const bonus of itemProfessions) {
+    if (!activeBonuses.has(bonus)) continue;
+    if (
+      bonus === "fisher" &&
+      itemProfessions.includes("angler") &&
+      activeBonuses.has("angler")
+    )
+      continue;
+    const adjusted = (calc[bonus] as (p: number) => number)(price);
+    if (best === null || adjusted > best.price) {
+      best = { price: adjusted, label: PROFESSION_LABELS[bonus] ?? bonus };
+    }
+  }
+  return best;
 }
 
 /**
@@ -88,49 +94,61 @@ export function applyBestProfessionBonus(
  * - Returns [] if no applicable professions are active
  */
 export function getStackedBonuses(
-	price: number,
-	itemProfessions: ProfessionBonus[],
-	activeBonuses: Set<ProfessionBonus>
+  price: number,
+  itemProfessions: ProfessionBonus[],
+  activeBonuses: Set<ProfessionBonus>,
 ): BonusResult[] {
-	const calc = professionCalculator();
-	const results: BonusResult[] = [];
+  const calc = professionCalculator();
+  const results: BonusResult[] = [];
 
-	const primaryProfessions = itemProfessions.filter((p) => p !== "artisan");
-	const hasArtisan = itemProfessions.includes("artisan") && activeBonuses.has("artisan");
+  const primaryProfessions = itemProfessions.filter((p) => p !== "artisan");
+  const hasArtisan =
+    itemProfessions.includes("artisan") && activeBonuses.has("artisan");
 
-	let activePrimary: ProfessionBonus | null = null;
-	for (const p of primaryProfessions) {
-		if (!activeBonuses.has(p)) continue;
-		if (p === "fisher" && primaryProfessions.includes("angler") && activeBonuses.has("angler"))
-			continue;
-		activePrimary = p;
-		break;
-	}
+  let activePrimary: ProfessionBonus | null = null;
+  for (const p of primaryProfessions) {
+    if (!activeBonuses.has(p)) continue;
+    if (
+      p === "fisher" &&
+      primaryProfessions.includes("angler") &&
+      activeBonuses.has("angler")
+    )
+      continue;
+    activePrimary = p;
+    break;
+  }
 
-	if (activePrimary) {
-		const primaryPrice = (calc[activePrimary] as (p: number) => number)(price);
-		results.push({ price: primaryPrice, label: PROFESSION_LABELS[activePrimary] ?? activePrimary });
+  if (activePrimary) {
+    const primaryPrice = (calc[activePrimary] as (p: number) => number)(price);
+    results.push({
+      price: primaryPrice,
+      label: PROFESSION_LABELS[activePrimary] ?? activePrimary,
+    });
 
-		if (hasArtisan) {
-			const comboPrice = calc.artisan(primaryPrice);
-			results.push({
-				price: comboPrice,
-				label: `${PROFESSION_LABELS[activePrimary] ?? activePrimary} + Artisan`,
-			});
-		}
-	} else if (hasArtisan) {
-		results.push({ price: calc.artisan(price), label: "Artisan" });
-	}
+    if (hasArtisan) {
+      const comboPrice = calc.artisan(primaryPrice);
+      results.push({
+        price: comboPrice,
+        label: `${PROFESSION_LABELS[activePrimary] ?? activePrimary} + Artisan`,
+      });
+    }
+  } else if (hasArtisan) {
+    results.push({ price: calc.artisan(price), label: "Artisan" });
+  }
 
-	return results;
+  return results;
 }
 
 /** Derives active knowledge bonuses from gameData.specialItems. */
-export function getActiveKnowledgeBonuses(gameData: GameData): Set<KnowledgeBonus> {
-	const set = new Set<KnowledgeBonus>();
-	if (gameData.specialItems.includes("bears-knowledge")) set.add("bears-knowledge");
-	if (gameData.specialItems.includes("spring-onion-mastery")) set.add("spring-onion-mastery");
-	return set;
+export function getActiveKnowledgeBonuses(
+  gameData: GameData,
+): Set<KnowledgeBonus> {
+  const set = new Set<KnowledgeBonus>();
+  if (gameData.specialItems.includes("bears-knowledge"))
+    set.add("bears-knowledge");
+  if (gameData.specialItems.includes("spring-onion-mastery"))
+    set.add("spring-onion-mastery");
+  return set;
 }
 
 /**
@@ -139,26 +157,32 @@ export function getActiveKnowledgeBonuses(gameData: GameData): Set<KnowledgeBonu
  * applies. They don't stack in-game.
  */
 export function applyBestForageableBonus(
-	price: number,
-	itemProfessions: ProfessionBonus[],
-	itemKnowledge: KnowledgeBonus[],
-	activeBonuses: Set<ProfessionBonus>,
-	activeKnowledge: Set<KnowledgeBonus>
+  price: number,
+  itemProfessions: ProfessionBonus[],
+  itemKnowledge: KnowledgeBonus[],
+  activeBonuses: Set<ProfessionBonus>,
+  activeKnowledge: Set<KnowledgeBonus>,
 ): BonusResult | null {
-	const profResult = applyBestProfessionBonus(price, itemProfessions, activeBonuses);
+  const profResult = applyBestProfessionBonus(
+    price,
+    itemProfessions,
+    activeBonuses,
+  );
 
-	const calc = knowledgeCalculator();
-	let knowResult: BonusResult | null = null;
-	for (const k of itemKnowledge) {
-		if (!activeKnowledge.has(k)) continue;
-		const adjusted =
-			k === "bears-knowledge" ? calc.bearsKnowledge(price) : calc.springOnionMastery(price);
-		knowResult = { price: adjusted, label: KNOWLEDGE_LABELS[k] ?? k };
-		break;
-	}
+  const calc = knowledgeCalculator();
+  let knowResult: BonusResult | null = null;
+  for (const k of itemKnowledge) {
+    if (!activeKnowledge.has(k)) continue;
+    const adjusted =
+      k === "bears-knowledge"
+        ? calc.bearsKnowledge(price)
+        : calc.springOnionMastery(price);
+    knowResult = { price: adjusted, label: KNOWLEDGE_LABELS[k] ?? k };
+    break;
+  }
 
-	if (profResult !== null && knowResult !== null) {
-		return profResult.price >= knowResult.price ? profResult : knowResult;
-	}
-	return profResult ?? knowResult;
+  if (profResult !== null && knowResult !== null) {
+    return profResult.price >= knowResult.price ? profResult : knowResult;
+  }
+  return profResult ?? knowResult;
 }

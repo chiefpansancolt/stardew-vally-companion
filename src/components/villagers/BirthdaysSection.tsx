@@ -1,65 +1,10 @@
 "use client";
 
-import { type Villager, villagers } from "stardew-valley-data";
-import { type GameData } from "@/types/app/game";
-import { assetPath } from "@/lib/utils/assetPath";
-
-interface Props {
-	gameData: GameData;
-}
-
-type Season = "spring" | "summer" | "fall" | "winter";
-
-const SEASONS: { id: Season; label: string; dotColor: string }[] = [
-	{ id: "spring", label: "Spring", dotColor: "#4ade80" },
-	{ id: "summer", label: "Summer", dotColor: "#fb923c" },
-	{ id: "fall", label: "Fall", dotColor: "#f59e0b" },
-	{ id: "winter", label: "Winter", dotColor: "#93c5fd" },
-];
-
-function capitalize(s: string) {
-	return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-interface BirthdayRowProps {
-	villager: Villager;
-	isToday: boolean;
-}
-
-function BirthdayRow({ villager, isToday }: BirthdayRowProps) {
-	return (
-		<div
-			className={`flex items-center gap-2 py-1.5 ${
-				isToday ? "-mx-1.5 rounded-md px-1.5" : "border-b border-white/5 last:border-0"
-			}`}
-			style={isToday ? { background: "rgba(217,201,124,0.15)" } : undefined}
-		>
-			<img
-				src={assetPath(villager.image)}
-				alt={villager.name}
-				className="h-6 w-6 shrink-0 rounded-md object-contain"
-				style={{
-					background: isToday ? "rgba(217,201,124,0.2)" : "rgba(255,255,255,0.08)",
-				}}
-			/>
-			<span
-				className={`flex-1 text-xs font-semibold ${
-					isToday ? "text-highlight" : "text-white/80"
-				}`}
-			>
-				{villager.name}
-			</span>
-			<span
-				className={`text-[0.7rem] font-semibold whitespace-nowrap ${
-					isToday ? "text-yellow-300/70" : "text-white/40"
-				}`}
-			>
-				Day {villager.birthday.day}
-				{isToday && " 🎂"}
-			</span>
-		</div>
-	);
-}
+import { villagers } from "stardew-valley-data";
+import type { VillagersProps as Props } from "@/types";
+import { capitalize } from "@/lib/utils/formatting";
+import { SEASONS } from "@/data/constants/seasons";
+import { BirthdayRow } from "./cards";
 
 export function BirthdaysSection({ gameData }: Props) {
 	const { season: currentSeason, day: currentDay } = gameData.character.currentDate;
@@ -77,46 +22,48 @@ export function BirthdaysSection({ gameData }: Props) {
 			</div>
 
 			<div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-				{SEASONS.map(({ id, label, dotColor }) => {
-					const seasonVillagers = villagers().byBirthdaySeason(id).sortByBirthday().get();
+				{Object.values(SEASONS)
+					.filter((s) => s.id !== "ginger island")
+					.map((meta) => {
+						const seasonVillagers = villagers()
+							.byBirthdaySeason(meta.id as "spring" | "summer" | "fall" | "winter")
+							.sortByBirthday()
+							.get();
 
-					return (
-						<div key={id} className="flex flex-col">
-							{/* Season header */}
-							<div className="mb-2 flex items-center gap-1.5 border-b border-white/10 pb-2">
-								<div
-									className="h-2 w-2 shrink-0 rounded-full"
-									style={{ background: dotColor }}
-								/>
-								<span className="text-sm font-bold tracking-wider text-white uppercase">
-									{label}
-								</span>
-							</div>
+						return (
+							<div key={meta.id} className="flex flex-col">
+								<div className="mb-2 flex items-center gap-1.5 border-b border-white/10 pb-2">
+									<div
+										className="h-2 w-2 shrink-0 rounded-full"
+										style={{ background: meta.dotColor }}
+									/>
+									<span className="text-sm font-bold tracking-wider text-white uppercase">
+										{meta.label}
+									</span>
+								</div>
 
-							{/* Villager rows */}
-							<div className="flex flex-col">
-								{seasonVillagers.map((villager) => {
-									const isToday =
-										id === currentSeason &&
-										villager.birthday.day === currentDay;
-									return (
-										<BirthdayRow
-											key={villager.id}
-											villager={villager}
-											isToday={isToday}
-										/>
-									);
-								})}
-								{seasonVillagers.length === 0 && (
-									<span className="text-xs text-white/30">None</span>
-								)}
+								<div className="flex flex-col">
+									{seasonVillagers.map((villager) => {
+										const isToday =
+											meta.id === currentSeason &&
+											villager.birthday.day === currentDay;
+										return (
+											<BirthdayRow
+												key={villager.id}
+												villager={villager}
+												isToday={isToday}
+											/>
+										);
+									})}
+									{seasonVillagers.length === 0 && (
+										<span className="text-xs text-white/30">None</span>
+									)}
+								</div>
 							</div>
-						</div>
-					);
-				})}
+						);
+					})}
 			</div>
 
-			{/* Legend: today highlight */}
 			<div className="mt-4 border-t border-white/10 pt-3">
 				<p className="text-[0.7rem] text-white/35">
 					{capitalize(currentSeason)} Day {currentDay} highlighted if a birthday falls

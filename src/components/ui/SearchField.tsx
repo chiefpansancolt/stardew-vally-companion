@@ -1,9 +1,4 @@
-interface Props {
-	value: string;
-	onChange: (value: string) => void;
-	placeholder?: string;
-	variant?: "dark" | "light";
-}
+import { SearchFieldProps as Props } from "@/types";
 
 export function SearchField({ value, onChange, placeholder = "Search…", variant = "dark" }: Props) {
 	const cls =

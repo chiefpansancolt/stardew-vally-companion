@@ -2,12 +2,8 @@
 
 import { animals, isFarmAnimal } from "stardew-valley-data";
 import { FaEgg } from "react-icons/fa";
-import { type GameData } from "@/types/app/game";
+import { CollectionProps as Props } from "@/types";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
 
 export function AnimalProductsHero({ gameData }: Props) {
 	const allAnimals = animals().farmAnimals().get().filter(isFarmAnimal);

@@ -1,25 +1,6 @@
 import type { SaveData } from "stardew-valley-data";
-import type { BundleConfig } from "./BundleSelectionStep";
-import type { CharacterFormData } from "./CharacterInfoStep";
-
-const FARM_TYPE_LABELS: Record<number, string> = {
-	0: "Standard",
-	1: "Riverland",
-	2: "Forest",
-	3: "Hill-top",
-	4: "Wilderness",
-	5: "Four Corners",
-	6: "Beach",
-	7: "Meadowlands",
-};
-
-interface ReviewStepProps {
-	path: "upload" | "build";
-	saveData?: SaveData | null;
-	description?: string;
-	characterForm?: CharacterFormData;
-	bundleConfig?: BundleConfig;
-}
+import type { BundleConfig, CharacterFormData, ReviewStepProps } from "@/types";
+import { FARM_TYPE_LABELS } from "@/data/constants/farms";
 
 function ReviewRow({ label, value }: { label: string; value: string | number }) {
 	return (

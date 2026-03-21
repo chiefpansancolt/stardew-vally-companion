@@ -1,23 +1,11 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { type OreItem } from "stardew-valley-data";
 import { HiCheck } from "react-icons/hi";
+import { OreDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
-import { type BonusResult } from "@/lib/utils/professionPrices";
-
-const NAVY_TILE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
-
-interface Props {
-	ore: OreItem | null;
-	shipped: boolean;
-	professionBonus: BonusResult | null;
-	onClose: () => void;
-}
+import { NAVY_TILE } from "@/data/constants/styles";
+import { PriceGrid } from "@/comps/ui/price-grid";
 
 export function OreDetailModal({ ore, shipped, professionBonus, onClose }: Props) {
 	if (!ore) return null;
@@ -51,7 +39,7 @@ export function OreDetailModal({ ore, shipped, professionBonus, onClose }: Props
 				<div className="flex flex-col gap-5">
 					<div>
 						<div className="mb-1.5 text-sm font-bold text-gray-900">Description</div>
-						<p className="text-sm italic leading-relaxed text-gray-500">
+						<p className="text-sm leading-relaxed text-gray-500 italic">
 							{ore.description}
 						</p>
 					</div>
@@ -76,7 +64,9 @@ export function OreDetailModal({ ore, shipped, professionBonus, onClose }: Props
 										className="flex items-center gap-3 rounded-xl px-4 py-2.5"
 										style={NAVY_TILE}
 									>
-										<span className="text-sm font-medium text-white/80">{loc}</span>
+										<span className="text-sm font-medium text-white/80">
+											{loc}
+										</span>
 									</div>
 								))}
 							</div>

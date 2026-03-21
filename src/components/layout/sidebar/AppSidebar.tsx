@@ -12,7 +12,6 @@ import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { GiMushroom } from "react-icons/gi";
-import { RiTreasureMapLine } from "react-icons/ri";
 import {
 	HiCog,
 	HiCollection,
@@ -22,6 +21,7 @@ import {
 	HiUserGroup,
 	HiViewGrid,
 } from "react-icons/hi";
+import { RiTreasureMapLine } from "react-icons/ri";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
 import { PlaythroughSwitcher } from "./PlaythroughSwitcher";

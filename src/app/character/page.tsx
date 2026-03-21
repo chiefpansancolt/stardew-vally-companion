@@ -1,80 +1,28 @@
 "use client";
 
-import { Card } from "flowbite-react";
-import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { professions } from "stardew-valley-data";
+import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
+import { toggleProfession } from "@/lib/pages/character";
 import { AchievementsSection } from "@/comps/character/AchievementsSection";
 import { CharacterHeroCard } from "@/comps/character/CharacterHeroCard";
 import { MasterySection } from "@/comps/character/MasterySection";
 import { SkillsSection } from "@/comps/character/SkillsSection";
 import { StardropsSection } from "@/comps/character/StardropsSection";
 import { ToolsSection } from "@/comps/character/ToolsSection";
+import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 
 export default function CharacterPage() {
 	const { activePlaythrough, updatePlaythrough } = usePlaythrough();
 
 	if (!activePlaythrough) {
-		return (
-			<div className="p-6">
-				<Card className="py-16 text-center">
-					<div className="mx-auto max-w-md">
-						<h2 className="mb-2 text-xl font-semibold text-gray-700 dark:text-gray-300">
-							No Active Playthrough
-						</h2>
-						<p className="text-gray-500 dark:text-gray-400">
-							Select or create a playthrough to view character details.
-						</p>
-					</div>
-				</Card>
-			</div>
-		);
+		return <NoPlaythroughFallback feature="character data" />;
 	}
 
 	const gameData = activePlaythrough.data;
 	const playthroughId = activePlaythrough.id;
 
 	function handleToggleProfession(profId: string) {
-		const allProfs = professions().get();
-		const prof = allProfs.find((p) => p.id === profId);
-		if (!prof) return;
-
-		const current = gameData.professions;
-		const isSelected = current.includes(profId);
-
-		let next: string[];
-		if (isSelected) {
-			const childIds = allProfs.filter((p) => p.parentProfession === profId).map((p) => p.id);
-			next = current.filter((id) => id !== profId && !childIds.includes(id));
-		} else {
-			next = [...current];
-			if (prof.level === 5) {
-				const siblings = allProfs.filter((p) => p.skill === prof.skill && p.level === 5 && p.id !== profId);
-				const toRemove = new Set<string>();
-				for (const sib of siblings) {
-					toRemove.add(sib.id);
-					allProfs.filter((p) => p.parentProfession === sib.id).forEach((p) => toRemove.add(p.id));
-				}
-				next = next.filter((id) => !toRemove.has(id));
-			} else {
-				if (prof.parentProfession && !next.includes(prof.parentProfession)) {
-					const parent = allProfs.find((p) => p.id === prof.parentProfession);
-					if (parent) {
-						const sibLv5 = allProfs.filter((p) => p.skill === parent.skill && p.level === 5 && p.id !== parent.id);
-						const toRemove = new Set<string>();
-						for (const sib of sibLv5) {
-							toRemove.add(sib.id);
-							allProfs.filter((p) => p.parentProfession === sib.id).forEach((p) => toRemove.add(p.id));
-						}
-						next = next.filter((id) => !toRemove.has(id));
-						next.push(prof.parentProfession);
-					}
-				}
-				const sibLv10 = allProfs.filter((p) => p.parentProfession === prof.parentProfession && p.id !== profId);
-				next = next.filter((id) => !sibLv10.map((s) => s.id).includes(id));
-			}
-			next.push(profId);
-		}
-
+		const next = toggleProfession(profId, gameData.professions, professions().get());
 		updatePlaythrough(playthroughId, {
 			data: { ...gameData, professions: next },
 		});

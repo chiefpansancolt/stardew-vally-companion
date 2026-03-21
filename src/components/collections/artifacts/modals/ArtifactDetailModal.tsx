@@ -1,23 +1,12 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { type Artifact } from "stardew-valley-data";
-import { HiCheck } from "react-icons/hi";
 import { FaStar } from "react-icons/fa";
+import { HiCheck } from "react-icons/hi";
+import { ArtifactDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
-
-const NAVY_TILE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
-
-interface Props {
-	artifact: Artifact | null;
-	donated: boolean;
-	found: boolean;
-	onClose: () => void;
-}
+import { NAVY_TILE } from "@/data/constants/styles";
+import { PriceGrid } from "@/comps/ui/price-grid";
 
 export function ArtifactDetailModal({ artifact, donated, found, onClose }: Props) {
 	if (!artifact) return null;
@@ -55,21 +44,18 @@ export function ArtifactDetailModal({ artifact, donated, found, onClose }: Props
 			</ModalHeader>
 			<ModalBody>
 				<div className="flex flex-col gap-5">
-					{/* Description */}
 					<div>
 						<div className="mb-1.5 text-sm font-bold text-gray-900">Description</div>
-						<p className="text-sm italic leading-relaxed text-gray-500">
+						<p className="text-sm leading-relaxed text-gray-500 italic">
 							{artifact.description}
 						</p>
 					</div>
 
-					{/* Sell Price */}
 					<div>
 						<div className="mb-2 text-sm font-bold text-gray-900">Sell Price</div>
 						<PriceGrid price={artifact.sellPrice} maxQuality="normal" variant="modal" />
 					</div>
 
-					{/* How to Find */}
 					<div>
 						<div className="mb-2 text-sm font-bold text-gray-900">How to Find</div>
 						<div className="flex flex-col gap-1.5">
@@ -85,12 +71,13 @@ export function ArtifactDetailModal({ artifact, donated, found, onClose }: Props
 						</div>
 					</div>
 
-					{/* Donation Reward */}
 					{artifact.donationNotes && (
 						<div>
-							<div className="mb-2 text-sm font-bold text-gray-900">Donation Reward</div>
+							<div className="mb-2 text-sm font-bold text-gray-900">
+								Donation Reward
+							</div>
 							<div className="rounded-xl px-4 py-3" style={NAVY_TILE}>
-								<div className="mb-1 flex items-center gap-1 text-[0.6rem] font-bold tracking-wide text-highlight uppercase">
+								<div className="text-highlight mb-1 flex items-center gap-1 text-[0.6rem] font-bold tracking-wide uppercase">
 									<FaStar className="h-2.5 w-2.5" /> Museum Reward
 								</div>
 								<p className="text-sm font-medium text-white/80">

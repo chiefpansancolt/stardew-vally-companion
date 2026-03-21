@@ -1,13 +1,9 @@
 "use client";
 
-import { minerals, type MineralItem } from "stardew-valley-data";
+import { type MineralItem, minerals } from "stardew-valley-data";
 import { FaGem } from "react-icons/fa";
-import { type GameData } from "@/types/app/game";
+import { CollectionProps as Props } from "@/types";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
 
 const allMineralItems = minerals().mineralItems().get() as MineralItem[];
 const total = allMineralItems.length;
@@ -23,17 +19,13 @@ const totalNodes = minerals().nodes().get().length;
 
 export function MineralsHero({ gameData }: Props) {
 	const foundCount = allMineralItems.filter(
-		(m) => gameData.minerals[m.id]?.found === true,
+		(m) => gameData.minerals[m.id]?.found === true
 	).length;
 	const donatedCount = allMineralItems.filter(
-		(m) => gameData.minerals[m.id]?.donated === true,
+		(m) => gameData.minerals[m.id]?.donated === true
 	).length;
-	const oresShipped = allOres.filter(
-		(o) => gameData.shipped[o.id]?.shipped === true,
-	).length;
-	const barsShipped = allBars.filter(
-		(b) => gameData.shipped[b.id]?.shipped === true,
-	).length;
+	const oresShipped = allOres.filter((o) => gameData.shipped[o.id]?.shipped === true).length;
+	const barsShipped = allBars.filter((b) => gameData.shipped[b.id]?.shipped === true).length;
 
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">

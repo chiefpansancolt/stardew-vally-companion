@@ -3,35 +3,9 @@
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { tools } from "stardew-valley-data";
 import { HiLockClosed } from "react-icons/hi";
+import type { RodData } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-
-export type RodLevel = {
-	name: string;
-	image: string;
-	cost: number | null;
-	fishingLevelRequired: number | null;
-	bait: boolean;
-	tackleSlots: number;
-	canEnchant: boolean;
-	obtain: string;
-	description: string;
-};
-export type RodData = {
-	id: string;
-	type: string;
-	name: string;
-	description: string;
-	canEnchant: boolean;
-	levels: RodLevel[];
-};
-
-export const ROD_DOT_HEX: Record<number, string> = {
-	0: "#86efac",
-	1: "#d97706",
-	2: "#60a5fa",
-	3: "#c084fc",
-	4: "#f0abfc",
-};
+import { ROD_DOT_HEX } from "@/data/constants/tools";
 
 export function FishingRodDetailModal({
 	levelIndex,

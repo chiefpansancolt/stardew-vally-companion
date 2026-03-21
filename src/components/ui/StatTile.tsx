@@ -1,11 +1,4 @@
-interface Props {
-	label: string;
-	value: string | number;
-	colored?: boolean;
-	accent?: boolean;
-	valueColor?: string;
-	suffix?: string | number;
-}
+import { StatTileProps as Props } from "@/types";
 
 export function StatTile({ label, value, colored, accent, valueColor, suffix }: Props) {
 	const color = valueColor

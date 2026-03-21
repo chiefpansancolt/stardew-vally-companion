@@ -1,11 +1,6 @@
 import { HiUpload } from "react-icons/hi";
 import { HiWrenchScrewdriver } from "react-icons/hi2";
-
-export type WizardPath = "upload" | "build";
-
-interface ChoosePathStepProps {
-	onSelect: (path: WizardPath) => void;
-}
+import type { ChoosePathStepProps } from "@/types";
 
 export function ChoosePathStep({ onSelect }: ChoosePathStepProps) {
 	return (

@@ -1,53 +1,9 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { tools } from "stardew-valley-data";
 import { HiLockClosed } from "react-icons/hi";
 import { assetPath } from "@/lib/utils/assetPath";
-
-export interface BackpackLevel {
-	id: string | null;
-	name: string;
-	description: string;
-	slots: number;
-	cost: number | null;
-	image: string | null;
-}
-
-export const BACKPACK_LEVELS: BackpackLevel[] = [
-	{
-		id: null,
-		name: "Basic Backpack",
-		description: "Your starting backpack. Holds 12 items.",
-		slots: 12,
-		cost: null,
-		image: null,
-	},
-	{
-		id: "large-pack",
-		name: "Large Pack",
-		description:
-			tools().find("large-pack")?.description ?? "Adds 12 more slots to your backpack.",
-		slots: 24,
-		cost: (tools().find("large-pack") as { cost?: number } | undefined)?.cost ?? 2000,
-		image: (() => {
-			const t = tools().find("large-pack");
-			return t && t.type === "backpack" ? t.image : null;
-		})(),
-	},
-	{
-		id: "deluxe-pack",
-		name: "Deluxe Pack",
-		description:
-			tools().find("deluxe-pack")?.description ?? "Adds 12 more slots to your backpack.",
-		slots: 36,
-		cost: (tools().find("deluxe-pack") as { cost?: number } | undefined)?.cost ?? 10000,
-		image: (() => {
-			const t = tools().find("deluxe-pack");
-			return t && t.type === "backpack" ? t.image : null;
-		})(),
-	},
-];
+import { BACKPACK_LEVELS } from "@/data/constants/backpacks";
 
 export function BackpackDetailModal({
 	maxItems,

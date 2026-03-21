@@ -1,48 +1,22 @@
 "use client";
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { type Crop } from "stardew-valley-data";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
-import { type GameData } from "@/types/app/game";
+import { CropDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
-import { PriceGrid } from "@/comps/ui/PriceGrid";
+import { ARTISAN_USE_META } from "@/data/constants/artisanGoods";
+import { SEASONS } from "@/data/constants/seasons";
+import { NAVY_TILE } from "@/data/constants/styles";
+import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
+import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeedRow } from "@/comps/ui/SeedRow";
-import { EnergyHealthGrid } from "@/comps/ui/EnergyHealthGrid";
-
-interface Props {
-	crop: Crop | null;
-	gameData: GameData;
-	onClose: () => void;
-}
-
-const ARTISAN_USE_META: Record<string, { name: string; image: string }> = {
-	honey: { name: "Honey", image: "images/artisan-goods/Honey.png" },
-	wine: { name: "Wine", image: "images/artisan-goods/Wine.png" },
-	juice: { name: "Juice", image: "images/artisan-goods/Juice.png" },
-	pickles: { name: "Pickles", image: "images/artisan-goods/Pickles.png" },
-	jelly: { name: "Jelly", image: "images/artisan-goods/Jelly.png" },
-	driedMushrooms: { name: "Dried Mushrooms", image: "images/artisan-goods/Dried Mushrooms.png" },
-	driedFruit: { name: "Dried Fruit", image: "images/artisan-goods/Dried Fruit.png" },
-};
-
-const SEASON_LABELS: Record<string, string> = {
-	spring: "Spring",
-	summer: "Summer",
-	fall: "Fall",
-	winter: "Winter",
-};
-
-const NAVY_TILE = {
-	background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)",
-	border: "1px solid rgba(43,58,103,0.6)",
-} as const;
+import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 
 export function CropDetailModal({ crop, gameData, onClose }: Props) {
 	if (!crop) return null;
 
 	const shipped = gameData.shipped[crop.id]?.shipped === true;
 	const shippedCount = gameData.shipped[crop.id]?.count ?? 0;
-	const seasonLabel = crop.seasons.map((s) => SEASON_LABELS[s] ?? s).join(", ");
+	const seasonLabel = crop.seasons.map((s) => SEASONS[s]?.label ?? s).join(", ");
 
 	const hasEnergy =
 		crop.energyHealth &&
@@ -71,7 +45,6 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 			</ModalHeader>
 			<ModalBody>
 				<div className="flex flex-col gap-4">
-					{/* Seed row */}
 					<SeedRow
 						image={crop.seedImage}
 						name={crop.seedName}
@@ -79,11 +52,13 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						variant="modal"
 					/>
 
-					{/* Info chips */}
 					<div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
 						{[
 							{ label: "Grow", value: `${crop.growDays}d` },
-							{ label: "Regrow", value: crop.regrowDays ? `${crop.regrowDays}d` : "—" },
+							{
+								label: "Regrow",
+								value: crop.regrowDays ? `${crop.regrowDays}d` : "—",
+							},
 							{ label: "Farming XP", value: crop.farmingXP ?? "—" },
 							{
 								label: "Shipped",
@@ -105,15 +80,15 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						))}
 					</div>
 
-					{/* Sell price */}
 					<div>
-						<div className="mb-2 text-sm font-bold text-gray-900">
-							Sell Price
-						</div>
-						<PriceGrid price={crop.cropSellPrice} maxQuality={crop.maxQuality} variant="modal" />
+						<div className="mb-2 text-sm font-bold text-gray-900">Sell Price</div>
+						<PriceGrid
+							price={crop.cropSellPrice}
+							maxQuality={crop.maxQuality}
+							variant="modal"
+						/>
 					</div>
 
-					{/* Energy & Health */}
 					{hasEnergy && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">
@@ -128,7 +103,6 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						</div>
 					)}
 
-					{/* Growth stages */}
 					{crop.stages && crop.stages.length > 0 && (
 						<div>
 							<div className="mb-2 text-sm font-bold text-gray-900">
@@ -150,7 +124,9 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 											) : (
 												<div className="h-14 w-14" />
 											)}
-											<span className="text-[0.6rem] text-white/80">{stage.name}</span>
+											<span className="text-[0.6rem] text-white/80">
+												{stage.name}
+											</span>
 										</div>
 										{i < crop.stages.length - 1 && (
 											<span className="mb-3 text-white/30">›</span>
@@ -161,12 +137,9 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						</div>
 					)}
 
-					{/* Artisan uses */}
 					{crop.artisanUses && Object.entries(crop.artisanUses).some(([, v]) => v) && (
 						<div>
-							<div className="mb-2 text-sm font-bold text-gray-900">
-								Artisan Uses
-							</div>
+							<div className="mb-2 text-sm font-bold text-gray-900">Artisan Uses</div>
 							<div className="flex flex-wrap gap-2">
 								{Object.entries(crop.artisanUses)
 									.filter(([, v]) => v)

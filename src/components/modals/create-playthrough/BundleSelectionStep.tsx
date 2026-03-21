@@ -10,39 +10,13 @@ import {
 	ToggleSwitch,
 } from "flowbite-react";
 import { bundles as queryBundles } from "stardew-valley-data";
-import type { Bundle, GoldBundle, ItemBundle } from "stardew-valley-data";
+import type { GoldBundle, ItemBundle } from "stardew-valley-data";
 import { useMemo } from "react";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { HiShoppingCart } from "react-icons/hi2";
-
-type BundlePath = "joja" | "cc";
-
-export interface BundleConfig {
-	bundlePath: BundlePath | null;
-	isRemix: boolean;
-	activeBundles: string[];
-	selectedBundles: Record<string, string[]>;
-}
-
-interface BundleSelectionStepProps {
-	config: BundleConfig;
-	onChange: (config: BundleConfig) => void;
-}
-
-const ROOM_LABELS: Record<string, string> = {
-	"crafts-room": "Crafts Room",
-	pantry: "Pantry",
-	"fish-tank": "Fish Tank",
-	"boiler-room": "Boiler Room",
-	"bulletin-board": "Bulletin Board",
-	vault: "Vault",
-};
-
-const CC_ROOMS = ["crafts-room", "pantry", "fish-tank", "boiler-room", "bulletin-board", "vault"];
-
-function isItemOrGoldBundle(bundle: Bundle): bundle is ItemBundle | GoldBundle {
-	return bundle.type === "items" || bundle.type === "gold";
-}
+import type { BundlePath, BundleSelectionStepProps } from "@/types";
+import { isItemOrGoldBundle } from "@/lib/utils/bundleHelpers";
+import { CC_ROOMS, ROOM_LABELS } from "@/data/constants/bundles";
 
 export function BundleSelectionStep({ config, onChange }: BundleSelectionStepProps) {
 	const standardCountsByRoom = useMemo(() => {

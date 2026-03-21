@@ -2,17 +2,9 @@
 
 import { villagers } from "stardew-valley-data";
 import { HiUserGroup } from "react-icons/hi";
-import { type GameData } from "@/types/app/game";
+import type { HeartEvent, VillagersProps as Props } from "@/types";
 import { effectiveMaxHearts } from "@/lib/utils/villagerHearts";
 import { StatTile } from "@/comps/ui/StatTile";
-
-interface Props {
-	gameData: GameData;
-}
-
-interface HeartEvent {
-	id: number | number[] | null;
-}
 
 export function VillagersHeroCard({ gameData }: Props) {
 	const allVillagers = villagers().get();
