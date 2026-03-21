@@ -5,7 +5,6 @@ import { tools } from "stardew-valley-data";
 import { HiLockClosed } from "react-icons/hi";
 import { assetPath } from "@/lib/utils/assetPath";
 
-// Local type for fishing rod runtime shape (package doesn't export FishingRodLevel)
 export type RodLevel = {
 	name: string;
 	image: string;
@@ -26,13 +25,12 @@ export type RodData = {
 	levels: RodLevel[];
 };
 
-// Dot colors for fishing rod levels
 export const ROD_DOT_HEX: Record<number, string> = {
-	0: "#86efac", // Training - light green
-	1: "#d97706", // Bamboo - amber
-	2: "#60a5fa", // Fiberglass - blue
-	3: "#c084fc", // Iridium - purple
-	4: "#f0abfc", // Advanced Iridium - fuchsia
+	0: "#86efac",
+	1: "#d97706",
+	2: "#60a5fa",
+	3: "#c084fc",
+	4: "#f0abfc",
 };
 
 export function FishingRodDetailModal({

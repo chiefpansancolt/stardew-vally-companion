@@ -14,13 +14,11 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 	const [appData, setAppData] = useState<AppData>(EMPTY_APP_DATA);
 	const [isHydrated, setIsHydrated] = useState(false);
 
-	// Hydrate from localStorage after mount to avoid SSR mismatch
 	useEffect(() => {
 		setAppData(storageService.load());
 		setIsHydrated(true);
 	}, []);
 
-	// Auto-save to localStorage on every state change (skip until hydrated)
 	useEffect(() => {
 		if (isHydrated) {
 			storageService.save(appData);

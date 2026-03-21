@@ -21,14 +21,10 @@ const TOOL_ENTRIES: Array<{ key: keyof ToolLevels; id: string }> = [
 	{ key: "trashCan", id: "trash-can" },
 ];
 
-// Game saves all tools as 0=basic, 1=copper, 2=steel, 3=gold, 4=iridium.
-// Pan has no basic level in the package (starts at copper=index 0),
-// so subtract 1 from the game level when indexing pan's levels[].
 const PAN_LEVEL_OFFSET = 1;
 
 const LEVEL_NAMES = ["Basic", "Copper", "Steel", "Gold", "Iridium"];
 
-// Inline hex colors to avoid Tailwind purging dynamic class names
 const LEVEL_DOT_HEX: Record<string, string> = {
 	Basic: "rgba(255,255,255,0.25)",
 	Copper: "#fb923c",
@@ -113,7 +109,7 @@ function FishingRodCard({ levelIndex, onClick }: { levelIndex: number; onClick: 
 	if (!rod) return null;
 	const lvl = rod.levels[levelIndex];
 	const imgSrc = lvl?.image ? assetPath(lvl.image) : null;
-	const isUpgraded = levelIndex > 1; // above Bamboo Pole
+	const isUpgraded = levelIndex > 1;
 
 	return (
 		<button

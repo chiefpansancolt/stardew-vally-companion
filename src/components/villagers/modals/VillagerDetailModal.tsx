@@ -23,7 +23,6 @@ interface Props {
 }
 
 function isSeen(event: HeartEvent, eventsSeen: string[], hearts: number): boolean {
-	// Non-visible events (null id, e.g. mail/gifts) — treated as received once the player reaches that heart level
 	if (event.id === null) return hearts >= event.heart;
 	return [event.id].flat().some((id) => eventsSeen.includes(String(id)));
 }

@@ -11,7 +11,7 @@ interface Props {
 	gameData: GameData;
 }
 
-const CHUNK_SIZE = 70; // 7 rows × 10 cols per row
+const CHUNK_SIZE = 70;
 
 function chunkArray<T>(arr: T[], size: number): T[][] {
 	const result: T[][] = [];

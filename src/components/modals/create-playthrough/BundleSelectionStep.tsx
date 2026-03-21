@@ -45,7 +45,6 @@ function isItemOrGoldBundle(bundle: Bundle): bundle is ItemBundle | GoldBundle {
 }
 
 export function BundleSelectionStep({ config, onChange }: BundleSelectionStepProps) {
-	// Standard bundle counts per room (used as max for remix selection)
 	const standardCountsByRoom = useMemo(() => {
 		const counts: Record<string, number> = {};
 		const stdBundles = queryBundles().standard().get().filter(isItemOrGoldBundle);
@@ -55,7 +54,6 @@ export function BundleSelectionStep({ config, onChange }: BundleSelectionStepPro
 		return counts;
 	}, []);
 
-	// All CC bundles (standard + remix) for remix mode
 	const allBundles = useMemo(() => {
 		return queryBundles()
 			.sortByRoomAndBundleGroup()
@@ -64,7 +62,6 @@ export function BundleSelectionStep({ config, onChange }: BundleSelectionStepPro
 			.filter((b) => b.room !== "abandoned-joja-mart");
 	}, []);
 
-	// Standard-only bundles
 	const standardBundles = useMemo(() => {
 		return queryBundles()
 			.standard()
@@ -87,7 +84,6 @@ export function BundleSelectionStep({ config, onChange }: BundleSelectionStepPro
 		if (path === "joja") {
 			onChange({ ...config, bundlePath: path, activeBundles: [], selectedBundles: {} });
 		} else {
-			// For CC, auto-activate all standard bundles
 			const stdIds = standardBundles.map((b) => b.id);
 			onChange({ ...config, bundlePath: path, activeBundles: stdIds, selectedBundles: {} });
 		}
@@ -95,10 +91,8 @@ export function BundleSelectionStep({ config, onChange }: BundleSelectionStepPro
 
 	const handleRemixToggle = (checked: boolean) => {
 		if (checked) {
-			// Switching to remix — clear active bundles so user must pick
 			onChange({ ...config, isRemix: true, activeBundles: [], selectedBundles: {} });
 		} else {
-			// Switching to standard — auto-activate all standard bundles
 			const stdIds = standardBundles.map((b) => b.id);
 			onChange({
 				...config,
@@ -131,7 +125,6 @@ export function BundleSelectionStep({ config, onChange }: BundleSelectionStepPro
 		if (current.includes(itemIndex)) {
 			updated = current.filter((i) => i !== itemIndex);
 		} else {
-			// Enforce itemsRequired limit
 			if (current.length >= itemsRequired) return;
 			updated = [...current, itemIndex];
 		}

@@ -13,7 +13,6 @@ export interface ToolModalState {
 const LEVEL_NAMES = ["Basic", "Copper", "Steel", "Gold", "Iridium"];
 const PAN_LEVEL_OFFSET = 1;
 
-// Colors for modal level cards on light (cream) background
 const LEVEL_CARD_HEX: Record<string, { border: string; bg: string; text: string }> = {
 	Basic: { border: "rgba(0,0,0,0.1)", bg: "rgba(0,0,0,0.03)", text: "#6b7280" },
 	Copper: { border: "rgba(234,88,12,0.3)", bg: "rgba(234,88,12,0.06)", text: "#c2410c" },

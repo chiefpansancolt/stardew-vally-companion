@@ -95,11 +95,9 @@ export function getStackedBonuses(
 	const calc = professionCalculator();
 	const results: BonusResult[] = [];
 
-	// Separate artisan from the "primary" professions
 	const primaryProfessions = itemProfessions.filter((p) => p !== "artisan");
 	const hasArtisan = itemProfessions.includes("artisan") && activeBonuses.has("artisan");
 
-	// Pick the best active primary profession (Angler overrides Fisher)
 	let activePrimary: ProfessionBonus | null = null;
 	for (const p of primaryProfessions) {
 		if (!activeBonuses.has(p)) continue;

@@ -73,7 +73,6 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 			return;
 		}
 
-		// Bundle step: if bundlePath is selected, go back to path choice first
 		if (path === "build" && currentStep === 3 && bundleConfig.bundlePath === null) {
 			setCurrentStep(2);
 			return;

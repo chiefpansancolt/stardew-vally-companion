@@ -23,16 +23,13 @@ export function VillagersHeroCard({ gameData }: Props) {
 		return progress.hearts >= effectiveMaxHearts(v, isMarried, progress.status);
 	}).length;
 
-	// All villagers share the same eventsSeen array — grab from any entry
 	const eventsSeen = Object.values(gameData.villagers)[0]?.eventsSeen ?? [];
 
-	// Count total possible events (with non-null ids) across all villagers
 	const totalPossibleEvents = allVillagers.reduce((sum, v) => {
 		const countable = (v.events as HeartEvent[]).filter((e) => e.id !== null).length;
 		return sum + countable;
 	}, 0);
 
-	// Count how many of those events the player has seen
 	const seenEventsCount = allVillagers.reduce((sum, v) => {
 		const seen = (v.events as HeartEvent[]).filter((e) => {
 			if (e.id === null) return false;

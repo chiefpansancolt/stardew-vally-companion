@@ -59,22 +59,18 @@ function VillagerCard({ villager, gameData, onClick }: VillagerCardProps) {
 	const eventPct = totalEvents > 0 ? Math.round((seenEvents / totalEvents) * 100) : 0;
 	const eventsComplete = totalEvents > 0 && seenEvents === totalEvents;
 
-	// Card border/bg
 	let cardStyle = "border-slate-500 bg-slate-700/50";
 	if (isMaxHearts) cardStyle = "border-green-500 bg-green-900/40";
 
-	// Name color
 	let nameColor = "text-white";
 	if (isMaxHearts) nameColor = "text-green-300";
 
-	// Status badge — use the actual status from save data; fall back to "—" if untracked
 	const rawStatus = progress?.status ?? "";
 	const statusLabel = isMarried ? "Married" : rawStatus || "—";
 	let statusCls = "bg-slate-600 text-slate-200";
 	if (isMaxHearts) statusCls = "bg-green-800 text-green-300";
 	const statusBadge = { label: statusLabel, cls: statusCls };
 
-	// Event bar fill color
 	let barFill = "#94a3b8";
 	if (isMaxHearts) barFill = "#4ade80";
 	if (eventsComplete) barFill = "#4a7c31";

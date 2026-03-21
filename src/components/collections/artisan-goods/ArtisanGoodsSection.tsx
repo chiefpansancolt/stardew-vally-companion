@@ -52,9 +52,6 @@ const EQUIPMENT_IMAGES: Record<string, string> = {
 	Tapper: "images/craftable/refining-equipment/Tapper.png",
 };
 
-// Pre-build image lookup for all ingredient IDs across all artisan goods
-// Validates that the search result name matches the ingredient name to avoid
-// wrong icons when an ID maps to a different item (e.g. Sturgeon Roe ID 723 = Oyster).
 const ingredientImageMap: Record<string, string> = {};
 for (const good of artisanGoods().get()) {
 	for (const ingredient of good.ingredients) {

@@ -184,7 +184,6 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 	const calculatedEnergy = result?.energy ?? null;
 	const calculatedHealth = result?.health ?? null;
 
-// Items with stacking professions (e.g. Smoked Fish: Fisher/Angler + Artisan)
 	const hasStackingProfessions =
 		!!good && good.profession.length > 1 && good.profession.includes("artisan");
 	const professionBonuses: BonusResult[] =

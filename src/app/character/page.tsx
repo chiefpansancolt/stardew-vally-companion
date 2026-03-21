@@ -43,13 +43,11 @@ export default function CharacterPage() {
 
 		let next: string[];
 		if (isSelected) {
-			// Remove this profession and any lv10 children
 			const childIds = allProfs.filter((p) => p.parentProfession === profId).map((p) => p.id);
 			next = current.filter((id) => id !== profId && !childIds.includes(id));
 		} else {
 			next = [...current];
 			if (prof.level === 5) {
-				// Remove sibling lv5 profs for this skill and their lv10 children
 				const siblings = allProfs.filter((p) => p.skill === prof.skill && p.level === 5 && p.id !== profId);
 				const toRemove = new Set<string>();
 				for (const sib of siblings) {
@@ -58,7 +56,6 @@ export default function CharacterPage() {
 				}
 				next = next.filter((id) => !toRemove.has(id));
 			} else {
-				// lv10: ensure parent lv5 is selected; remove sibling lv10s
 				if (prof.parentProfession && !next.includes(prof.parentProfession)) {
 					const parent = allProfs.find((p) => p.id === prof.parentProfession);
 					if (parent) {
