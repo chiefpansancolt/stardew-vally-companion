@@ -4,6 +4,7 @@ import type {
   ArtisanGood,
   BarItem,
   CollectionItem,
+  CookedDish,
   CraftingRecipe,
   Crop,
   Fish,
@@ -14,6 +15,7 @@ import type {
   NodeItem,
   OreItem,
   ProfessionBonus,
+  MonsterLoot,
   ResourceItem,
   Tree,
   WildTree,
@@ -270,5 +272,38 @@ export interface ResourceDetailModalProps {
   resource: ResourceItem | null;
   shipped: boolean;
   professionBonus: BonusResult | null;
+  onClose: () => void;
+}
+
+export interface CookingCardProps {
+  dish: CookedDish;
+  learned: boolean;
+  cooked: boolean;
+  onClick: () => void;
+}
+
+export interface CookingDetailModalProps {
+  dish: CookedDish | null;
+  learned: boolean;
+  cooked: boolean;
+  onClose: () => void;
+}
+
+export interface CookingBadgeProps {
+  learned: boolean;
+  cooked: boolean;
+}
+
+export interface MonsterLootCardProps {
+  loot: MonsterLoot;
+  shipped: boolean;
+  shippable: boolean;
+  onClick: () => void;
+}
+
+export interface MonsterLootDetailModalProps {
+  loot: MonsterLoot | null;
+  shipped: boolean;
+  shippable: boolean;
   onClose: () => void;
 }

@@ -1,5 +1,7 @@
 import type {
   CaughtFilter,
+  CookingSourceFilter,
+  CookingStatusFilter,
   CraftingStatusFilter,
   DonationFilter,
   FoundFilter,
@@ -67,4 +69,21 @@ export const CRAFTING_STATUS_FILTERS: FilterOption<CraftingStatusFilter>[] = [
   { id: "crafted", label: "Crafted" },
   { id: "learned", label: "Learned" },
   { id: "not-learned", label: "Not Learned" },
+];
+
+export const COOKING_STATUS_FILTERS: FilterOption<CookingStatusFilter>[] = [
+  { id: "all", label: "All" },
+  { id: "cooked", label: "Cooked" },
+  { id: "learned", label: "Learned" },
+  { id: "not-learned", label: "Not Learned" },
+];
+
+export const COOKING_SOURCE_FILTERS: FilterOption<CookingSourceFilter>[] = [
+  { id: "all", label: "All" },
+  { id: "queen-of-sauce", label: "Queen of Sauce" },
+  { id: "friendship", label: "Friendship" },
+  { id: "purchase", label: "Purchase" },
+  { id: "skill", label: "Skill Level" },
+  { id: "default", label: "Default" },
+  { id: "cutscene", label: "Special Event" },
 ];

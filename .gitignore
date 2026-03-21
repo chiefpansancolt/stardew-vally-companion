@@ -44,3 +44,4 @@ next-env.d.ts
 # game assets copied from stardew-valley-data package
 /public/images/
 design/
+test-file.ts

@@ -94,13 +94,6 @@ export function ForageablesSection({ gameData }: Props) {
 
 	const totalShown = filteredForageables.length + dedupedTreeProduce.length;
 
-	const RADIO_LABEL = (active: boolean) =>
-		`relative flex cursor-pointer items-center rounded-md border px-2.5 py-1 transition-all ${
-			active
-				? "border-accent bg-accent text-white"
-				: "border-white/20 bg-white/5 text-white/60 hover:border-white/40"
-		}`;
-
 	return (
 		<NavySection title="Forageables" badge={`${totalShown} items`}>
 			<div className="mb-4 flex flex-wrap items-center gap-3">
