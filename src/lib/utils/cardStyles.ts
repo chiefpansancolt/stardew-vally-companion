@@ -25,3 +25,22 @@ export function museumCardStyles(donated: boolean, found: boolean) {
     nameColor: "text-white",
   };
 }
+
+export function craftingCardStyles(learned: boolean, crafted: boolean) {
+  if (crafted) {
+    return {
+      borderBg: "border-green-500/40 bg-green-900/20",
+      nameColor: "text-green-300",
+    };
+  }
+  if (learned) {
+    return {
+      borderBg: "border-accent/40 bg-accent/10",
+      nameColor: "text-accent",
+    };
+  }
+  return {
+    borderBg: "border-white/10 bg-white/5",
+    nameColor: "text-white",
+  };
+}

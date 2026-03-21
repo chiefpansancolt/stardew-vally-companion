@@ -1,0 +1,1 @@
+export { resolveIngredientImage } from "./ingredientImage";

@@ -4,6 +4,7 @@ import type {
   ArtisanGood,
   BarItem,
   CollectionItem,
+  CraftingRecipe,
   Crop,
   Fish,
   Forageable,
@@ -13,6 +14,7 @@ import type {
   NodeItem,
   OreItem,
   ProfessionBonus,
+  ResourceItem,
   Tree,
   WildTree,
 } from "stardew-valley-data";
@@ -236,4 +238,37 @@ export interface PriceFormulaModalProps {
   good: ArtisanGood | null;
   onClose: () => void;
   activeProfessionBonuses?: Set<ProfessionBonus> | null;
+}
+
+export interface CraftingCardProps {
+  recipe: CraftingRecipe;
+  learned: boolean;
+  crafted: boolean;
+  onClick: () => void;
+}
+
+export interface CraftingDetailModalProps {
+  recipe: CraftingRecipe | null;
+  learned: boolean;
+  crafted: boolean;
+  onClose: () => void;
+}
+
+export interface CraftingBadgeProps {
+  learned: boolean;
+  crafted: boolean;
+}
+
+export interface ResourceCardProps {
+  resource: ResourceItem;
+  shipped: boolean;
+  professionBonus: BonusResult | null;
+  onClick: () => void;
+}
+
+export interface ResourceDetailModalProps {
+  resource: ResourceItem | null;
+  shipped: boolean;
+  professionBonus: BonusResult | null;
+  onClose: () => void;
 }

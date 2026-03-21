@@ -1,5 +1,6 @@
 import type {
   CaughtFilter,
+  CraftingStatusFilter,
   DonationFilter,
   FoundFilter,
   MarriageFilter,
@@ -59,4 +60,11 @@ export const MARRIAGE_FILTERS: FilterOption<MarriageFilter>[] = [
   { id: "all", label: "All" },
   { id: "marriageable", label: "Marriageable" },
   { id: "non-marriageable", label: "Non-Marriageable" },
+];
+
+export const CRAFTING_STATUS_FILTERS: FilterOption<CraftingStatusFilter>[] = [
+  { id: "all", label: "All" },
+  { id: "crafted", label: "Crafted" },
+  { id: "learned", label: "Learned" },
+  { id: "not-learned", label: "Not Learned" },
 ];
