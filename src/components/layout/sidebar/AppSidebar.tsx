@@ -13,6 +13,7 @@ import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "r
 import { FaSeedling } from "react-icons/fa";
 import { GiMushroom } from "react-icons/gi";
 import {
+	HiCalendar,
 	HiCog,
 	HiCollection,
 	HiHome,
@@ -85,6 +86,18 @@ export function AppSidebar() {
 										onClick={() => setSidebarOpen(false)}
 									>
 										Villagers
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/calendar"
+										icon={HiCalendar}
+										active={pathname === "/calendar"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Calendar
 									</SidebarItem>
 								)}
 

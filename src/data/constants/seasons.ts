@@ -53,3 +53,5 @@ export const SEASONS: Record<Season, SeasonMeta> = {
     dotColor: "#2dd4bf",
   },
 };
+
+export const BOOKSELLER_ICON = "images/seasons/calendar-icons/Bookseller.png";
