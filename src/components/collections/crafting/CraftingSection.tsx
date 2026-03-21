@@ -2,12 +2,12 @@
 
 import { crafting, type CraftingRecipe } from "stardew-valley-data";
 import { useState } from "react";
-import type { CollectionProps as Props, CraftingStatusFilter } from "@/types";
+import type { CraftingStatusFilter, CollectionProps as Props } from "@/types";
 import { CRAFTING_CATEGORIES } from "@/data/constants/crafting";
 import { CRAFTING_STATUS_FILTERS } from "@/data/constants/filters";
+import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
-import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/filter-popover";
 import { CraftingCard } from "./cards";
 import { CraftingDetailModal } from "./modals/CraftingDetailModal";
 
@@ -65,7 +65,7 @@ function CategorySection({
 	const [statusFilter, setStatusFilter] = useState<CraftingStatusFilter>("all");
 
 	const craftedCount = recipes.filter(
-		(r) => gameData.craftingRecipes[r.name]?.crafted === true,
+		(r) => gameData.craftingRecipes[r.name]?.crafted === true
 	).length;
 
 	const filtered = recipes.filter((r) => {

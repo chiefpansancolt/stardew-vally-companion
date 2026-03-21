@@ -15,9 +15,7 @@ export default function CalendarPage() {
 		<div className="p-6">
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Calendar</h1>
-				<p className="mt-1 text-gray-600">
-					Birthdays, festivals, and seasonal events
-				</p>
+				<p className="mt-1 text-gray-600">Birthdays, festivals, and seasonal events</p>
 			</div>
 
 			<CalendarView gameData={activePlaythrough.data} />

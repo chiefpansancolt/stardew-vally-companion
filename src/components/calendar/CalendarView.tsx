@@ -1,10 +1,10 @@
 "use client";
 
-import { seasons, villagers, type Season } from "stardew-valley-data";
+import { type Season, seasons, villagers } from "stardew-valley-data";
 import { useMemo, useState } from "react";
 import type { CalendarBirthday, CalendarFestival, CalendarProps } from "@/types";
-import { CalendarHeader } from "./CalendarHeader";
 import { CalendarGrid } from "./CalendarGrid";
+import { CalendarHeader } from "./CalendarHeader";
 import { CalendarDayModal } from "./modals/CalendarDayModal";
 
 const allSeasons = seasons().get();
@@ -57,7 +57,10 @@ export function CalendarView({ gameData }: CalendarProps) {
 	const selectedIsBookseller = selectedDay ? booksellerDays.has(selectedDay) : false;
 
 	return (
-		<div className="overflow-hidden rounded-xl border border-secondary/60" style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}>
+		<div
+			className="border-secondary/60 overflow-hidden rounded-xl border"
+			style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
+		>
 			<div className="border-b border-white/10 px-6 py-4">
 				<CalendarHeader season={season} onSeasonChange={setSeason} />
 			</div>

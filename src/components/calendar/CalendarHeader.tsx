@@ -39,22 +39,24 @@ export function CalendarHeader({ season, onSeasonChange }: CalendarHeaderProps) 
 				</button>
 
 				<div className="flex gap-1">
-					{Object.values(SEASONS).filter((s) => s.id !== "ginger island").map((sMeta) => {
-						const isActive = sMeta.id === season;
-						return (
-							<button
-								key={sMeta.id}
-								onClick={() => onSeasonChange(sMeta.id)}
-								className={`cursor-pointer rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
-									isActive
-										? `${sMeta.badgeColor} text-white`
-										: "text-white/60 hover:bg-white/10"
-								}`}
-							>
-								{sMeta.label}
-							</button>
-						);
-					})}
+					{Object.values(SEASONS)
+						.filter((s) => s.id !== "ginger island")
+						.map((sMeta) => {
+							const isActive = sMeta.id === season;
+							return (
+								<button
+									key={sMeta.id}
+									onClick={() => onSeasonChange(sMeta.id)}
+									className={`cursor-pointer rounded-md px-3 py-1.5 text-sm font-semibold transition-all ${
+										isActive
+											? `${sMeta.badgeColor} text-white`
+											: "text-white/60 hover:bg-white/10"
+									}`}
+								>
+									{sMeta.label}
+								</button>
+							);
+						})}
 				</div>
 
 				<button

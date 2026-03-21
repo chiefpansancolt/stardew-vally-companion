@@ -7,13 +7,16 @@ import { StatTile } from "@/comps/ui/StatTile";
 
 const allLoot = monsterLoot().get();
 const shippableIds = new Set(
-	collections().itemsShipped().get().map((i) => i.id),
+	collections()
+		.itemsShipped()
+		.get()
+		.map((i) => i.id)
 );
 const shippableLoot = allLoot.filter((l) => shippableIds.has(l.id));
 
 export function MonsterLootHero({ gameData }: Props) {
 	const shippedCount = shippableLoot.filter(
-		(l) => gameData.shipped[l.id]?.shipped === true,
+		(l) => gameData.shipped[l.id]?.shipped === true
 	).length;
 
 	return (

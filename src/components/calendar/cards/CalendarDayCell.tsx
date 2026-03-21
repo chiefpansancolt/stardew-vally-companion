@@ -21,11 +21,7 @@ export function CalendarDayCell({
 					: "border-white/10 bg-white/5 hover:bg-white/10"
 			} ${hasEvents ? "cursor-pointer" : "cursor-default"}`}
 		>
-			<span
-				className={`text-xs font-semibold ${
-					isToday ? "text-accent" : "text-white/50"
-				}`}
-			>
+			<span className={`text-xs font-semibold ${isToday ? "text-accent" : "text-white/50"}`}>
 				{day}
 			</span>
 
@@ -49,7 +45,7 @@ export function CalendarDayCell({
 							alt={f.name}
 							className="h-5 w-5 shrink-0 object-contain"
 						/>
-						<span className="truncate text-[0.6rem] font-medium text-highlight">
+						<span className="text-highlight truncate text-[0.6rem] font-medium">
 							{f.name}
 						</span>
 					</div>

@@ -19,7 +19,9 @@ export function ResourceCard({ resource, shipped, professionBonus, onClick }: Ca
 					className="h-12 w-12 shrink-0 rounded-lg object-contain"
 				/>
 				<div className="min-w-0 flex-1">
-					<span className={`text-sm font-bold leading-tight ${nameColor}`}>{resource.name}</span>
+					<span className={`text-sm leading-tight font-bold ${nameColor}`}>
+						{resource.name}
+					</span>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">Click to see locations</div>
 				</div>
 				<ShippedBadge shippable shipped={shipped} />

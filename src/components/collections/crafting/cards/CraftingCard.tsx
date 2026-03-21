@@ -19,7 +19,7 @@ export function CraftingCard({ recipe, learned, crafted, onClick }: CraftingCard
 				/>
 				<div className="min-w-0 flex-1">
 					<div className="flex items-center justify-between gap-2">
-						<span className={`text-sm font-bold leading-tight ${nameColor}`}>
+						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{recipe.name}
 						</span>
 						<CraftingBadge learned={learned} crafted={crafted} />
@@ -35,7 +35,7 @@ export function CraftingCard({ recipe, learned, crafted, onClick }: CraftingCard
 							</span>
 						))}
 						{recipe.output.quantity > 1 && (
-							<span className="rounded border border-highlight/20 bg-highlight/10 px-1.5 py-0.5 text-[0.55rem] font-semibold text-highlight">
+							<span className="border-highlight/20 bg-highlight/10 text-highlight rounded border px-1.5 py-0.5 text-[0.55rem] font-semibold">
 								Makes {recipe.output.quantity}
 							</span>
 						)}

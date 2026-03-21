@@ -11,7 +11,11 @@ export function CraftingBadge({ learned, crafted }: Props) {
 		);
 	}
 	if (learned) {
-		return <Badge color="warning" size="xxs">Learned</Badge>;
+		return (
+			<Badge color="warning" size="xxs">
+				Learned
+			</Badge>
+		);
 	}
 	return (
 		<Badge color="gray" icon={HiLockClosed} size="xxs">

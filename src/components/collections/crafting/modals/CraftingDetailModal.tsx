@@ -2,9 +2,9 @@
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import type { CraftingDetailModalProps as Props } from "@/types";
+import { resolveIngredientImage } from "@/lib/pages/crafting";
 import { assetPath } from "@/lib/utils/assetPath";
 import { NAVY_TILE } from "@/data/constants/styles";
-import { resolveIngredientImage } from "@/lib/pages/crafting";
 import { CraftingBadge } from "@/comps/ui/CraftingBadge";
 
 export function CraftingDetailModal({ recipe, learned, crafted, onClose }: Props) {
@@ -33,19 +33,13 @@ export function CraftingDetailModal({ recipe, learned, crafted, onClose }: Props
 					<p className="text-sm text-gray-500 italic">{recipe.description}</p>
 
 					<div className="grid grid-cols-2 gap-2">
-						<div
-							className="flex flex-col gap-1 rounded-xl px-4 py-3"
-							style={NAVY_TILE}
-						>
+						<div className="flex flex-col gap-1 rounded-xl px-4 py-3" style={NAVY_TILE}>
 							<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 								Source
 							</span>
 							<span className="text-sm font-bold text-white/85">{recipe.source}</span>
 						</div>
-						<div
-							className="flex flex-col gap-1 rounded-xl px-4 py-3"
-							style={NAVY_TILE}
-						>
+						<div className="flex flex-col gap-1 rounded-xl px-4 py-3" style={NAVY_TILE}>
 							<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
 								Output
 							</span>

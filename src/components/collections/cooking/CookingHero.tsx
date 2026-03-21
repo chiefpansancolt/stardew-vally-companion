@@ -10,10 +10,10 @@ const allDishes = cooking().get();
 export function CookingHero({ gameData }: Props) {
 	const total = allDishes.length;
 	const learnedCount = allDishes.filter(
-		(d) => gameData.cookingRecipes[d.name]?.learned === true,
+		(d) => gameData.cookingRecipes[d.name]?.learned === true
 	).length;
 	const cookedCount = allDishes.filter(
-		(d) => gameData.cookingRecipes[d.name]?.cooked === true,
+		(d) => gameData.cookingRecipes[d.name]?.cooked === true
 	).length;
 
 	return (

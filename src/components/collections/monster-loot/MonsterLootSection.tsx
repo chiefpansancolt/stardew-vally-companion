@@ -4,15 +4,18 @@ import { collections, monsterLoot, type MonsterLoot } from "stardew-valley-data"
 import { useMemo, useState } from "react";
 import type { CollectionProps as Props, ShippedFilter } from "@/types";
 import { SHIPPED_FILTERS } from "@/data/constants/filters";
+import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
-import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/filter-popover";
 import { MonsterLootCard } from "./cards";
 import { MonsterLootDetailModal } from "./modals/MonsterLootDetailModal";
 
 const allLoot = monsterLoot().get();
 const shippableIds = new Set(
-	collections().itemsShipped().get().map((i) => i.id),
+	collections()
+		.itemsShipped()
+		.get()
+		.map((i) => i.id)
 );
 const shippableLoot = allLoot.filter((l) => shippableIds.has(l.id));
 
@@ -22,7 +25,7 @@ export function MonsterLootSection({ gameData }: Props) {
 	const [selectedLoot, setSelectedLoot] = useState<MonsterLoot | null>(null);
 
 	const shippedCount = shippableLoot.filter(
-		(l) => gameData.shipped[l.id]?.shipped === true,
+		(l) => gameData.shipped[l.id]?.shipped === true
 	).length;
 
 	const filtered = useMemo(() => {

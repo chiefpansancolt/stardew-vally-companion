@@ -29,7 +29,9 @@ export function MineralsHero({ gameData }: Props) {
 	).length;
 	const oresShipped = allOres.filter((o) => gameData.shipped[o.id]?.shipped === true).length;
 	const barsShipped = allBars.filter((b) => gameData.shipped[b.id]?.shipped === true).length;
-	const resourcesShipped = allResources.filter((r) => gameData.shipped[r.id]?.shipped === true).length;
+	const resourcesShipped = allResources.filter(
+		(r) => gameData.shipped[r.id]?.shipped === true
+	).length;
 
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">

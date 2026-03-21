@@ -7,7 +7,7 @@ import { ShippedBadge } from "@/comps/ui/ShippedBadge";
 
 const allMonsters = monsters().get();
 const monsterNameById: Record<string, string> = Object.fromEntries(
-	allMonsters.map((m) => [m.id, m.name]),
+	allMonsters.map((m) => [m.id, m.name])
 );
 
 export function MonsterLootCard({ loot, shipped, shippable, onClick }: MonsterLootCardProps) {
@@ -26,7 +26,7 @@ export function MonsterLootCard({ loot, shipped, shippable, onClick }: MonsterLo
 				/>
 				<div className="min-w-0 flex-1">
 					<div className="flex items-center justify-between gap-2">
-						<span className={`text-sm font-bold leading-tight ${nameColor}`}>
+						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{loot.name}
 						</span>
 						<ShippedBadge shippable={shippable} shipped={shipped} />
@@ -43,11 +43,7 @@ export function MonsterLootCard({ loot, shipped, shippable, onClick }: MonsterLo
 					</div>
 				</div>
 			</div>
-			<PriceGrid
-				price={loot.sellPrice}
-				maxQuality="normal"
-				shipped={shippable && shipped}
-			/>
+			<PriceGrid price={loot.sellPrice} maxQuality="normal" shipped={shippable && shipped} />
 		</button>
 	);
 }

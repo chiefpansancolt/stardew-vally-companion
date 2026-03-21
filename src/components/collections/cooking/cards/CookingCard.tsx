@@ -41,14 +41,12 @@ export function CookingCard({ dish, learned, cooked, onClick }: CookingCardProps
 				/>
 				<div className="min-w-0 flex-1">
 					<div className="flex items-center justify-between gap-2">
-						<span className={`text-sm font-bold leading-tight ${nameColor}`}>
+						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{dish.name}
 						</span>
 						<CookingBadge learned={learned} cooked={cooked} />
 					</div>
-					<div className="mt-0.5 text-[0.6rem] text-white/40">
-						{formatSource(dish)}
-					</div>
+					<div className="mt-0.5 text-[0.6rem] text-white/40">{formatSource(dish)}</div>
 					{hasEnergy && (
 						<div className="mt-1 flex items-center gap-2">
 							<span className="inline-flex items-center gap-0.5">

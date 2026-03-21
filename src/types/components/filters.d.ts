@@ -11,6 +11,17 @@ export type WeatherFilter = "all" | "sunny" | "rainy" | "both";
 export type DifficultyFilter = "all" | "easy" | "medium" | "hard";
 export type RewardFilter = "all" | "has-reward";
 export type TreeTypeFilter = "all" | "fruit-tree" | "wild-tree";
-export type CraftingStatusFilter = "all" | "crafted" | "learned" | "not-learned";
+export type CraftingStatusFilter =
+  | "all"
+  | "crafted"
+  | "learned"
+  | "not-learned";
 export type CookingStatusFilter = "all" | "cooked" | "learned" | "not-learned";
-export type CookingSourceFilter = "all" | "queen-of-sauce" | "friendship" | "purchase" | "skill" | "default" | "cutscene";
+export type CookingSourceFilter =
+  | "all"
+  | "queen-of-sauce"
+  | "friendship"
+  | "purchase"
+  | "skill"
+  | "default"
+  | "cutscene";

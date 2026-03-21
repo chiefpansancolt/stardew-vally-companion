@@ -35,11 +35,7 @@ export function MonsterLootDetailModal({ loot, shipped, shippable, onClose }: Pr
 				<div className="flex flex-col gap-5">
 					<div>
 						<div className="mb-2 text-sm font-bold text-gray-900">Sell Price</div>
-						<PriceGrid
-							price={loot.sellPrice}
-							maxQuality="normal"
-							variant="modal"
-						/>
+						<PriceGrid price={loot.sellPrice} maxQuality="normal" variant="modal" />
 					</div>
 
 					<div>

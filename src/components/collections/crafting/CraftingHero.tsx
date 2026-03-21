@@ -10,10 +10,10 @@ const allRecipes = crafting().get();
 export function CraftingHero({ gameData }: Props) {
 	const total = allRecipes.length;
 	const learnedCount = allRecipes.filter(
-		(r) => gameData.craftingRecipes[r.name]?.learned === true,
+		(r) => gameData.craftingRecipes[r.name]?.learned === true
 	).length;
 	const craftedCount = allRecipes.filter(
-		(r) => gameData.craftingRecipes[r.name]?.crafted === true,
+		(r) => gameData.craftingRecipes[r.name]?.crafted === true
 	).length;
 
 	return (

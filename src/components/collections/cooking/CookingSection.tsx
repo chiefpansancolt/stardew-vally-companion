@@ -1,12 +1,12 @@
 "use client";
 
-import { cooking, type CookedDish } from "stardew-valley-data";
+import { type CookedDish, cooking } from "stardew-valley-data";
 import { useMemo, useState } from "react";
-import type { CollectionProps as Props, CookingStatusFilter, CookingSourceFilter } from "@/types";
-import { COOKING_STATUS_FILTERS, COOKING_SOURCE_FILTERS } from "@/data/constants/filters";
+import type { CookingSourceFilter, CookingStatusFilter, CollectionProps as Props } from "@/types";
+import { COOKING_SOURCE_FILTERS, COOKING_STATUS_FILTERS } from "@/data/constants/filters";
+import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
-import { FilterPopover, FilterGroup, FilterRadio } from "@/comps/ui/filter-popover";
 import { CookingCard } from "./cards";
 import { CookingDetailModal } from "./modals/CookingDetailModal";
 
@@ -19,7 +19,7 @@ export function CookingSection({ gameData }: Props) {
 	const [selectedDish, setSelectedDish] = useState<CookedDish | null>(null);
 
 	const cookedCount = allDishes.filter(
-		(d) => gameData.cookingRecipes[d.name]?.cooked === true,
+		(d) => gameData.cookingRecipes[d.name]?.cooked === true
 	).length;
 
 	const filtered = useMemo(() => {
@@ -40,7 +40,9 @@ export function CookingSection({ gameData }: Props) {
 			});
 	}, [search, statusFilter, sourceFilter, gameData.cookingRecipes]);
 
-	const activeFilterCount = [statusFilter !== "all", sourceFilter !== "all"].filter(Boolean).length;
+	const activeFilterCount = [statusFilter !== "all", sourceFilter !== "all"].filter(
+		Boolean
+	).length;
 
 	const selectedLearned = selectedDish
 		? gameData.cookingRecipes[selectedDish.name]?.learned === true
@@ -56,7 +58,11 @@ export function CookingSection({ gameData }: Props) {
 				badge={`${cookedCount} / ${allDishes.length} cooked`}
 			>
 				<div className="mb-4 flex flex-wrap items-center gap-3">
-					<SearchField value={search} onChange={setSearch} placeholder="Search recipes…" />
+					<SearchField
+						value={search}
+						onChange={setSearch}
+						placeholder="Search recipes…"
+					/>
 					<FilterPopover activeCount={activeFilterCount}>
 						<div className="flex flex-col gap-3">
 							<FilterGroup label="Status">

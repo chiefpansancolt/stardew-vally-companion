@@ -2,10 +2,10 @@
 
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import type { CookingDetailModalProps as Props } from "@/types";
-import { assetPath } from "@/lib/utils/assetPath";
-import { NAVY_TILE } from "@/data/constants/styles";
-import { SEASONS } from "@/data/constants/seasons";
 import { resolveIngredientImage } from "@/lib/pages/crafting";
+import { assetPath } from "@/lib/utils/assetPath";
+import { SEASONS } from "@/data/constants/seasons";
+import { NAVY_TILE } from "@/data/constants/styles";
 import { CookingBadge } from "@/comps/ui/CookingBadge";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
@@ -56,11 +56,7 @@ export function CookingDetailModal({ dish, learned, cooked, onClose }: Props) {
 
 					<div>
 						<div className="mb-2 text-sm font-bold text-gray-900">Sell Price</div>
-						<PriceGrid
-							price={dish.sellPrice}
-							maxQuality="normal"
-							variant="modal"
-						/>
+						<PriceGrid price={dish.sellPrice} maxQuality="normal" variant="modal" />
 					</div>
 
 					{dish.buffs.length > 0 && (
@@ -146,7 +142,9 @@ export function CookingDetailModal({ dish, learned, cooked, onClose }: Props) {
 	);
 }
 
-function formatRecipeSource(src: Props["dish"] extends null ? never : NonNullable<Props["dish"]>["recipeSources"][number]): string {
+function formatRecipeSource(
+	src: Props["dish"] extends null ? never : NonNullable<Props["dish"]>["recipeSources"][number]
+): string {
 	switch (src.type) {
 		case "friendship":
 			return `${src.villager} — ${src.hearts} hearts`;

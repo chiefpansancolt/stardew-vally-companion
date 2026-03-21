@@ -6,8 +6,16 @@ import { assetPath } from "@/lib/utils/assetPath";
 import { BOOKSELLER_ICON, SEASONS } from "@/data/constants/seasons";
 import { NAVY_TILE } from "@/data/constants/styles";
 
-export function CalendarDayModal({ day, season, isBookseller, birthdays, festivals, onClose }: Props) {
-	if (day === null || (birthdays.length === 0 && festivals.length === 0 && !isBookseller)) return null;
+export function CalendarDayModal({
+	day,
+	season,
+	isBookseller,
+	birthdays,
+	festivals,
+	onClose,
+}: Props) {
+	if (day === null || (birthdays.length === 0 && festivals.length === 0 && !isBookseller))
+		return null;
 
 	const seasonMeta = SEASONS[season];
 
@@ -98,7 +106,8 @@ export function CalendarDayModal({ day, season, isBookseller, birthdays, festiva
 								<div>
 									<span className="text-sm font-bold text-white">Bookseller</span>
 									<div className="text-[0.65rem] text-white/50">
-										Possible visit day — the Bookseller appears 2 random days per season
+										Possible visit day — the Bookseller appears 2 random days
+										per season
 									</div>
 								</div>
 							</div>

@@ -18,7 +18,7 @@ export function ResourcesSection({ gameData }: Props) {
 	const [selectedResource, setSelectedResource] = useState<ResourceItem | null>(null);
 
 	const shippedCount = allResources.filter(
-		(r) => gameData.shipped[r.id]?.shipped === true,
+		(r) => gameData.shipped[r.id]?.shipped === true
 	).length;
 
 	const filtered = useMemo(() => {
