@@ -27,7 +27,7 @@ export function NodesSection() {
 	return (
 		<>
 			<NavySection title="Mining Nodes" badge={`${allNodes.length} nodes`}>
-				<div className="mb-4">
+				<div className="mb-4 flex">
 					<SearchField value={search} onChange={setSearch} placeholder="Search nodes…" />
 				</div>
 

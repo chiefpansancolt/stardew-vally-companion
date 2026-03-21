@@ -14,6 +14,9 @@ const totalOres = allOres.length;
 const allBars = minerals().bars().get();
 const totalBars = allBars.length;
 
+const allResources = minerals().resources().get();
+const totalResources = allResources.length;
+
 const totalGeodes = minerals().geodes().get().length;
 const totalNodes = minerals().nodes().get().length;
 
@@ -26,6 +29,7 @@ export function MineralsHero({ gameData }: Props) {
 	).length;
 	const oresShipped = allOres.filter((o) => gameData.shipped[o.id]?.shipped === true).length;
 	const barsShipped = allBars.filter((b) => gameData.shipped[b.id]?.shipped === true).length;
+	const resourcesShipped = allResources.filter((r) => gameData.shipped[r.id]?.shipped === true).length;
 
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
@@ -69,6 +73,13 @@ export function MineralsHero({ gameData }: Props) {
 					value={barsShipped}
 					valueColor="text-accent"
 					suffix={`/ ${totalBars}`}
+				/>
+				<StatTile label="Total Resources" value={totalResources} />
+				<StatTile
+					label="Resources Shipped"
+					value={resourcesShipped}
+					valueColor="text-accent"
+					suffix={`/ ${totalResources}`}
 				/>
 				<StatTile label="Total Geodes" value={totalGeodes} />
 				<StatTile label="Total Nodes" value={totalNodes} />

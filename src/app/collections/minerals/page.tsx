@@ -7,6 +7,7 @@ import { MineralItemsSection } from "@/comps/collections/minerals/MineralItemsSe
 import { MineralsHero } from "@/comps/collections/minerals/MineralsHero";
 import { NodesSection } from "@/comps/collections/minerals/NodesSection";
 import { OresSection } from "@/comps/collections/minerals/OresSection";
+import { ResourcesSection } from "@/comps/collections/minerals/ResourcesSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 
 export default function MineralsPage() {
@@ -21,7 +22,7 @@ export default function MineralsPage() {
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Minerals</h1>
 				<p className="mt-1 text-gray-600">
-					Mine collectibles — track gems, geodes, ores, bars, and mining nodes
+					Mine collectibles — track gems, geodes, ores, bars, resources, and mining nodes
 				</p>
 			</div>
 
@@ -31,6 +32,7 @@ export default function MineralsPage() {
 				<GeodesSection />
 				<OresSection gameData={activePlaythrough.data} />
 				<BarsSection gameData={activePlaythrough.data} />
+				<ResourcesSection gameData={activePlaythrough.data} />
 				<NodesSection />
 			</div>
 		</div>
