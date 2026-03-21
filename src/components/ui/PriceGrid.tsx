@@ -119,7 +119,6 @@ export function PriceGrid({
 		);
 	}
 
-	// Basic quality — multiple stacked bonus rows (e.g. Smoked Fish: Fisher, Fisher + Artisan)
 	if (professionBonuses && professionBonuses.length > 0) {
 		const rowCls = `flex flex-1 items-center justify-between border border-white/10 ${isModal ? "rounded-xl px-3 py-2" : "rounded-lg bg-white/5 px-2.5 py-1.5"}`;
 		const labelCls = "w-12 shrink-0 text-right text-[0.5rem] font-semibold tracking-wide text-white/40 uppercase";
@@ -147,7 +146,6 @@ export function PriceGrid({
 		);
 	}
 
-	// Basic quality (single price row)
 	if (professionBonus !== null) {
 		return (
 			<div className="flex flex-col gap-1">
@@ -159,7 +157,7 @@ export function PriceGrid({
 						className={`flex flex-1 items-center justify-between border border-white/10 ${isModal ? "rounded-xl px-3 py-2" : "rounded-lg bg-white/5 px-2.5 py-1.5"}`}
 						style={isModal ? NAVY_TILE_STYLE : undefined}
 					>
-						<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
+						<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
 							Price
 						</span>
 						<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${valueColor}`}>
@@ -175,7 +173,7 @@ export function PriceGrid({
 						className={`flex flex-1 items-center justify-between border border-white/10 ${isModal ? "rounded-xl px-3 py-2" : "rounded-lg bg-white/5 px-2.5 py-1.5"}`}
 						style={isModal ? NAVY_TILE_STYLE : undefined}
 					>
-						<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
+						<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
 							Price
 						</span>
 						<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${bonusColor}`}>
@@ -192,7 +190,7 @@ export function PriceGrid({
 			className={`flex items-center justify-between border border-white/10 ${isModal ? "rounded-xl px-3 py-2" : "rounded-lg bg-white/5 px-2.5 py-1.5"}`}
 			style={isModal ? NAVY_TILE_STYLE : undefined}
 		>
-			<span className="text-[0.6rem] font-semibold tracking-wide text-white/50 uppercase">
+			<span className="text-[0.6rem] font-semibold tracking-wide text-white/80 uppercase">
 				Price
 			</span>
 			<span className={`${isModal ? "text-sm" : "text-xs"} font-bold ${valueColor}`}>{fmt(price)}g</span>

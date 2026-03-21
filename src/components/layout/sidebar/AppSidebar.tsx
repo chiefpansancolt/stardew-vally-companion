@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { GiMushroom } from "react-icons/gi";
+import { RiTreasureMapLine } from "react-icons/ri";
 import {
 	HiCog,
 	HiCollection,
@@ -110,6 +111,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Animal Products
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/artifacts"
+											icon={RiTreasureMapLine}
+											active={pathname === "/collections/artifacts"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Artifacts
 										</SidebarItem>
 										<SidebarItem
 											as={Link}
