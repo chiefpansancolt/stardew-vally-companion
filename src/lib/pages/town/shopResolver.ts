@@ -42,7 +42,6 @@ export interface ShopItem {
   image: string | null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SHOP_MAP: Record<string, () => { get: () => any[] }> = {
   "pierre-shop": pierre,
   "saloon-shop": saloon,
@@ -68,7 +67,6 @@ const SHOP_MAP: Record<string, () => { get: () => any[] }> = {
 
 const cache = new Map<string, ShopItem[]>();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizePrice(item: any): string {
   if (item.tradeItemName && item.tradeAmount) {
     return `${item.tradeAmount}x ${item.tradeItemName}`;

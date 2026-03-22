@@ -26,50 +26,36 @@ export function GrandpaEvaluationSection({ gameData }: Props) {
 	const villagersProgress = getVillagersAt8Hearts(gameData);
 	const skillsProgress = getTotalSkillLevels(gameData);
 	const petProgress = getPetFriendship(gameData);
-
-	const achievementProgress = useMemo(
-		(): CriterionProgress => ({
-			"Full Shipment": getShipmentProgress(gameData),
-			"Master Angler": getAnglerProgress(gameData),
-			"A Complete Collection": getMuseumProgress(gameData),
-		}),
-		[gameData]
-	);
-
-	const friendshipProgress = useMemo(
-		(): CriterionProgress => ({
-			"5+ Villagers at 8 Hearts": { current: villagersProgress.current, total: 5 },
-			"10+ Villagers at 8 Hearts": { current: villagersProgress.current, total: 10 },
-			"Pet at Max Friendship": petProgress,
-		}),
-		[villagersProgress, petProgress]
-	);
-
-	const skillsProgressMap = useMemo(
-		(): CriterionProgress => ({
-			"Total Skill Levels ≥30": { current: skillsProgress.current, total: 30 },
-			"Total Skill Levels ≥50": { current: skillsProgress.current, total: 50 },
-		}),
-		[skillsProgress]
-	);
-
 	const ccProgress = getCCRoomProgress(gameData);
-	const ccProgressMap = useMemo(
-		(): CriterionProgress => ({
-			"Community Center Completed": { current: ccProgress.current, total: ccProgress.total },
-		}),
-		[ccProgress]
-	);
 
-	const categories = useMemo(() => {
-		return GRANDPA_CATEGORY_ORDER.map((cat) => {
-			const meta = GRANDPA_CATEGORY_META[cat];
-			const entries = result.breakdown.filter((e) => e.category === cat);
-			const earned = entries.reduce((sum, e) => sum + e.points, 0);
-			const max = entries.reduce((sum, e) => sum + e.maxPoints, 0);
-			return { cat, ...meta, entries, earned, max };
-		});
-	}, [result]);
+	const achievementProgress: CriterionProgress = {
+		"Full Shipment": getShipmentProgress(gameData),
+		"Master Angler": getAnglerProgress(gameData),
+		"A Complete Collection": getMuseumProgress(gameData),
+	};
+
+	const friendshipProgress: CriterionProgress = {
+		"5+ Villagers at 8 Hearts": { current: villagersProgress.current, total: 5 },
+		"10+ Villagers at 8 Hearts": { current: villagersProgress.current, total: 10 },
+		"Pet at Max Friendship": petProgress,
+	};
+
+	const skillsProgressMap: CriterionProgress = {
+		"Total Skill Levels ≥30": { current: skillsProgress.current, total: 30 },
+		"Total Skill Levels ≥50": { current: skillsProgress.current, total: 50 },
+	};
+
+	const ccProgressMap: CriterionProgress = {
+		"Community Center Completed": { current: ccProgress.current, total: ccProgress.total },
+	};
+
+	const categories = GRANDPA_CATEGORY_ORDER.map((cat) => {
+		const meta = GRANDPA_CATEGORY_META[cat];
+		const entries = result.breakdown.filter((e) => e.category === cat);
+		const earned = entries.reduce((sum, e) => sum + e.points, 0);
+		const max = entries.reduce((sum, e) => sum + e.maxPoints, 0);
+		return { cat, ...meta, entries, earned, max };
+	});
 
 	return (
 		<NavySection title="Evaluation" badge={`${result.score} / ${result.maxScore} points`}>

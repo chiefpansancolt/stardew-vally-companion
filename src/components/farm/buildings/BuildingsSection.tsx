@@ -6,7 +6,7 @@ import {
 	search as searchApi,
 	type SearchResult,
 } from "stardew-valley-data";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { BuildingProgress, FishPondInfo, CollectionProps as Props } from "@/types";
 import { FilterPopover, FilterSelect } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
@@ -33,24 +33,26 @@ function getFishInfo(fishType: number): { name: string; image: string | null } {
 	};
 }
 
+function buildFishPondMap(fishPonds: Props["gameData"]["fishPonds"]): Map<string, FishPondInfo> {
+	const map = new Map<string, FishPondInfo>();
+	for (const fp of fishPonds) {
+		const info = getFishInfo(fp.fishType);
+		map.set(fp.buildingId, {
+			name: info.name,
+			image: info.image,
+			currentOccupants: fp.currentOccupants,
+			maxOccupants: fp.maxOccupants,
+		});
+	}
+	return map;
+}
+
 export function BuildingsSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");
 	const [builderFilter, setBuilderFilter] = useState("all");
 	const [selectedBuilding, setSelectedBuilding] = useState<BuildingProgress | null>(null);
 
-	const fishPondInfoMap = useMemo(() => {
-		const map = new Map<string, FishPondInfo>();
-		for (const fp of gameData.fishPonds) {
-			const info = getFishInfo(fp.fishType);
-			map.set(fp.buildingId, {
-				name: info.name,
-				image: info.image,
-				currentOccupants: fp.currentOccupants,
-				maxOccupants: fp.maxOccupants,
-			});
-		}
-		return map;
-	}, [gameData.fishPonds]);
+	const fishPondInfoMap = buildFishPondMap(gameData.fishPonds);
 
 	const houseLevel = gameData.character.houseUpgradeLevel;
 	const houseData =
@@ -68,30 +70,26 @@ export function BuildingsSection({ gameData }: Props) {
 		image: houseData.image,
 	};
 
-	const allPlayerBuildings = useMemo(() => {
-		return gameData.buildings.map((b) => {
-			if (b.type === "Farmhouse") {
-				return { ...b, type: houseData.name };
-			}
-			return b;
-		});
-	}, [gameData.buildings, houseData.name]);
+	const allPlayerBuildings = gameData.buildings.map((b) => {
+		if (b.type === "Farmhouse") {
+			return { ...b, type: houseData.name };
+		}
+		return b;
+	});
 
-	const filtered = useMemo(() => {
-		return allPlayerBuildings
-			.filter((b) => {
-				if (!search) return true;
-				const q = search.toLowerCase();
-				if (b.type.toLowerCase().includes(q)) return true;
-				const fp = fishPondInfoMap.get(b.id);
-				return fp ? fp.name.toLowerCase().includes(q) : false;
-			})
-			.filter((b) => {
-				if (builderFilter === "all") return true;
-				const data = getBuildingData(b);
-				return data?.builder === builderFilter;
-			});
-	}, [allPlayerBuildings, search, builderFilter]);
+	const filtered = allPlayerBuildings
+		.filter((b) => {
+			if (!search) return true;
+			const q = search.toLowerCase();
+			if (b.type.toLowerCase().includes(q)) return true;
+			const fp = fishPondInfoMap.get(b.id);
+			return fp ? fp.name.toLowerCase().includes(q) : false;
+		})
+		.filter((b) => {
+			if (builderFilter === "all") return true;
+			const data = getBuildingData(b);
+			return data?.builder === builderFilter;
+		});
 
 	const activeFilterCount = [builderFilter !== "all"].filter(Boolean).length;
 
