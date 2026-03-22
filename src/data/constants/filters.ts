@@ -6,6 +6,7 @@ import type {
   DonationFilter,
   FoundFilter,
   MarriageFilter,
+  MonsterTypeFilter,
   SeasonFilter,
   ShippedFilter,
 } from "@/types";
@@ -86,4 +87,10 @@ export const COOKING_SOURCE_FILTERS: FilterOption<CookingSourceFilter>[] = [
   { id: "skill", label: "Skill Level" },
   { id: "default", label: "Default" },
   { id: "cutscene", label: "Special Event" },
+];
+
+export const MONSTER_TYPE_FILTERS: FilterOption<MonsterTypeFilter>[] = [
+  { id: "all", label: "All" },
+  { id: "standard", label: "Standard" },
+  { id: "dangerous", label: "Dangerous" },
 ];

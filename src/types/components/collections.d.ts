@@ -12,7 +12,9 @@ import type {
   FruitTree,
   GeodeContainer,
   MineralItem,
+  Monster,
   MonsterLoot,
+  MonsterSlayerGoal,
   NodeItem,
   OreItem,
   ProfessionBonus,
@@ -305,5 +307,22 @@ export interface MonsterLootDetailModalProps {
   loot: MonsterLoot | null;
   shipped: boolean;
   shippable: boolean;
+  onClose: () => void;
+}
+
+export interface SlayerGoalCardProps {
+  goal: MonsterSlayerGoal;
+  killCount: number;
+}
+
+export interface MonsterCardProps {
+  monster: Monster;
+  killCount: number;
+  onClick: () => void;
+}
+
+export interface MonsterDetailModalProps {
+  monster: Monster | null;
+  killCount: number;
   onClose: () => void;
 }

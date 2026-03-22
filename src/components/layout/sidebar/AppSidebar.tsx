@@ -11,7 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
-import { GiMushroom } from "react-icons/gi";
+import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
 import {
 	HiCalendar,
 	HiCog,
@@ -207,6 +207,18 @@ export function AppSidebar() {
 											Monster Loot
 										</SidebarItem>
 									</SidebarCollapse>
+								)}
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/mines"
+										icon={GiCrossedSwords}
+										active={pathname === "/mines"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Mines & Monsters
+									</SidebarItem>
 								)}
 							</SidebarItemGroup>
 						</SidebarItems>

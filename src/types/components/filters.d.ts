@@ -25,3 +25,4 @@ export type CookingSourceFilter =
   | "skill"
   | "default"
   | "cutscene";
+export type MonsterTypeFilter = "all" | "standard" | "dangerous";
