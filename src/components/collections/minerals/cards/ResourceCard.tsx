@@ -24,7 +24,10 @@ export function ResourceCard({ resource, shipped, professionBonus, onClick }: Ca
 					</span>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">Click to see locations</div>
 				</div>
-				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
+				<StatusBadge
+					status={shipped ? "success" : "inactive"}
+					label={shipped ? "Shipped" : "Not Shipped"}
+				/>
 			</div>
 			<PriceGrid
 				price={resource.sellPrice}

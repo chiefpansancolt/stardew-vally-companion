@@ -13,7 +13,6 @@ import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "r
 import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { GiChicken, GiCrossedSwords, GiMushroom } from "react-icons/gi";
-import { PiFarmFill } from "react-icons/pi";
 import {
 	HiBookOpen,
 	HiCalendar,
@@ -25,6 +24,7 @@ import {
 	HiUserGroup,
 	HiViewGrid,
 } from "react-icons/hi";
+import { PiFarmFill } from "react-icons/pi";
 import { RiTreasureMapLine } from "react-icons/ri";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";

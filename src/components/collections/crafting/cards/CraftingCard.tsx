@@ -22,7 +22,13 @@ export function CraftingCard({ recipe, learned, crafted, onClick }: CraftingCard
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{recipe.name}
 						</span>
-						{crafted ? <StatusBadge status="success" label="Crafted" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
+						{crafted ? (
+							<StatusBadge status="success" label="Crafted" />
+						) : learned ? (
+							<StatusBadge status="warning" label="Learned" />
+						) : (
+							<StatusBadge status="inactive" label="Not Learned" />
+						)}
 					</div>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">{recipe.source}</div>
 					<div className="mt-1 flex flex-wrap gap-1">

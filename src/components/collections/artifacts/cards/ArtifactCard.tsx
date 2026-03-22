@@ -1,8 +1,8 @@
 import type { ArtifactCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { museumCardStyles } from "@/lib/utils/cardStyles";
-import { StatusBadge } from "@/comps/ui/StatusBadge";
 import { PriceGrid } from "@/comps/ui/price-grid";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function ArtifactCard({ artifact, donated, found, onClick }: ArtifactCardProps) {
 	const { borderBg, nameColor } = museumCardStyles(donated, found);
@@ -24,7 +24,13 @@ export function ArtifactCard({ artifact, donated, found, onClick }: ArtifactCard
 					</span>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">Click to see locations</div>
 				</div>
-				{donated ? <StatusBadge status="success" label="Donated" /> : found ? <StatusBadge status="warning" label="Found" /> : <StatusBadge status="inactive" label="Not Found" />}
+				{donated ? (
+					<StatusBadge status="success" label="Donated" />
+				) : found ? (
+					<StatusBadge status="warning" label="Found" />
+				) : (
+					<StatusBadge status="inactive" label="Not Found" />
+				)}
 			</div>
 
 			<PriceGrid price={artifact.sellPrice} maxQuality="normal" shipped={donated} />

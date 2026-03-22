@@ -66,7 +66,12 @@ export function ArtisanGoodCard({
 						</div>
 					)}
 				</div>
-				{shippable && <StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />}
+				{shippable && (
+					<StatusBadge
+						status={shipped ? "success" : "inactive"}
+						label={shipped ? "Shipped" : "Not Shipped"}
+					/>
+				)}
 			</div>
 
 			{good.sellPrice !== null ? (

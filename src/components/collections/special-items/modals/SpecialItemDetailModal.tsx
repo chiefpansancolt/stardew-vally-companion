@@ -29,7 +29,10 @@ export function SpecialItemDetailModal({ item, acquired, onClose }: Props) {
 									Info
 								</span>
 							) : (
-								<StatusBadge status={acquired ? "success" : "inactive"} label={acquired ? "Acquired" : "Not Acquired"} />
+								<StatusBadge
+									status={acquired ? "success" : "inactive"}
+									label={acquired ? "Acquired" : "Not Acquired"}
+								/>
 							)}
 						</div>
 					</div>

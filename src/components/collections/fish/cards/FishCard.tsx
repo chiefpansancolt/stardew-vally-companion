@@ -36,7 +36,10 @@ export function FishCard({ fish, caught, professionBonus = null, onClick }: Fish
 						)}
 					</div>
 				</div>
-				<StatusBadge status={caught ? "success" : "inactive"} label={caught ? "Caught" : "Not Caught"} />
+				<StatusBadge
+					status={caught ? "success" : "inactive"}
+					label={caught ? "Caught" : "Not Caught"}
+				/>
 			</div>
 
 			<div className="flex flex-wrap items-center gap-1">

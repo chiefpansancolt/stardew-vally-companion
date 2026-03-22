@@ -1,9 +1,9 @@
 "use client";
 
-import { animals, isFarmAnimal, type FarmAnimal } from "stardew-valley-data";
+import { animals, type FarmAnimal, isFarmAnimal } from "stardew-valley-data";
 import { useMemo, useState } from "react";
-import type { CollectionProps as Props, FarmAnimalProgress } from "@/types";
-import { BUILDING_FILTER_OPTIONS, ANIMAL_SORT_OPTIONS } from "@/data/constants/animals";
+import type { FarmAnimalProgress, CollectionProps as Props } from "@/types";
+import { ANIMAL_SORT_OPTIONS, BUILDING_FILTER_OPTIONS } from "@/data/constants/animals";
 import { FilterPopover, FilterSelect } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
@@ -47,11 +47,11 @@ export function FarmAnimalsSection({ gameData }: Props) {
 			});
 	}, [gameData.animals, search, typeFilter, buildingFilter, sort]);
 
-	const activeFilterCount = [typeFilter !== "all", buildingFilter !== "all"].filter(Boolean).length;
+	const activeFilterCount = [typeFilter !== "all", buildingFilter !== "all"].filter(
+		Boolean
+	).length;
 
-	const selectedSpecies = selectedAnimal
-		? speciesMap.get(selectedAnimal.type)
-		: undefined;
+	const selectedSpecies = selectedAnimal ? speciesMap.get(selectedAnimal.type) : undefined;
 
 	return (
 		<>

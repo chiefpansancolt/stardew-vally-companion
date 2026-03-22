@@ -40,7 +40,10 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						<div className="text-lg font-extrabold">{crop.name}</div>
 						<div className="text-sm text-gray-500">{seasonLabel}</div>
 					</div>
-					<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
+					<StatusBadge
+						status={shipped ? "success" : "inactive"}
+						label={shipped ? "Shipped" : "Not Shipped"}
+					/>
 				</div>
 			</ModalHeader>
 			<ModalBody>

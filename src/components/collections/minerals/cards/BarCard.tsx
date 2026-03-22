@@ -30,7 +30,10 @@ export function BarCard({ bar, shipped, professionBonus, onClick, oreNameById }:
 						</div>
 					)}
 				</div>
-				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
+				<StatusBadge
+					status={shipped ? "success" : "inactive"}
+					label={shipped ? "Shipped" : "Not Shipped"}
+				/>
 			</div>
 			<PriceGrid
 				price={bar.sellPrice}

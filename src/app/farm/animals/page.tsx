@@ -17,9 +17,7 @@ export default function AnimalsPage() {
 		<div className="p-6">
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Animals</h1>
-				<p className="mt-1 text-gray-600">
-					Your farm animals, pets, and buildings
-				</p>
+				<p className="mt-1 text-gray-600">Your farm animals, pets, and buildings</p>
 			</div>
 
 			<div className="flex flex-col gap-6">

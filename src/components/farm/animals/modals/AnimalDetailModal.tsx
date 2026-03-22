@@ -5,8 +5,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import type { AnimalDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { capitalize, formatNumber } from "@/lib/utils/formatting";
-import { NAVY_TILE } from "@/data/constants/styles";
 import { FRIENDSHIP_PER_HEART, MAX_FRIENDSHIP, MAX_HEARTS } from "@/data/constants/animals";
+import { NAVY_TILE } from "@/data/constants/styles";
 
 export function AnimalDetailModal({ animal, species, onClose }: Props) {
 	if (!animal) return null;
@@ -32,7 +32,7 @@ export function AnimalDetailModal({ animal, species, onClose }: Props) {
 						<div className="flex items-center gap-2 text-sm text-gray-500">
 							<span>{species?.name ?? animal.type}</span>
 							{animal.hasAnimalCracker && (
-								<span className="flex items-center gap-1 text-xs text-highlight">
+								<span className="text-highlight flex items-center gap-1 text-xs">
 									<img
 										src="/images/misc/Golden Animal Cracker.png"
 										alt="Animal Cracker"
@@ -80,12 +80,25 @@ export function AnimalDetailModal({ animal, species, onClose }: Props) {
 								{ label: "Age", value: `${animal.age} days` },
 								{ label: "Happiness", value: String(animal.happiness) },
 								{ label: "Building", value: animal.buildingType },
-								{ label: "Days to Produce", value: String(species?.daysToProduce ?? "—") },
-								{ label: "Purchase Price", value: species?.purchasePrice ? `${formatNumber(species.purchasePrice)}g` : "—" },
-								{ label: "Harvest Method", value: species?.harvestMethod ? capitalize(species.harvestMethod) : "—" },
+								{
+									label: "Days to Produce",
+									value: String(species?.daysToProduce ?? "—"),
+								},
+								{
+									label: "Purchase Price",
+									value: species?.purchasePrice
+										? `${formatNumber(species.purchasePrice)}g`
+										: "—",
+								},
+								{
+									label: "Harvest Method",
+									value: species?.harvestMethod
+										? capitalize(species.harvestMethod)
+										: "—",
+								},
 							].map((stat) => (
 								<div key={stat.label}>
-									<div className="text-[0.6rem] font-semibold uppercase tracking-wide text-white/40">
+									<div className="text-[0.6rem] font-semibold tracking-wide text-white/40 uppercase">
 										{stat.label}
 									</div>
 									<div className="mt-1 text-sm font-bold text-white/90">
@@ -115,7 +128,7 @@ export function AnimalDetailModal({ animal, species, onClose }: Props) {
 												Base produce
 											</div>
 										</div>
-										<div className="text-xs font-bold text-highlight">
+										<div className="text-highlight text-xs font-bold">
 											{species.produce.sellPrice}g
 										</div>
 									</div>
@@ -134,7 +147,7 @@ export function AnimalDetailModal({ animal, species, onClose }: Props) {
 													Deluxe produce
 												</div>
 											</div>
-											<div className="text-xs font-bold text-highlight">
+											<div className="text-highlight text-xs font-bold">
 												{species.deluxeProduce.sellPrice}g
 											</div>
 										</div>

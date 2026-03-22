@@ -5,26 +5,18 @@ import { MAX_FRIENDSHIP } from "@/data/constants/animals";
 export function PetCard({ pet }: Props) {
 	const hasFriendship = pet.friendship !== null;
 	const friendship = pet.friendship ?? 0;
-	const pct = hasFriendship
-		? Math.min((friendship / MAX_FRIENDSHIP) * 100, 100)
-		: 0;
+	const pct = hasFriendship ? Math.min((friendship / MAX_FRIENDSHIP) * 100, 100) : 0;
 	const isMaxed = hasFriendship && friendship >= MAX_FRIENDSHIP;
 	const image = findPetImage(pet.type, pet.breed);
 
 	return (
 		<div
 			className={`flex items-center gap-4 rounded-lg border p-4 ${
-				isMaxed
-					? "border-green-400/30 bg-green-400/10"
-					: "border-white/10 bg-white/5"
+				isMaxed ? "border-green-400/30 bg-green-400/10" : "border-white/10 bg-white/5"
 			}`}
 		>
 			{image && (
-				<img
-					src={image}
-					alt={pet.type}
-					className="h-14 w-14 shrink-0 object-contain"
-				/>
+				<img src={image} alt={pet.type} className="h-14 w-14 shrink-0 object-contain" />
 			)}
 			<div className="flex-1">
 				<div className={`text-base font-bold ${isMaxed ? "text-green-300" : "text-white"}`}>

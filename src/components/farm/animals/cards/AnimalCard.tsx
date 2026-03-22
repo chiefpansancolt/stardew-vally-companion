@@ -14,9 +14,7 @@ export function AnimalCard({ animal, species, onClick }: Props) {
 			type="button"
 			onClick={onClick}
 			className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 text-left transition-colors hover:bg-white/10 ${
-				isMaxed
-					? "border-green-400/30 bg-green-400/10"
-					: "border-white/10 bg-white/5"
+				isMaxed ? "border-green-400/30 bg-green-400/10" : "border-white/10 bg-white/5"
 			}`}
 		>
 			{species?.image && (
@@ -57,9 +55,7 @@ export function AnimalCard({ animal, species, onClick }: Props) {
 					<span className="rounded-full border border-white/12 bg-white/8 px-2 py-0.5 text-[0.55rem] font-semibold text-white/80">
 						{animal.buildingType}
 					</span>
-					<span className="text-[0.65rem] text-white/80">
-						Age: {animal.age} days
-					</span>
+					<span className="text-[0.65rem] text-white/80">Age: {animal.age} days</span>
 				</div>
 				<div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
 					<div

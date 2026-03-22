@@ -13,9 +13,7 @@ export function AnimalsHero({ gameData }: Props) {
 
 	const avgFriendship =
 		animalCount > 0
-			? Math.round(
-					gameData.animals.reduce((sum, a) => sum + a.friendship, 0) / animalCount,
-				)
+			? Math.round(gameData.animals.reduce((sum, a) => sum + a.friendship, 0) / animalCount)
 			: 0;
 
 	return (

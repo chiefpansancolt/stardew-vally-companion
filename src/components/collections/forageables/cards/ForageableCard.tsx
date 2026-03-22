@@ -33,7 +33,10 @@ export function ForageableCard({
 				</div>
 				{shippable && (
 					<div className="flex shrink-0 flex-col items-end gap-1">
-						<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
+						<StatusBadge
+							status={shipped ? "success" : "inactive"}
+							label={shipped ? "Shipped" : "Not Shipped"}
+						/>
 						{shipped && (
 							<span className="text-[0.6rem] text-white/60">
 								×{shippedCount} shipped

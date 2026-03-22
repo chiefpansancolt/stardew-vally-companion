@@ -31,7 +31,10 @@ export function ProduceCard({ entry, shipped, professionBonus = null }: ProduceC
 						{animalName} · {building}
 					</div>
 				</div>
-				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
+				<StatusBadge
+					status={shipped ? "success" : "inactive"}
+					label={shipped ? "Shipped" : "Not Shipped"}
+				/>
 			</div>
 
 			<PriceGrid

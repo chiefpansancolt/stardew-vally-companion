@@ -29,7 +29,12 @@ export function MonsterLootCard({ loot, shipped, shippable, onClick }: MonsterLo
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{loot.name}
 						</span>
-						{shippable && <StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />}
+						{shippable && (
+							<StatusBadge
+								status={shipped ? "success" : "inactive"}
+								label={shipped ? "Shipped" : "Not Shipped"}
+							/>
+						)}
 					</div>
 					<div className="mt-1 flex flex-wrap gap-1">
 						{loot.droppedBy.map((mId) => (

@@ -105,7 +105,15 @@ function FruitTreeModal({ tree, gameData }: { tree: FruitTree; gameData: GameDat
 					<div>
 						<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 							Produce
-							{shipped ? <StatusBadge status="success" label="Shipped" count={shippedCount} /> : <StatusBadge status="inactive" label="Not Shipped" />}
+							{shipped ? (
+								<StatusBadge
+									status="success"
+									label="Shipped"
+									count={shippedCount}
+								/>
+							) : (
+								<StatusBadge status="inactive" label="Not Shipped" />
+							)}
 						</div>
 
 						<div
@@ -259,7 +267,16 @@ function WildTreeModal({
 						<div>
 							<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 								Tapper Produce
-								{isShippable && (shipped ? <StatusBadge status="success" label="Shipped" count={shippedCount} /> : <StatusBadge status="inactive" label="Not Shipped" />)}
+								{isShippable &&
+									(shipped ? (
+										<StatusBadge
+											status="success"
+											label="Shipped"
+											count={shippedCount}
+										/>
+									) : (
+										<StatusBadge status="inactive" label="Not Shipped" />
+									))}
 							</div>
 
 							<div

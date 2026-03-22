@@ -44,7 +44,13 @@ export function CookingCard({ dish, learned, cooked, onClick }: CookingCardProps
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{dish.name}
 						</span>
-						{cooked ? <StatusBadge status="success" label="Cooked" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
+						{cooked ? (
+							<StatusBadge status="success" label="Cooked" />
+						) : learned ? (
+							<StatusBadge status="warning" label="Learned" />
+						) : (
+							<StatusBadge status="inactive" label="Not Learned" />
+						)}
 					</div>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">{formatSource(dish)}</div>
 					{hasEnergy && (
