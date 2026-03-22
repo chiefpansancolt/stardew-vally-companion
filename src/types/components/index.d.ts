@@ -9,3 +9,4 @@ export * from "./villagers";
 export * from "./wizard";
 export * from "./toast";
 export * from "./modals";
+export * from "./grandpa";

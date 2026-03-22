@@ -23,6 +23,7 @@ export const DEFAULT_GAME_DATA: GameData = {
       day: 1,
       year: 1,
     },
+    willyBackRoomInvitation: false,
   },
   toolLevels: {
     wateringCan: 0,
@@ -67,4 +68,19 @@ export const DEFAULT_GAME_DATA: GameData = {
     hasSkullKey: false,
   },
   perfectionWaiverCount: 0,
+  communityCenter: {
+    unlocked: false,
+    bundlesActive: false,
+    completed: false,
+    ceremonyAttended: false,
+    jojaAbandoned: false,
+    rooms: {
+      boilerRoom: false,
+      craftsRoom: false,
+      pantry: false,
+      fishTank: false,
+      vault: false,
+      bulletin: false,
+    },
+  },
 };

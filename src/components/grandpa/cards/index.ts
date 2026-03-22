@@ -1,0 +1,1 @@
+export { GrandpaCategoryCard } from "./GrandpaCategoryCard";

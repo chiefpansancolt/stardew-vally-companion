@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
+import { FaClipboardList } from "react-icons/fa";
 import {
 	HiCalendar,
 	HiCog,
@@ -218,6 +219,18 @@ export function AppSidebar() {
 										onClick={() => setSidebarOpen(false)}
 									>
 										Mines & Monsters
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/grandpa"
+										icon={FaClipboardList}
+										active={pathname === "/grandpa"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Grandpa&apos;s Evaluation
 									</SidebarItem>
 								)}
 							</SidebarItemGroup>

@@ -20,6 +20,7 @@ export interface CharacterInfo {
     day: number;
     year: number;
   };
+  willyBackRoomInvitation: boolean;
 }
 
 export interface ToolLevels {
@@ -136,4 +137,23 @@ export interface GameData {
   buildings: BuildingProgress[];
   mineProgress: MineProgress;
   perfectionWaiverCount: number;
+  communityCenter: CommunityCenterProgress;
+}
+
+export interface CommunityCenterProgress {
+  unlocked: boolean;
+  bundlesActive: boolean;
+  completed: boolean;
+  ceremonyAttended: boolean;
+  jojaAbandoned: boolean;
+  rooms: CommunityCenterRooms;
+}
+
+export interface CommunityCenterRooms {
+  boilerRoom: boolean;
+  craftsRoom: boolean;
+  pantry: boolean;
+  fishTank: boolean;
+  vault: boolean;
+  bulletin: boolean;
 }

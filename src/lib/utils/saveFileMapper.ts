@@ -1,6 +1,12 @@
 import type { SaveData } from "stardew-valley-data";
+import { villagers as villagersQuery } from "stardew-valley-data";
 import type { GameData } from "@/types";
 import { DEFAULT_GAME_DATA } from "@/data/constants";
+
+const villagerEventMap = new Map<string, Set<string>>();
+for (const v of villagersQuery().get()) {
+  villagerEventMap.set(v.name, new Set(v.events.map((e) => String(e.id))));
+}
 
 /**
  * Maps parsed SaveData from stardew-valley-data's parseSaveFile() into our GameData structure.
@@ -24,6 +30,7 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       totalDaysPlayed: save.date.totalDaysPlayed,
       millisecondsPlayed: save.player.millisecondsPlayed,
       farmType: save.farm.type,
+      willyBackRoomInvitation: save.player.willyBackRoomInvitation,
       currentDate: {
         season: save.date.season as "spring" | "summer" | "fall" | "winter",
         day: save.date.day,
@@ -91,15 +98,20 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     ),
 
     villagers: Object.fromEntries(
-      save.friendships.map((f) => [
-        f.name,
-        {
-          hearts: f.hearts,
-          heartPoints: f.points,
-          eventsSeen: save.eventsSeen,
-          status: f.status,
-        },
-      ]),
+      save.friendships.map((f) => {
+        const villagerEvents = villagerEventMap.get(f.name);
+        return [
+          f.name,
+          {
+            hearts: f.hearts,
+            heartPoints: f.points,
+            eventsSeen: villagerEvents
+              ? save.eventsSeen.filter((id) => villagerEvents.has(id))
+              : [],
+            status: f.status,
+          },
+        ];
+      }),
     ),
 
     bundles: Object.fromEntries(
@@ -217,5 +229,6 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     },
 
     perfectionWaiverCount: save.perfection.waivers,
+    communityCenter: save.communityCenter,
   };
 }
