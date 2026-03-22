@@ -26,3 +26,10 @@ export type CookingSourceFilter =
   | "default"
   | "cutscene";
 export type MonsterTypeFilter = "all" | "standard" | "dangerous";
+export type SpecialItemTypeFilter =
+  | "all"
+  | "special-item"
+  | "book"
+  | "skill-book"
+  | "mastery";
+export type SpecialItemStatusFilter = "all" | "acquired" | "not-acquired";

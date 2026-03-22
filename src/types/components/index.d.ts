@@ -10,3 +10,4 @@ export * from "./wizard";
 export * from "./toast";
 export * from "./modals";
 export * from "./grandpa";
+export * from "./specialItems";

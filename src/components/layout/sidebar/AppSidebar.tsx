@@ -14,6 +14,7 @@ import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
 import {
+	HiBookOpen,
 	HiCalendar,
 	HiCog,
 	HiCollection,
@@ -206,6 +207,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Monster Loot
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/special-items"
+											icon={HiBookOpen}
+											active={pathname === "/collections/special-items"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Special Items
 										</SidebarItem>
 									</SidebarCollapse>
 								)}

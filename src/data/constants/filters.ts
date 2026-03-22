@@ -9,6 +9,8 @@ import type {
   MonsterTypeFilter,
   SeasonFilter,
   ShippedFilter,
+  SpecialItemStatusFilter,
+  SpecialItemTypeFilter,
 } from "@/types";
 
 interface FilterOption<T extends string> {
@@ -94,3 +96,19 @@ export const MONSTER_TYPE_FILTERS: FilterOption<MonsterTypeFilter>[] = [
   { id: "standard", label: "Standard" },
   { id: "dangerous", label: "Dangerous" },
 ];
+
+export const SPECIAL_ITEM_TYPE_FILTERS: FilterOption<SpecialItemTypeFilter>[] =
+  [
+    { id: "all", label: "All" },
+    { id: "special-item", label: "Special Items" },
+    { id: "book", label: "Books" },
+    { id: "skill-book", label: "Skill Books" },
+    { id: "mastery", label: "Mastery" },
+  ];
+
+export const SPECIAL_ITEM_STATUS_FILTERS: FilterOption<SpecialItemStatusFilter>[] =
+  [
+    { id: "all", label: "All" },
+    { id: "acquired", label: "Acquired" },
+    { id: "not-acquired", label: "Not Acquired" },
+  ];
