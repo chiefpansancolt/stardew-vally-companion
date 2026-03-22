@@ -61,6 +61,7 @@ export const DEFAULT_GAME_DATA: GameData = {
   animals: [],
   pets: [],
   buildings: [],
+  fishPonds: [],
   mineProgress: {
     deepestMineLevel: 0,
     deepestSkullCavernLevel: 0,

@@ -24,7 +24,7 @@ import {
 	HiUserGroup,
 	HiViewGrid,
 } from "react-icons/hi";
-import { PiFarmFill } from "react-icons/pi";
+import { PiBarnFill, PiFarmFill } from "react-icons/pi";
 import { RiTreasureMapLine } from "react-icons/ri";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { useUI } from "@/lib/contexts/UIContext";
@@ -91,6 +91,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Animals
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/farm/buildings"
+											icon={PiBarnFill}
+											active={pathname === "/farm/buildings"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Buildings
 										</SidebarItem>
 									</SidebarCollapse>
 								)}

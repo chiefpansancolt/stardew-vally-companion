@@ -91,6 +91,13 @@ export interface BuildingProgress {
   animalCount: number;
 }
 
+export interface FishPondProgress {
+  buildingId: string;
+  fishType: number;
+  currentOccupants: number;
+  maxOccupants: number;
+}
+
 export interface SkillProgress {
   level: number;
   xp: number;
@@ -135,6 +142,7 @@ export interface GameData {
   animals: FarmAnimalProgress[];
   pets: PetProgress[];
   buildings: BuildingProgress[];
+  fishPonds: FishPondProgress[];
   mineProgress: MineProgress;
   perfectionWaiverCount: number;
   communityCenter: CommunityCenterProgress;

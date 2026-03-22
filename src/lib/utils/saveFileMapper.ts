@@ -233,6 +233,13 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       animalCount: b.animalCount,
     })),
 
+    fishPonds: save.fishPonds.map((fp) => ({
+      buildingId: fp.buildingId,
+      fishType: fp.fishType,
+      currentOccupants: fp.currentOccupants,
+      maxOccupants: fp.maxOccupants,
+    })),
+
     mineProgress: {
       deepestMineLevel: save.mineProgress.deepestMineLevel,
       deepestSkullCavernLevel: save.mineProgress.deepestSkullCavernLevel,
