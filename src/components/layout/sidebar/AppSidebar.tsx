@@ -12,7 +12,8 @@ import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
-import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
+import { GiChicken, GiCrossedSwords, GiMushroom } from "react-icons/gi";
+import { PiFarmFill } from "react-icons/pi";
 import {
 	HiBookOpen,
 	HiCalendar,
@@ -68,15 +69,30 @@ export function AppSidebar() {
 								</SidebarItem>
 
 								{activePlaythrough && (
-									<SidebarItem
-										as={Link}
-										href="/character"
-										icon={HiUser}
-										active={pathname === "/character"}
-										onClick={() => setSidebarOpen(false)}
+									<SidebarCollapse
+										icon={PiFarmFill}
+										label="Farm"
+										open={pathname.startsWith("/farm")}
 									>
-										Character
-									</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/farm/character"
+											icon={HiUser}
+											active={pathname === "/farm/character"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Character
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/farm/animals"
+											icon={GiChicken}
+											active={pathname === "/farm/animals"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Animals
+										</SidebarItem>
+									</SidebarCollapse>
 								)}
 
 								{activePlaythrough && (

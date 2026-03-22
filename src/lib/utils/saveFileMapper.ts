@@ -204,16 +204,28 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       hasAnimalCracker: a.hasAnimalCracker,
     })),
 
-    pets: save.pet
-      ? [
-          {
-            name: save.pet.name,
-            type: save.pet.type,
-            breed: String(save.pet.breed),
-            friendship: save.pet.friendship,
-          },
-        ]
-      : [],
+    pets: [
+      ...(save.pet
+        ? [
+            {
+              name: save.pet.name,
+              type: save.pet.type,
+              breed: String(save.pet.breed),
+              friendship: save.pet.friendship,
+            },
+          ]
+        : []),
+      ...(save.horse
+        ? [
+            {
+              name: save.horse.name,
+              type: "Horse",
+              breed: "",
+              friendship: null,
+            },
+          ]
+        : []),
+    ],
 
     buildings: save.buildings.map((b) => ({
       id: b.id,

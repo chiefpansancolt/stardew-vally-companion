@@ -82,7 +82,7 @@ export interface PetProgress {
   name: string;
   type: string;
   breed: string;
-  friendship: number;
+  friendship: number | null;
 }
 
 export interface BuildingProgress {
