@@ -15,7 +15,7 @@ function buildRows(
 	category: string,
 	entries: Props["entries"],
 	totalEarnings: number,
-	progress?: Props["progress"],
+	progress?: Props["progress"]
 ): CriterionRow[] {
 	if (category === "earnings") {
 		return EARNINGS_TIERS.map((tier) => {
@@ -25,9 +25,7 @@ function buildRows(
 				earned,
 				partial: false,
 				points: earned ? "1 / 1" : "0 / 1",
-				progress: !earned
-					? { current: totalEarnings, total: tier.threshold }
-					: undefined,
+				progress: !earned ? { current: totalEarnings, total: tier.threshold } : undefined,
 			};
 		});
 	}
@@ -109,7 +107,7 @@ export function GrandpaCategoryCard({
 											row.earned
 												? "font-medium text-green-300"
 												: row.partial
-													? "font-medium text-accent"
+													? "text-accent font-medium"
 													: "text-white/40"
 										}`}
 									>
@@ -132,12 +130,13 @@ export function GrandpaCategoryCard({
 								<div className="mt-1.5 flex items-center gap-2">
 									<div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
 										<div
-											className="h-full rounded-full bg-accent/60"
+											className="bg-accent/60 h-full rounded-full"
 											style={{ width: `${progressPct}%` }}
 										/>
 									</div>
 									<span className="text-[0.625rem] text-white/40">
-										{row.progress.current.toLocaleString()} / {row.progress.total.toLocaleString()}
+										{row.progress.current.toLocaleString()} /{" "}
+										{row.progress.total.toLocaleString()}
 									</span>
 								</div>
 							)}

@@ -3,8 +3,12 @@
 import { FaClipboardList } from "react-icons/fa";
 import { TbCandle, TbCandleFilled } from "react-icons/tb";
 import type { GrandpaHeroProps as Props } from "@/types";
+import {
+	CANDLE_THRESHOLDS,
+	GRANDPA_CATEGORY_META,
+	GRANDPA_CATEGORY_ORDER,
+} from "@/data/constants/grandpa";
 import { StatTile } from "@/comps/ui/StatTile";
-import { GRANDPA_CATEGORY_ORDER, GRANDPA_CATEGORY_META, CANDLE_THRESHOLDS } from "@/data/constants/grandpa";
 
 export function GrandpaHero({ result }: Props) {
 	const categoriesComplete = GRANDPA_CATEGORY_ORDER.filter((cat) => {
@@ -35,7 +39,7 @@ export function GrandpaHero({ result }: Props) {
 						return (
 							<div key={candle} className="flex flex-col items-center gap-1">
 								{lit ? (
-									<TbCandleFilled className="h-8 w-8 text-accent" />
+									<TbCandleFilled className="text-accent h-8 w-8" />
 								) : (
 									<TbCandle className="h-8 w-8 text-gray-300" />
 								)}

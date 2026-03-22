@@ -1,4 +1,4 @@
-import { collections, fish, minerals, artifacts } from "stardew-valley-data";
+import { artifacts, collections, fish, minerals } from "stardew-valley-data";
 import type { GameData } from "@/types";
 
 export interface AchievementProgress {

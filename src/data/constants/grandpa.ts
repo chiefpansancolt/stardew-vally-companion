@@ -1,12 +1,12 @@
 import type { GrandpaCategory } from "stardew-valley-data";
 import type { IconType } from "react-icons";
 import {
-  HiCurrencyDollar,
   HiAcademicCap,
-  HiStar,
+  HiCurrencyDollar,
   HiHeart,
   HiHome,
   HiMap,
+  HiStar,
 } from "react-icons/hi";
 
 interface GrandpaCategoryMeta {
@@ -14,7 +14,10 @@ interface GrandpaCategoryMeta {
   icon: IconType;
 }
 
-export const GRANDPA_CATEGORY_META: Record<GrandpaCategory, GrandpaCategoryMeta> = {
+export const GRANDPA_CATEGORY_META: Record<
+  GrandpaCategory,
+  GrandpaCategoryMeta
+> = {
   earnings: { label: "Earnings", icon: HiCurrencyDollar },
   skills: { label: "Skills", icon: HiAcademicCap },
   achievements: { label: "Achievements", icon: HiStar },

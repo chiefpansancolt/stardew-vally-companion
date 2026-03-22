@@ -11,8 +11,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
-import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
 import { FaClipboardList } from "react-icons/fa";
+import { GiCrossedSwords, GiMushroom } from "react-icons/gi";
 import {
 	HiCalendar,
 	HiCog,
