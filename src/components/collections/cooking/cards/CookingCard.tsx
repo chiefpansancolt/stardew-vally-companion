@@ -1,7 +1,7 @@
 import type { CookingCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { craftingCardStyles } from "@/lib/utils/cardStyles";
-import { CookingBadge } from "@/comps/ui/CookingBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 function formatSource(dish: CookingCardProps["dish"]): string {
 	const src = dish.recipeSources[0];
@@ -44,7 +44,7 @@ export function CookingCard({ dish, learned, cooked, onClick }: CookingCardProps
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{dish.name}
 						</span>
-						<CookingBadge learned={learned} cooked={cooked} />
+						{cooked ? <StatusBadge status="success" label="Cooked" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
 					</div>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">{formatSource(dish)}</div>
 					{hasEnergy && (

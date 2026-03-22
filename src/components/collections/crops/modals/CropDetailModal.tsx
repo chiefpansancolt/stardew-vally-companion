@@ -9,7 +9,7 @@ import { NAVY_TILE } from "@/data/constants/styles";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeedRow } from "@/comps/ui/SeedRow";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function CropDetailModal({ crop, gameData, onClose }: Props) {
 	if (!crop) return null;
@@ -40,7 +40,7 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						<div className="text-lg font-extrabold">{crop.name}</div>
 						<div className="text-sm text-gray-500">{seasonLabel}</div>
 					</div>
-					<ShippedBadge shippable={true} shipped={shipped} />
+					<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 				</div>
 			</ModalHeader>
 			<ModalBody>

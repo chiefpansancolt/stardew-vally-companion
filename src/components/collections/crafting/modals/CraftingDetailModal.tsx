@@ -5,7 +5,7 @@ import type { CraftingDetailModalProps as Props } from "@/types";
 import { resolveIngredientImage } from "@/lib/pages/crafting";
 import { assetPath } from "@/lib/utils/assetPath";
 import { NAVY_TILE } from "@/data/constants/styles";
-import { CraftingBadge } from "@/comps/ui/CraftingBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function CraftingDetailModal({ recipe, learned, crafted, onClose }: Props) {
 	if (!recipe) return null;
@@ -22,7 +22,7 @@ export function CraftingDetailModal({ recipe, learned, crafted, onClose }: Props
 					<div>
 						<div className="flex items-center gap-2">
 							<span className="text-lg font-extrabold">{recipe.name}</span>
-							<CraftingBadge learned={learned} crafted={crafted} />
+							{crafted ? <StatusBadge status="success" label="Crafted" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
 						</div>
 						<div className="text-sm text-gray-500">{recipe.category}</div>
 					</div>

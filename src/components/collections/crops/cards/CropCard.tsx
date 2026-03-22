@@ -5,7 +5,7 @@ import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
 import { SeedRow } from "@/comps/ui/SeedRow";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function CropCard({
 	crop,
@@ -53,7 +53,7 @@ export function CropCard({
 					</div>
 				</div>
 				<div className="flex shrink-0 flex-col items-end gap-1">
-					<ShippedBadge shippable={true} shipped={shipped} />
+					<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 					{shipped && shippedCount > 0 && (
 						<span className="text-[0.6rem] text-white/80">×{shippedCount} shipped</span>
 					)}

@@ -5,7 +5,7 @@ import type { SpecialItemDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SPECIAL_ITEM_TYPE_LABELS } from "@/data/constants/specialItems";
 import { NAVY_TILE } from "@/data/constants/styles";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function SpecialItemDetailModal({ item, acquired, onClose }: Props) {
 	if (!item) return null;
@@ -29,12 +29,7 @@ export function SpecialItemDetailModal({ item, acquired, onClose }: Props) {
 									Info
 								</span>
 							) : (
-								<ShippedBadge
-									shippable
-									shipped={acquired}
-									label="Acquired"
-									notLabel="Not Acquired"
-								/>
+								<StatusBadge status={acquired ? "success" : "inactive"} label={acquired ? "Acquired" : "Not Acquired"} />
 							)}
 						</div>
 					</div>

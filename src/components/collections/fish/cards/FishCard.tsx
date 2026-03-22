@@ -4,7 +4,7 @@ import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { WEATHER_LABELS } from "@/data/constants/filters";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 import { DifficultyBar } from "./DifficultyBar";
 
 export function FishCard({ fish, caught, professionBonus = null, onClick }: FishCardProps) {
@@ -36,12 +36,7 @@ export function FishCard({ fish, caught, professionBonus = null, onClick }: Fish
 						)}
 					</div>
 				</div>
-				<ShippedBadge
-					shippable={true}
-					shipped={caught}
-					label="Caught"
-					notLabel="Not Caught"
-				/>
+				<StatusBadge status={caught ? "success" : "inactive"} label={caught ? "Caught" : "Not Caught"} />
 			</div>
 
 			<div className="flex flex-wrap items-center gap-1">

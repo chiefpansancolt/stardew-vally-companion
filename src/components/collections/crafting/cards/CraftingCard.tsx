@@ -1,7 +1,7 @@
 import type { CraftingCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { craftingCardStyles } from "@/lib/utils/cardStyles";
-import { CraftingBadge } from "@/comps/ui/CraftingBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function CraftingCard({ recipe, learned, crafted, onClick }: CraftingCardProps) {
 	const { borderBg, nameColor } = craftingCardStyles(learned, crafted);
@@ -22,7 +22,7 @@ export function CraftingCard({ recipe, learned, crafted, onClick }: CraftingCard
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{recipe.name}
 						</span>
-						<CraftingBadge learned={learned} crafted={crafted} />
+						{crafted ? <StatusBadge status="success" label="Crafted" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
 					</div>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">{recipe.source}</div>
 					<div className="mt-1 flex flex-wrap gap-1">

@@ -258,11 +258,6 @@ export interface CraftingDetailModalProps {
   onClose: () => void;
 }
 
-export interface CraftingBadgeProps {
-  learned: boolean;
-  crafted: boolean;
-}
-
 export interface ResourceCardProps {
   resource: ResourceItem;
   shipped: boolean;
@@ -289,11 +284,6 @@ export interface CookingDetailModalProps {
   learned: boolean;
   cooked: boolean;
   onClose: () => void;
-}
-
-export interface CookingBadgeProps {
-  learned: boolean;
-  cooked: boolean;
 }
 
 export interface MonsterLootCardProps {

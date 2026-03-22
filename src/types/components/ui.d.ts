@@ -17,12 +17,12 @@ export interface StatTileProps {
   suffix?: string | number;
 }
 
-export interface ShippedBadgeProps {
-  shippable: boolean;
-  shipped: boolean;
+export type BadgeStatus = "success" | "warning" | "inactive";
+
+export interface StatusBadgeProps {
+  status: BadgeStatus;
+  label: string;
   count?: number;
-  label?: string;
-  notLabel?: string;
 }
 
 export interface FilterPopoverProps {
@@ -89,11 +89,6 @@ export interface EnergyHealthGridProps {
   maxQuality: string;
   variant?: "card" | "modal";
   poison?: boolean;
-}
-
-export interface MuseumBadgeProps {
-  donated: boolean;
-  found: boolean;
 }
 
 export interface BuyPrice {

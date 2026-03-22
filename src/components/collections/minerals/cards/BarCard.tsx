@@ -2,7 +2,7 @@ import type { BarCardProps as CardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function BarCard({ bar, shipped, professionBonus, onClick, oreNameById }: CardProps) {
 	const { borderBg, nameColor } = shippedCardStyles(shipped);
@@ -30,7 +30,7 @@ export function BarCard({ bar, shipped, professionBonus, onClick, oreNameById }:
 						</div>
 					)}
 				</div>
-				<ShippedBadge shippable shipped={shipped} />
+				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 			</div>
 			<PriceGrid
 				price={bar.sellPrice}

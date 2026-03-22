@@ -6,7 +6,7 @@ import type { MonsterLootDetailModalProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { NAVY_TILE } from "@/data/constants/styles";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 const allMonsters = monsters().get();
 const monsterById = Object.fromEntries(allMonsters.map((m) => [m.id, m]));
@@ -26,7 +26,7 @@ export function MonsterLootDetailModal({ loot, shipped, shippable, onClose }: Pr
 					<div>
 						<div className="flex items-center gap-2">
 							<span className="text-lg font-extrabold">{loot.name}</span>
-							<ShippedBadge shippable={shippable} shipped={shipped} />
+							{shippable && <StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />}
 						</div>
 					</div>
 				</div>

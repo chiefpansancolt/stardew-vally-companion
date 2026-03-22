@@ -1,7 +1,7 @@
 import type { SpecialItemCardProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SPECIAL_ITEM_TYPE_LABELS } from "@/data/constants/specialItems";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function SpecialItemCard({ item, acquired, onClick }: Props) {
 	const isInfo = acquired === null;
@@ -31,18 +31,7 @@ export function SpecialItemCard({ item, acquired, onClick }: Props) {
 					>
 						{item.name}
 					</span>
-					{isInfo ? (
-						<span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.625rem] font-medium text-white/50">
-							Info
-						</span>
-					) : (
-						<ShippedBadge
-							shippable
-							shipped={acquired}
-							label="Acquired"
-							notLabel="Not Acquired"
-						/>
-					)}
+					{!isInfo && <StatusBadge status={acquired ? "success" : "inactive"} label={acquired ? "Acquired" : "Not Acquired"} />}
 				</div>
 				<p className="mt-0.5 line-clamp-1 text-xs text-white/80">{item.effect}</p>
 				<span className="mt-1 inline-block rounded bg-white/5 px-1.5 py-0.5 text-[0.625rem] text-white/80">

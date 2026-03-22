@@ -3,7 +3,7 @@ import { assetPath } from "@/lib/utils/assetPath";
 import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function WildTreeTapperCard({
 	tree,
@@ -28,7 +28,7 @@ export function WildTreeTapperCard({
 					<div className="mt-1 text-[0.65rem] text-white/60">{tree.name} tapper</div>
 				</div>
 				<div className="flex shrink-0 flex-col items-end gap-1">
-					<ShippedBadge shippable={true} shipped={shipped} />
+					<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 					{shipped && (
 						<span className="text-[0.6rem] text-white/60">×{shippedCount}</span>
 					)}

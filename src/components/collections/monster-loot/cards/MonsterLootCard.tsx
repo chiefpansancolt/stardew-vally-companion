@@ -3,7 +3,7 @@ import type { MonsterLootCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 const allMonsters = monsters().get();
 const monsterNameById: Record<string, string> = Object.fromEntries(
@@ -29,7 +29,7 @@ export function MonsterLootCard({ loot, shipped, shippable, onClick }: MonsterLo
 						<span className={`text-sm leading-tight font-bold ${nameColor}`}>
 							{loot.name}
 						</span>
-						<ShippedBadge shippable={shippable} shipped={shipped} />
+						{shippable && <StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />}
 					</div>
 					<div className="mt-1 flex flex-wrap gap-1">
 						{loot.droppedBy.map((mId) => (

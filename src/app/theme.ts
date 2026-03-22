@@ -41,7 +41,7 @@ export const customTheme: CustomFlowbiteTheme = createTheme({
           "bg-highlight/20 text-highlight hover:bg-highlight/30 dark:bg-highlight/30 dark:text-highlight dark:hover:bg-highlight/40",
       },
       size: {
-        xxs: "px-2 py-0.5 text-[0.65rem]",
+        xxs: "px-1 py-0.5 text-[0.50rem]",
       },
     },
   },

@@ -2,7 +2,7 @@ import type { ResourceCardProps as CardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function ResourceCard({ resource, shipped, professionBonus, onClick }: CardProps) {
 	const { borderBg, nameColor } = shippedCardStyles(shipped);
@@ -24,7 +24,7 @@ export function ResourceCard({ resource, shipped, professionBonus, onClick }: Ca
 					</span>
 					<div className="mt-0.5 text-[0.6rem] text-white/40">Click to see locations</div>
 				</div>
-				<ShippedBadge shippable shipped={shipped} />
+				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 			</div>
 			<PriceGrid
 				price={resource.sellPrice}

@@ -4,7 +4,7 @@ import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeasonBadges } from "@/comps/ui/SeasonBadges";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 import { ArtisanUsesRow } from "./ArtisanUsesRow";
 
 export function ForageableCard({
@@ -33,7 +33,7 @@ export function ForageableCard({
 				</div>
 				{shippable && (
 					<div className="flex shrink-0 flex-col items-end gap-1">
-						<ShippedBadge shippable={shippable} shipped={shipped} />
+						<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 						{shipped && (
 							<span className="text-[0.6rem] text-white/60">
 								×{shippedCount} shipped

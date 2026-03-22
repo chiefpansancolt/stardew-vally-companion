@@ -5,7 +5,7 @@ import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { EQUIPMENT_IMAGES } from "@/data/constants/artisanGoods";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function ArtisanGoodCard({
 	good,
@@ -66,7 +66,7 @@ export function ArtisanGoodCard({
 						</div>
 					)}
 				</div>
-				<ShippedBadge shippable={shippable} shipped={shipped} />
+				{shippable && <StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />}
 			</div>
 
 			{good.sellPrice !== null ? (

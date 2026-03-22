@@ -10,7 +10,7 @@ import { NAVY_TILE } from "@/data/constants/styles";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SeedRow } from "@/comps/ui/SeedRow";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 function FruitTreeModal({ tree, gameData }: { tree: FruitTree; gameData: GameData }) {
 	const p = tree.produce;
@@ -105,7 +105,7 @@ function FruitTreeModal({ tree, gameData }: { tree: FruitTree; gameData: GameDat
 					<div>
 						<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 							Produce
-							<ShippedBadge shippable={true} shipped={shipped} count={shippedCount} />
+							{shipped ? <StatusBadge status="success" label="Shipped" count={shippedCount} /> : <StatusBadge status="inactive" label="Not Shipped" />}
 						</div>
 
 						<div
@@ -259,11 +259,7 @@ function WildTreeModal({
 						<div>
 							<div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
 								Tapper Produce
-								<ShippedBadge
-									shippable={isShippable}
-									shipped={shipped}
-									count={shippedCount}
-								/>
+								{isShippable && (shipped ? <StatusBadge status="success" label="Shipped" count={shippedCount} /> : <StatusBadge status="inactive" label="Not Shipped" />)}
 							</div>
 
 							<div

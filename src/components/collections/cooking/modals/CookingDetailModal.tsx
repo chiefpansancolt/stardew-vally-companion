@@ -6,7 +6,7 @@ import { resolveIngredientImage } from "@/lib/pages/crafting";
 import { assetPath } from "@/lib/utils/assetPath";
 import { SEASONS } from "@/data/constants/seasons";
 import { NAVY_TILE } from "@/data/constants/styles";
-import { CookingBadge } from "@/comps/ui/CookingBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 import { EnergyHealthGrid } from "@/comps/ui/energy-health-grid";
 import { PriceGrid } from "@/comps/ui/price-grid";
 
@@ -30,7 +30,7 @@ export function CookingDetailModal({ dish, learned, cooked, onClose }: Props) {
 					<div>
 						<div className="flex items-center gap-2">
 							<span className="text-lg font-extrabold">{dish.name}</span>
-							<CookingBadge learned={learned} cooked={cooked} />
+							{cooked ? <StatusBadge status="success" label="Cooked" /> : learned ? <StatusBadge status="warning" label="Learned" /> : <StatusBadge status="inactive" label="Not Learned" />}
 						</div>
 					</div>
 				</div>

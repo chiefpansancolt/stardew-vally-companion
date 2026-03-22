@@ -2,7 +2,7 @@ import type { ProduceCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
-import { ShippedBadge } from "@/comps/ui/ShippedBadge";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 export function ProduceCard({ entry, shipped, professionBonus = null }: ProduceCardProps) {
 	const { produce, animalName, building, isDeluxe } = entry;
@@ -31,7 +31,7 @@ export function ProduceCard({ entry, shipped, professionBonus = null }: ProduceC
 						{animalName} · {building}
 					</div>
 				</div>
-				<ShippedBadge shippable={true} shipped={shipped} />
+				<StatusBadge status={shipped ? "success" : "inactive"} label={shipped ? "Shipped" : "Not Shipped"} />
 			</div>
 
 			<PriceGrid
