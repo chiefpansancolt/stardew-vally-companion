@@ -12,3 +12,4 @@ export * from "./modals";
 export * from "./grandpa";
 export * from "./specialItems";
 export * from "./farm";
+export * from "./town";

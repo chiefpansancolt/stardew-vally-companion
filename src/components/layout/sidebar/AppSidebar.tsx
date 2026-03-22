@@ -19,6 +19,7 @@ import {
 	HiCog,
 	HiCollection,
 	HiHome,
+	HiLocationMarker,
 	HiTable,
 	HiUser,
 	HiUserGroup,
@@ -115,6 +116,16 @@ export function AppSidebar() {
 										Villagers
 									</SidebarItem>
 								)}
+
+								<SidebarItem
+									as={Link}
+									href="/town"
+									icon={HiLocationMarker}
+									active={pathname === "/town"}
+									onClick={() => setSidebarOpen(false)}
+								>
+									Town
+								</SidebarItem>
 
 								{activePlaythrough && (
 									<SidebarItem
