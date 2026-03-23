@@ -115,6 +115,12 @@ export interface MasteryProgress {
   unlocked: string[];
 }
 
+export interface JojaProgress {
+  isMember: boolean;
+  completed: boolean;
+  developments: Record<string, boolean>;
+}
+
 export interface GameData {
   character: CharacterInfo;
   toolLevels: ToolLevels;
@@ -147,6 +153,7 @@ export interface GameData {
   islandUpgrades: Record<string, boolean>;
   perfectionWaiverCount: number;
   communityCenter: CommunityCenterProgress;
+  joja: JojaProgress;
 }
 
 export interface CommunityCenterProgress {

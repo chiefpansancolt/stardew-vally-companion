@@ -252,5 +252,12 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     ),
     perfectionWaiverCount: save.perfection.waivers,
     communityCenter: save.communityCenter,
+    joja: {
+      isMember: save.joja.isMember,
+      completed: save.joja.completed,
+      developments: Object.fromEntries(
+        save.joja.developments.map((d) => [d.id, d.purchased]),
+      ),
+    },
   };
 }

@@ -9,9 +9,10 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
+import { FaBuilding, FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
+import { FaSchool } from "react-icons/fa6";
 import { GiChicken, GiCrossedSwords, GiMushroom, GiPalmTree } from "react-icons/gi";
 import {
 	HiBookOpen,
@@ -274,6 +275,30 @@ export function AppSidebar() {
 										onClick={() => setSidebarOpen(false)}
 									>
 										Mines & Monsters
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && !activePlaythrough.data.joja?.isMember && (
+									<SidebarItem
+										as={Link}
+										href="/community-center"
+										icon={FaSchool}
+										active={pathname === "/community-center"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Community Center
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && activePlaythrough.data.joja?.isMember && (
+									<SidebarItem
+										as={Link}
+										href="/joja"
+										icon={FaBuilding}
+										active={pathname === "/joja"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Joja Development
 									</SidebarItem>
 								)}
 

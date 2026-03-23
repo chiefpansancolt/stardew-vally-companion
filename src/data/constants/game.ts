@@ -70,6 +70,11 @@ export const DEFAULT_GAME_DATA: GameData = {
   },
   islandUpgrades: {},
   perfectionWaiverCount: 0,
+  joja: {
+    isMember: false,
+    completed: false,
+    developments: {},
+  },
   communityCenter: {
     unlocked: false,
     bundlesActive: false,

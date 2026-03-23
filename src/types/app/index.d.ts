@@ -17,4 +17,8 @@ export type {
   SkillProgress,
   ToolLevels,
   VillagerProgress,
+  CommunityCenterProgress,
+  CommunityCenterRooms,
+  JojaProgress,
+  FishPondProgress,
 } from "./game";

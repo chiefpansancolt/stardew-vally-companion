@@ -15,3 +15,12 @@ export const CC_ROOMS = [
   "bulletin-board",
   "vault",
 ];
+
+export const ROOM_TO_CC_KEY: Record<string, string> = {
+  "crafts-room": "craftsRoom",
+  pantry: "pantry",
+  "fish-tank": "fishTank",
+  "boiler-room": "boilerRoom",
+  "bulletin-board": "bulletin",
+  vault: "vault",
+};
