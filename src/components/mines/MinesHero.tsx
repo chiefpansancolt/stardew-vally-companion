@@ -1,7 +1,7 @@
 "use client";
 
 import { monsterSlayerGoals } from "stardew-valley-data";
-import { GiCrossedSwords } from "react-icons/gi";
+import { GiMineWagon } from "react-icons/gi";
 import type { CollectionProps as Props } from "@/types";
 import { getGoalKillCount } from "@/lib/pages/mines";
 import { StatTile } from "@/comps/ui/StatTile";
@@ -19,7 +19,7 @@ export function MinesHero({ gameData }: Props) {
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
 			<div className="mb-4 flex items-center gap-3">
-				<GiCrossedSwords className="h-7 w-7 text-gray-400" />
+				<GiMineWagon className="h-7 w-7 text-gray-400" />
 				<div>
 					<div className="text-lg font-bold text-gray-900">Mines & Monsters</div>
 					<div className="mt-0.5 text-sm text-gray-500">
