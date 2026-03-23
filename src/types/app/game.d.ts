@@ -144,6 +144,7 @@ export interface GameData {
   buildings: BuildingProgress[];
   fishPonds: FishPondProgress[];
   mineProgress: MineProgress;
+  islandUpgrades: Record<string, boolean>;
   perfectionWaiverCount: number;
   communityCenter: CommunityCenterProgress;
 }

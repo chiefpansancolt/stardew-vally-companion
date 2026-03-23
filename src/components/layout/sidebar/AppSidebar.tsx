@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 import { FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
-import { GiChicken, GiCrossedSwords, GiMushroom } from "react-icons/gi";
+import { GiChicken, GiCrossedSwords, GiMushroom, GiPalmTree } from "react-icons/gi";
 import {
 	HiBookOpen,
 	HiCalendar,
@@ -101,6 +101,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Buildings
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/farm/ginger-island"
+											icon={GiPalmTree}
+											active={pathname === "/farm/ginger-island"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Ginger Island
 										</SidebarItem>
 									</SidebarCollapse>
 								)}

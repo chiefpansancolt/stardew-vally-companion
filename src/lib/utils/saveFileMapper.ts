@@ -247,6 +247,9 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       hasSkullKey: save.mineProgress.hasSkullKey,
     },
 
+    islandUpgrades: Object.fromEntries(
+      save.islandUpgrades.map((u) => [u.id, u.unlocked]),
+    ),
     perfectionWaiverCount: save.perfection.waivers,
     communityCenter: save.communityCenter,
   };

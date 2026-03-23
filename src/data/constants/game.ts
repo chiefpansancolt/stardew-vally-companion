@@ -68,6 +68,7 @@ export const DEFAULT_GAME_DATA: GameData = {
     hasRustyKey: false,
     hasSkullKey: false,
   },
+  islandUpgrades: {},
   perfectionWaiverCount: 0,
   communityCenter: {
     unlocked: false,
