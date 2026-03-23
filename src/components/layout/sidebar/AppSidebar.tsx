@@ -35,6 +35,7 @@ import {
 	HiUserGroup,
 	HiViewGrid,
 } from "react-icons/hi";
+import { LuSwords } from "react-icons/lu";
 import { PiBarnFill, PiFarmFill } from "react-icons/pi";
 import { RiTreasureMapLine } from "react-icons/ri";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
@@ -286,6 +287,16 @@ export function AppSidebar() {
 										Mines & Monsters
 									</SidebarItem>
 								)}
+
+								<SidebarItem
+									as={Link}
+									href="/gear"
+									icon={LuSwords}
+									active={pathname === "/gear"}
+									onClick={() => setSidebarOpen(false)}
+								>
+									Gear
+								</SidebarItem>
 
 								{activePlaythrough && !activePlaythrough.data.joja?.isMember && (
 									<SidebarItem
