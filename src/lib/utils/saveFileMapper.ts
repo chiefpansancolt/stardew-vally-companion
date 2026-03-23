@@ -135,9 +135,10 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       save.walnuts.collected.map((id) => [id, 1]),
     ),
 
-    secretNotes: Object.fromEntries(
-      save.secretNotes.notesFound.map((id) => [String(id), true]),
-    ),
+    secretNotes: Object.fromEntries([
+      ...save.secretNotes.notesFound.map((id) => [String(id), true]),
+      ...save.secretNotes.journalScrapsFound.map((id) => [String(id), true]),
+    ]),
 
     lostBooks: DEFAULT_GAME_DATA.lostBooks,
 
@@ -251,6 +252,8 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       save.islandUpgrades.map((u) => [u.id, u.unlocked]),
     ),
     perfectionWaiverCount: save.perfection.waivers,
+    helpWantedCompleted: save.player.helpWantedQuests,
+    lostBooksFound: save.player.lostBooksFound,
     communityCenter: save.communityCenter,
     joja: {
       isMember: save.joja.isMember,

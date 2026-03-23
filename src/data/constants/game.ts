@@ -70,6 +70,8 @@ export const DEFAULT_GAME_DATA: GameData = {
   },
   islandUpgrades: {},
   perfectionWaiverCount: 0,
+  helpWantedCompleted: 0,
+  lostBooksFound: 0,
   joja: {
     isMember: false,
     completed: false,

@@ -16,6 +16,7 @@ import {
 	FaFish,
 	FaGem,
 	FaHammer,
+	FaScroll,
 	FaSkull,
 	FaUtensils,
 } from "react-icons/fa";
@@ -297,6 +298,18 @@ export function AppSidebar() {
 								>
 									Gear
 								</SidebarItem>
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/quests"
+										icon={FaScroll}
+										active={pathname === "/quests"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Quests
+									</SidebarItem>
+								)}
 
 								{activePlaythrough && !activePlaythrough.data.joja?.isMember && (
 									<SidebarItem

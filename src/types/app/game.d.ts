@@ -152,6 +152,8 @@ export interface GameData {
   mineProgress: MineProgress;
   islandUpgrades: Record<string, boolean>;
   perfectionWaiverCount: number;
+  helpWantedCompleted: number;
+  lostBooksFound: number;
   communityCenter: CommunityCenterProgress;
   joja: JojaProgress;
 }
