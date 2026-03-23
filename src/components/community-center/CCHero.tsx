@@ -2,7 +2,7 @@
 
 import { bundles } from "stardew-valley-data";
 import { FaSchool } from "react-icons/fa6";
-import type { CollectionProps as Props, CommunityCenterRooms } from "@/types";
+import type { CommunityCenterRooms, CollectionProps as Props } from "@/types";
 import { isItemOrGoldBundle } from "@/lib/utils/bundleHelpers";
 import { CC_ROOMS, ROOM_TO_CC_KEY } from "@/data/constants/bundles";
 import { StatTile } from "@/comps/ui/StatTile";
@@ -24,7 +24,7 @@ export function CCHero({ gameData }: Props) {
 	const rooms = cc.rooms;
 
 	const roomsComplete = CC_ROOMS.filter(
-		(r) => rooms[ROOM_TO_CC_KEY[r] as keyof CommunityCenterRooms],
+		(r) => rooms[ROOM_TO_CC_KEY[r] as keyof CommunityCenterRooms]
 	).length;
 
 	let bundlesComplete = 0;
@@ -71,13 +71,17 @@ export function CCHero({ gameData }: Props) {
 				<StatTile
 					label="Rooms Complete"
 					value={roomsComplete}
-					valueColor={roomsComplete === CC_ROOMS.length ? "text-green-600" : "text-accent"}
+					valueColor={
+						roomsComplete === CC_ROOMS.length ? "text-green-600" : "text-accent"
+					}
 					suffix={`/ ${CC_ROOMS.length}`}
 				/>
 				<StatTile
 					label="Bundles Complete"
 					value={bundlesComplete}
-					valueColor={bundlesComplete === allBundles.length ? "text-green-600" : "text-accent"}
+					valueColor={
+						bundlesComplete === allBundles.length ? "text-green-600" : "text-accent"
+					}
 					suffix={`/ ${allBundles.length}`}
 				/>
 				<StatTile

@@ -1,14 +1,14 @@
 "use client";
 
-import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
-import { JojaHero } from "@/comps/joja/JojaHero";
-import { DevelopmentsSection } from "@/comps/joja/DevelopmentsSection";
-import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
-import { NAVY_TILE } from "@/data/constants/styles";
 import { assetPath } from "@/lib/utils/assetPath";
+import { NAVY_TILE } from "@/data/constants/styles";
+import { DevelopmentsSection } from "@/comps/joja/DevelopmentsSection";
+import { JojaHero } from "@/comps/joja/JojaHero";
+import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 
 function JojaContent() {
 	const { activePlaythrough } = usePlaythrough();
@@ -29,7 +29,7 @@ function JojaContent() {
 					</p>
 					<Link
 						href="/community-center"
-						className="mt-4 inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/80"
+						className="bg-primary hover:bg-primary/80 mt-4 inline-block rounded-lg px-4 py-2 text-sm font-semibold text-white"
 					>
 						Go to Community Center
 					</Link>
@@ -42,9 +42,7 @@ function JojaContent() {
 		<div className="p-6">
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Joja Community Development</h1>
-				<p className="mt-1 text-gray-600">
-					Joja Mart community development projects
-				</p>
+				<p className="mt-1 text-gray-600">Joja Mart community development projects</p>
 			</div>
 
 			<div className="flex flex-col gap-6">
@@ -60,7 +58,9 @@ function JojaContent() {
 							Active member — community development projects available
 						</div>
 					</div>
-					<span className={`text-sm font-bold ${activePlaythrough.data.joja?.isMember ? "text-green-400" : "text-white/80"}`}>
+					<span
+						className={`text-sm font-bold ${activePlaythrough.data.joja?.isMember ? "text-green-400" : "text-white/80"}`}
+					>
 						{activePlaythrough.data.joja?.isMember ? "Active" : "Inactive"}
 					</span>
 				</div>

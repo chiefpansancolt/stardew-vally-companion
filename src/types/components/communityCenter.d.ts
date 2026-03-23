@@ -1,4 +1,4 @@
-import type { ItemBundle, GoldBundle } from "stardew-valley-data";
+import type { GoldBundle, ItemBundle } from "stardew-valley-data";
 
 export interface BundleCardProps {
   bundle: ItemBundle | GoldBundle;

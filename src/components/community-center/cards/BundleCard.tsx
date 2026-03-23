@@ -23,18 +23,14 @@ export function BundleCard({ bundle, completedItems }: Props) {
 
 	const completedCount = Object.values(completedItems).filter(Boolean).length;
 	const totalRequired = isGold ? 1 : bundle.itemsRequired;
-	const isComplete = isGold
-		? !!completedItems["0"]
-		: completedCount >= totalRequired;
+	const isComplete = isGold ? !!completedItems["0"] : completedCount >= totalRequired;
 
 	const rewardImage = getItemImage(bundle.reward.name);
 
 	return (
 		<div
 			className={`flex flex-col gap-2 rounded-lg border p-3 ${
-				isComplete
-					? "border-green-400/30 bg-green-400/10"
-					: "border-white/10 bg-white/5"
+				isComplete ? "border-green-400/30 bg-green-400/10" : "border-white/10 bg-white/5"
 			}`}
 		>
 			<div className="flex items-start gap-2.5">
@@ -120,7 +116,7 @@ export function BundleCard({ bundle, completedItems }: Props) {
 				</div>
 			)}
 
-			<div className="flex items-center gap-1.5 rounded-lg border border-highlight/15 bg-highlight/8 px-2 py-1">
+			<div className="border-highlight/15 bg-highlight/8 flex items-center gap-1.5 rounded-lg border px-2 py-1">
 				<span className="text-[0.55rem] font-semibold text-white/80">Reward:</span>
 				{rewardImage && (
 					<img
@@ -129,7 +125,7 @@ export function BundleCard({ bundle, completedItems }: Props) {
 						className="h-5 w-5 object-contain"
 					/>
 				)}
-				<span className="text-[0.6rem] font-bold text-highlight">
+				<span className="text-highlight text-[0.6rem] font-bold">
 					{bundle.reward.quantity > 1 ? `${bundle.reward.quantity} ` : ""}
 					{bundle.reward.name}
 				</span>

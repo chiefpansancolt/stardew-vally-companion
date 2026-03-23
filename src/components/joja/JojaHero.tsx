@@ -10,9 +10,7 @@ const jojaBundles = bundles().jojaBundles().get() as JojaBundle[];
 const totalCost = jojaBundles.reduce((sum, b) => sum + b.goldCost, 0);
 
 export function JojaHero({ gameData }: Props) {
-	const purchased = jojaBundles.filter(
-		(b) => gameData.joja.developments[b.id],
-	).length;
+	const purchased = jojaBundles.filter((b) => gameData.joja.developments[b.id]).length;
 	const purchasedCost = jojaBundles
 		.filter((b) => gameData.joja.developments[b.id])
 		.reduce((sum, b) => sum + b.goldCost, 0);

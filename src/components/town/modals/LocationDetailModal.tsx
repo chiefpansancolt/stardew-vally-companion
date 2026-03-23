@@ -116,10 +116,11 @@ export function LocationDetailModal({ location, onClose }: Props) {
 							<div className="flex-1">
 								<div className="text-sm font-bold text-white">Joja Membership</div>
 								<div className="text-[0.7rem] text-white/50">
-									Purchase a Joja membership to unlock community development projects
+									Purchase a Joja membership to unlock community development
+									projects
 								</div>
 							</div>
-							<div className="text-sm font-bold text-highlight">5,000g</div>
+							<div className="text-highlight text-sm font-bold">5,000g</div>
 						</div>
 					)}
 

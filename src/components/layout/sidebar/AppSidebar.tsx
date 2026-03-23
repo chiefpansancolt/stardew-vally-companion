@@ -9,7 +9,16 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBuilding, FaCheese, FaEgg, FaFish, FaGem, FaHammer, FaSkull, FaUtensils } from "react-icons/fa";
+import {
+	FaBuilding,
+	FaCheese,
+	FaEgg,
+	FaFish,
+	FaGem,
+	FaHammer,
+	FaSkull,
+	FaUtensils,
+} from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { FaSchool } from "react-icons/fa6";

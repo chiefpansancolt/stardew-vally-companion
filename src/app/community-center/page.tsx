@@ -1,8 +1,8 @@
 "use client";
 
 import { Alert } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
 import Link from "next/link";
+import { HiInformationCircle } from "react-icons/hi";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CCHero } from "@/comps/community-center/CCHero";
 import { RoomSections } from "@/comps/community-center/RoomSection";
@@ -20,12 +20,10 @@ export default function CommunityCenterPage() {
 			<div className="flex min-h-[50vh] items-center justify-center p-6">
 				<div className="text-center">
 					<div className="text-lg font-bold text-gray-500">Joja Member</div>
-					<p className="mt-2 text-sm text-gray-600">
-						You chose the Joja route.
-					</p>
+					<p className="mt-2 text-sm text-gray-600">You chose the Joja route.</p>
 					<Link
 						href="/joja"
-						className="mt-4 inline-block rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/80"
+						className="bg-primary hover:bg-primary/80 mt-4 inline-block rounded-lg px-4 py-2 text-sm font-semibold text-white"
 					>
 						Go to Joja Development
 					</Link>
@@ -38,9 +36,7 @@ export default function CommunityCenterPage() {
 		<div className="p-6">
 			<div className="mb-6">
 				<h1 className="text-3xl font-bold text-gray-900">Community Center</h1>
-				<p className="mt-1 text-gray-600">
-					Bundle progress and room completion
-				</p>
+				<p className="mt-1 text-gray-600">Bundle progress and room completion</p>
 			</div>
 
 			<div className="flex flex-col gap-6">

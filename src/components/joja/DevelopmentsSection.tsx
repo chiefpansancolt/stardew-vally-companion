@@ -9,12 +9,13 @@ import { StatusBadge } from "@/comps/ui/StatusBadge";
 const jojaBundles = bundles().jojaBundles().get() as JojaBundle[];
 
 export function DevelopmentsSection({ gameData }: Props) {
-	const purchased = jojaBundles.filter(
-		(b) => gameData.joja.developments[b.id],
-	).length;
+	const purchased = jojaBundles.filter((b) => gameData.joja.developments[b.id]).length;
 
 	return (
-		<NavySection title="Development Projects" badge={`${purchased} / ${jojaBundles.length} purchased`}>
+		<NavySection
+			title="Development Projects"
+			badge={`${purchased} / ${jojaBundles.length} purchased`}
+		>
 			<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 				{jojaBundles.map((dev) => {
 					const isPurchased = !!gameData.joja.developments[dev.id];
@@ -40,7 +41,7 @@ export function DevelopmentsSection({ gameData }: Props) {
 							</div>
 							<div className="text-[0.7rem] text-white/80">{dev.description}</div>
 							<div className="flex items-center justify-between">
-								<span className="text-sm font-bold text-highlight">
+								<span className="text-highlight text-sm font-bold">
 									{formatNumber(dev.goldCost)}g
 								</span>
 								<span className="text-[0.65rem] text-white/80">
