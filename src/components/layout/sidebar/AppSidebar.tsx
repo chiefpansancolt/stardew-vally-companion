@@ -70,7 +70,10 @@ export function AppSidebar() {
 									href="/"
 									icon={HiHome}
 									active={pathname === "/"}
-									onClick={() => setSidebarOpen(false)}
+									onClick={() => {
+										sessionStorage.setItem("explicit-home", "1");
+										setSidebarOpen(false);
+									}}
 								>
 									Home
 								</SidebarItem>

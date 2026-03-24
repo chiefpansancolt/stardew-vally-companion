@@ -2,7 +2,8 @@
 
 import { Button } from "flowbite-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
 	HiChartBar,
 	HiCheckCircle,
@@ -11,6 +12,7 @@ import {
 	HiDeviceMobile,
 	HiShieldCheck,
 } from "react-icons/hi";
+import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 
 const APP_NAME = "Stardew Valley Companion";
 const APP_TAGLINE = "Track Your Farm Progress";
@@ -76,6 +78,20 @@ const FAQS = [
 
 export default function Home() {
 	const [openFaq, setOpenFaq] = useState<number | null>(null);
+	const router = useRouter();
+	const { activePlaythrough } = usePlaythrough();
+
+	const [allowHome] = useState(() => {
+		if (typeof window === "undefined") return false;
+		const flag = sessionStorage.getItem("explicit-home") === "1";
+		if (flag) sessionStorage.removeItem("explicit-home");
+		return flag;
+	});
+
+	useEffect(() => {
+		if (allowHome || !activePlaythrough) return;
+		router.replace("/dashboard");
+	}, [activePlaythrough, router, allowHome]);
 
 	return (
 		<div className="bg-white dark:bg-gray-900">
