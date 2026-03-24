@@ -1,302 +1,310 @@
 "use client";
 
-import { Button } from "flowbite-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "flowbite-react";
 import {
-	HiChartBar,
-	HiCheckCircle,
-	HiClipboardList,
-	HiDatabase,
-	HiDeviceMobile,
-	HiShieldCheck,
+  HiCalendar,
+  HiChevronDown,
+  HiChevronUp,
+  HiInformationCircle,
+  HiTemplate,
+  HiUpload,
 } from "react-icons/hi";
+import { FaTrophy } from "react-icons/fa";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 
-const APP_NAME = "Stardew Valley Companion";
-const APP_TAGLINE = "Track Your Farm Progress";
-const APP_DESCRIPTION =
-	"The ultimate companion app for Stardew Valley. Manage multiple playthroughs and track bundles, friendships, fish, crops, and more.";
-
 const FEATURES = [
-	{
-		icon: HiClipboardList,
-		title: "Multiple Playthroughs",
-		description:
-			"Create and manage unlimited farm saves. Track different strategies and runs separately.",
-	},
-	{
-		icon: HiCheckCircle,
-		title: "Bundle Tracking",
-		description:
-			"Track Community Center bundles and Joja Community Development projects across every playthrough.",
-	},
-	{
-		icon: HiChartBar,
-		title: "Dashboard Overview",
-		description:
-			"See your progress at a glance with summary stats for bundles, friendships, collections, and more.",
-	},
-	{
-		icon: HiDatabase,
-		title: "Data Export/Import",
-		description:
-			"Export your progress as JSON for backup or share with friends. Import data anytime.",
-	},
-	{
-		icon: HiShieldCheck,
-		title: "Private & Offline",
-		description:
-			"All data is stored locally in your browser. No account required, no data sent to servers.",
-	},
-	{
-		icon: HiDeviceMobile,
-		title: "Dark Mode",
-		description: "Comfortable to use day or night with full dark mode support.",
-	},
+  {
+    icon: <img src="/images/skills/Farming.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Dashboard",
+    description: "An at-a-glance overview of your entire playthrough: stats, skills, progress, and perfection score.",
+  },
+  {
+    icon: <img src="/images/bundles/icons/Bundle Green.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Community Center",
+    description: "Track every bundle room and donation. See exactly what you still need to complete the Community Center.",
+  },
+  {
+    icon: <img src="/images/skills/Fishing.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Collections",
+    description: "Monitor fish, crops, minerals, artifacts, cooking, and crafting with progress bars for every category.",
+  },
+  {
+    icon: <img src="/images/villagers/Abigail.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Villagers",
+    description: "Track heart levels for every villager. See who needs more attention and who is maxed out.",
+  },
+  {
+    icon: <img src="/images/skills/Combat.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Skills & Tools",
+    description: "Level tracking for all 5 skills and tool upgrades. See professions and mastery status at a glance.",
+  },
+  {
+    icon: <img src="/images/skills/Mining.png" className="h-8 w-8 object-contain" alt="" />,
+    title: "Mines & Monsters",
+    description: "Track mine depth, Skull Cavern progress, key items, and monster slayer goals all in one place.",
+  },
+  {
+    icon: <FaTrophy className="h-7 w-7 text-primary" />,
+    title: "Perfection Tracker",
+    description: "A full breakdown of your perfection score across all 11 categories, with waiver tracking.",
+  },
+  {
+    icon: <HiCalendar className="h-7 w-7 text-primary" />,
+    title: "Seasonal Calendar",
+    description: "See which crops, fish, and events are available for the current season and plan ahead.",
+  },
+  {
+    icon: <HiUpload className="h-7 w-7 text-primary" />,
+    title: "Save File Import",
+    description: "Upload your Stardew save file and it will be parsed automatically. No manual entry needed.",
+  },
+];
+
+const STEPS = [
+  {
+    number: 1,
+    title: "Create a Playthrough",
+    description:
+      "Upload your Stardew Valley save file for automatic import. Or start manually with your farm name and bundles. Full manual editing is coming soon.",
+  },
+  {
+    number: 2,
+    title: "Track Your Progress",
+    description:
+      "Update collections, heart levels, bundles, skills, and milestones as you play, at your own pace.",
+  },
+  {
+    number: 3,
+    title: "See Your Dashboard",
+    description:
+      "Get a full overview of your farm at any time. See what is done, what is left, and how close you are to perfection.",
+  },
 ];
 
 const FAQS = [
-	{
-		question: `What is ${APP_NAME}?`,
-		answer: `${APP_NAME} is a progress tracking tool for Stardew Valley. It helps you manage multiple farm saves and track bundles, friendships, fish, artifacts, and more — all in one place.`,
-	},
-	{
-		question: "How does it store my data?",
-		answer: "All your data is stored locally in your browser using localStorage. Your progress is private and doesn't require any server or account. You can export and import data as JSON files for backup.",
-	},
-	{
-		question: "Can I track multiple playthroughs?",
-		answer: "Yes! Create and manage multiple farm saves, each with its own progress. Switch between them using the sidebar dropdown.",
-	},
-	{
-		question: "Is this app free to use?",
-		answer: `Yes, ${APP_NAME} is completely free to use. No subscriptions, no ads, no hidden costs.`,
-	},
+  {
+    question: "What is Stardew Valley Companion?",
+    answer:
+      "A free progress tracking tool for Stardew Valley. It helps you manage multiple farm saves and track bundles, friendships, fish, artifacts, skills, and more. No account required.",
+  },
+  {
+    question: "How does it store my data?",
+    answer:
+      "All your data is stored locally in your browser using localStorage. Nothing is sent to any server. You can export your data as a JSON file for backup and re-import it anytime.",
+  },
+  {
+    question: "Can I track multiple playthroughs?",
+    answer:
+      "Yes. Create and manage as many playthroughs as you want. Each one has its own independent progress. Switch between them at any time from the sidebar dropdown.",
+  },
+  {
+    question: "How do I import my save file?",
+    answer:
+      "Find your save file on your computer (Windows: %AppData%\\StardewValley\\Saves, Mac: ~/.config/StardewValley/Saves), then upload the XML file when creating a new playthrough. The app parses it automatically.",
+  },
+  {
+    question: "Is it free to use?",
+    answer: "Completely free. No subscriptions, no ads, no hidden costs.",
+  },
 ];
 
 export default function Home() {
-	const [openFaq, setOpenFaq] = useState<number | null>(null);
-	const router = useRouter();
-	const { activePlaythrough } = usePlaythrough();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const router = useRouter();
+  const { activePlaythrough } = usePlaythrough();
 
-	const [allowHome] = useState(() => {
-		if (typeof window === "undefined") return false;
-		const flag = sessionStorage.getItem("explicit-home") === "1";
-		if (flag) sessionStorage.removeItem("explicit-home");
-		return flag;
-	});
+  const [allowHome] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const flag = sessionStorage.getItem("explicit-home") === "1";
+    if (flag) sessionStorage.removeItem("explicit-home");
+    return flag;
+  });
 
-	useEffect(() => {
-		if (allowHome || !activePlaythrough) return;
-		router.replace("/dashboard");
-	}, [activePlaythrough, router, allowHome]);
+  useEffect(() => {
+    if (allowHome || !activePlaythrough) return;
+    router.replace("/dashboard");
+  }, [activePlaythrough, router, allowHome]);
 
-	return (
-		<div className="bg-white dark:bg-gray-900">
-			<main>
-				<div className="relative isolate overflow-hidden pt-14 pb-16 sm:pb-20">
-					<div
-						aria-hidden="true"
-						className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-					>
-						<div
-							style={{
-								clipPath:
-									"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-							}}
-							className="from-primary to-secondary relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr opacity-20 sm:left-[calc(50%-30rem)] sm:w-288.75"
-						/>
-					</div>
-					<div className="mx-auto max-w-7xl px-6 lg:px-8">
-						<div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-							<div className="text-center">
-								<h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-									{APP_TAGLINE}
-								</h1>
-								<p className="mt-8 text-lg font-medium text-pretty text-gray-600 sm:text-xl/8 dark:text-gray-400">
-									{APP_DESCRIPTION}
-								</p>
-								<div className="mt-10 flex items-center justify-center gap-x-6">
-									<Button
-										as={Link}
-										href="/playthrough/list"
-										color="accent"
-										size="lg"
-									>
-										Get Started
-									</Button>
-									<Link
-										href="#features"
-										className="text-sm/6 font-semibold text-gray-900 dark:text-white"
-									>
-										Learn more <span aria-hidden="true">&rarr;</span>
-									</Link>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div
-						aria-hidden="true"
-						className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-					>
-						<div
-							style={{
-								clipPath:
-									"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-							}}
-							className="from-primary to-secondary relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr opacity-20 sm:left-[calc(50%+36rem)] sm:w-288.75"
-						/>
-					</div>
-				</div>
+  return (
+    <div className="mx-auto max-w-5xl px-6 py-12">
+      <div className="flex flex-col gap-20">
 
-				<div className="mt-8 sm:mt-16" id="features">
-					<div className="mx-auto max-w-7xl px-6 lg:px-8">
-						<div className="mx-auto max-w-2xl sm:text-center">
-							<h2 className="text-primary dark:text-primary/80 text-base/7 font-semibold">
-								Everything you need
-							</h2>
-							<p className="mt-2 text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl dark:text-white">
-								All your farm progress in one place
-							</p>
-						</div>
-					</div>
-					<div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
-						<dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base/7 text-gray-600 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16 dark:text-gray-400">
-							{FEATURES.map(({ icon: Icon, title, description }) => (
-								<div key={title} className="relative pl-9">
-									<dt className="inline font-semibold text-gray-900 dark:text-white">
-										<Icon className="text-primary dark:text-primary/80 absolute top-1 left-1 size-5" />
-										{title}
-									</dt>
-									<dd> {description}</dd>
-								</div>
-							))}
-						</dl>
-					</div>
-				</div>
+        <section className="flex flex-col items-center text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-primary">
+            Stardew Valley Companion
+          </p>
+          <h1 className="max-w-xl text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl">
+            Track every detail of your{" "}
+            <span className="text-primary">farm</span>
+          </h1>
+          <p className="max-w-lg text-[1.0625rem] leading-relaxed text-gray-500">
+            A companion app for Stardew Valley players. Manage multiple playthroughs and track bundles, friendships, collections, skills, and more. All in one place.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {activePlaythrough ? (
+              <>
+                <Button as={Link} href="/dashboard" color="primary" size="lg">
+                  <HiTemplate className="mr-2 h-4 w-4" />
+                  Go to Dashboard
+                </Button>
+                <Link
+                  href="/playthrough/list"
+                  className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                >
+                  Playthroughs
+                </Link>
+              </>
+            ) : (
+              <>
+                <Button as={Link} href="/playthrough/list" color="primary" size="lg">
+                  Get Started
+                </Button>
+                <a
+                  href="#features"
+                  className="text-sm font-semibold text-gray-700 hover:text-gray-900"
+                >
+                  Learn more &rarr;
+                </a>
+              </>
+            )}
+          </div>
+          <p className="text-xs text-gray-400">
+            Free and private. All data stays in your browser.
+          </p>
+          <div className="mt-10 w-full overflow-hidden rounded-2xl border border-[#d6d0bc] shadow-xl">
+            <img
+              src="/Site Screenshot.png"
+              alt="Stardew Valley Companion dashboard preview"
+              className="w-full"
+            />
+          </div>
+        </section>
 
-				<div className="mx-auto mt-32 px-6 sm:mt-56 lg:px-8">
-					<div className="mx-auto max-w-4xl">
-						<h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-							Frequently asked questions
-						</h2>
-						<dl className="mt-16 divide-y divide-gray-900/10 dark:divide-white/10">
-							{FAQS.map((faq, index) => (
-								<div key={index} className="py-6 first:pt-0 last:pb-0">
-									<dt>
-										<button
-											type="button"
-											onClick={() =>
-												setOpenFaq(openFaq === index ? null : index)
-											}
-											className="flex w-full items-start justify-between text-left text-gray-900 dark:text-white"
-											aria-expanded={openFaq === index}
-										>
-											<span className="text-base/7 font-semibold">
-												{faq.question}
-											</span>
-											<span className="ml-6 flex h-7 items-center">
-												<svg
-													viewBox="0 0 24 24"
-													fill="none"
-													stroke="currentColor"
-													strokeWidth="1.5"
-													aria-hidden="true"
-													className={`size-6 ${openFaq === index ? "hidden" : ""}`}
-												>
-													<path
-														d="M12 6v12m6-6H6"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-													/>
-												</svg>
-												<svg
-													viewBox="0 0 24 24"
-													fill="none"
-													stroke="currentColor"
-													strokeWidth="1.5"
-													aria-hidden="true"
-													className={`size-6 ${openFaq === index ? "" : "hidden"}`}
-												>
-													<path
-														d="M18 12H6"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-													/>
-												</svg>
-											</span>
-										</button>
-									</dt>
-									{openFaq === index && (
-										<dd className="mt-2 pr-12">
-											<p className="text-base/7 text-gray-600 dark:text-gray-400">
-												{faq.answer}
-											</p>
-										</dd>
-									)}
-								</div>
-							))}
-						</dl>
-					</div>
-				</div>
-			</main>
+        <section id="features">
+          <div className="mb-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              What you can track
+            </p>
+            <h2 className="mt-2 text-3xl font-extrabold text-gray-900">
+              Everything your farm needs
+            </h2>
+            <p className="mt-3 text-[0.9375rem] text-gray-500">
+              From bundles to friendships, skills to collections. It is all here.
+            </p>
+          </div>
 
-			<footer className="mt-32">
-				<div className="mx-auto border-t border-gray-200 px-6 py-16 lg:px-8 dark:border-white/10">
-					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
-						<div className="space-y-8">
-							<p className="text-xl font-bold text-gray-900 dark:text-white">
-								{APP_NAME}
-							</p>
-							<p className="text-sm/6 text-gray-600 dark:text-gray-400">
-								Track your Stardew Valley farm progress with ease.
-							</p>
-						</div>
-						<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-							<div>
-								<h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-									Navigation
-								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									<li>
-										<Link
-											href="/playthrough/list"
-											className="text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-										>
-											Playthroughs
-										</Link>
-									</li>
-									<li>
-										<Link
-											href="/settings"
-											className="text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-										>
-											Settings
-										</Link>
-									</li>
-								</ul>
-							</div>
-							<div>
-								<h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-									Disclaimer
-								</h3>
-								<p className="mt-6 text-xs/5 text-gray-600 dark:text-gray-400">
-									This application is not affiliated with or endorsed by
-									ConcernedApe or Stardew Valley. All trademarks are property of
-									their respective owners.
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 dark:border-white/10">
-						<p className="text-xs/5 text-gray-500 dark:text-gray-400">
-							&copy; {new Date().getFullYear()} {APP_NAME}
-						</p>
-					</div>
-				</div>
-			</footer>
-		</div>
-	);
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map(({ icon, title, description }) => (
+              <div
+                key={title}
+                className="flex flex-col gap-3 rounded-xl border border-[#d6d0bc] bg-white p-5 shadow-sm"
+              >
+                <div className="flex h-10 w-10 items-center justify-center">
+                  {icon}
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">{title}</p>
+                  <p className="mt-1 text-[0.8125rem] leading-relaxed text-gray-500">
+                    {description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-5 flex gap-4 rounded-xl border border-[#d6d0bc] bg-white p-4 shadow-sm">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center">
+              <HiInformationCircle className="h-5 w-5 text-accent" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-gray-900">
+                Save file import gives you the full experience
+              </p>
+              <p className="mt-1 text-[0.8125rem] leading-relaxed text-gray-500">
+                Most tracking requires uploading your Stardew Valley save file from your PC. Right now, manual playthrough creation supports setting up your farm name, character name, and Community Center bundles only. Full manual tracking is coming in a future update.
+              </p>
+              <span className="mt-2 inline-block rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[0.7rem] font-bold text-primary">
+                Full editing coming soon
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div
+            className="rounded-xl border border-secondary/60 p-8"
+            style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
+          >
+            <div className="text-center">
+              <p className="text-xs font-bold uppercase tracking-widest text-highlight">
+                Simple to start
+              </p>
+              <h2 className="mt-2 text-2xl font-extrabold text-white">
+                Get started in minutes
+              </h2>
+              <p className="mt-2 text-[0.9rem] text-white/60">
+                No account required. Everything is stored locally in your browser.
+              </p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
+              {STEPS.map(({ number, title, description }) => (
+                <div key={number} className="flex flex-col gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-extrabold text-white">
+                    {number}
+                  </div>
+                  <div>
+                    <p className="font-bold text-white">{title}</p>
+                    <p className="mt-1 text-[0.8125rem] leading-relaxed text-white/60">
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              Got questions?
+            </p>
+            <h2 className="mt-2 text-3xl font-extrabold text-gray-900">
+              Frequently asked questions
+            </h2>
+          </div>
+
+          <div className="divide-y divide-gray-200 border-t border-gray-200">
+            {FAQS.map(({ question, answer }, i) => (
+              <div key={i}>
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                  aria-expanded={openFaq === i}
+                >
+                  <span className="font-semibold text-gray-900">{question}</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#d6d0bc] bg-surface text-gray-500">
+                    {openFaq === i ? (
+                      <HiChevronUp className="h-3.5 w-3.5" />
+                    ) : (
+                      <HiChevronDown className="h-3.5 w-3.5" />
+                    )}
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <p className="pb-5 text-sm leading-relaxed text-gray-500">{answer}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+      </div>
+    </div>
+  );
 }
