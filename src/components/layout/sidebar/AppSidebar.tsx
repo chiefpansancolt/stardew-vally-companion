@@ -33,6 +33,7 @@ import {
 	HiHome,
 	HiLocationMarker,
 	HiTable,
+	HiTemplate,
 	HiUser,
 	HiUserGroup,
 	HiViewGrid,
@@ -82,6 +83,16 @@ export function AppSidebar() {
 									onClick={() => setSidebarOpen(false)}
 								>
 									Playthroughs
+								</SidebarItem>
+
+								<SidebarItem
+									as={Link}
+									href="/dashboard"
+									icon={HiTemplate}
+									active={pathname === "/dashboard"}
+									onClick={() => setSidebarOpen(false)}
+								>
+									Dashboard
 								</SidebarItem>
 
 								{activePlaythrough && (
