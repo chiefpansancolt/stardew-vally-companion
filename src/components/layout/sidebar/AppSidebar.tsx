@@ -18,6 +18,7 @@ import {
 	FaHammer,
 	FaScroll,
 	FaSkull,
+	FaTrophy,
 	FaUtensils,
 } from "react-icons/fa";
 import { FaSeedling } from "react-icons/fa";
@@ -344,6 +345,18 @@ export function AppSidebar() {
 										onClick={() => setSidebarOpen(false)}
 									>
 										Grandpa&apos;s Evaluation
+									</SidebarItem>
+								)}
+
+								{activePlaythrough && (
+									<SidebarItem
+										as={Link}
+										href="/perfection"
+										icon={FaTrophy}
+										active={pathname === "/perfection"}
+										onClick={() => setSidebarOpen(false)}
+									>
+										Perfection
 									</SidebarItem>
 								)}
 							</SidebarItemGroup>
