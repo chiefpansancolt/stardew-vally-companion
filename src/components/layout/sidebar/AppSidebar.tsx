@@ -57,7 +57,9 @@ export function AppSidebar() {
 		>
 			<Sidebar aria-label="Sidebar navigation" className="h-full border-none">
 				<div className="flex h-full flex-col">
-					<PlaythroughSwitcher />
+					<div className="border-b border-white/10">
+						<PlaythroughSwitcher />
+					</div>
 
 					<div className="mt-2 flex-1 overflow-y-auto">
 						<SidebarItems>
@@ -363,7 +365,7 @@ export function AppSidebar() {
 						</SidebarItems>
 					</div>
 
-					<div>
+					<div className="border-t border-white/10">
 						<ul>
 							<li>
 								<Link
