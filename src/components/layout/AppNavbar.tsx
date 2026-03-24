@@ -2,7 +2,8 @@
 
 import { Button, Navbar, NavbarBrand } from "flowbite-react";
 import Image from "next/image";
-import { HiMenu, HiX } from "react-icons/hi";
+import Link from "next/link";
+import { HiClipboardList, HiMenu, HiX } from "react-icons/hi";
 import { useUI } from "@/lib/contexts/UIContext";
 
 export function AppNavbar() {
@@ -38,7 +39,17 @@ export function AppNavbar() {
 					</span>
 				</NavbarBrand>
 			</div>
-			<div className="flex md:order-2" />
+			<div className="flex md:order-2">
+				<Button
+					as={Link}
+					href="/items-needed"
+					size="sm"
+					className="border-white/30 bg-white/15 text-white hover:bg-white/25"
+				>
+					<HiClipboardList className="h-4 w-4" />
+					<span className="ml-1.5 hidden sm:inline">Items Needed</span>
+				</Button>
+			</div>
 		</Navbar>
 	);
 }

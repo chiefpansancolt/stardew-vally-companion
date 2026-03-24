@@ -262,5 +262,6 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
         save.joja.developments.map((d) => [d.id, d.purchased]),
       ),
     },
+    trackedGifts: [],
   };
 }

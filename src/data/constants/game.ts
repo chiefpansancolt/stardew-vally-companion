@@ -72,6 +72,7 @@ export const DEFAULT_GAME_DATA: GameData = {
   perfectionWaiverCount: 0,
   helpWantedCompleted: 0,
   lostBooksFound: 0,
+  trackedGifts: [],
   joja: {
     isMember: false,
     completed: false,

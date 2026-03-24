@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import type { TrackedGift } from "@/types";
 import type { AppData, Playthrough } from "@/types/app";
 import type { PlaythroughContextType } from "@/types/contexts";
 import { storageService } from "@/service/storage";
@@ -87,6 +88,31 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 
 	const exportData = () => storageService.exportData();
 
+	const addTrackedGift = (gift: TrackedGift) => {
+		if (!activePlaythrough) return;
+		const existing = activePlaythrough.data.trackedGifts ?? [];
+		const alreadyTracked = existing.some(
+			(g) => g.itemName === gift.itemName && g.villagerName === gift.villagerName
+		);
+		if (alreadyTracked) return;
+		updatePlaythrough(activePlaythrough.id, {
+			data: { ...activePlaythrough.data, trackedGifts: [...existing, gift] },
+		});
+	};
+
+	const removeTrackedGift = (itemName: string, villagerName: string) => {
+		if (!activePlaythrough) return;
+		const existing = activePlaythrough.data.trackedGifts ?? [];
+		updatePlaythrough(activePlaythrough.id, {
+			data: {
+				...activePlaythrough.data,
+				trackedGifts: existing.filter(
+					(g) => !(g.itemName === itemName && g.villagerName === villagerName)
+				),
+			},
+		});
+	};
+
 	const clearAllData = () => {
 		setAppData({ playthroughs: [], activePlaythroughId: null });
 		storageService.clear();
@@ -104,6 +130,8 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 				importData,
 				exportData,
 				clearAllData,
+				addTrackedGift,
+				removeTrackedGift,
 			}}
 		>
 			{children}

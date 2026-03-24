@@ -1,4 +1,4 @@
-import { Playthrough } from "@/types/app";
+import { Playthrough, TrackedGift } from "@/types/app";
 
 export interface PlaythroughContextType {
   playthroughs: Playthrough[];
@@ -16,6 +16,8 @@ export interface PlaythroughContextType {
   importData: (jsonString: string) => { success: boolean; error?: string };
   exportData: () => string;
   clearAllData: () => void;
+  addTrackedGift: (gift: TrackedGift) => void;
+  removeTrackedGift: (itemName: string, villagerName: string) => void;
 }
 
 export interface UIContextType {

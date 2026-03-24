@@ -121,7 +121,15 @@ export interface JojaProgress {
   developments: Record<string, boolean>;
 }
 
+export interface TrackedGift {
+  itemName: string;
+  villagerName: string;
+  given: boolean;
+  preference?: "loves" | "likes" | "neutral";
+}
+
 export interface GameData {
+  trackedGifts: TrackedGift[];
   character: CharacterInfo;
   toolLevels: ToolLevels;
   shipped: Record<string, ShippedItem>;

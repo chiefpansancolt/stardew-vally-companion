@@ -21,4 +21,5 @@ export type {
   CommunityCenterRooms,
   JojaProgress,
   FishPondProgress,
+  TrackedGift,
 } from "./game";
