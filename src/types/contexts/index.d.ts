@@ -3,6 +3,7 @@ import { Playthrough, TrackedGift } from "@/types/app";
 export interface PlaythroughContextType {
   playthroughs: Playthrough[];
   activePlaythrough: Playthrough | null;
+  isManualPlaythrough: boolean;
   setActivePlaythrough: (id: string | null) => void;
   addPlaythrough: (
     playthrough: Omit<

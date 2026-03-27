@@ -24,6 +24,7 @@ export interface DeleteConfirmModalProps {
 export interface EditStepProgressProps {
   steps: string[];
   currentStep: number;
+  onStepClick: (index: number) => void;
 }
 
 export interface EditStep {

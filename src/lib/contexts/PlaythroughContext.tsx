@@ -30,6 +30,8 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 	const activePlaythrough =
 		appData.playthroughs.find((p) => p.id === appData.activePlaythroughId) || null;
 
+	const isManualPlaythrough = activePlaythrough?.platform !== "PC";
+
 	const setActivePlaythrough = (id: string | null) => {
 		setAppData((prev) => ({ ...prev, activePlaythroughId: id }));
 	};
@@ -122,6 +124,7 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 		<PlaythroughContext.Provider
 			value={{
 				playthroughs: appData.playthroughs,
+				isManualPlaythrough,
 				activePlaythrough,
 				setActivePlaythrough,
 				addPlaythrough,

@@ -33,6 +33,7 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 		playthroughName: "",
 		farmName: "",
 		farmType: 0,
+		platform: "PC",
 	});
 	const [bundleConfig, setBundleConfig] = useState<BundleConfig>({
 		bundlePath: null,
@@ -53,7 +54,7 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 		setPath(null);
 		setSaveData(null);
 		setUploadDescription("");
-		setCharacterForm({ playthroughName: "", farmName: "", farmType: 0 });
+		setCharacterForm({ playthroughName: "", farmName: "", farmType: 0, platform: "PC" });
 		setBundleConfig({
 			bundlePath: null,
 			isRemix: false,
@@ -99,6 +100,7 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 				addPlaythrough({
 					name: `${saveData.player.farmName} Farm`,
 					description: uploadDescription.trim() || undefined,
+					platform: "PC",
 					data: gameData,
 				});
 			} else if (path === "build" && characterForm) {
@@ -117,6 +119,7 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 				};
 				addPlaythrough({
 					name: characterForm.playthroughName,
+					platform: characterForm.platform,
 					data: gameData,
 				});
 			}

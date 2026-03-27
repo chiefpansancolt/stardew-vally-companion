@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { professions } from "stardew-valley-data";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { toggleProfession } from "@/lib/pages/character";
@@ -11,9 +12,20 @@ import { StardropsSection } from "@/comps/farm/character/StardropsSection";
 import { ToolsSection } from "@/comps/farm/character/ToolsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 import { PageHeader } from "@/comps/ui/PageHeader";
+import { EditModal } from "@/comps/modals/CreatePlaythroughModal";
+import {
+	CharacterCoreEditStep,
+	ToolsEditStep,
+	SkillsEditStep,
+	StardropsEditStep,
+	AchievementsEditStep,
+} from "@/comps/farm/character/edit";
+import type { CharacterEditDraft, EditStep } from "@/types";
 
 export default function CharacterPage() {
-	const { activePlaythrough, updatePlaythrough } = usePlaythrough();
+	const { activePlaythrough, updatePlaythrough, isManualPlaythrough } = usePlaythrough();
+	const [editOpen, setEditOpen] = useState(false);
+	const [draft, setDraft] = useState<CharacterEditDraft | null>(null);
 
 	if (!activePlaythrough) {
 		return <NoPlaythroughFallback feature="character data" />;
@@ -29,9 +41,119 @@ export default function CharacterPage() {
 		});
 	}
 
+	function handleOpenEdit() {
+		setDraft({
+			character: { ...gameData.character },
+			toolLevels: { ...gameData.toolLevels },
+			skills: { ...gameData.skills },
+			professions: [...gameData.professions],
+			mastery: { ...gameData.mastery, unlocked: [...gameData.mastery.unlocked] },
+			stardrops: { ...gameData.stardrops },
+			achievements: [...gameData.achievements],
+		});
+		setEditOpen(true);
+	}
+
+	function handleSave(stepIndex: number) {
+		if (!draft) return;
+		const base = gameData;
+		if (stepIndex === 0) {
+			updatePlaythrough(playthroughId, {
+				data: { ...base, character: draft.character },
+			});
+		} else if (stepIndex === 1) {
+			updatePlaythrough(playthroughId, {
+				data: {
+					...base,
+					toolLevels: draft.toolLevels,
+					character: { ...base.character, maxItems: draft.character.maxItems },
+				},
+			});
+		} else if (stepIndex === 2) {
+			updatePlaythrough(playthroughId, {
+				data: {
+					...base,
+					skills: draft.skills,
+					professions: draft.professions,
+					mastery: draft.mastery,
+				},
+			});
+		} else if (stepIndex === 3) {
+			updatePlaythrough(playthroughId, {
+				data: { ...base, stardrops: draft.stardrops },
+			});
+		} else if (stepIndex === 4) {
+			updatePlaythrough(playthroughId, {
+				data: { ...base, achievements: draft.achievements },
+			});
+		}
+	}
+
+	const editSteps: EditStep[] = draft
+		? [
+				{
+					label: "Character",
+					content: (
+						<CharacterCoreEditStep
+							character={draft.character}
+							onChange={(character) => setDraft((d) => d && { ...d, character })}
+						/>
+					),
+				},
+				{
+					label: "Tools",
+					content: (
+						<ToolsEditStep
+							toolLevels={draft.toolLevels}
+							maxItems={draft.character.maxItems}
+							onToolLevelsChange={(toolLevels) => setDraft((d) => d && { ...d, toolLevels })}
+							onMaxItemsChange={(maxItems) =>
+								setDraft((d) => d && { ...d, character: { ...d.character, maxItems } })
+							}
+						/>
+					),
+				},
+				{
+					label: "Skills",
+					content: (
+						<SkillsEditStep
+							skills={draft.skills}
+							professions={draft.professions}
+							mastery={draft.mastery}
+							onSkillsChange={(skills) => setDraft((d) => d && { ...d, skills })}
+							onProfessionsChange={(profs) => setDraft((d) => d && { ...d, professions: profs })}
+							onMasteryChange={(mastery) => setDraft((d) => d && { ...d, mastery })}
+						/>
+					),
+				},
+				{
+					label: "Stardrops",
+					content: (
+						<StardropsEditStep
+							stardrops={draft.stardrops}
+							onChange={(stardrops) => setDraft((d) => d && { ...d, stardrops })}
+						/>
+					),
+				},
+				{
+					label: "Achievements",
+					content: (
+						<AchievementsEditStep
+							achievements={draft.achievements}
+							onChange={(achievements) => setDraft((d) => d && { ...d, achievements })}
+						/>
+					),
+				},
+		  ]
+		: [];
+
 	return (
 		<div className="p-6">
-			<PageHeader title="Character" description="Your farmer's profile, skills, and progression" />
+			<PageHeader
+				title="Character"
+				description="Your farmer's profile, skills, and progression"
+				onEdit={isManualPlaythrough ? handleOpenEdit : undefined}
+			/>
 
 			<div className="flex flex-col gap-6">
 				<CharacterHeroCard gameData={gameData} />
@@ -41,6 +163,14 @@ export default function CharacterPage() {
 				<StardropsSection gameData={gameData} />
 				<AchievementsSection gameData={gameData} />
 			</div>
+
+			<EditModal
+				isOpen={editOpen}
+				onClose={() => setEditOpen(false)}
+				title="Edit Character"
+				steps={editSteps}
+				onSave={handleSave}
+			/>
 		</div>
 	);
 }

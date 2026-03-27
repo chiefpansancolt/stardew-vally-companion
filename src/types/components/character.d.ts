@@ -1,5 +1,5 @@
 import type { Skill } from "stardew-valley-data";
-import type { GameData } from "@/types/app/game";
+import type { CharacterInfo, GameData, MasteryProgress, SkillProgress, ToolLevels } from "@/types/app/game";
 
 export interface CharacterProps {
   gameData: GameData;
@@ -74,6 +74,47 @@ export type RodData = {
   canEnchant: boolean;
   levels: RodLevel[];
 };
+
+export interface CharacterEditDraft {
+  character: CharacterInfo;
+  toolLevels: ToolLevels;
+  skills: Record<string, SkillProgress>;
+  professions: string[];
+  mastery: MasteryProgress;
+  stardrops: Record<string, boolean>;
+  achievements: string[];
+}
+
+export interface CharacterCoreEditStepProps {
+  character: CharacterInfo;
+  onChange: (character: CharacterInfo) => void;
+}
+
+export interface ToolsEditStepProps {
+  toolLevels: ToolLevels;
+  maxItems: number;
+  onToolLevelsChange: (toolLevels: ToolLevels) => void;
+  onMaxItemsChange: (maxItems: number) => void;
+}
+
+export interface SkillsEditStepProps {
+  skills: Record<string, SkillProgress>;
+  professions: string[];
+  mastery: MasteryProgress;
+  onSkillsChange: (skills: Record<string, SkillProgress>) => void;
+  onProfessionsChange: (professions: string[]) => void;
+  onMasteryChange: (mastery: MasteryProgress) => void;
+}
+
+export interface StardropsEditStepProps {
+  stardrops: Record<string, boolean>;
+  onChange: (stardrops: Record<string, boolean>) => void;
+}
+
+export interface AchievementsEditStepProps {
+  achievements: string[];
+  onChange: (achievements: string[]) => void;
+}
 
 export interface BackpackLevel {
   id: string | null;

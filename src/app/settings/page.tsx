@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Badge, Button, Card, FileInput, Label } from "flowbite-react";
+import { Alert, Badge, Button, Card, FileInput, Label, Select } from "flowbite-react";
 import {
 	HiCheckCircle,
 	HiDownload,
@@ -11,10 +11,13 @@ import {
 } from "react-icons/hi";
 import { useSettingsActions } from "@/lib/pages/settings";
 import { PageHeader } from "@/comps/ui/PageHeader";
+import { PLATFORMS } from "@/data/constants/platforms";
+import type { Platform } from "@/data/constants/platforms";
 
 export default function Settings() {
 	const {
 		playthroughs,
+		updatePlaythrough,
 		fileInputRef,
 		confirmReset,
 		resetSuccess,
@@ -50,6 +53,38 @@ export default function Settings() {
 					>
 						{importStatus.message}
 					</Alert>
+				)}
+
+				{playthroughs.length > 0 && (
+					<Card className="mb-4">
+						<h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+							Playthrough Settings
+						</h2>
+						<div className="space-y-3">
+							{playthroughs.map((pt) => (
+								<div key={pt.id} className="flex items-center justify-between gap-4">
+									<div className="min-w-0 flex-1">
+										<p className="truncate text-sm font-semibold text-gray-800">{pt.name}</p>
+									</div>
+									<div className="w-36 shrink-0">
+										<Select
+											sizing="sm"
+											value={pt.platform ?? "PC"}
+											onChange={(e) =>
+												updatePlaythrough(pt.id, { platform: e.target.value as Platform })
+											}
+										>
+											{PLATFORMS.map((p) => (
+												<option key={p} value={p}>
+													{p}
+												</option>
+											))}
+										</Select>
+									</div>
+								</div>
+							))}
+						</div>
+					</Card>
 				)}
 
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">

@@ -1,4 +1,5 @@
 import type { SaveData } from "stardew-valley-data";
+import type { Platform } from "@/data/constants/platforms";
 
 export type WizardPath = "upload" | "build";
 
@@ -8,6 +9,7 @@ export interface CharacterFormData {
   playthroughName: string;
   farmName: string;
   farmType: number;
+  platform: Platform;
 }
 
 export interface BundleConfig {

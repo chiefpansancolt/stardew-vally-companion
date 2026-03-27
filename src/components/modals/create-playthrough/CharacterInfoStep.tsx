@@ -1,10 +1,32 @@
 import { Label, Select, TextInput } from "flowbite-react";
 import type { CharacterInfoStepProps } from "@/types";
 import { FARM_TYPES } from "@/data/constants/farms";
+import { PLATFORMS } from "@/data/constants/platforms";
 
 export function CharacterInfoStep({ formData, onChange }: CharacterInfoStepProps) {
 	return (
 		<div className="space-y-4">
+			<div className="grid grid-cols-2 gap-4">
+				<div>
+					<div className="mb-2 block">
+						<Label htmlFor="platform">Platform</Label>
+					</div>
+					<Select
+						id="platform"
+						value={formData.platform}
+						onChange={(e) =>
+							onChange({ ...formData, platform: e.target.value as (typeof PLATFORMS)[number] })
+						}
+					>
+						{PLATFORMS.map((p) => (
+							<option key={p} value={p}>
+								{p}
+							</option>
+						))}
+					</Select>
+				</div>
+			</div>
+
 			<div>
 				<div className="mb-2 block">
 					<Label htmlFor="playthrough-name">

@@ -4,7 +4,7 @@ import { Tooltip } from "flowbite-react";
 import { HiCheck } from "react-icons/hi";
 import type { EditStepProgressProps } from "@/types";
 
-export function EditStepProgress({ steps, currentStep }: EditStepProgressProps) {
+export function EditStepProgress({ steps, currentStep, onStepClick }: EditStepProgressProps) {
 	return (
 		<div className="flex items-center justify-center">
 			{steps.map((label, index) => {
@@ -18,9 +18,10 @@ export function EditStepProgress({ steps, currentStep }: EditStepProgressProps) 
 							<button
 								type="button"
 								aria-label={label}
-								className={`relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full focus:outline-none ${
+								onClick={() => onStepClick(index)}
+								className={`relative flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none ${
 									isCompleted
-										? "bg-primary"
+										? "bg-primary hover:opacity-80"
 										: isCurrent
 											? "border-2 border-primary bg-white"
 											: "border-2 border-gray-300 bg-white hover:border-gray-400"

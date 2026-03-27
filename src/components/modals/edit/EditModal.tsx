@@ -49,7 +49,7 @@ export function EditModal({ isOpen, onClose, title, steps, onSave }: EditModalPr
 	const stepLabels = steps.map((s) => s.label);
 
 	return (
-		<Modal show={isOpen} onClose={onClose} dismissible size="3xl">
+		<Modal show={isOpen} onClose={onClose} dismissible size="5xl">
 			<ModalHeader>{title}</ModalHeader>
 			<ModalBody>{steps[currentStep]?.content}</ModalBody>
 			<ModalFooter>
@@ -67,7 +67,7 @@ export function EditModal({ isOpen, onClose, title, steps, onSave }: EditModalPr
 
 					<div className="flex flex-1 justify-center">
 						{showProgress && (
-							<EditStepProgress steps={stepLabels} currentStep={currentStep} />
+							<EditStepProgress steps={stepLabels} currentStep={currentStep} onStepClick={setCurrentStep} />
 						)}
 					</div>
 

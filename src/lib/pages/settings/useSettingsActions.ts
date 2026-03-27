@@ -5,7 +5,7 @@ import type { ImportStatus } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 
 export function useSettingsActions() {
-  const { playthroughs, exportData, importData, clearAllData } =
+  const { playthroughs, updatePlaythrough, exportData, importData, clearAllData } =
     usePlaythrough();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -78,6 +78,7 @@ export function useSettingsActions() {
 
   return {
     playthroughs,
+    updatePlaythrough,
     fileInputRef,
     confirmReset,
     resetSuccess,
