@@ -113,3 +113,9 @@ export interface NavySectionProps {
 export interface NoPlaythroughFallbackProps {
   feature: string;
 }
+
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  onEdit?: () => void;
+}

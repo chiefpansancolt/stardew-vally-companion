@@ -3,6 +3,7 @@
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CollectionsOverview } from "@/comps/collections/overview/CollectionsOverview";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CollectionsPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -15,13 +16,7 @@ export default function CollectionsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Collections</h1>
-				<p className="mt-1 text-gray-600">
-					Track your shipped items, fish, artifacts, minerals, cooking, and crafting
-					progress
-				</p>
-			</div>
+			<PageHeader title="Collections" description="Track your shipped items, fish, artifacts, minerals, cooking, and crafting progress" />
 
 			<CollectionsOverview gameData={gameData} />
 		</div>

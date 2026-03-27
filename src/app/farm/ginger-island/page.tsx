@@ -6,6 +6,7 @@ import { IslandUpgradesSection } from "@/comps/farm/ginger-island/IslandUpgrades
 import { ParrotCalculatorSection } from "@/comps/farm/ginger-island/ParrotCalculatorSection";
 import { WalnutsSection } from "@/comps/farm/ginger-island/WalnutsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function GingerIslandPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -16,12 +17,7 @@ export default function GingerIslandPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Ginger Island</h1>
-				<p className="mt-1 text-gray-600">
-					Island upgrades, golden walnuts, and parrot calculator
-				</p>
-			</div>
+			<PageHeader title="Ginger Island" description="Island upgrades, golden walnuts, and parrot calculator" />
 
 			<div className="flex flex-col gap-6">
 				<GingerIslandHero gameData={activePlaythrough.data} />

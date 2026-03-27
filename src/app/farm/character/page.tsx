@@ -10,6 +10,7 @@ import { SkillsSection } from "@/comps/farm/character/SkillsSection";
 import { StardropsSection } from "@/comps/farm/character/StardropsSection";
 import { ToolsSection } from "@/comps/farm/character/ToolsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CharacterPage() {
 	const { activePlaythrough, updatePlaythrough } = usePlaythrough();
@@ -30,12 +31,7 @@ export default function CharacterPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900 dark:text-white">Character</h1>
-				<p className="mt-1 text-gray-600 dark:text-gray-400">
-					Your farmer&apos;s profile, skills, and progression
-				</p>
-			</div>
+			<PageHeader title="Character" description="Your farmer's profile, skills, and progression" />
 
 			<div className="flex flex-col gap-6">
 				<CharacterHeroCard gameData={gameData} />

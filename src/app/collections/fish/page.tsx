@@ -4,6 +4,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { FishHero } from "@/comps/collections/fish/FishHero";
 import { FishSection } from "@/comps/collections/fish/FishSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function FishPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -14,12 +15,7 @@ export default function FishPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Fish</h1>
-				<p className="mt-1 text-gray-600">
-					All catchable fish with locations, seasons, difficulty, and sell prices
-				</p>
-			</div>
+			<PageHeader title="Fish" description="All catchable fish with locations, seasons, difficulty, and sell prices" />
 
 			<div className="flex flex-col gap-6">
 				<FishHero gameData={activePlaythrough.data} />

@@ -7,6 +7,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CCHero } from "@/comps/community-center/CCHero";
 import { RoomSections } from "@/comps/community-center/RoomSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CommunityCenterPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -34,10 +35,7 @@ export default function CommunityCenterPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Community Center</h1>
-				<p className="mt-1 text-gray-600">Bundle progress and room completion</p>
-			</div>
+			<PageHeader title="Community Center" description="Bundle progress and room completion" />
 
 			<div className="flex flex-col gap-6">
 				{activePlaythrough.data.communityCenter.completed && (

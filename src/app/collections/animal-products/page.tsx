@@ -4,6 +4,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { AnimalProductsHero } from "@/comps/collections/animal-products/AnimalProductsHero";
 import { AnimalProductsSection } from "@/comps/collections/animal-products/AnimalProductsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function AnimalProductsPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -14,12 +15,7 @@ export default function AnimalProductsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Animal Products</h1>
-				<p className="mt-1 text-gray-600">
-					Farm animal produce, quality sell prices, and shipping progress
-				</p>
-			</div>
+			<PageHeader title="Animal Products" description="Farm animal produce, quality sell prices, and shipping progress" />
 
 			<div className="flex flex-col gap-6">
 				<AnimalProductsHero gameData={activePlaythrough.data} />

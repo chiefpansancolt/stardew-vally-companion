@@ -7,6 +7,7 @@ import { buildGrandpaInput } from "@/lib/pages/grandpa";
 import { GrandpaEvaluationSection } from "@/comps/grandpa/GrandpaEvaluationSection";
 import { GrandpaHero } from "@/comps/grandpa/GrandpaHero";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function GrandpaPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -23,10 +24,7 @@ export default function GrandpaPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Grandpa&apos;s Evaluation</h1>
-				<p className="mt-1 text-gray-600">Year 3 farm evaluation criteria and progress</p>
-			</div>
+			<PageHeader title="Grandpa's Evaluation" description="Year 3 farm evaluation criteria and progress" />
 
 			<div className="flex flex-col gap-6">
 				<GrandpaHero result={result} />

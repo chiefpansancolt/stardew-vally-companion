@@ -4,6 +4,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { SpecialItemsHero } from "@/comps/collections/special-items/SpecialItemsHero";
 import { SpecialItemsSection } from "@/comps/collections/special-items/SpecialItemsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function SpecialItemsPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -14,10 +15,7 @@ export default function SpecialItemsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Special Items</h1>
-				<p className="mt-1 text-gray-600">Powers, books, and mastery unlocks</p>
-			</div>
+			<PageHeader title="Special Items" description="Powers, books, and mastery unlocks" />
 
 			<div className="flex flex-col gap-6">
 				<SpecialItemsHero gameData={activePlaythrough.data} />

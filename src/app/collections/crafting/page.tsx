@@ -4,6 +4,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CraftingHero } from "@/comps/collections/crafting/CraftingHero";
 import { CraftingSection } from "@/comps/collections/crafting/CraftingSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CraftingPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -14,10 +15,7 @@ export default function CraftingPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Crafting</h1>
-				<p className="mt-1 text-gray-600">Crafting recipes, ingredients, and progress</p>
-			</div>
+			<PageHeader title="Crafting" description="Crafting recipes, ingredients, and progress" />
 
 			<div className="flex flex-col gap-6">
 				<CraftingHero gameData={activePlaythrough.data} />

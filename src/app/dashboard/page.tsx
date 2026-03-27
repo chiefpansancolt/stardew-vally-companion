@@ -14,6 +14,7 @@ import {
 } from "@/comps/dashboard/cards";
 import { DashboardHero } from "@/comps/dashboard/DashboardHero";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function DashboardPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -40,10 +41,7 @@ export default function DashboardPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-				<p className="mt-1 text-gray-600">Overview of your playthrough progress</p>
-			</div>
+			<PageHeader title="Dashboard" description="Overview of your playthrough progress" />
 
 			<div className="flex flex-col gap-6">
 				<DashboardHero gameData={gameData} />

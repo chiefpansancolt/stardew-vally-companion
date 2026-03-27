@@ -9,6 +9,7 @@ import { NAVY_TILE } from "@/data/constants/styles";
 import { DevelopmentsSection } from "@/comps/joja/DevelopmentsSection";
 import { JojaHero } from "@/comps/joja/JojaHero";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 function JojaContent() {
 	const { activePlaythrough } = usePlaythrough();
@@ -40,10 +41,7 @@ function JojaContent() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Joja Community Development</h1>
-				<p className="mt-1 text-gray-600">Joja Mart community development projects</p>
-			</div>
+			<PageHeader title="Joja Community Development" description="Joja Mart community development projects" />
 
 			<div className="flex flex-col gap-6">
 				<div className="flex items-center gap-4 rounded-lg p-4" style={NAVY_TILE}>

@@ -5,6 +5,7 @@ import { AnimalsHero } from "@/comps/farm/animals/AnimalsHero";
 import { FarmAnimalsSection } from "@/comps/farm/animals/FarmAnimalsSection";
 import { PetsSection } from "@/comps/farm/animals/PetsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function AnimalsPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -15,10 +16,7 @@ export default function AnimalsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Animals</h1>
-				<p className="mt-1 text-gray-600">Your farm animals, pets, and buildings</p>
-			</div>
+			<PageHeader title="Animals" description="Your farm animals, pets, and buildings" />
 
 			<div className="flex flex-col gap-6">
 				<AnimalsHero gameData={activePlaythrough.data} />

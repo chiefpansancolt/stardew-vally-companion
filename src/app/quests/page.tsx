@@ -7,6 +7,7 @@ import { NAVY_TILE } from "@/data/constants/styles";
 import { QuestsHero } from "@/comps/quests/QuestsHero";
 import { LostBooksTab, QuestsTab, SecretNotesTab } from "@/comps/quests/tabs";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 const questCount = quests().get().length;
 const noteCount = secretNotes().get().length;
@@ -21,10 +22,7 @@ export default function QuestsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Quests</h1>
-				<p className="mt-1 text-gray-600">Quests, secret notes, and lost books</p>
-			</div>
+			<PageHeader title="Quests" description="Quests, secret notes, and lost books" />
 
 			<div className="flex flex-col gap-6">
 				<QuestsHero gameData={activePlaythrough.data} />

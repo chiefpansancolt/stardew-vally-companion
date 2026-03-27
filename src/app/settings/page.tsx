@@ -10,6 +10,7 @@ import {
 	HiUpload,
 } from "react-icons/hi";
 import { useSettingsActions } from "@/lib/pages/settings";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function Settings() {
 	const {
@@ -27,12 +28,7 @@ export default function Settings() {
 	return (
 		<section className="bg-surface dark:bg-surface-dark min-h-screen p-8">
 			<div className="mx-auto">
-				<div className="mb-8">
-					<h1 className="text-4xl font-bold text-gray-900 dark:text-white">Settings</h1>
-					<p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-						Manage your data and application settings
-					</p>
-				</div>
+				<PageHeader title="Settings" description="Manage your data and application settings" />
 
 				<div className="mb-8">
 					<Alert color="info" icon={HiInformationCircle}>

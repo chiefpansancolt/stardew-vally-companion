@@ -4,6 +4,7 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CropsHero } from "@/comps/collections/crops/CropsHero";
 import { CropsSection } from "@/comps/collections/crops/CropsSection";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CropsPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -14,12 +15,7 @@ export default function CropsPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Crops</h1>
-				<p className="mt-1 text-gray-600">
-					Plantable crops, grow times, sell prices, and shipping progress
-				</p>
-			</div>
+			<PageHeader title="Crops" description="Plantable crops, grow times, sell prices, and shipping progress" />
 
 			<div className="flex flex-col gap-6">
 				<CropsHero gameData={activePlaythrough.data} />

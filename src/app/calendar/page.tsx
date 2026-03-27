@@ -3,6 +3,7 @@
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { CalendarView } from "@/comps/calendar/CalendarView";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function CalendarPage() {
 	const { activePlaythrough } = usePlaythrough();
@@ -13,11 +14,7 @@ export default function CalendarPage() {
 
 	return (
 		<div className="p-6">
-			<div className="mb-6">
-				<h1 className="text-3xl font-bold text-gray-900">Calendar</h1>
-				<p className="mt-1 text-gray-600">Birthdays, festivals, and seasonal events</p>
-			</div>
-
+			<PageHeader title="Calendar" description="Birthdays, festivals, and seasonal events" />
 			<CalendarView gameData={activePlaythrough.data} />
 		</div>
 	);
