@@ -35,7 +35,10 @@ export default function CommunityCenterPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Community Center" description="Bundle progress and room completion" />
+			<PageHeader
+				title="Community Center"
+				description="Bundle progress and room completion"
+			/>
 
 			<div className="flex flex-col gap-6">
 				{activePlaythrough.data.communityCenter.completed && (

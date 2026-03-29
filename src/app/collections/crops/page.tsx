@@ -15,7 +15,10 @@ export default function CropsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Crops" description="Plantable crops, grow times, sell prices, and shipping progress" />
+			<PageHeader
+				title="Crops"
+				description="Plantable crops, grow times, sell prices, and shipping progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<CropsHero gameData={activePlaythrough.data} />

@@ -15,7 +15,10 @@ export default function ArtifactsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Artifacts" description="Museum artifacts — track which ones you've found and donated" />
+			<PageHeader
+				title="Artifacts"
+				description="Museum artifacts — track which ones you've found and donated"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<ArtifactsHero gameData={activePlaythrough.data} />

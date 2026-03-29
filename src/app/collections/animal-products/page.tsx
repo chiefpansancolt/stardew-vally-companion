@@ -15,7 +15,10 @@ export default function AnimalProductsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Animal Products" description="Farm animal produce, quality sell prices, and shipping progress" />
+			<PageHeader
+				title="Animal Products"
+				description="Farm animal produce, quality sell prices, and shipping progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<AnimalProductsHero gameData={activePlaythrough.data} />

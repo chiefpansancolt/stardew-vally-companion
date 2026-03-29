@@ -8,9 +8,10 @@ import { NavySection } from "@/comps/ui/NavySection";
 const parrot = jojaParrotCalculator();
 
 export function ParrotCalculatorSection({ gameData }: Props) {
-	const walnutsFound = gameData.goldenWalnutsFound > 0
-		? gameData.goldenWalnutsFound
-		: Object.keys(gameData.goldenWalnuts).length;
+	const walnutsFound =
+		gameData.goldenWalnutsFound > 0
+			? gameData.goldenWalnutsFound
+			: Object.keys(gameData.goldenWalnuts).length;
 	const remaining = parrot.remaining(walnutsFound);
 	const cost = parrot.cost(walnutsFound);
 

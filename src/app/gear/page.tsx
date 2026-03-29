@@ -3,7 +3,6 @@
 import { TabItem, Tabs } from "flowbite-react";
 import { GEAR_COUNTS } from "@/data/constants/gear";
 import { NAVY_TILE } from "@/data/constants/styles";
-import { PageHeader } from "@/comps/ui/PageHeader";
 import { GearHero } from "@/comps/gear/GearHero";
 import {
 	BaitTab,
@@ -14,11 +13,15 @@ import {
 	TrinketsTab,
 	WeaponsTab,
 } from "@/comps/gear/tabs";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function GearPage() {
 	return (
 		<div className="p-6">
-			<PageHeader title="Gear" description="Weapons, footwear, rings, hats, trinkets, bait, and tackle" />
+			<PageHeader
+				title="Gear"
+				description="Weapons, footwear, rings, hats, trinkets, bait, and tackle"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<GearHero />

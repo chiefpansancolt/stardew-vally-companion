@@ -17,7 +17,10 @@ export default function GingerIslandPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Ginger Island" description="Island upgrades, golden walnuts, and parrot calculator" />
+			<PageHeader
+				title="Ginger Island"
+				description="Island upgrades, golden walnuts, and parrot calculator"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<GingerIslandHero gameData={activePlaythrough.data} />

@@ -8,7 +8,10 @@ import { assetPath } from "@/lib/utils/assetPath";
 
 const allAchievements = achievements().get();
 
-export function AchievementsEditStep({ achievements: initialAchievements, onChange }: AchievementsEditStepProps) {
+export function AchievementsEditStep({
+	achievements: initialAchievements,
+	onChange,
+}: AchievementsEditStepProps) {
 	const [local, setLocal] = useState(initialAchievements);
 
 	function toggle(id: string) {
@@ -58,7 +61,10 @@ export function AchievementsEditStep({ achievements: initialAchievements, onChan
 									{achievement.description}
 								</div>
 								{isEarned ? (
-									<span className="inline-flex items-center gap-1 rounded-full bg-highlight/20 px-2 py-0.5 text-[0.625rem] font-bold text-highlight" style={{ filter: "brightness(0.75)" }}>
+									<span
+										className="bg-highlight/20 text-highlight inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[0.625rem] font-bold"
+										style={{ filter: "brightness(0.75)" }}
+									>
 										<HiCheck className="h-3 w-3" /> Earned
 									</span>
 								) : (

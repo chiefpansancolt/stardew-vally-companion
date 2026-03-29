@@ -15,7 +15,10 @@ export default function MonsterLootPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Monster Loot" description="Items dropped by monsters and shipping progress" />
+			<PageHeader
+				title="Monster Loot"
+				description="Items dropped by monsters and shipping progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<MonsterLootHero gameData={activePlaythrough.data} />

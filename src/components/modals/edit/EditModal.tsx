@@ -67,7 +67,11 @@ export function EditModal({ isOpen, onClose, title, steps, onSave }: EditModalPr
 
 					<div className="flex flex-1 justify-center">
 						{showProgress && (
-							<EditStepProgress steps={stepLabels} currentStep={currentStep} onStepClick={setCurrentStep} />
+							<EditStepProgress
+								steps={stepLabels}
+								currentStep={currentStep}
+								onStepClick={setCurrentStep}
+							/>
 						)}
 					</div>
 

@@ -3,9 +3,9 @@
 import { useState } from "react";
 import type { CharacterCoreEditStepProps } from "@/types";
 import type { CharacterInfo } from "@/types/app/game";
+import { SEASONS } from "@/data/constants/seasons";
 
 type DateSeason = "spring" | "summer" | "fall" | "winter";
-import { SEASONS } from "@/data/constants/seasons";
 
 const INPUT =
 	"w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary";
@@ -14,7 +14,10 @@ const LABEL = "mb-1 block text-xs font-semibold text-gray-500";
 
 const HOUSE_LABELS = ["Starter", "Kitchen", "Kids Room", "Cellar"];
 
-export function CharacterCoreEditStep({ character: initialCharacter, onChange }: CharacterCoreEditStepProps) {
+export function CharacterCoreEditStep({
+	character: initialCharacter,
+	onChange,
+}: CharacterCoreEditStepProps) {
 	const [local, setLocal] = useState<CharacterInfo>(initialCharacter);
 
 	function set<K extends keyof CharacterInfo>(key: K, value: CharacterInfo[K]) {

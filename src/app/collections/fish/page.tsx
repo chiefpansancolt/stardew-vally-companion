@@ -15,7 +15,10 @@ export default function FishPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Fish" description="All catchable fish with locations, seasons, difficulty, and sell prices" />
+			<PageHeader
+				title="Fish"
+				description="All catchable fish with locations, seasons, difficulty, and sell prices"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<FishHero gameData={activePlaythrough.data} />

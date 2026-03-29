@@ -1,26 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { professions } from "stardew-valley-data";
+import { useState } from "react";
+import type { CharacterEditDraft, EditStep } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { toggleProfession } from "@/lib/pages/character";
 import { AchievementsSection } from "@/comps/farm/character/AchievementsSection";
 import { CharacterHeroCard } from "@/comps/farm/character/CharacterHeroCard";
+import {
+	AchievementsEditStep,
+	CharacterCoreEditStep,
+	SkillsEditStep,
+	StardropsEditStep,
+	ToolsEditStep,
+} from "@/comps/farm/character/edit";
 import { MasterySection } from "@/comps/farm/character/MasterySection";
 import { SkillsSection } from "@/comps/farm/character/SkillsSection";
 import { StardropsSection } from "@/comps/farm/character/StardropsSection";
 import { ToolsSection } from "@/comps/farm/character/ToolsSection";
+import { EditModal } from "@/comps/modals/CreatePlaythroughModal";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 import { PageHeader } from "@/comps/ui/PageHeader";
-import { EditModal } from "@/comps/modals/CreatePlaythroughModal";
-import {
-	CharacterCoreEditStep,
-	ToolsEditStep,
-	SkillsEditStep,
-	StardropsEditStep,
-	AchievementsEditStep,
-} from "@/comps/farm/character/edit";
-import type { CharacterEditDraft, EditStep } from "@/types";
 
 export default function CharacterPage() {
 	const { activePlaythrough, updatePlaythrough, isManualPlaythrough } = usePlaythrough();
@@ -106,9 +106,13 @@ export default function CharacterPage() {
 						<ToolsEditStep
 							toolLevels={draft.toolLevels}
 							maxItems={draft.character.maxItems}
-							onToolLevelsChange={(toolLevels) => setDraft((d) => d && { ...d, toolLevels })}
+							onToolLevelsChange={(toolLevels) =>
+								setDraft((d) => d && { ...d, toolLevels })
+							}
 							onMaxItemsChange={(maxItems) =>
-								setDraft((d) => d && { ...d, character: { ...d.character, maxItems } })
+								setDraft(
+									(d) => d && { ...d, character: { ...d.character, maxItems } }
+								)
 							}
 						/>
 					),
@@ -121,7 +125,9 @@ export default function CharacterPage() {
 							professions={draft.professions}
 							mastery={draft.mastery}
 							onSkillsChange={(skills) => setDraft((d) => d && { ...d, skills })}
-							onProfessionsChange={(profs) => setDraft((d) => d && { ...d, professions: profs })}
+							onProfessionsChange={(profs) =>
+								setDraft((d) => d && { ...d, professions: profs })
+							}
 							onMasteryChange={(mastery) => setDraft((d) => d && { ...d, mastery })}
 						/>
 					),
@@ -140,11 +146,13 @@ export default function CharacterPage() {
 					content: (
 						<AchievementsEditStep
 							achievements={draft.achievements}
-							onChange={(achievements) => setDraft((d) => d && { ...d, achievements })}
+							onChange={(achievements) =>
+								setDraft((d) => d && { ...d, achievements })
+							}
 						/>
 					),
 				},
-		  ]
+			]
 		: [];
 
 	return (

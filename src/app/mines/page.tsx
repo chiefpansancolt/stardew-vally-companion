@@ -16,7 +16,10 @@ export default function MinesPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Mines & Monsters" description="Mine progress, slayer goals, and monster bestiary" />
+			<PageHeader
+				title="Mines & Monsters"
+				description="Mine progress, slayer goals, and monster bestiary"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<MinesHero gameData={activePlaythrough.data} />

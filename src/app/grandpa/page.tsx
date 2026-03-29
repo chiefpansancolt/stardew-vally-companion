@@ -24,7 +24,10 @@ export default function GrandpaPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Grandpa's Evaluation" description="Year 3 farm evaluation criteria and progress" />
+			<PageHeader
+				title="Grandpa's Evaluation"
+				description="Year 3 farm evaluation criteria and progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<GrandpaHero result={result} />

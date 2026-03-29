@@ -20,7 +20,10 @@ export default function MineralsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Minerals" description="Mine collectibles — track gems, geodes, ores, bars, resources, and mining nodes" />
+			<PageHeader
+				title="Minerals"
+				description="Mine collectibles — track gems, geodes, ores, bars, resources, and mining nodes"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<MineralsHero gameData={activePlaythrough.data} />

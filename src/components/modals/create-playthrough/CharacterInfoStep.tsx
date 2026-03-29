@@ -15,7 +15,10 @@ export function CharacterInfoStep({ formData, onChange }: CharacterInfoStepProps
 						id="platform"
 						value={formData.platform}
 						onChange={(e) =>
-							onChange({ ...formData, platform: e.target.value as (typeof PLATFORMS)[number] })
+							onChange({
+								...formData,
+								platform: e.target.value as (typeof PLATFORMS)[number],
+							})
 						}
 					>
 						{PLATFORMS.map((p) => (

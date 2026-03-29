@@ -15,7 +15,10 @@ export default function CraftingPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Crafting" description="Crafting recipes, ingredients, and progress" />
+			<PageHeader
+				title="Crafting"
+				description="Crafting recipes, ingredients, and progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<CraftingHero gameData={activePlaythrough.data} />

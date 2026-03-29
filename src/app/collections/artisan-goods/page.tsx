@@ -15,7 +15,10 @@ export default function ArtisanGoodsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Artisan Goods" description="Processed goods, equipment sources, sell prices, and shipping progress" />
+			<PageHeader
+				title="Artisan Goods"
+				description="Processed goods, equipment sources, sell prices, and shipping progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<ArtisanGoodsHero gameData={activePlaythrough.data} />

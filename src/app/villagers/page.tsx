@@ -19,7 +19,10 @@ export default function VillagersPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Villagers" description="Friendships, heart events, birthdays, and gift preferences" />
+			<PageHeader
+				title="Villagers"
+				description="Friendships, heart events, birthdays, and gift preferences"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<VillagersHeroCard gameData={gameData} />

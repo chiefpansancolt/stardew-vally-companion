@@ -14,7 +14,7 @@ export function PageHeader({ title, description, onEdit }: PageHeaderProps) {
 					<button
 						type="button"
 						onClick={onEdit}
-						className="inline-flex cursor-pointer items-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90"
+						className="bg-primary inline-flex cursor-pointer items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90"
 					>
 						Edit
 					</button>

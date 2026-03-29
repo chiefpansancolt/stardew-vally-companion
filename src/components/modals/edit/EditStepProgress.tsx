@@ -23,7 +23,7 @@ export function EditStepProgress({ steps, currentStep, onStepClick }: EditStepPr
 									isCompleted
 										? "bg-primary hover:opacity-80"
 										: isCurrent
-											? "border-2 border-primary bg-white"
+											? "border-primary border-2 bg-white"
 											: "border-2 border-gray-300 bg-white hover:border-gray-400"
 								}`}
 							>

@@ -10,12 +10,15 @@ import { StatTile } from "@/comps/ui/StatTile";
 const parrot = jojaParrotCalculator();
 
 export function GingerIslandHero({ gameData }: Props) {
-	const walnutsFound = gameData.goldenWalnutsFound > 0
-		? gameData.goldenWalnutsFound
-		: Object.keys(gameData.goldenWalnuts).length;
+	const walnutsFound =
+		gameData.goldenWalnutsFound > 0
+			? gameData.goldenWalnutsFound
+			: Object.keys(gameData.goldenWalnuts).length;
 	const upgradesUnlocked = ISLAND_UPGRADES.filter((u) => gameData.islandUpgrades[u.id]).length;
-	const walnutsSpent = ISLAND_UPGRADES.filter((u) => gameData.islandUpgrades[u.id])
-		.reduce((sum, u) => sum + u.cost, 0);
+	const walnutsSpent = ISLAND_UPGRADES.filter((u) => gameData.islandUpgrades[u.id]).reduce(
+		(sum, u) => sum + u.cost,
+		0
+	);
 	const walnutsAvailable = Math.max(0, walnutsFound - walnutsSpent);
 	const parrotCost = parrot.cost(walnutsFound);
 

@@ -41,7 +41,10 @@ function JojaContent() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Joja Community Development" description="Joja Mart community development projects" />
+			<PageHeader
+				title="Joja Community Development"
+				description="Joja Mart community development projects"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<div className="flex items-center gap-4 rounded-lg p-4" style={NAVY_TILE}>

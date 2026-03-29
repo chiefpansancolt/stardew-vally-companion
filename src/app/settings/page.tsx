@@ -10,9 +10,9 @@ import {
 	HiUpload,
 } from "react-icons/hi";
 import { useSettingsActions } from "@/lib/pages/settings";
-import { PageHeader } from "@/comps/ui/PageHeader";
 import { PLATFORMS } from "@/data/constants/platforms";
 import type { Platform } from "@/data/constants/platforms";
+import { PageHeader } from "@/comps/ui/PageHeader";
 
 export default function Settings() {
 	const {
@@ -31,7 +31,10 @@ export default function Settings() {
 	return (
 		<section className="bg-surface dark:bg-surface-dark min-h-screen p-8">
 			<div className="mx-auto">
-				<PageHeader title="Settings" description="Manage your data and application settings" />
+				<PageHeader
+					title="Settings"
+					description="Manage your data and application settings"
+				/>
 
 				<div className="mb-8">
 					<Alert color="info" icon={HiInformationCircle}>
@@ -62,16 +65,23 @@ export default function Settings() {
 						</h2>
 						<div className="space-y-3">
 							{playthroughs.map((pt) => (
-								<div key={pt.id} className="flex items-center justify-between gap-4">
+								<div
+									key={pt.id}
+									className="flex items-center justify-between gap-4"
+								>
 									<div className="min-w-0 flex-1">
-										<p className="truncate text-sm font-semibold text-gray-800">{pt.name}</p>
+										<p className="truncate text-sm font-semibold text-gray-800">
+											{pt.name}
+										</p>
 									</div>
 									<div className="w-36 shrink-0">
 										<Select
 											sizing="sm"
 											value={pt.platform ?? "PC"}
 											onChange={(e) =>
-												updatePlaythrough(pt.id, { platform: e.target.value as Platform })
+												updatePlaythrough(pt.id, {
+													platform: e.target.value as Platform,
+												})
 											}
 										>
 											{PLATFORMS.map((p) => (

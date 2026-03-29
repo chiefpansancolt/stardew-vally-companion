@@ -32,7 +32,10 @@ export default function PerfectionPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Perfection Tracker" description="Track your progress toward 100% game completion" />
+			<PageHeader
+				title="Perfection Tracker"
+				description="Track your progress toward 100% game completion"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<PerfectionHero

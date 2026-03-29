@@ -1,8 +1,8 @@
 import { Tooltip } from "flowbite-react";
 import { HiQuestionMarkCircle } from "react-icons/hi";
 import type { WalnutCardProps as Props } from "@/types";
-import { StatusBadge } from "@/comps/ui/StatusBadge";
 import { assetPath } from "@/lib/utils/assetPath";
+import { StatusBadge } from "@/comps/ui/StatusBadge";
 
 const WALNUT_IMG = assetPath("images/misc/Golden Walnut.png");
 

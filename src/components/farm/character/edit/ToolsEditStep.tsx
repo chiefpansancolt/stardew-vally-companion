@@ -43,7 +43,9 @@ export function ToolsEditStep({
 						if (!tool || tool.type !== "upgradeable") return null;
 						const isPan = id === "pan";
 						const currentLevel = toolLevels[key];
-						const levelIndex = isPan ? Math.max(0, currentLevel - PAN_LEVEL_OFFSET) : currentLevel;
+						const levelIndex = isPan
+							? Math.max(0, currentLevel - PAN_LEVEL_OFFSET)
+							: currentLevel;
 						const imgSrc = tool.levels[levelIndex]?.image
 							? assetPath(tool.levels[levelIndex].image)
 							: null;
@@ -90,7 +92,9 @@ export function ToolsEditStep({
 													}
 												>
 													{!selected ? (
-														<span className="text-gray-500">{name}</span>
+														<span className="text-gray-500">
+															{name}
+														</span>
 													) : (
 														name
 													)}

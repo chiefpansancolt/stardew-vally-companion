@@ -79,7 +79,9 @@ export function SkillsEditStep({
 									alt={skill.name}
 									className="h-7 w-7 object-contain"
 								/>
-								<span className="text-sm font-bold text-gray-800">{skill.name}</span>
+								<span className="text-sm font-bold text-gray-800">
+									{skill.name}
+								</span>
 							</div>
 
 							<div className="mb-3">
@@ -155,7 +157,7 @@ export function SkillsEditStep({
 								<div>
 									<p className="mb-1.5 text-[0.65rem] font-semibold text-gray-500 uppercase">
 										Level 10 Profession
-										<span className="ml-1 font-normal normal-case text-gray-400">
+										<span className="ml-1 font-normal text-gray-400 normal-case">
 											(from {selectedLv5.name})
 										</span>
 									</p>
@@ -254,7 +256,7 @@ export function SkillsEditStep({
 									{skill.name}
 								</span>
 								{unlocked ? (
-									<span className="inline-flex items-center gap-0.5 rounded-full bg-accent/20 px-1.5 py-0.5 text-[0.55rem] font-bold text-accent">
+									<span className="bg-accent/20 text-accent inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[0.55rem] font-bold">
 										<HiCheck className="h-2.5 w-2.5" /> Mastered
 									</span>
 								) : (

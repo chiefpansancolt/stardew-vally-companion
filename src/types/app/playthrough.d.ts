@@ -1,5 +1,5 @@
-import type { GameData } from "./game";
 import type { Platform } from "@/data/constants/platforms";
+import type { GameData } from "./game";
 
 export type { Platform };
 

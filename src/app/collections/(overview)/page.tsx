@@ -16,7 +16,10 @@ export default function CollectionsPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Collections" description="Track your shipped items, fish, artifacts, minerals, cooking, and crafting progress" />
+			<PageHeader
+				title="Collections"
+				description="Track your shipped items, fish, artifacts, minerals, cooking, and crafting progress"
+			/>
 
 			<CollectionsOverview gameData={gameData} />
 		</div>

@@ -8,7 +8,10 @@ import { assetPath } from "@/lib/utils/assetPath";
 
 const allDrops = starDrops().get();
 
-export function StardropsEditStep({ stardrops: initialStardrops, onChange }: StardropsEditStepProps) {
+export function StardropsEditStep({
+	stardrops: initialStardrops,
+	onChange,
+}: StardropsEditStepProps) {
 	const [local, setLocal] = useState(initialStardrops);
 
 	function toggle(id: string) {
@@ -22,9 +25,7 @@ export function StardropsEditStep({ stardrops: initialStardrops, onChange }: Sta
 	return (
 		<div>
 			<div className="mb-4 flex items-center justify-between">
-				<p className="text-xs font-bold tracking-wide text-gray-500 uppercase">
-					Stardrops
-				</p>
+				<p className="text-xs font-bold tracking-wide text-gray-500 uppercase">Stardrops</p>
 				<span className="rounded-full bg-gray-100 px-3 py-0.5 text-[0.7rem] font-semibold text-gray-600">
 					{collectedCount} / {allDrops.length} collected
 				</span>
@@ -58,7 +59,7 @@ export function StardropsEditStep({ stardrops: initialStardrops, onChange }: Sta
 									{drop.description}
 								</div>
 								{collected ? (
-									<span className="inline-flex items-center gap-1 rounded-full bg-accent/20 px-2 py-0.5 text-[0.625rem] font-bold text-accent">
+									<span className="bg-accent/20 text-accent inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[0.625rem] font-bold">
 										<HiCheck className="h-3 w-3" /> Collected
 									</span>
 								) : (

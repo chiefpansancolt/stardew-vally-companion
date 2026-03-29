@@ -16,7 +16,10 @@ export default function ForageablesPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Forageables" description="Wild-gathered items, tree produce, and tapper goods with sell prices and artisan uses" />
+			<PageHeader
+				title="Forageables"
+				description="Wild-gathered items, tree produce, and tapper goods with sell prices and artisan uses"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<ForageablesHero gameData={activePlaythrough.data} />

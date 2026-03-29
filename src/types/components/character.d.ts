@@ -1,5 +1,11 @@
 import type { Skill } from "stardew-valley-data";
-import type { CharacterInfo, GameData, MasteryProgress, SkillProgress, ToolLevels } from "@/types/app/game";
+import type {
+  CharacterInfo,
+  GameData,
+  MasteryProgress,
+  SkillProgress,
+  ToolLevels,
+} from "@/types/app/game";
 
 export interface CharacterProps {
   gameData: GameData;

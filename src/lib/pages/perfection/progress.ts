@@ -250,9 +250,10 @@ function getCategoryProgress(
     }
 
     case "golden-walnuts-found": {
-      const found = gameData.goldenWalnutsFound > 0
-        ? gameData.goldenWalnutsFound
-        : Object.keys(gameData.goldenWalnuts).length;
+      const found =
+        gameData.goldenWalnutsFound > 0
+          ? gameData.goldenWalnutsFound
+          : Object.keys(gameData.goldenWalnuts).length;
       const missing: MissingItem[] = [];
       for (const w of allWalnuts) {
         if (!gameData.goldenWalnuts[w.id]) {

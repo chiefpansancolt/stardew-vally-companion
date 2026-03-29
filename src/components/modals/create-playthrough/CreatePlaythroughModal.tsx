@@ -138,7 +138,10 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 		if (path === "build" && currentStep === 2)
 			return !!(characterForm.playthroughName.trim() && characterForm.farmName.trim());
 		if (path === "build" && currentStep === 3)
-			return bundleConfig.bundlePath === "joja" || (bundleConfig.bundlePath !== null && bundleConfig.activeBundles.length > 0);
+			return (
+				bundleConfig.bundlePath === "joja" ||
+				(bundleConfig.bundlePath !== null && bundleConfig.activeBundles.length > 0)
+			);
 		return false;
 	})();
 

@@ -15,7 +15,10 @@ export default function CookingPage() {
 
 	return (
 		<div className="p-6">
-			<PageHeader title="Cooking" description="Cooking recipes, ingredients, buffs, and progress" />
+			<PageHeader
+				title="Cooking"
+				description="Cooking recipes, ingredients, buffs, and progress"
+			/>
 
 			<div className="flex flex-col gap-6">
 				<CookingHero gameData={activePlaythrough.data} />

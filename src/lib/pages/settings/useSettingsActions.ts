@@ -5,8 +5,13 @@ import type { ImportStatus } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 
 export function useSettingsActions() {
-  const { playthroughs, updatePlaythrough, exportData, importData, clearAllData } =
-    usePlaythrough();
+  const {
+    playthroughs,
+    updatePlaythrough,
+    exportData,
+    importData,
+    clearAllData,
+  } = usePlaythrough();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [confirmReset, setConfirmReset] = useState(false);
