@@ -45,6 +45,7 @@ export const DEFAULT_GAME_DATA: GameData = {
   achievements: [],
   stardrops: {},
   goldenWalnuts: {},
+  goldenWalnutsFound: 0,
   secretNotes: {},
   lostBooks: {},
   monsters: {},

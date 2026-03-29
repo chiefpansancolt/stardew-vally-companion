@@ -24,7 +24,9 @@ interface MilestoneTile {
 
 export function MilestonesCard({ gameData }: DashboardProps) {
 	const stardropsFound = allStardrops.filter((s) => gameData.stardrops[s.id]).length;
-	const walnuts = Object.keys(gameData.goldenWalnuts).length;
+	const walnuts = gameData.goldenWalnutsFound > 0
+		? gameData.goldenWalnutsFound
+		: Object.keys(gameData.goldenWalnuts).length;
 	const notesFound = secretNotes.filter((n) => gameData.secretNotes[n.id]).length;
 	const scrapsFound = journalScraps.filter((n) => gameData.secretNotes[n.id]).length;
 	const townDone = townOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;

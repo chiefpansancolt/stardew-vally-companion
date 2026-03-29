@@ -2,11 +2,14 @@ import { Tooltip } from "flowbite-react";
 import { HiQuestionMarkCircle } from "react-icons/hi";
 import type { WalnutCardProps as Props } from "@/types";
 import { StatusBadge } from "@/comps/ui/StatusBadge";
+import { assetPath } from "@/lib/utils/assetPath";
+
+const WALNUT_IMG = assetPath("images/misc/Golden Walnut.png");
 
 export function WalnutCard({ walnut, found }: Props) {
 	return (
 		<div
-			className={`flex flex-col gap-1.5 rounded-lg border p-3 ${
+			className={`relative flex flex-col gap-1.5 rounded-lg border p-3 ${
 				found ? "border-green-400/30 bg-green-400/10" : "border-white/10 bg-white/5"
 			}`}
 		>
@@ -31,6 +34,10 @@ export function WalnutCard({ walnut, found }: Props) {
 						Show Hint
 					</span>
 				</Tooltip>
+			</div>
+			<div className="absolute right-2 bottom-2 flex items-center gap-0.5">
+				<img src={WALNUT_IMG} alt="Golden Walnut" className="h-4 w-4 object-contain" />
+				<span className="text-[0.6rem] font-bold text-yellow-300/80">x{walnut.amount}</span>
 			</div>
 		</div>
 	);

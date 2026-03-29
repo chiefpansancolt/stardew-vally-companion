@@ -143,6 +143,7 @@ export interface GameData {
   achievements: string[];
   stardrops: Record<string, boolean>;
   goldenWalnuts: Record<string, number>;
+  goldenWalnutsFound: number;
   secretNotes: Record<string, boolean>;
   lostBooks: Record<string, boolean>;
   monsters: Record<string, number>;

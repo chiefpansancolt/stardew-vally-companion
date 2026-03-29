@@ -134,6 +134,7 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     goldenWalnuts: Object.fromEntries(
       save.walnuts.collected.map((id) => [id, 1]),
     ),
+    goldenWalnutsFound: save.walnuts.found,
 
     secretNotes: Object.fromEntries([
       ...save.secretNotes.notesFound.map((id) => [String(id), true]),
