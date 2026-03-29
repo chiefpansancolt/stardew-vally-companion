@@ -16,7 +16,9 @@ export function AnimalProductsHero({ gameData }: Props) {
 	]);
 
 	const shippableEntries = allEntries.filter((p) => !EXCLUDED_FROM_SHIPPING.has(p.id));
-	const shippedCount = shippableEntries.filter((p) => gameData.shipped[p.id]?.shipped === true).length;
+	const shippedCount = shippableEntries.filter(
+		(p) => gameData.shipped[p.id]?.shipped === true
+	).length;
 
 	const stats = [
 		{ label: "Animals", value: allAnimals.length },

@@ -2,18 +2,22 @@
 
 import { animals, isFarmAnimal } from "stardew-valley-data";
 import { useState } from "react";
-import { type ProduceEntry, CollectionProps as Props, type ShippedFilter as BaseShippedFilter } from "@/types";
+import {
+	type ShippedFilter as BaseShippedFilter,
+	type ProduceEntry,
+	CollectionProps as Props,
+} from "@/types";
 import { applyBestProfessionBonus, getActiveProfessionBonuses } from "@/lib/utils/professionPrices";
 import { SHIPPED_FILTERS } from "@/data/constants/filters";
-
-type ShippedFilter = BaseShippedFilter | "not-applicable";
-
-const FILTERS = [...SHIPPED_FILTERS, { id: "not-applicable" as const, label: "Other" }];
 import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
 import { ProduceCard } from "./cards";
+
+type ShippedFilter = BaseShippedFilter | "not-applicable";
+
+const FILTERS = [...SHIPPED_FILTERS, { id: "not-applicable" as const, label: "Other" }];
 
 export function AnimalProductsSection({ gameData }: Props) {
 	const [search, setSearch] = useState("");

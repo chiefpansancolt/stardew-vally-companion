@@ -4,7 +4,12 @@ import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { StatusBadge } from "@/comps/ui/StatusBadge";
 
-export function ProduceCard({ entry, shipped, shippable = true, professionBonus = null }: ProduceCardProps) {
+export function ProduceCard({
+	entry,
+	shipped,
+	shippable = true,
+	professionBonus = null,
+}: ProduceCardProps) {
 	const { produce, animalName, building, isDeluxe } = entry;
 	const { borderBg, nameColor } = shippedCardStyles(shippable && shipped);
 

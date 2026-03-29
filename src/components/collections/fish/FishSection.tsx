@@ -11,11 +11,17 @@ import {
 	type WeatherFilter,
 } from "@/types";
 import { applyBestProfessionBonus, getActiveProfessionBonuses } from "@/lib/utils/professionPrices";
-import { FilterCheckbox, FilterGroup, FilterPopover, FilterRadio, FilterSelect } from "@/comps/ui/filter-popover";
+import { FISH_CATEGORY_FILTERS } from "@/data/constants/filters";
+import {
+	FilterCheckbox,
+	FilterGroup,
+	FilterPopover,
+	FilterRadio,
+	FilterSelect,
+} from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
-import { FISH_CATEGORY_FILTERS } from "@/data/constants/filters";
 import { FishCard } from "./cards";
 import { FishDetailModal } from "./modals/FishDetailModal";
 
