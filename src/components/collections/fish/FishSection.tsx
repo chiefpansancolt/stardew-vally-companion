@@ -11,10 +11,11 @@ import {
 	type WeatherFilter,
 } from "@/types";
 import { applyBestProfessionBonus, getActiveProfessionBonuses } from "@/lib/utils/professionPrices";
-import { FilterGroup, FilterPopover, FilterRadio, FilterSelect } from "@/comps/ui/filter-popover";
+import { FilterCheckbox, FilterGroup, FilterPopover, FilterRadio, FilterSelect } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
 import { SearchField } from "@/comps/ui/SearchField";
+import { FISH_CATEGORY_FILTERS } from "@/data/constants/filters";
 import { FishCard } from "./cards";
 import { FishDetailModal } from "./modals/FishDetailModal";
 
@@ -32,8 +33,18 @@ export function FishSection({ gameData }: Props) {
 	const [weatherFilter, setWeatherFilter] = useState<WeatherFilter>("all");
 	const [locationFilter, setLocationFilter] = useState("all");
 	const [difficultyFilter, setDifficultyFilter] = useState<DifficultyFilter>("all");
+	const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set());
 	const [showProfessionPrices, setShowProfessionPrices] = useState(false);
 	const [selectedFish, setSelectedFish] = useState<Fish | null>(null);
+
+	function toggleCategory(id: string) {
+		setCategoryFilter((prev) => {
+			const next = new Set(prev);
+			if (next.has(id)) next.delete(id);
+			else next.add(id);
+			return next;
+		});
+	}
 
 	const activeProfessionBonuses = getActiveProfessionBonuses(gameData);
 	const hasFishingProfession =
@@ -46,6 +57,7 @@ export function FishSection({ gameData }: Props) {
 		weatherFilter !== "all",
 		locationFilter !== "all",
 		difficultyFilter !== "all",
+		categoryFilter.size > 0,
 	].filter(Boolean).length;
 
 	const filtered = useMemo(() => {
@@ -71,7 +83,8 @@ export function FishSection({ gameData }: Props) {
 				if (difficultyFilter === "medium") return f.difficulty >= 34 && f.difficulty <= 66;
 				if (difficultyFilter === "hard") return f.difficulty >= 67;
 				return true;
-			});
+			})
+			.filter((f) => categoryFilter.size === 0 || categoryFilter.has(f.category));
 	}, [
 		search,
 		caughtFilter,
@@ -80,6 +93,7 @@ export function FishSection({ gameData }: Props) {
 		weatherFilter,
 		locationFilter,
 		difficultyFilter,
+		categoryFilter,
 		gameData.fishCaught,
 	]);
 
@@ -200,6 +214,18 @@ export function FishSection({ gameData }: Props) {
 										</FilterRadio>
 									)
 								)}
+							</FilterGroup>
+							<FilterGroup label="Category">
+								{FISH_CATEGORY_FILTERS.map(({ id, label }) => (
+									<FilterCheckbox
+										key={id}
+										value={id}
+										checked={categoryFilter.has(id)}
+										onChange={() => toggleCategory(id)}
+									>
+										{label}
+									</FilterCheckbox>
+								))}
 							</FilterGroup>
 						</div>
 					</FilterPopover>

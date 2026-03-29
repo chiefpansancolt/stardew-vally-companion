@@ -112,3 +112,12 @@ export const SPECIAL_ITEM_STATUS_FILTERS: FilterOption<SpecialItemStatusFilter>[
     { id: "acquired", label: "Acquired" },
     { id: "not-acquired", label: "Not Acquired" },
   ];
+
+export const FISH_CATEGORY_FILTERS: { id: string; label: string }[] = [
+  { id: "regular", label: "Regular" },
+  { id: "crab-pot", label: "Crab Pot" },
+  { id: "night-market", label: "Night Market" },
+  { id: "legendary", label: "Legendary" },
+  { id: "legendary-2", label: "Legendary II" },
+  { id: "other", label: "Other" },
+];

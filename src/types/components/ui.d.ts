@@ -51,6 +51,13 @@ export interface FilterRadioProps {
   children: React.ReactNode;
 }
 
+export interface FilterCheckboxProps {
+  value: string;
+  checked: boolean;
+  onChange: () => void;
+  children: React.ReactNode;
+}
+
 export interface SeasonBadgesProps {
   seasons: Season[];
 }
