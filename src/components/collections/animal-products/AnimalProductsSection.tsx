@@ -2,9 +2,13 @@
 
 import { animals, isFarmAnimal } from "stardew-valley-data";
 import { useState } from "react";
-import { type ProduceEntry, CollectionProps as Props, type ShippedFilter } from "@/types";
+import { type ProduceEntry, CollectionProps as Props, type ShippedFilter as BaseShippedFilter } from "@/types";
 import { applyBestProfessionBonus, getActiveProfessionBonuses } from "@/lib/utils/professionPrices";
 import { SHIPPED_FILTERS } from "@/data/constants/filters";
+
+type ShippedFilter = BaseShippedFilter | "not-applicable";
+
+const FILTERS = [...SHIPPED_FILTERS, { id: "not-applicable" as const, label: "Other" }];
 import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
 import { NavySection } from "@/comps/ui/NavySection";
 import { ProfessionsButton } from "@/comps/ui/ProfessionsButton";
@@ -21,6 +25,8 @@ export function AnimalProductsSection({ gameData }: Props) {
 
 	const allAnimals = animals().farmAnimals().get().filter(isFarmAnimal);
 
+	const EXCLUDED_FROM_SHIPPING = new Set(["928", "107"]); // Golden Egg, Dinosaur Egg
+
 	const allEntries: ProduceEntry[] = allAnimals.flatMap((a) => [
 		{ produce: a.produce, animalName: a.name, building: a.building, isDeluxe: false },
 		...(a.deluxeProduce
@@ -35,7 +41,8 @@ export function AnimalProductsSection({ gameData }: Props) {
 			: []),
 	]);
 
-	const shippedCount = allEntries.filter(
+	const shippableEntries = allEntries.filter((e) => !EXCLUDED_FROM_SHIPPING.has(e.produce.id));
+	const shippedCount = shippableEntries.filter(
 		(e) => gameData.shipped[e.produce.id]?.shipped === true
 	).length;
 
@@ -48,6 +55,10 @@ export function AnimalProductsSection({ gameData }: Props) {
 			);
 		})
 		.filter((e) => {
+			const shippable = !EXCLUDED_FROM_SHIPPING.has(e.produce.id);
+			if (filter === "all") return true;
+			if (filter === "not-applicable") return !shippable;
+			if (!shippable) return false;
 			const shipped = gameData.shipped[e.produce.id]?.shipped === true;
 			if (filter === "shipped") return shipped;
 			if (filter === "not-shipped") return !shipped;
@@ -57,7 +68,7 @@ export function AnimalProductsSection({ gameData }: Props) {
 	return (
 		<NavySection
 			title="Animal Products"
-			badge={`${shippedCount} / ${allEntries.length} shipped`}
+			badge={`${shippedCount} / ${shippableEntries.length} shipped`}
 		>
 			<div className="mb-4 flex flex-wrap items-center gap-3">
 				<SearchField
@@ -67,7 +78,7 @@ export function AnimalProductsSection({ gameData }: Props) {
 				/>
 				<FilterPopover activeCount={filter !== "all" ? 1 : 0}>
 					<FilterGroup label="Shipped Status">
-						{SHIPPED_FILTERS.map(({ id, label }) => (
+						{FILTERS.map(({ id, label }) => (
 							<FilterRadio
 								key={id}
 								name="animal-products-filter"
@@ -99,6 +110,7 @@ export function AnimalProductsSection({ gameData }: Props) {
 							key={`${entry.animalName}-${entry.produce.id}-${entry.isDeluxe}`}
 							entry={entry}
 							shipped={gameData.shipped[entry.produce.id]?.shipped === true}
+							shippable={!EXCLUDED_FROM_SHIPPING.has(entry.produce.id)}
 							professionBonus={
 								showProfessionPrices
 									? applyBestProfessionBonus(

@@ -4,9 +4,9 @@ import { shippedCardStyles } from "@/lib/utils/cardStyles";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { StatusBadge } from "@/comps/ui/StatusBadge";
 
-export function ProduceCard({ entry, shipped, professionBonus = null }: ProduceCardProps) {
+export function ProduceCard({ entry, shipped, shippable = true, professionBonus = null }: ProduceCardProps) {
 	const { produce, animalName, building, isDeluxe } = entry;
-	const { borderBg, nameColor } = shippedCardStyles(shipped);
+	const { borderBg, nameColor } = shippedCardStyles(shippable && shipped);
 
 	return (
 		<div className={`flex flex-col gap-3 rounded-xl border p-3 transition-all ${borderBg}`}>
@@ -31,10 +31,12 @@ export function ProduceCard({ entry, shipped, professionBonus = null }: ProduceC
 						{animalName} · {building}
 					</div>
 				</div>
-				<StatusBadge
-					status={shipped ? "success" : "inactive"}
-					label={shipped ? "Shipped" : "Not Shipped"}
-				/>
+				{shippable && (
+					<StatusBadge
+						status={shipped ? "success" : "inactive"}
+						label={shipped ? "Shipped" : "Not Shipped"}
+					/>
+				)}
 			</div>
 
 			<PriceGrid

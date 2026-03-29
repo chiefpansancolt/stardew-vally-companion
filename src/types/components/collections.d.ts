@@ -55,6 +55,7 @@ export interface ProduceEntry {
 export interface ProduceCardProps {
   entry: ProduceEntry;
   shipped: boolean;
+  shippable?: boolean;
   professionBonus?: BonusResult | null;
 }
 

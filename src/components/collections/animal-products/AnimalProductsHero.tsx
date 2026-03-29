@@ -8,17 +8,20 @@ import { StatTile } from "@/comps/ui/StatTile";
 export function AnimalProductsHero({ gameData }: Props) {
 	const allAnimals = animals().farmAnimals().get().filter(isFarmAnimal);
 
+	const EXCLUDED_FROM_SHIPPING = new Set(["928", "107"]); // Golden Egg, Dinosaur Egg
+
 	const allEntries = allAnimals.flatMap((a) => [
 		a.produce,
 		...(a.deluxeProduce ? [a.deluxeProduce] : []),
 	]);
 
-	const shippedCount = allEntries.filter((p) => gameData.shipped[p.id]?.shipped === true).length;
+	const shippableEntries = allEntries.filter((p) => !EXCLUDED_FROM_SHIPPING.has(p.id));
+	const shippedCount = shippableEntries.filter((p) => gameData.shipped[p.id]?.shipped === true).length;
 
 	const stats = [
 		{ label: "Animals", value: allAnimals.length },
 		{ label: "Produce Items", value: allEntries.length },
-		{ label: "Shipped", value: `${shippedCount} / ${allEntries.length}`, colored: true },
+		{ label: "Shipped", value: `${shippedCount} / ${shippableEntries.length}`, colored: true },
 	];
 
 	return (
