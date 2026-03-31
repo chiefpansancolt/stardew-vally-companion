@@ -136,10 +136,12 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     ),
     goldenWalnutsFound: save.walnuts.found,
 
-    secretNotes: Object.fromEntries([
-      ...save.secretNotes.notesFound.map((id) => [String(id), true]),
-      ...save.secretNotes.journalScrapsFound.map((id) => [String(id), true]),
-    ]),
+    secretNotes: Object.fromEntries(
+      save.secretNotes.notesFound.map((id) => [String(id), true]),
+    ),
+    journalScraps: Object.fromEntries(
+      save.secretNotes.journalScrapsFound.map((id) => [String(id + 1000), true]),
+    ),
 
     lostBooks: DEFAULT_GAME_DATA.lostBooks,
 

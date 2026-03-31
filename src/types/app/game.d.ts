@@ -145,6 +145,7 @@ export interface GameData {
   goldenWalnuts: Record<string, number>;
   goldenWalnutsFound: number;
   secretNotes: Record<string, boolean>;
+  journalScraps: Record<string, boolean>;
   lostBooks: Record<string, boolean>;
   monsters: Record<string, number>;
   skills: Record<string, SkillProgress>;

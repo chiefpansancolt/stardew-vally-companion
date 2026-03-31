@@ -29,7 +29,7 @@ export function MilestonesCard({ gameData }: DashboardProps) {
 			? gameData.goldenWalnutsFound
 			: Object.keys(gameData.goldenWalnuts).length;
 	const notesFound = secretNotes.filter((n) => gameData.secretNotes[n.id]).length;
-	const scrapsFound = journalScraps.filter((n) => gameData.secretNotes[n.id]).length;
+	const scrapsFound = journalScraps.filter((n) => gameData.journalScraps[n.id]).length;
 	const townDone = townOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;
 	const qiDone = qiOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;
 

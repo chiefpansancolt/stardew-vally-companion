@@ -22,7 +22,7 @@ export function SecretNotesTab({ gameData }: Props) {
 	);
 
 	const notesFound = notes.filter((n) => gameData.secretNotes[n.id]).length;
-	const scrapsFound = scraps.filter((n) => gameData.secretNotes[n.id]).length;
+	const scrapsFound = scraps.filter((n) => gameData.journalScraps[n.id]).length;
 
 	return (
 		<div className="flex flex-col gap-8">
@@ -92,7 +92,7 @@ export function SecretNotesTab({ gameData }: Props) {
 				</div>
 				<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 					{filteredScraps.map((scrap) => {
-						const found = !!gameData.secretNotes[scrap.id];
+						const found = !!gameData.journalScraps[scrap.id];
 						return (
 							<div
 								key={scrap.id}

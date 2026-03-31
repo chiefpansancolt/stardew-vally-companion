@@ -19,7 +19,7 @@ export function QuestsHero({ gameData }: Props) {
 	const townComplete = townOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;
 	const qiComplete = qiOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;
 	const notesFound = notes.filter((n) => gameData.secretNotes[n.id]).length;
-	const scrapsFound = scraps.filter((n) => gameData.secretNotes[n.id]).length;
+	const scrapsFound = scraps.filter((n) => gameData.journalScraps[n.id]).length;
 
 	return (
 		<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
