@@ -1,6 +1,7 @@
 "use client";
 
 import { assetPath } from "@/lib/utils/assetPath";
+import { kebabToTitle } from "@/lib/utils/formatting";
 import { GEAR_DATA } from "@/data/constants/gear";
 import { PriceGrid } from "@/comps/ui/price-grid";
 
@@ -24,7 +25,7 @@ export function TrinketsTab() {
 						<div className="mt-1 text-[0.6rem] text-white/80">{t.effect}</div>
 						<div className="mt-1 flex gap-1">
 							<span className="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[0.55rem] text-white/80">
-								{t.source}
+								{kebabToTitle(t.source)}
 							</span>
 						</div>
 						<div className="mt-1">
