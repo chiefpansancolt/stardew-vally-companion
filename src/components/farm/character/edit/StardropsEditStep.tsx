@@ -38,7 +38,7 @@ export function StardropsEditStep({
 							key={drop.id}
 							type="button"
 							onClick={() => toggle(drop.id)}
-							className={`flex items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
+							className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
 								collected
 									? "border-accent/40 bg-accent/5 hover:bg-accent/10"
 									: "border-gray-200 bg-gray-50 hover:border-gray-300"

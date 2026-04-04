@@ -8,7 +8,10 @@ export const ROD_DOT_HEX: Record<number, string> = {
   4: "#f0abfc",
 };
 
-export const TOOL_ENTRIES: Array<{ key: keyof ToolLevels; id: string }> = [
+export const TOOL_ENTRIES: Array<{
+  key: Exclude<keyof ToolLevels, "currentlyUpgrading">;
+  id: string;
+}> = [
   { key: "axe", id: "axe" },
   { key: "pickaxe", id: "pickaxe" },
   { key: "hoe", id: "hoe" },

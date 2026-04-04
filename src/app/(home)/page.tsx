@@ -302,7 +302,7 @@ export default function Home() {
 								<button
 									type="button"
 									onClick={() => setOpenFaq(openFaq === i ? null : i)}
-									className="flex w-full items-center justify-between gap-4 py-5 text-left"
+									className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
 									aria-expanded={openFaq === i}
 								>
 									<span className="font-semibold text-gray-900">{question}</span>

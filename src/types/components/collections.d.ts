@@ -5,7 +5,6 @@ import type {
   BarItem,
   CollectionItem,
   CookedDish,
-  CraftingRecipe,
   Crop,
   Fish,
   Forageable,
@@ -19,12 +18,21 @@ import type {
   OreItem,
   ProfessionBonus,
   ResourceItem,
+  CookingRecipe as SDVCookingRecipe,
+  CraftingRecipe as SDVCraftingRecipe,
   Tree,
   WildTree,
 } from "stardew-valley-data";
-import type { GameData } from "@/types/app/game";
 import type { BonusResult } from "@/lib/utils/professionPrices";
 import type { applyBestProfessionBonus } from "@/lib/utils/professionPrices";
+import type {
+  CookingRecipe,
+  CraftingRecipe,
+  FishCaughtProgress,
+  GameData,
+  MuseumItem,
+  ShippedItem,
+} from "../app/game";
 
 export interface CollectionProps {
   gameData: GameData;
@@ -246,14 +254,14 @@ export interface PriceFormulaModalProps {
 }
 
 export interface CraftingCardProps {
-  recipe: CraftingRecipe;
+  recipe: SDVCraftingRecipe;
   learned: boolean;
   crafted: boolean;
   onClick: () => void;
 }
 
 export interface CraftingDetailModalProps {
-  recipe: CraftingRecipe | null;
+  recipe: SDVCraftingRecipe | null;
   learned: boolean;
   crafted: boolean;
   onClose: () => void;
@@ -316,4 +324,112 @@ export interface MonsterDetailModalProps {
   monster: Monster | null;
   killCount: number;
   onClose: () => void;
+}
+
+// ---- Edit drafts ----
+
+export interface CookingEditDraft {
+  cookingRecipes: Record<string, CookingRecipe>;
+}
+
+export interface CraftingEditDraft {
+  craftingRecipes: Record<string, CraftingRecipe>;
+}
+
+export interface FishEditDraft {
+  fishCaught: FishCaughtProgress[];
+}
+
+export interface ArtifactsEditDraft {
+  artifacts: Record<string, MuseumItem>;
+}
+
+export interface MineralsEditDraft {
+  minerals: Record<string, MuseumItem>;
+  shipped: Record<string, ShippedItem>;
+}
+
+export interface SpecialItemsEditDraft {
+  specialItems: string[];
+  books: string[];
+}
+
+export interface ShippedEditDraft {
+  shipped: Record<string, ShippedItem>;
+}
+
+// ---- Edit step props ----
+
+export interface CookingEditStepProps {
+  cookingRecipes: Record<string, CookingRecipe>;
+  onChange: (cookingRecipes: Record<string, CookingRecipe>) => void;
+}
+
+export interface CraftingEditStepProps {
+  craftingRecipes: Record<string, CraftingRecipe>;
+  onChange: (craftingRecipes: Record<string, CraftingRecipe>) => void;
+}
+
+export interface FishEditStepProps {
+  fishCaught: FishCaughtProgress[];
+  onChange: (fishCaught: FishCaughtProgress[]) => void;
+}
+
+export interface ArtifactsEditStepProps {
+  artifacts: Record<string, MuseumItem>;
+  onChange: (artifacts: Record<string, MuseumItem>) => void;
+}
+
+export interface MineralsMuseumEditStepProps {
+  minerals: Record<string, MuseumItem>;
+  onChange: (minerals: Record<string, MuseumItem>) => void;
+}
+
+export interface MineralsShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface SpecialItemsEditStepProps {
+  specialItems: string[];
+  books: string[];
+  onSpecialItemsChange: (specialItems: string[]) => void;
+  onBooksChange: (books: string[]) => void;
+}
+
+export interface ShipEditItem {
+  id: string;
+  name: string;
+  image: string;
+}
+
+export interface ShippedItemsEditStepProps {
+  items: ShipEditItem[];
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface CropsShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface ForageablesShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface AnimalProductsShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface MonsterLootShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
+}
+
+export interface ArtisanGoodsShippedEditStepProps {
+  shipped: Record<string, ShippedItem>;
+  onChange: (shipped: Record<string, ShippedItem>) => void;
 }

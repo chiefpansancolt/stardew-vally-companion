@@ -2,19 +2,24 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import type { EditStep, JojaEditDraft } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { assetPath } from "@/lib/utils/assetPath";
 import { NAVY_TILE } from "@/data/constants/styles";
 import { DevelopmentsSection } from "@/comps/joja/DevelopmentsSection";
+import { JojaEditStep } from "@/comps/joja/edit";
 import { JojaHero } from "@/comps/joja/JojaHero";
+import { EditModal } from "@/comps/modals/CreatePlaythroughModal";
 import { NoPlaythroughFallback } from "@/comps/ui/NoPlaythroughFallback";
 import { PageHeader } from "@/comps/ui/PageHeader";
 
 function JojaContent() {
-	const { activePlaythrough } = usePlaythrough();
+	const { activePlaythrough, updatePlaythrough, isManualPlaythrough } = usePlaythrough();
 	const searchParams = useSearchParams();
 	const devOverride = searchParams.get("dev") === "true";
+	const [editOpen, setEditOpen] = useState(false);
+	const [draft, setDraft] = useState<JojaEditDraft | null>(null);
 
 	if (!activePlaythrough) {
 		return <NoPlaythroughFallback feature="joja development" />;
@@ -39,11 +44,46 @@ function JojaContent() {
 		);
 	}
 
+	const gameData = activePlaythrough.data;
+	const playthroughId = activePlaythrough.id;
+
+	function handleOpenEdit() {
+		setDraft({
+			joja: {
+				...gameData.joja,
+				developments: { ...gameData.joja.developments },
+			},
+		});
+		setEditOpen(true);
+	}
+
+	function handleSave() {
+		if (!draft) return;
+		updatePlaythrough(playthroughId, {
+			data: { ...gameData, joja: draft.joja },
+		});
+	}
+
+	const editSteps: EditStep[] = draft
+		? [
+				{
+					label: "Joja",
+					content: (
+						<JojaEditStep
+							joja={draft.joja}
+							onChange={(joja) => setDraft((d) => d && { ...d, joja })}
+						/>
+					),
+				},
+			]
+		: [];
+
 	return (
 		<div className="p-6">
 			<PageHeader
 				title="Joja Community Development"
 				description="Joja Mart community development projects"
+				onEdit={isManualPlaythrough ? handleOpenEdit : undefined}
 			/>
 
 			<div className="flex flex-col gap-6">
@@ -60,15 +100,23 @@ function JojaContent() {
 						</div>
 					</div>
 					<span
-						className={`text-sm font-bold ${activePlaythrough.data.joja?.isMember ? "text-green-400" : "text-white/80"}`}
+						className={`text-sm font-bold ${gameData.joja?.isMember ? "text-green-400" : "text-white/80"}`}
 					>
-						{activePlaythrough.data.joja?.isMember ? "Active" : "Inactive"}
+						{gameData.joja?.isMember ? "Active" : "Inactive"}
 					</span>
 				</div>
 
-				<JojaHero gameData={activePlaythrough.data} />
-				<DevelopmentsSection gameData={activePlaythrough.data} />
+				<JojaHero gameData={gameData} />
+				<DevelopmentsSection gameData={gameData} />
 			</div>
+
+			<EditModal
+				isOpen={editOpen}
+				onClose={() => setEditOpen(false)}
+				title="Edit Joja Progress"
+				steps={editSteps}
+				onSave={handleSave}
+			/>
 		</div>
 	);
 }

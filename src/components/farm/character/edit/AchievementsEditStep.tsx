@@ -39,7 +39,7 @@ export function AchievementsEditStep({
 							key={achievement.id}
 							type="button"
 							onClick={() => toggle(achievement.id)}
-							className={`flex items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
+							className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
 								isEarned
 									? "border-highlight/40 bg-highlight/5 hover:bg-highlight/10"
 									: "border-gray-200 bg-gray-50 hover:border-gray-300"

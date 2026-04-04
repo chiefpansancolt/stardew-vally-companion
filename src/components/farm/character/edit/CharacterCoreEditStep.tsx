@@ -140,7 +140,7 @@ export function CharacterCoreEditStep({
 							key={i}
 							type="button"
 							onClick={() => set("houseUpgradeLevel", i)}
-							className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
+							className={`cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors ${
 								character.houseUpgradeLevel === i
 									? "border-primary bg-primary text-white"
 									: "border-gray-200 bg-gray-100 text-gray-600 hover:bg-gray-200"

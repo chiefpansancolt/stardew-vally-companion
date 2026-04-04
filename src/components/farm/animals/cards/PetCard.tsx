@@ -20,11 +20,13 @@ export function PetCard({ pet }: Props) {
 			)}
 			<div className="flex-1">
 				<div className="flex items-center gap-2">
-					<div className={`text-base font-bold ${isMaxed ? "text-green-300" : "text-white"}`}>
+					<div
+						className={`text-base font-bold ${isMaxed ? "text-green-300" : "text-white"}`}
+					>
 						{pet.name}
 					</div>
 					{pet.starter && (
-						<span className="rounded bg-accent/20 px-1.5 py-0.5 text-[0.55rem] font-semibold text-accent">
+						<span className="bg-accent/20 text-accent rounded px-1.5 py-0.5 text-[0.55rem] font-semibold">
 							Starter
 						</span>
 					)}

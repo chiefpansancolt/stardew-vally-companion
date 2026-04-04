@@ -23,7 +23,7 @@ export function ToolCard({ toolId, level, isUpgrading, onClick }: ToolCardProps)
 			className="hover:border-accent/40 hover:bg-accent/10 relative flex w-full cursor-pointer flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-3 text-center transition-all"
 		>
 			{isUpgrading && (
-				<span className="absolute top-1.5 right-1.5 rounded bg-highlight/20 px-1 py-0.5 text-[0.5rem] font-semibold leading-none text-highlight">
+				<span className="bg-highlight/20 text-highlight absolute top-1.5 right-1.5 rounded px-1 py-0.5 text-[0.5rem] leading-none font-semibold">
 					Upgrading
 				</span>
 			)}

@@ -94,7 +94,7 @@ export function SkillsEditStep({
 											key={lvl}
 											type="button"
 											onClick={() => setSkill(skill.id, lvl)}
-											className={`h-7 w-7 rounded-full text-xs font-bold transition-colors ${
+											className={`h-7 w-7 cursor-pointer rounded-full text-xs font-bold transition-colors ${
 												progress.level === lvl
 													? "bg-primary text-white"
 													: "border border-gray-200 bg-white text-gray-600 hover:bg-gray-100"
@@ -119,7 +119,7 @@ export function SkillsEditStep({
 													key={prof.id}
 													type="button"
 													onClick={() => handleProfessionClick(prof.id)}
-													className={`flex items-start gap-2 rounded-lg border p-2.5 text-left transition-colors ${
+													className={`flex cursor-pointer items-start gap-2 rounded-lg border p-2.5 text-left transition-colors ${
 														active
 															? "border-primary/40 bg-primary/5"
 															: "border-gray-200 bg-white hover:border-gray-300"
@@ -169,7 +169,7 @@ export function SkillsEditStep({
 													key={prof.id}
 													type="button"
 													onClick={() => handleProfessionClick(prof.id)}
-													className={`flex items-start gap-2 rounded-lg border p-2.5 text-left transition-colors ${
+													className={`flex cursor-pointer items-start gap-2 rounded-lg border p-2.5 text-left transition-colors ${
 														active
 															? "border-primary/40 bg-primary/5"
 															: "border-gray-200 bg-white hover:border-gray-300"
@@ -239,7 +239,7 @@ export function SkillsEditStep({
 								key={skill.id}
 								type="button"
 								onClick={() => toggleMastery(skill.id)}
-								className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-colors ${
+								className={`flex cursor-pointer flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-colors ${
 									unlocked
 										? "border-accent/40 bg-accent/5"
 										: "border-gray-200 bg-gray-50 hover:border-gray-300"

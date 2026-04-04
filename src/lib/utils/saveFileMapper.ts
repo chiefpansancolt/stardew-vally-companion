@@ -46,7 +46,8 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       hoe: save.player.toolLevels.hoe.level,
       trashCan: save.player.toolLevels.trashCan.level,
       fishingRod: save.player.toolLevels.fishingRod.level,
-      currentlyUpgrading: save.player.toolLevels.currentlyUpgrading?.tool ?? null,
+      currentlyUpgrading:
+        save.player.toolLevels.currentlyUpgrading?.tool ?? null,
     },
 
     shipped: Object.fromEntries(
@@ -139,7 +140,10 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       save.secretNotes.notesFound.map((id) => [String(id), true]),
     ),
     journalScraps: Object.fromEntries(
-      save.secretNotes.journalScrapsFound.map((id) => [String(id + 1000), true]),
+      save.secretNotes.journalScrapsFound.map((id) => [
+        String(id + 1000),
+        true,
+      ]),
     ),
 
     lostBooks: DEFAULT_GAME_DATA.lostBooks,

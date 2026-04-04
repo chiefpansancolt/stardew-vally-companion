@@ -43,3 +43,29 @@ export interface BuildingDetailModalProps {
   fishPond?: FishPondInfo;
   onClose: () => void;
 }
+
+export interface AnimalsEditDraft {
+  animals: FarmAnimalProgress[];
+  pets: PetProgress[];
+  buildings: BuildingProgress[];
+}
+
+export interface AnimalsEditStepProps {
+  animals: FarmAnimalProgress[];
+  buildings: BuildingProgress[];
+  onChange: (animals: FarmAnimalProgress[]) => void;
+}
+
+export interface PetsEditStepProps {
+  pets: PetProgress[];
+  onChange: (pets: PetProgress[]) => void;
+}
+
+export interface BuildingsEditDraft {
+  buildings: BuildingProgress[];
+}
+
+export interface BuildingsEditStepProps {
+  buildings: BuildingProgress[];
+  onChange: (buildings: BuildingProgress[]) => void;
+}

@@ -29,3 +29,12 @@ export interface HeartEvent {
   description: string;
   details: string;
 }
+
+export interface VillagersEditDraft {
+  villagers: Record<string, VillagerProgress>;
+}
+
+export interface VillagersEditStepProps {
+  villagers: Record<string, VillagerProgress>;
+  onChange: (villagers: Record<string, VillagerProgress>) => void;
+}

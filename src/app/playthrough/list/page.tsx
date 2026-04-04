@@ -74,7 +74,7 @@ export default function PlaythroughListPage() {
 							<button
 								key={opt}
 								onClick={() => setSortOption(opt)}
-								className={`rounded-lg px-3 py-1.5 text-sm transition-colors ${
+								className={`cursor-pointer rounded-lg px-3 py-1.5 text-sm transition-colors ${
 									sortOption === opt
 										? "bg-accent text-white"
 										: "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"

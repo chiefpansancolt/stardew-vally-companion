@@ -80,7 +80,7 @@ export function ToolsEditStep({
 													key={name}
 													type="button"
 													onClick={() => setTool(key, i)}
-													className="rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors"
+													className="cursor-pointer rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors"
 													style={
 														selected
 															? {
@@ -137,7 +137,7 @@ export function ToolsEditStep({
 											key={lvl.name}
 											type="button"
 											onClick={() => setTool("fishingRod", i)}
-											className="rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors"
+											className="cursor-pointer rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors"
 											style={
 												selected
 													? {
@@ -189,7 +189,7 @@ export function ToolsEditStep({
 										key={bp.slots}
 										type="button"
 										onClick={() => handleMaxItemsChange(bp.slots)}
-										className={`rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors ${
+										className={`cursor-pointer rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold transition-colors ${
 											selected
 												? "border-primary/40 bg-primary/10 text-primary"
 												: "border-gray-200 text-gray-500 hover:bg-gray-100"
