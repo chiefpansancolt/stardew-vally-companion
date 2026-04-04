@@ -45,8 +45,6 @@ export default function AnimalsPage() {
 		}
 	}
 
-	const hasPets = gameData.pets.length > 0;
-
 	const editSteps: EditStep[] = draft
 		? [
 				{
@@ -59,19 +57,15 @@ export default function AnimalsPage() {
 						/>
 					),
 				},
-				...(hasPets
-					? [
-							{
-								label: "Pets",
-								content: (
-									<PetsEditStep
-										pets={draft.pets}
-										onChange={(pets) => setDraft((d) => d && { ...d, pets })}
-									/>
-								),
-							},
-						]
-					: []),
+				{
+					label: "Pets",
+					content: (
+						<PetsEditStep
+							pets={draft.pets}
+							onChange={(pets) => setDraft((d) => d && { ...d, pets })}
+						/>
+					),
+				},
 			]
 		: [];
 
