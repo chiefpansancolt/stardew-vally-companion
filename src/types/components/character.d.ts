@@ -43,6 +43,7 @@ export interface ToolCardProps {
   toolId: string;
   level: number;
   onClick: () => void;
+  isUpgrading?: boolean;
 }
 
 export interface FishingRodCardProps {

@@ -19,8 +19,15 @@ export function PetCard({ pet }: Props) {
 				<img src={image} alt={pet.type} className="h-14 w-14 shrink-0 object-contain" />
 			)}
 			<div className="flex-1">
-				<div className={`text-base font-bold ${isMaxed ? "text-green-300" : "text-white"}`}>
-					{pet.name}
+				<div className="flex items-center gap-2">
+					<div className={`text-base font-bold ${isMaxed ? "text-green-300" : "text-white"}`}>
+						{pet.name}
+					</div>
+					{pet.starter && (
+						<span className="rounded bg-accent/20 px-1.5 py-0.5 text-[0.55rem] font-semibold text-accent">
+							Starter
+						</span>
+					)}
 				</div>
 				<div className="mt-0.5 text-xs text-white/50">{pet.type}</div>
 				{hasFriendship && (

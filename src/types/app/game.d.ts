@@ -31,6 +31,7 @@ export interface ToolLevels {
   hoe: number;
   trashCan: number;
   fishingRod: number;
+  currentlyUpgrading: string | null;
 }
 
 export interface ShippedItem {
@@ -83,6 +84,7 @@ export interface PetProgress {
   type: string;
   breed: string;
   friendship: number | null;
+  starter: boolean;
 }
 
 export interface BuildingProgress {

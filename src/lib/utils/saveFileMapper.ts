@@ -39,15 +39,14 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     },
 
     toolLevels: {
-      wateringCan: save.player.toolLevels.wateringCan,
-      pan: save.player.toolLevels.pan,
-      pickaxe: save.player.toolLevels.pickaxe,
-      axe: save.player.toolLevels.axe,
-      hoe: save.player.toolLevels.hoe,
-      trashCan: save.player.toolLevels.trashCan,
-      fishingRod:
-        (save.player.toolLevels as unknown as Record<string, number>)
-          .fishingRod ?? 0,
+      wateringCan: save.player.toolLevels.wateringCan.level,
+      pan: save.player.toolLevels.pan.level,
+      pickaxe: save.player.toolLevels.pickaxe.level,
+      axe: save.player.toolLevels.axe.level,
+      hoe: save.player.toolLevels.hoe.level,
+      trashCan: save.player.toolLevels.trashCan.level,
+      fishingRod: save.player.toolLevels.fishingRod.level,
+      currentlyUpgrading: save.player.toolLevels.currentlyUpgrading?.tool ?? null,
     },
 
     shipped: Object.fromEntries(
@@ -209,16 +208,13 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
     })),
 
     pets: [
-      ...(save.pet
-        ? [
-            {
-              name: save.pet.name,
-              type: save.pet.type,
-              breed: String(save.pet.breed),
-              friendship: save.pet.friendship,
-            },
-          ]
-        : []),
+      ...save.pets.map((p) => ({
+        name: p.name,
+        type: p.type,
+        breed: String(p.breed),
+        friendship: p.friendship,
+        starter: p.starter,
+      })),
       ...(save.horse
         ? [
             {
@@ -226,6 +222,7 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
               type: "Horse",
               breed: "",
               friendship: null,
+              starter: false,
             },
           ]
         : []),

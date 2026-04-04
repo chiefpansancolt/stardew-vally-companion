@@ -3,14 +3,16 @@ import type { ToolCardProps } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
 import { LEVEL_META, LEVEL_NAMES, PAN_LEVEL_OFFSET } from "@/data/constants/tools";
 
-export function ToolCard({ toolId, level, onClick }: ToolCardProps) {
+export function ToolCard({ toolId, level, isUpgrading, onClick }: ToolCardProps) {
 	const tool = tools().find(toolId);
 	if (!tool || tool.type !== "upgradeable") return null;
 
 	const isPan = toolId === "pan";
-	const levelIndex = isPan ? Math.max(0, level - PAN_LEVEL_OFFSET) : level;
+	const levelIndex = isPan ? Math.max(0, level) : level;
 	const levelData = tool.levels[levelIndex];
-	const levelName = LEVEL_NAMES[level] ?? LEVEL_NAMES[LEVEL_NAMES.length - 1];
+	const levelName = isPan
+		? (LEVEL_NAMES[level + PAN_LEVEL_OFFSET] ?? LEVEL_NAMES[LEVEL_NAMES.length - 1])
+		: (LEVEL_NAMES[level] ?? LEVEL_NAMES[LEVEL_NAMES.length - 1]);
 	const imgSrc = levelData?.image ? assetPath(levelData.image) : null;
 	const totalDots = tool.levels.length;
 	const dotNames = isPan ? ["Copper", "Steel", "Gold", "Iridium"] : LEVEL_NAMES;
@@ -18,8 +20,13 @@ export function ToolCard({ toolId, level, onClick }: ToolCardProps) {
 	return (
 		<button
 			onClick={onClick}
-			className="hover:border-accent/40 hover:bg-accent/10 flex w-full cursor-pointer flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-3 text-center transition-all"
+			className="hover:border-accent/40 hover:bg-accent/10 relative flex w-full cursor-pointer flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-3 text-center transition-all"
 		>
+			{isUpgrading && (
+				<span className="absolute top-1.5 right-1.5 rounded bg-highlight/20 px-1 py-0.5 text-[0.5rem] font-semibold leading-none text-highlight">
+					Upgrading
+				</span>
+			)}
 			{imgSrc ? (
 				<img src={imgSrc} alt={tool.name} className="h-10 w-10 object-contain" />
 			) : (

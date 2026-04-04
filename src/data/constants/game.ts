@@ -33,6 +33,7 @@ export const DEFAULT_GAME_DATA: GameData = {
     hoe: 0,
     trashCan: 0,
     fishingRod: -1,
+    currentlyUpgrading: null,
   },
   shipped: {},
   fishCaught: [],

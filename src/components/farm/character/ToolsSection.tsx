@@ -33,6 +33,7 @@ export function ToolsSection({ gameData }: Props) {
 							key={id}
 							toolId={id}
 							level={toolLevels[key]}
+							isUpgrading={toolLevels.currentlyUpgrading === key}
 							onClick={() =>
 								setModalState({ toolId: id, currentLevel: toolLevels[key] })
 							}
