@@ -27,8 +27,8 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       stardew-valley-data:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.0.1
+        version: 1.0.1
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -2209,8 +2209,8 @@ packages:
   stable-hash@0.0.5:
     resolution: {integrity: sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==}
 
-  stardew-valley-data@1.0.0:
-    resolution: {integrity: sha512-KVHVZFhcCojBitkopHGlXGXk75SKmThmfXJsunQE85K0Btfrz1dUd60VOX15w+L2Rw827xbO0k6Xw0+EOIeDGg==}
+  stardew-valley-data@1.0.1:
+    resolution: {integrity: sha512-+NRc/SXnYCA+Ak6ysnQK0/z7mzHAnGb9EJ/3k+RynE0JFZ6f6MEYA5kAOJVZEdJzTpX82wSm0AQ0Nr9BBiXmzA==}
     engines: {node: '>=24'}
 
   stop-iteration-iterator@1.1.0:
@@ -4561,7 +4561,7 @@ snapshots:
 
   stable-hash@0.0.5: {}
 
-  stardew-valley-data@1.0.0:
+  stardew-valley-data@1.0.1:
     dependencies:
       fast-xml-parser: 5.5.10
 
