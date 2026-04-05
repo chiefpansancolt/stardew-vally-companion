@@ -25,6 +25,7 @@ import { FaSeedling } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { FaSchool } from "react-icons/fa6";
 import { GiChicken, GiMineWagon, GiMushroom, GiPalmTree } from "react-icons/gi";
+import { GiScarecrow } from "react-icons/gi";
 import {
 	HiBookOpen,
 	HiCalendar,
@@ -290,6 +291,15 @@ export function AppSidebar() {
 											onClick={() => setSidebarOpen(false)}
 										>
 											Special Items
+										</SidebarItem>
+										<SidebarItem
+											as={Link}
+											href="/collections/rarecrows"
+											icon={GiScarecrow}
+											active={pathname === "/collections/rarecrows"}
+											onClick={() => setSidebarOpen(false)}
+										>
+											Rarecrows
 										</SidebarItem>
 									</SidebarCollapse>
 								)}

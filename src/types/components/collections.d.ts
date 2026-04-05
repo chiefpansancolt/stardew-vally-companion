@@ -17,6 +17,7 @@ import type {
   NodeItem,
   OreItem,
   ProfessionBonus,
+  Rarecrow,
   ResourceItem,
   CookingRecipe as SDVCookingRecipe,
   CraftingRecipe as SDVCraftingRecipe,
@@ -326,6 +327,11 @@ export interface MonsterDetailModalProps {
   onClose: () => void;
 }
 
+export interface RarecrowCardProps {
+  rarecrow: Rarecrow;
+  obtained: boolean;
+}
+
 // ---- Edit drafts ----
 
 export interface CookingEditDraft {
@@ -352,6 +358,10 @@ export interface MineralsEditDraft {
 export interface SpecialItemsEditDraft {
   specialItems: string[];
   books: string[];
+}
+
+export interface RarecrowsEditDraft {
+  rarecrows: string[];
 }
 
 export interface ShippedEditDraft {
@@ -395,6 +405,11 @@ export interface SpecialItemsEditStepProps {
   books: string[];
   onSpecialItemsChange: (specialItems: string[]) => void;
   onBooksChange: (books: string[]) => void;
+}
+
+export interface RarecrowsEditStepProps {
+  rarecrows: string[];
+  onChange: (rarecrows: string[]) => void;
 }
 
 export interface ShipEditItem {

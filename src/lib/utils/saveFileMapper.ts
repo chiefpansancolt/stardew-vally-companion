@@ -190,6 +190,8 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
       .filter((p) => p.acquired)
       .map((p) => p.id),
 
+    rarecrows: save.rarecrows.placed,
+
     questsCompleted: Object.fromEntries(
       save.activeQuests.filter((q) => q.completed).map((q) => [q.id, true]),
     ),

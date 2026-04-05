@@ -59,6 +59,7 @@ export const DEFAULT_GAME_DATA: GameData = {
   },
   books: [],
   specialItems: [],
+  rarecrows: [],
   questsCompleted: {},
   specialOrdersCompleted: {},
   animals: [],

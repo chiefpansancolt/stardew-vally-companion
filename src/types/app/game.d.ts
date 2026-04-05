@@ -155,6 +155,7 @@ export interface GameData {
   mastery: MasteryProgress;
   books: string[];
   specialItems: string[];
+  rarecrows: string[];
   questsCompleted: Record<string, boolean>;
   specialOrdersCompleted: Record<string, boolean>;
   animals: FarmAnimalProgress[];
