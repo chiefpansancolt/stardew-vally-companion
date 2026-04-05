@@ -4,7 +4,10 @@ export function PageHeader({ title, description, onEdit }: PageHeaderProps) {
 	return (
 		<div className="mb-6 md:flex md:items-center md:justify-between">
 			<div className="min-w-0 flex-1">
-				<h1 className="text-3xl font-bold text-gray-900 sm:truncate sm:tracking-tight">
+				<h1
+					className="text-3xl font-bold text-gray-900 sm:truncate sm:tracking-tight"
+					style={{ fontFamily: "var(--font-stardew-valley)" }}
+				>
 					{title}
 				</h1>
 				{description && <p className="mt-1 text-gray-600">{description}</p>}

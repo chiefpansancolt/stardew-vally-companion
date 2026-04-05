@@ -1,8 +1,8 @@
 "use client";
 
 import { TabItem, Tabs } from "flowbite-react";
+import { tabTitle } from "@/lib/utils/tabTitle";
 import { GEAR_COUNTS } from "@/data/constants/gear";
-import { NAVY_TILE } from "@/data/constants/styles";
 import { GearHero } from "@/comps/gear/GearHero";
 import {
 	BaitTab,
@@ -27,40 +27,26 @@ export default function GearPage() {
 				<GearHero />
 
 				<Tabs variant="underline">
-					<TabItem title={`Weapons (${GEAR_COUNTS.weapons})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<WeaponsTab />
-						</div>
+					<TabItem title={tabTitle(`Weapons (${GEAR_COUNTS.weapons})`)}>
+						<WeaponsTab />
 					</TabItem>
-					<TabItem title={`Footwear (${GEAR_COUNTS.footwear})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<FootwearTab />
-						</div>
+					<TabItem title={tabTitle(`Footwear (${GEAR_COUNTS.footwear})`)}>
+						<FootwearTab />
 					</TabItem>
-					<TabItem title={`Rings (${GEAR_COUNTS.rings})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<RingsTab />
-						</div>
+					<TabItem title={tabTitle(`Rings (${GEAR_COUNTS.rings})`)}>
+						<RingsTab />
 					</TabItem>
-					<TabItem title={`Hats (${GEAR_COUNTS.hats})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<HatsTab />
-						</div>
+					<TabItem title={tabTitle(`Hats (${GEAR_COUNTS.hats})`)}>
+						<HatsTab />
 					</TabItem>
-					<TabItem title={`Trinkets (${GEAR_COUNTS.trinkets})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<TrinketsTab />
-						</div>
+					<TabItem title={tabTitle(`Trinkets (${GEAR_COUNTS.trinkets})`)}>
+						<TrinketsTab />
 					</TabItem>
-					<TabItem title={`Bait (${GEAR_COUNTS.bait})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<BaitTab />
-						</div>
+					<TabItem title={tabTitle(`Bait (${GEAR_COUNTS.bait})`)}>
+						<BaitTab />
 					</TabItem>
-					<TabItem title={`Tackle (${GEAR_COUNTS.tackle})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<TackleTab />
-						</div>
+					<TabItem title={tabTitle(`Tackle (${GEAR_COUNTS.tackle})`)}>
+						<TackleTab />
 					</TabItem>
 				</Tabs>
 			</div>

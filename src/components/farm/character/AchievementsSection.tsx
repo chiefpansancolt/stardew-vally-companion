@@ -4,25 +4,17 @@ import { achievements } from "stardew-valley-data";
 import { HiCheck, HiLockClosed } from "react-icons/hi";
 import { type CharacterProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
+import { NavySection } from "@/comps/ui/NavySection";
 
 export function AchievementsSection({ gameData }: Props) {
 	const allAchievements = achievements().get();
 	const earnedCount = allAchievements.filter((a) => gameData.achievements.includes(a.id)).length;
 
 	return (
-		<div
-			className="border-secondary/60 rounded-xl border p-5"
-			style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
+		<NavySection
+			title="Achievements"
+			badge={`${earnedCount} / ${allAchievements.length} earned`}
 		>
-			<div className="mb-4 flex items-center justify-between">
-				<h3 className="text-[0.8125rem] font-bold tracking-wide text-white uppercase">
-					Achievements
-				</h3>
-				<span className="bg-highlight/20 text-highlight rounded-full px-3 py-0.5 text-[0.7rem] font-semibold">
-					{earnedCount} / {allAchievements.length} earned
-				</span>
-			</div>
-
 			<div
 				className="grid gap-3"
 				style={{ gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))" }}
@@ -67,6 +59,6 @@ export function AchievementsSection({ gameData }: Props) {
 					);
 				})}
 			</div>
-		</div>
+		</NavySection>
 	);
 }

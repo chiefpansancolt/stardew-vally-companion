@@ -5,7 +5,7 @@ import { lostBooks, quests, secretNotes } from "stardew-valley-data";
 import { useState } from "react";
 import type { EditStep, QuestsEditDraft } from "@/types";
 import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
-import { NAVY_TILE } from "@/data/constants/styles";
+import { tabTitle } from "@/lib/utils/tabTitle";
 import { EditModal } from "@/comps/modals/CreatePlaythroughModal";
 import { NotesBooksEditStep, QuestsEditStep, SpecialOrdersEditStep } from "@/comps/quests/edit";
 import { QuestsHero } from "@/comps/quests/QuestsHero";
@@ -127,20 +127,14 @@ export default function QuestsPage() {
 				<QuestsHero gameData={gameData} />
 
 				<Tabs variant="underline">
-					<TabItem title={`Quests (${questCount})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<QuestsTab gameData={gameData} />
-						</div>
+					<TabItem title={tabTitle(`Quests (${questCount})`)}>
+						<QuestsTab gameData={gameData} />
 					</TabItem>
-					<TabItem title={`Secret Notes (${noteCount})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<SecretNotesTab gameData={gameData} />
-						</div>
+					<TabItem title={tabTitle(`Secret Notes (${noteCount})`)}>
+						<SecretNotesTab gameData={gameData} />
 					</TabItem>
-					<TabItem title={`Lost Books (${bookCount})`}>
-						<div className="rounded-b-xl p-5" style={NAVY_TILE}>
-							<LostBooksTab gameData={gameData} />
-						</div>
+					<TabItem title={tabTitle(`Lost Books (${bookCount})`)}>
+						<LostBooksTab gameData={gameData} />
 					</TabItem>
 				</Tabs>
 			</div>

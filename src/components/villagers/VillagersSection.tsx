@@ -6,6 +6,7 @@ import type { MarriageFilter, VillagersProps as Props, SeasonFilter } from "@/ty
 import { effectiveMaxHearts } from "@/lib/utils/villagerHearts";
 import { MARRIAGE_FILTERS, SEASON_FILTERS } from "@/data/constants/filters";
 import { FilterGroup, FilterPopover, FilterRadio } from "@/comps/ui/filter-popover";
+import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
 import { VillagerCard } from "./cards";
 import { VillagerDetailModal } from "./modals/VillagerDetailModal";
@@ -35,19 +36,10 @@ export function VillagersSection({ gameData }: Props) {
 
 	return (
 		<>
-			<div
-				className="border-secondary/60 rounded-xl border p-5"
-				style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
+			<NavySection
+				title="Villagers"
+				badge={`${maxHeartsCount} / ${allVillagers.length} max hearts`}
 			>
-				<div className="mb-4 flex items-center justify-between">
-					<h3 className="text-[0.8125rem] font-bold tracking-wide text-white uppercase">
-						Villagers
-					</h3>
-					<span className="bg-highlight/20 text-highlight rounded-full px-3 py-0.5 text-[0.7rem] font-semibold">
-						{maxHeartsCount} / {allVillagers.length} max hearts
-					</span>
-				</div>
-
 				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={search}
@@ -98,7 +90,7 @@ export function VillagersSection({ gameData }: Props) {
 						/>
 					))}
 				</div>
-			</div>
+			</NavySection>
 
 			{selected && (
 				<VillagerDetailModal

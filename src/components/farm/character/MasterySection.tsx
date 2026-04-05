@@ -5,6 +5,7 @@ import { HiCheck, HiLockClosed } from "react-icons/hi";
 import { type CharacterProps as Props } from "@/types";
 import { getCurrentMasteryLevel } from "@/lib/pages/character";
 import { assetPath } from "@/lib/utils/assetPath";
+import { NavySection } from "@/comps/ui/NavySection";
 
 const MAX_MASTERY_XP = MASTERY_LEVELS[MASTERY_LEVELS.length - 1]?.totalXp ?? 100_000;
 
@@ -16,19 +17,8 @@ export function MasterySection({ gameData }: Props) {
 	const masteredCount = allSkills.filter((s) => unlocked.includes(s.id)).length;
 
 	return (
-		<div
-			className="border-secondary/60 rounded-xl border p-5"
-			style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
-		>
-			<div className="mb-1 flex items-center justify-between">
-				<h3 className="text-[0.8125rem] font-bold tracking-wide text-white uppercase">
-					Mastery
-				</h3>
-				<span className="bg-highlight/20 text-highlight rounded-full px-3 py-0.5 text-[0.7rem] font-semibold">
-					{masteredCount} / {allSkills.length} Mastered
-				</span>
-			</div>
-			<div className="mb-4 text-[0.75rem] text-blue-300">
+		<NavySection title="Mastery" badge={`${masteredCount} / ${allSkills.length} Mastered`}>
+			<div className="-mt-2 mb-2 text-[0.75rem] text-blue-300">
 				{masteryXp.toLocaleString()} / {MAX_MASTERY_XP.toLocaleString()} XP · Level{" "}
 				{currentLevel}
 			</div>
@@ -98,6 +88,6 @@ export function MasterySection({ gameData }: Props) {
 					);
 				})}
 			</div>
-		</div>
+		</NavySection>
 	);
 }

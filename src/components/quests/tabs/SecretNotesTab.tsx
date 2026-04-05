@@ -3,6 +3,7 @@
 import { secretNotes } from "stardew-valley-data";
 import { useState } from "react";
 import type { CollectionProps as Props } from "@/types";
+import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
 import { StatusBadge } from "@/comps/ui/StatusBadge";
 
@@ -25,17 +26,9 @@ export function SecretNotesTab({ gameData }: Props) {
 	const scrapsFound = scraps.filter((n) => gameData.journalScraps[n.id]).length;
 
 	return (
-		<div className="flex flex-col gap-8">
-			<div>
-				<div className="mb-3 flex items-center gap-2">
-					<span className="text-sm font-bold tracking-wide text-white uppercase">
-						Secret Notes
-					</span>
-					<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-						{notesFound} / {notes.length} found
-					</span>
-				</div>
-				<div className="mb-3 flex flex-wrap items-center gap-3">
+		<div className="flex flex-col gap-4">
+			<NavySection title="Secret Notes" badge={`${notesFound} / ${notes.length} found`}>
+				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={noteSearch}
 						onChange={setNoteSearch}
@@ -72,18 +65,10 @@ export function SecretNotesTab({ gameData }: Props) {
 						);
 					})}
 				</div>
-			</div>
+			</NavySection>
 
-			<div>
-				<div className="mb-3 flex items-center gap-2">
-					<span className="text-sm font-bold tracking-wide text-white uppercase">
-						Journal Scraps
-					</span>
-					<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-						{scrapsFound} / {scraps.length} found
-					</span>
-				</div>
-				<div className="mb-3 flex flex-wrap items-center gap-3">
+			<NavySection title="Journal Scraps" badge={`${scrapsFound} / ${scraps.length} found`}>
+				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={scrapSearch}
 						onChange={setScrapSearch}
@@ -120,7 +105,7 @@ export function SecretNotesTab({ gameData }: Props) {
 						);
 					})}
 				</div>
-			</div>
+			</NavySection>
 		</div>
 	);
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { assetPath } from "@/lib/utils/assetPath";
 import { GEAR_DATA } from "@/data/constants/gear";
+import { NavySection } from "@/comps/ui/NavySection";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SearchField } from "@/comps/ui/SearchField";
 
@@ -15,7 +16,7 @@ export function FootwearTab() {
 	);
 
 	return (
-		<>
+		<NavySection title="Footwear" badge={`${allFootwear.length} items`}>
 			<div className="mb-4 flex flex-wrap items-center gap-3">
 				<SearchField value={search} onChange={setSearch} placeholder="Search footwear…" />
 			</div>
@@ -52,6 +53,6 @@ export function FootwearTab() {
 					</div>
 				))}
 			</div>
-		</>
+		</NavySection>
 	);
 }

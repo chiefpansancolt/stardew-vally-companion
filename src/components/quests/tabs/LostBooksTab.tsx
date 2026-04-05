@@ -4,6 +4,7 @@ import { lostBooks } from "stardew-valley-data";
 import { useState } from "react";
 import type { CollectionProps as Props } from "@/types";
 import { assetPath } from "@/lib/utils/assetPath";
+import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
 
 const allBooks = lostBooks().get();
@@ -15,16 +16,11 @@ export function LostBooksTab({ gameData }: Props) {
 	);
 
 	return (
-		<div>
-			<div className="mb-3 flex items-center gap-2">
-				<span className="text-sm font-bold tracking-wide text-white uppercase">
-					Lost Books
-				</span>
-				<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-					{gameData.lostBooksFound} / {allBooks.length} found
-				</span>
-			</div>
-			<div className="mb-3 flex flex-wrap items-center gap-3">
+		<NavySection
+			title="Lost Books"
+			badge={`${gameData.lostBooksFound} / ${allBooks.length} found`}
+		>
+			<div className="mb-4 flex flex-wrap items-center gap-3">
 				<SearchField value={search} onChange={setSearch} placeholder="Search books…" />
 			</div>
 			<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -47,6 +43,6 @@ export function LostBooksTab({ gameData }: Props) {
 					</div>
 				))}
 			</div>
-		</div>
+		</NavySection>
 	);
 }

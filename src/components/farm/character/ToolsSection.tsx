@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { CharacterProps as Props, ToolModalState } from "@/types";
 import { TOOL_ENTRIES } from "@/data/constants/tools";
+import { NavySection } from "@/comps/ui/NavySection";
 import { BackpackCard, FishingRodCard, ToolCard } from "./cards";
 import { BackpackDetailModal } from "./modals/BackpackDetailModal";
 import { FishingRodDetailModal } from "./modals/FishingRodDetailModal";
@@ -17,16 +18,7 @@ export function ToolsSection({ gameData }: Props) {
 
 	return (
 		<>
-			<div
-				className="border-secondary/60 rounded-xl border p-5"
-				style={{ background: "linear-gradient(135deg, #1e2538 0%, #2b3a67 100%)" }}
-			>
-				<div className="mb-4">
-					<h3 className="text-[0.8125rem] font-bold tracking-wide text-white uppercase">
-						Tools & Backpack
-					</h3>
-				</div>
-
+			<NavySection title="Tools & Backpack">
 				<div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-8">
 					{TOOL_ENTRIES.map(({ key, id }) => (
 						<ToolCard
@@ -45,7 +37,7 @@ export function ToolsSection({ gameData }: Props) {
 					/>
 					<BackpackCard maxItems={maxItems} onClick={() => setBackpackModalOpen(true)} />
 				</div>
-			</div>
+			</NavySection>
 
 			<ToolDetailModal state={modalState} onClose={() => setModalState(null)} />
 			{rodModalOpen && (

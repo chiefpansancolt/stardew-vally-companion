@@ -4,6 +4,7 @@ import { useState } from "react";
 import { assetPath } from "@/lib/utils/assetPath";
 import { GEAR_DATA } from "@/data/constants/gear";
 import { FilterPopover, FilterSelect } from "@/comps/ui/filter-popover";
+import { NavySection } from "@/comps/ui/NavySection";
 import { PriceGrid } from "@/comps/ui/price-grid";
 import { SearchField } from "@/comps/ui/SearchField";
 
@@ -31,7 +32,7 @@ export function WeaponsTab() {
 		.filter((w) => typeFilter === "all" || w.type === typeFilter);
 
 	return (
-		<>
+		<NavySection title="Weapons" badge={`${filtered.length} shown`}>
 			<div className="mb-4 flex flex-wrap items-center gap-3">
 				<SearchField value={search} onChange={setSearch} placeholder="Search weapons…" />
 				<FilterPopover activeCount={typeFilter !== "all" ? 1 : 0}>
@@ -84,6 +85,6 @@ export function WeaponsTab() {
 					</div>
 				))}
 			</div>
-		</>
+		</NavySection>
 	);
 }

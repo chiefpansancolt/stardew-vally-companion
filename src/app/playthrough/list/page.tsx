@@ -45,7 +45,10 @@ export default function PlaythroughListPage() {
 		<div className="p-6">
 			<div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 				<div>
-					<h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+					<h1
+						className="text-3xl font-bold text-gray-900 dark:text-white"
+						style={{ fontFamily: "var(--font-stardew-valley)" }}
+					>
 						My Playthroughs
 					</h1>
 					<p className="mt-1 text-gray-600 dark:text-gray-400">

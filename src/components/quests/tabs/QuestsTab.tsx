@@ -3,6 +3,7 @@
 import { quests, specialOrders } from "stardew-valley-data";
 import { useState } from "react";
 import type { CollectionProps as Props } from "@/types";
+import { NavySection } from "@/comps/ui/NavySection";
 import { SearchField } from "@/comps/ui/SearchField";
 import { StatusBadge } from "@/comps/ui/StatusBadge";
 
@@ -31,17 +32,9 @@ export function QuestsTab({ gameData }: Props) {
 	const qiComplete = qiOrders.filter((o) => gameData.specialOrdersCompleted[o.id]).length;
 
 	return (
-		<div className="flex flex-col gap-8">
-			<div>
-				<div className="mb-3 flex items-center justify-between">
-					<span className="text-sm font-bold tracking-wide text-white uppercase">
-						Main Quests
-					</span>
-					<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-						{allQuests.length} quests
-					</span>
-				</div>
-				<div className="mb-3 flex flex-wrap items-center gap-3">
+		<div className="flex flex-col gap-4">
+			<NavySection title="Main Quests" badge={`${questsComplete} / ${allQuests.length}`}>
+				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={questSearch}
 						onChange={setQuestSearch}
@@ -72,18 +65,13 @@ export function QuestsTab({ gameData }: Props) {
 						</div>
 					))}
 				</div>
-			</div>
+			</NavySection>
 
-			<div>
-				<div className="mb-3 flex items-center justify-between">
-					<span className="text-sm font-bold tracking-wide text-white uppercase">
-						Special Orders (Town)
-					</span>
-					<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-						{townComplete} / {townOrders.length}
-					</span>
-				</div>
-				<div className="mb-3 flex flex-wrap items-center gap-3">
+			<NavySection
+				title="Special Orders (Town)"
+				badge={`${townComplete} / ${townOrders.length}`}
+			>
+				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={townSearch}
 						onChange={setTownSearch}
@@ -134,18 +122,10 @@ export function QuestsTab({ gameData }: Props) {
 						);
 					})}
 				</div>
-			</div>
+			</NavySection>
 
-			<div>
-				<div className="mb-3 flex items-center justify-between">
-					<span className="text-sm font-bold tracking-wide text-white uppercase">
-						Qi Special Orders
-					</span>
-					<span className="bg-highlight/20 text-highlight rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold">
-						{qiComplete} / {qiOrders.length}
-					</span>
-				</div>
-				<div className="mb-3 flex flex-wrap items-center gap-3">
+			<NavySection title="Qi Special Orders" badge={`${qiComplete} / ${qiOrders.length}`}>
+				<div className="mb-4 flex flex-wrap items-center gap-3">
 					<SearchField
 						value={qiSearch}
 						onChange={setQiSearch}
@@ -191,7 +171,7 @@ export function QuestsTab({ gameData }: Props) {
 						);
 					})}
 				</div>
-			</div>
+			</NavySection>
 		</div>
 	);
 }

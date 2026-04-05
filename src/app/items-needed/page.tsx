@@ -102,7 +102,12 @@ export default function ItemsNeededPage() {
 	return (
 		<div className="space-y-6 px-4 py-6">
 			<div className="rounded-xl border border-[#d6d0bc] bg-white p-6 shadow-sm">
-				<h1 className="text-2xl font-extrabold text-gray-900">Items Needed</h1>
+				<h1
+					className="text-2xl font-extrabold text-gray-900"
+					style={{ fontFamily: "var(--font-stardew-valley)" }}
+				>
+					Items Needed
+				</h1>
 				<p className="mt-1 text-sm text-gray-500">
 					Everything still needed to complete your collection goals
 				</p>
