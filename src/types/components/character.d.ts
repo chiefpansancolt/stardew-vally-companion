@@ -1,6 +1,7 @@
 import type { Skill } from "stardew-valley-data";
 import type {
   CharacterInfo,
+  ChildProgress,
   GameData,
   MasteryProgress,
   SkillProgress,
@@ -90,6 +91,12 @@ export interface CharacterEditDraft {
   mastery: MasteryProgress;
   stardrops: Record<string, boolean>;
   achievements: string[];
+  children: ChildProgress[];
+}
+
+export interface ChildrenEditStepProps {
+  items: ChildProgress[];
+  onChange: (children: ChildProgress[]) => void;
 }
 
 export interface CharacterCoreEditStepProps {

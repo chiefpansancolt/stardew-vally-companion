@@ -87,6 +87,12 @@ export interface PetProgress {
   starter: boolean;
 }
 
+export interface ChildProgress {
+  name: string;
+  age: number;
+  gender: string;
+}
+
 export interface BuildingProgress {
   id: string;
   type: string;
@@ -160,6 +166,7 @@ export interface GameData {
   specialOrdersCompleted: Record<string, boolean>;
   animals: FarmAnimalProgress[];
   pets: PetProgress[];
+  children: ChildProgress[];
   buildings: BuildingProgress[];
   fishPonds: FishPondProgress[];
   mineProgress: MineProgress;

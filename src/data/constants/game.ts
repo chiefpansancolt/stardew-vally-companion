@@ -64,6 +64,7 @@ export const DEFAULT_GAME_DATA: GameData = {
   specialOrdersCompleted: {},
   animals: [],
   pets: [],
+  children: [],
   buildings: [],
   fishPonds: [],
   mineProgress: {

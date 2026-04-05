@@ -7,9 +7,11 @@ import { usePlaythrough } from "@/lib/contexts/PlaythroughContext";
 import { toggleProfession } from "@/lib/pages/character";
 import { AchievementsSection } from "@/comps/farm/character/AchievementsSection";
 import { CharacterHeroCard } from "@/comps/farm/character/CharacterHeroCard";
+import { ChildrenSection } from "@/comps/farm/character/ChildrenSection";
 import {
 	AchievementsEditStep,
 	CharacterCoreEditStep,
+	ChildrenEditStep,
 	SkillsEditStep,
 	StardropsEditStep,
 	ToolsEditStep,
@@ -50,6 +52,7 @@ export default function CharacterPage() {
 			mastery: { ...gameData.mastery, unlocked: [...gameData.mastery.unlocked] },
 			stardrops: { ...gameData.stardrops },
 			achievements: [...gameData.achievements],
+			children: gameData.children.map((c) => ({ ...c })),
 		});
 		setEditOpen(true);
 	}
@@ -85,6 +88,10 @@ export default function CharacterPage() {
 		} else if (stepIndex === 4) {
 			updatePlaythrough(playthroughId, {
 				data: { ...base, achievements: draft.achievements },
+			});
+		} else if (stepIndex === 5) {
+			updatePlaythrough(playthroughId, {
+				data: { ...base, children: draft.children },
 			});
 		}
 	}
@@ -152,6 +159,15 @@ export default function CharacterPage() {
 						/>
 					),
 				},
+				{
+					label: "Children",
+					content: (
+						<ChildrenEditStep
+							items={draft.children}
+							onChange={(children) => setDraft((d) => d && { ...d, children })}
+						/>
+					),
+				},
 			]
 		: [];
 
@@ -165,6 +181,7 @@ export default function CharacterPage() {
 
 			<div className="flex flex-col gap-6">
 				<CharacterHeroCard gameData={gameData} />
+				<ChildrenSection gameData={gameData} />
 				<ToolsSection gameData={gameData} />
 				<SkillsSection gameData={gameData} onToggleProfession={handleToggleProfession} />
 				<MasterySection gameData={gameData} />

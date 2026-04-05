@@ -234,6 +234,12 @@ export function mapSaveDataToGameData(save: SaveData): GameData {
         : []),
     ],
 
+    children: save.children.map((c) => ({
+      name: c.name,
+      age: c.age,
+      gender: c.gender,
+    })),
+
     buildings: save.buildings.map((b) => ({
       id: b.id,
       type: b.type,
