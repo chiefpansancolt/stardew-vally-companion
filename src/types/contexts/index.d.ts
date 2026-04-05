@@ -26,8 +26,3 @@ export interface UIContextType {
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
 }
-
-export interface SaveFABProps {
-  isDirty: boolean;
-  onSave: () => boolean;
-}
