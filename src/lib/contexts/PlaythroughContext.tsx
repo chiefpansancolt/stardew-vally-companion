@@ -16,7 +16,6 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 	const [isHydrated, setIsHydrated] = useState(false);
 
 	useEffect(() => {
-		// eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: hydrate from localStorage after SSR to prevent hydration mismatch
 		const loaded = storageService.load();
 		const migrated: AppData = {
 			...loaded,
@@ -25,6 +24,7 @@ export function PlaythroughProvider({ children }: { children: React.ReactNode })
 				data: { ...DEFAULT_GAME_DATA, ...p.data },
 			})),
 		};
+		// eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: hydrate from localStorage after SSR to prevent hydration mismatch
 		setAppData(migrated);
 		setIsHydrated(true);
 	}, []);

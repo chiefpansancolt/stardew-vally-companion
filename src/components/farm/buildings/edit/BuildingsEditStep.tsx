@@ -1,7 +1,7 @@
 "use client";
 
 import { buildings } from "stardew-valley-data";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HiPlus, HiX } from "react-icons/hi";
 import type { BuildingsEditStepProps } from "@/types";
 import type { BuildingProgress } from "@/types/app/game";
@@ -11,9 +11,14 @@ const allBuildingTypes = buildings().get();
 
 export function BuildingsEditStep({ buildings: initial, onChange }: BuildingsEditStepProps) {
 	const [local, setLocal] = useState<BuildingProgress[]>([...initial]);
+	const idCounter = useRef(0);
 
 	function addBuilding(type: string) {
-		const next = [...local, { id: `manual-${type}-${Date.now()}`, type, animalCount: 0 }];
+		idCounter.current += 1;
+		const next = [
+			...local,
+			{ id: `manual-${type}-${idCounter.current}`, type, animalCount: 0 },
+		];
 		setLocal(next);
 		onChange(next);
 	}
