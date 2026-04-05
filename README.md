@@ -5,17 +5,20 @@ A comprehensive Stardew Valley progress tracker and companion app built with Nex
 ## Features
 
 ### Playthrough Management
+
 - Create playthroughs manually or by uploading a Stardew Valley save file (PC)
 - Switch between multiple playthroughs
 - Full import / export / reset in settings
 
 ### Farm
+
 - **Character** — skills, professions, mastery levels, tools, fishing rods, backpacks, pets
 - **Buildings** — track farm buildings and animal counts
 - **Animals** — track animal friendship and produce status
 - **Ginger Island** — golden walnuts, parrot upgrades, island progress
 
 ### Collections
+
 - **Crops** — shipped status, seasons, sell prices with profession bonuses
 - **Forageables** — all forageable items by season
 - **Animal Products** — eggs, milk, and artisan goods from animals
@@ -29,6 +32,7 @@ A comprehensive Stardew Valley progress tracker and companion app built with Nex
 - **Special Items** — rarecrows, furniture, hats, rings, boots, and more
 
 ### Community & Progression
+
 - **Community Center** — bundle completion tracking (standard and remix modes)
 - **Joja Mart** — Joja membership development milestones
 - **Villagers** — heart levels, birthdays, gift preferences, and marriageability

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Playthrough Management
+
 - Create playthroughs manually (build wizard) or by uploading a PC save file
 - Multi-step create wizard: character info → bundle selection → review
 - Community Center and Joja bundle modes (standard and remix)
@@ -20,12 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full import / export / reset in settings
 
 #### Farm
+
 - Character page — skills (Farming, Mining, Foraging, Fishing, Combat), professions, mastery levels, tools, fishing rods, backpacks, and pet tracking
 - Buildings page — add/remove farm buildings and track animal counts per building
 - Animals page — track animal friendship and produce
 - Ginger Island page — golden walnut count, parrot upgrades, and island progress
 
 #### Collections
+
 - Collections overview with aggregate shipped/donated/caught statistics
 - Crops — shipped status, seasons, sell prices with profession bonus calculator
 - Forageables — all forageable items with season filters
@@ -40,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Special Items — rarecrows, furniture, hats (with price), rings, boots, and trinkets
 
 #### Community & Progression
+
 - Community Center — room-by-room bundle completion with item-level tracking
 - Joja Mart — Joja membership development project milestones
 - Villagers — heart levels, birthdays, gift preferences, marriage eligibility, and gift tracking
@@ -53,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gear — equipment tracking
 
 #### Infrastructure
+
 - localStorage persistence — all data stored locally, no backend required
 - Save file parser — map PC save XML directly to tracked game state
 - `stardew-valley-data` integration — game data queries for all pages
