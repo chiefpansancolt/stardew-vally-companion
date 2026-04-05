@@ -24,7 +24,12 @@ export function MonsterDetailModal({ monster, killCount, onClose }: Props) {
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{monster.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{monster.name}
+							</span>
 							<span
 								className={`rounded-full px-2 py-0.5 text-[0.65rem] font-bold ${
 									killCount > 0

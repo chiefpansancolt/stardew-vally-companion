@@ -57,7 +57,12 @@ export function FishDetailModal({ fish, caught, onClose, activeProfessionBonuses
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{fish.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{fish.name}
+							</span>
 							{caught && (
 								<span className="rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
 									✓ Caught

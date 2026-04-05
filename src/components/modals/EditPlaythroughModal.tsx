@@ -82,7 +82,9 @@ export function EditPlaythroughModal({
 
 	return (
 		<Modal show={isOpen} onClose={() => handleClose()}>
-			<ModalHeader>Edit Playthrough</ModalHeader>
+			<ModalHeader>
+				<span style={{ fontFamily: "var(--font-stardew-valley)" }}>Edit Playthrough</span>
+			</ModalHeader>
 			<ModalBody>
 				<div className="space-y-4">
 					<div>

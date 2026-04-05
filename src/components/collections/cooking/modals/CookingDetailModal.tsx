@@ -29,7 +29,12 @@ export function CookingDetailModal({ dish, learned, cooked, onClose }: Props) {
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{dish.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{dish.name}
+							</span>
 							{cooked ? (
 								<StatusBadge status="success" label="Cooked" />
 							) : learned ? (

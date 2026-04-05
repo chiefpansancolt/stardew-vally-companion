@@ -42,7 +42,12 @@ export function BuildingDetailModal({
 						className="h-14 w-14 object-contain"
 					/>
 					<div>
-						<div className="text-lg font-extrabold">{buildingData.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{buildingData.name}
+						</div>
 						<div className="text-sm text-gray-500">{buildingData.description}</div>
 					</div>
 				</div>

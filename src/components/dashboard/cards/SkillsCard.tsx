@@ -91,7 +91,8 @@ export function SkillsCard({ gameData }: DashboardProps) {
 			<div className="mt-3 flex flex-wrap gap-2 border-t border-white/8 pt-3">
 				{TOOL_ENTRIES.map(({ key, id }) => {
 					const level = gameData.toolLevels[key];
-					const levelName = LEVEL_NAMES[key === "pan" ? level + PAN_LEVEL_OFFSET : level] ?? "Basic";
+					const levelName =
+						LEVEL_NAMES[key === "pan" ? level + PAN_LEVEL_OFFSET : level] ?? "Basic";
 					const color = LEVEL_COLORS[levelName] ?? "text-white/80";
 					const label = TOOL_LABEL[key] ?? key.charAt(0).toUpperCase() + key.slice(1);
 					const imgSrc = `/images/tools/${id}/${levelName === "Basic" ? label.replace(" ", " ") : levelName + " " + label}.png`;

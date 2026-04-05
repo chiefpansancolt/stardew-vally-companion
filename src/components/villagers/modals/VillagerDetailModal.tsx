@@ -44,7 +44,12 @@ export function VillagerDetailModal({ villager, progress, spouse, onClose }: Pro
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-bold text-gray-800">{villager.name}</span>
+							<span
+								className="text-lg font-bold text-gray-800"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{villager.name}
+							</span>
 							{isMarried && (
 								<span className="rounded-full bg-yellow-100 px-2 py-0.5 text-[0.65rem] font-bold text-yellow-700">
 									Married

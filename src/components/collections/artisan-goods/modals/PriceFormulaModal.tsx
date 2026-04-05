@@ -51,7 +51,10 @@ export function PriceFormulaModal({ good, onClose, activeProfessionBonuses = nul
 							className="h-8 w-8 object-contain"
 						/>
 						<div>
-							<div className="text-base font-bold">
+							<div
+								className="text-base font-bold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
 								{good.name} — Price Calculator
 							</div>
 							<div className="text-xs font-normal text-gray-500 italic">

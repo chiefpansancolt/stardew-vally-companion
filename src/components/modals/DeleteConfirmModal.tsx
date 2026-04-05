@@ -17,7 +17,9 @@ export function DeleteConfirmModal({
 
 	return (
 		<Modal show={isOpen} onClose={onClose} size="md">
-			<ModalHeader>{title}</ModalHeader>
+			<ModalHeader>
+				<span style={{ fontFamily: "var(--font-stardew-valley)" }}>{title}</span>
+			</ModalHeader>
 			<ModalBody>
 				<div className="text-center">
 					<LuTrash2 className="mx-auto mb-4 size-12 text-gray-400 dark:text-gray-500" />

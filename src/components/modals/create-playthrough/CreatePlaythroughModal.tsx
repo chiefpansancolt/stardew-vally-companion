@@ -193,7 +193,11 @@ export function CreatePlaythroughModal({ isOpen, onClose }: CreatePlaythroughMod
 
 	return (
 		<Modal show={isOpen} onClose={handleClose} dismissible size="xl">
-			<ModalHeader>Create New Playthrough</ModalHeader>
+			<ModalHeader>
+				<span style={{ fontFamily: "var(--font-stardew-valley)" }}>
+					Create New Playthrough
+				</span>
+			</ModalHeader>
 			<ModalBody>
 				<div className="space-y-6">
 					<StepIndicator steps={steps} currentStep={currentStep} />

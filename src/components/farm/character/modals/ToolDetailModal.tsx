@@ -38,7 +38,12 @@ export function ToolDetailModal({
 						<div className="h-10 w-10 rounded-lg bg-white/10" />
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{tool.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{tool.name}
+						</div>
 						<div
 							className="text-sm font-semibold"
 							style={{ color: LEVEL_META[currentLevelName]?.card.text ?? "inherit" }}

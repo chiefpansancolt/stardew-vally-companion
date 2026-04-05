@@ -28,7 +28,12 @@ export function MineralDetailModal({
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{mineral.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{mineral.name}
+							</span>
 							{donated && (
 								<span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
 									<HiCheck className="h-3 w-3" /> Donated

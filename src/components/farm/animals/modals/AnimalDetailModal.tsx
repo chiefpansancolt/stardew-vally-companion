@@ -28,7 +28,12 @@ export function AnimalDetailModal({ animal, species, onClose }: Props) {
 						/>
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{animal.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{animal.name}
+						</div>
 						<div className="flex items-center gap-2 text-sm text-gray-500">
 							<span>{species?.name ?? animal.type}</span>
 							{animal.hasAnimalCracker && (

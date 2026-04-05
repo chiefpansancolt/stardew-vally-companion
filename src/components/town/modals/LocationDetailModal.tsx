@@ -54,7 +54,12 @@ export function LocationDetailModal({ location, onClose }: Props) {
 						className="h-14 w-14 rounded-lg object-cover"
 					/>
 					<div>
-						<div className="text-lg font-extrabold">{location.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{location.name}
+						</div>
 						{location.address && (
 							<div className="text-sm text-gray-500">{location.address}</div>
 						)}

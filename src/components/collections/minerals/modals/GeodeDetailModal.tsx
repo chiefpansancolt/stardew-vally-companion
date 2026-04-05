@@ -25,7 +25,12 @@ export function GeodeDetailModal({ geode, fallbackContents, onClose }: Props) {
 						className="h-14 w-14 object-contain"
 					/>
 					<div>
-						<span className="text-lg font-extrabold">{geode.name}</span>
+						<span
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{geode.name}
+						</span>
 					</div>
 				</div>
 			</ModalHeader>

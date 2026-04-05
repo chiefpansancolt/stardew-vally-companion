@@ -22,7 +22,12 @@ export function ArtifactDetailModal({ artifact, donated, found, onClose }: Props
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{artifact.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{artifact.name}
+							</span>
 							{donated && (
 								<span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
 									<HiCheck className="h-3 w-3" /> Donated

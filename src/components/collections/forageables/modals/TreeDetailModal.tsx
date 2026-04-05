@@ -32,7 +32,12 @@ function FruitTreeModal({ tree, gameData }: { tree: FruitTree; gameData: GameDat
 						/>
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{tree.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{tree.name}
+						</div>
 						<div className="text-sm text-gray-500">
 							{seasonLabel} harvest · Fruit Tree
 						</div>
@@ -220,7 +225,12 @@ function WildTreeModal({
 						/>
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{tree.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{tree.name}
+						</div>
 						<div className="text-sm text-gray-500">Wild Tree</div>
 					</div>
 				</div>

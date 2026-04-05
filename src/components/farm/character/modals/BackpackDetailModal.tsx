@@ -29,7 +29,12 @@ export function BackpackDetailModal({
 						/>
 					)}
 					<div>
-						<div className="text-lg font-extrabold">Backpack</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							Backpack
+						</div>
 						<div className="text-sm font-semibold text-gray-500">
 							{BACKPACK_LEVELS[activeLevelIndex]?.name} — {maxItems} slots
 						</div>

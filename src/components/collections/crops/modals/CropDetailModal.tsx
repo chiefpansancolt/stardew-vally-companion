@@ -37,7 +37,12 @@ export function CropDetailModal({ crop, gameData, onClose }: Props) {
 						<div className="h-10 w-10 rounded-lg bg-white/10" />
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{crop.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{crop.name}
+						</div>
 						<div className="text-sm text-gray-500">{seasonLabel}</div>
 					</div>
 					<StatusBadge

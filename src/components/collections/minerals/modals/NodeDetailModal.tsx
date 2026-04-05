@@ -18,7 +18,12 @@ export function NodeDetailModal({ node, itemNameById, onClose }: Props) {
 						className="h-14 w-14 object-contain"
 					/>
 					<div>
-						<span className="text-lg font-extrabold">{node.name}</span>
+						<span
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{node.name}
+						</span>
 					</div>
 				</div>
 			</ModalHeader>

@@ -21,7 +21,12 @@ export function CraftingDetailModal({ recipe, learned, crafted, onClose }: Props
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{recipe.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{recipe.name}
+							</span>
 							{crafted ? (
 								<StatusBadge status="success" label="Crafted" />
 							) : learned ? (

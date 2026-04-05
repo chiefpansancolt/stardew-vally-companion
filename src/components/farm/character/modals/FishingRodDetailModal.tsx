@@ -31,7 +31,12 @@ export function FishingRodDetailModal({
 						/>
 					)}
 					<div>
-						<div className="text-lg font-extrabold">{rod.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{rod.name}
+						</div>
 						<div className="text-sm font-semibold text-gray-500">
 							{currentLvl?.name}
 						</div>

@@ -188,7 +188,12 @@ export function SkillDetailModal({
 						className="h-12 w-12 object-contain"
 					/>
 					<div>
-						<div className="text-lg font-extrabold">{skill.name}</div>
+						<div
+							className="text-lg font-extrabold"
+							style={{ fontFamily: "var(--font-stardew-valley)" }}
+						>
+							{skill.name}
+						</div>
 						<div className="text-sm font-normal text-gray-500 dark:text-gray-400">
 							{skill.toolBonus}
 						</div>

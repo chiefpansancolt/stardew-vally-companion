@@ -28,7 +28,10 @@ export function CalendarDayModal({
 						alt={seasonMeta.label}
 						className="h-8 w-8 object-contain"
 					/>
-					<span className="text-lg font-bold">
+					<span
+						className="text-lg font-bold"
+						style={{ fontFamily: "var(--font-stardew-valley)" }}
+					>
 						{seasonMeta.label} {day}
 					</span>
 				</div>

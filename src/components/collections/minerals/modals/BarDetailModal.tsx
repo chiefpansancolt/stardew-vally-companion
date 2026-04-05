@@ -21,7 +21,12 @@ export function BarDetailModal({ bar, shipped, professionBonus, oreNameById, onC
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{bar.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{bar.name}
+							</span>
 							{shipped ? (
 								<span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[0.65rem] font-bold text-green-700">
 									<HiCheck className="h-3 w-3" /> Shipped

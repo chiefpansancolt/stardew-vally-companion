@@ -25,7 +25,12 @@ export function MonsterLootDetailModal({ loot, shipped, shippable, onClose }: Pr
 					/>
 					<div>
 						<div className="flex items-center gap-2">
-							<span className="text-lg font-extrabold">{loot.name}</span>
+							<span
+								className="text-lg font-extrabold"
+								style={{ fontFamily: "var(--font-stardew-valley)" }}
+							>
+								{loot.name}
+							</span>
 							{shippable && (
 								<StatusBadge
 									status={shipped ? "success" : "inactive"}

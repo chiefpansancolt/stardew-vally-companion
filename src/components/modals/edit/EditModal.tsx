@@ -50,7 +50,9 @@ export function EditModal({ isOpen, onClose, title, steps, onSave }: EditModalPr
 
 	return (
 		<Modal show={isOpen} onClose={onClose} dismissible size="5xl">
-			<ModalHeader>{title}</ModalHeader>
+			<ModalHeader>
+				<span style={{ fontFamily: "var(--font-stardew-valley)" }}>{title}</span>
+			</ModalHeader>
 			<ModalBody>{steps[currentStep]?.content}</ModalBody>
 			<ModalFooter>
 				<div className="flex w-full items-center justify-between gap-4">
