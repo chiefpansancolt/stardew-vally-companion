@@ -25,7 +25,7 @@ export function Footer() {
 						<ul className="mt-5 flex space-x-6">
 							<li>
 								<a
-									href="https://github.com/chiefpansancolt/stardew-valley-companion"
+									href="https://github.com/chiefpansancolt/stardew-vally-companion"
 									className="text-white hover:text-white"
 									target="_blank"
 									rel="noopener noreferrer"

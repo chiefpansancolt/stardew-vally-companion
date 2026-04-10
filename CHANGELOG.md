@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-04-10
+
+### Added
+
+- Better SEO support
+- Added a Footer
+- Discord Server Link
+
+### Chore
+
+- Bump Dependencies
+
 ## [1.0.1] - 2026-04-05
 
 ### Fix
