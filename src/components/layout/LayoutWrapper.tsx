@@ -5,6 +5,7 @@ import { ThemeProvider } from "flowbite-react";
 import { ToastContainer } from "react-toastify";
 import { AppNavbar } from "@/comps/layout/AppNavbar";
 import { AppSidebar } from "@/comps/layout/sidebar/AppSidebar";
+import { Footer } from "@/comps/layout/Footer";
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 	return (
@@ -14,8 +15,9 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 				<div className="flex flex-1 overflow-hidden">
 					<AppSidebar />
 					<div className="flex flex-1 flex-col overflow-hidden">
-						<main className="bg-surface dark:bg-surface-dark flex-1 overflow-y-auto">
-							{children}
+						<main className="bg-surface dark:bg-surface-dark flex flex-1 flex-col overflow-y-auto">
+							<div className="flex-1">{children}</div>
+							<Footer />
 						</main>
 					</div>
 				</div>

@@ -53,7 +53,7 @@ export function AppSidebar() {
 
 	return (
 		<aside
-			className={`border-secondary/30 bg-secondary dark:border-secondary/40 dark:bg-secondary/90 fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r transition-transform duration-300 ease-in-out md:static md:top-0 md:h-auto md:translate-x-0 ${
+			className={`border-secondary/30 bg-secondary dark:border-secondary/40 dark:bg-secondary/90 fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-64 transform overflow-y-auto border-r transition-transform duration-300 ease-in-out md:static md:top-0 md:h-full md:translate-x-0 ${
 				sidebarOpen ? "translate-x-0" : "-translate-x-full"
 			}`}
 		>
