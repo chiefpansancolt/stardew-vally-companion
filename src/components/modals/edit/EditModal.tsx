@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiChevronLeft } from "react-icons/hi";
 import type { EditModalProps } from "@/types";
 import { EditStepProgress } from "./EditStepProgress";
@@ -14,12 +14,14 @@ export function EditModal({ isOpen, onClose, title, steps, onSave }: EditModalPr
 	const isLastStep = currentStep === steps.length - 1;
 	const showProgress = steps.length > 1;
 
-	useEffect(() => {
+	const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+	if (isOpen !== prevIsOpen) {
+		setPrevIsOpen(isOpen);
 		if (!isOpen) {
 			setCurrentStep(0);
 			setIsSaving(false);
 		}
-	}, [isOpen]);
+	}
 
 	const handleBack = () => {
 		if (isFirstStep) return;
