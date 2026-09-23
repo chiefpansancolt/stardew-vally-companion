@@ -49,6 +49,9 @@ export const metadata: Metadata = {
 	],
 	authors: [{ name: "GamerDex" }],
 	creator: "GamerDex",
+	alternates: {
+		canonical: "/",
+	},
 	robots: {
 		index: true,
 		follow: true,
@@ -75,7 +78,8 @@ export const metadata: Metadata = {
 		images: [
 			{
 				url: "/Site Screenshot.png",
-				width: 1200,
+				width: 1919,
+				height: 920,
 				alt: "Stardew Valley Companion dashboard preview",
 			},
 		],
